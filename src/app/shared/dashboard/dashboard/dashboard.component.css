@@ -1,0 +1,39 @@
+.sidebar {
+    height: 100%;
+    width: 250px;
+    /* padding-top: 20px; */
+    background-color: black;
+}
+
+.sidebar-nav {
+    padding-left: 0;
+    list-style: none;
+}
+.nav-heading{
+    color: white;
+    text-align: center;
+}
+.sidebar-nav .nav-lik {
+    display: block;
+    text-decoration: none;
+    padding: 10px;
+    color: white;
+}
+
+.side-nav .nav-lik:hover {
+    color: black;
+    background-color: white;
+}
+.nav-item:hover {
+    color: black;
+    background-color: rgb(183, 103, 103);
+}
+@media (max-width:768px){
+   
+   .sidebar{
+        width: 100%;
+        position:relative;
+        height: auto;
+       background-color: green;
+    }
+}

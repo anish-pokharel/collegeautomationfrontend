@@ -1,89 +1,164 @@
-<!-- 
+<nav class="navbar navbar-expand-lg  bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand text-white" href="#">NCIT</a>
+        <button class="navbar-toggler text-white bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon "></span>
+        </button>
+        <div class="d-flex gap-3">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mx-auto gap-3 text-white">
+                    <li class="nav-item ">
+                        <a class="nav-link active text-white" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">Service</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">Help</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">AboutUs</a>
+                    </li>
 
 
-    <aside id="sidebar" class="sidebar">
+                </ul>
+            </div>
+            <div>
 
-        <ul class="sidebar-nav" id="sidebar-nav">
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-success" type="submit" (click)="loginButton()">Login</button>
+                    <button class="btn btn-primary mx-2" type="submit" (click)="registerButton()">Signup</button>
+                </form>
+            </div>
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="">
-                    <i class="bi bi-grid"></i>
-                    <span>Dashboards</span>
-                </a>
-            </li>
+        </div>
+    </div>
+</nav>
 
-        
-            <li class="nav-heading">Pages</li>
+<div class="container-fluid">
+    <div class="row">
 
-            <li class="nav-item">
-                <a class="nav-link " >
-                    <i class="bi bi-person"></i>
-                    <span>Semester Enroll</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" >
-                    <i class="bi bi-question-circle"></i>
-                    <span>Attendance Record</span>
-                </a>
-            </li>
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" >
-                    <i class="bi bi-envelope"></i>
-                    <span>Course Enroll</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" >
-                    <i class="bi bi-card-list"></i>
-                    <span>Purchase Course</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" >
-                    <i class="bi bi-box-arrow-in-right"></i>
-                    <span>Setting</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" >
-                    <i class="bi bi-dash-circle"></i>
-                    <span>Join Clubs</span>
-                </a>
-            </li>
+        <aside class="sidebar  col-md-3 ">
+            <ul class="sidebar-nav ">
+                <li class="nav-heading">Dashboard</li>
+                <li class="nav-item">
+                    <a (click)="showSection('semester')" class="pointer  nav-lik collapsed">
+                        <span>Semster Enroll</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a (click)="showSection('attendance-record')" class="pointer nav-lik collapsed">
+                        <span>Academic Records</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a (click)="showSection('course-enroll')" class="pointer nav-lik collapsed">
+                        <span>Course Enroll</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a (click)="showSection('our-courses')" class="pointer nav-lik collapsed">
+                        <span>Our Courses</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a (click)="showSection('setting')" class="pointer nav-lik collapsed">
+                        <span>Setting</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a (click)="showSection('join-club')" class="pointer nav-lik collapsed">
+                        <span>Join Clubs</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a (click)="showSection('id-card')" class="pointer nav-lik collapsed">
+                        <span>Id card Renew</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a (click)="showSection('sponsorship')" class="pointer nav-lik collapsed">
+                        <span>Sponsorship</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a (click)="showSection('assignment')" class="pointer nav-lik collapsed">
+                        <span>Assignment</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a (click)="showSection('feedback')" class="pointer nav-lik collapsed">
+                        <span>Feedback</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a (click)="showSection('discussion')" class="pointer nav-lik collapsed">
+                        <span>Discussion</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a (click)="showSection('semester-enoll')" class="pointer nav-lik collapsed">
+                        <span>Semster Enroll</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a  class="pointer nav-lik collapsed">
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+        <main role="main" class="col-md-9  px-4">
+          
+            <div class="content">
+                <div *ngIf="currentSection === 'semester'">
+                    <app-semester-enroll></app-semester-enroll>
+                </div>
+                <div *ngIf="currentSection === 'attendance-record'">
+                    <app-academic-records></app-academic-records>
+                </div>
+                <div *ngIf="currentSection === 'academic-records'">
+                    <app-attendance-record></app-attendance-record>
+                </div>
+                <div *ngIf="currentSection === 'course-enroll'">
+                    <app-course-enroll></app-course-enroll>
+                </div>
+                <div *ngIf="currentSection === 'our-courses'">
+                    <app-semester-enroll></app-semester-enroll>
+                </div>
+                <div *ngIf="currentSection === 'setting'">
+                    <app-setting></app-setting>
+                </div>
+                <div *ngIf="currentSection === 'join-club'">
+                    <app-join-clubs></app-join-clubs>
+                </div>
+               
+                <div *ngIf="currentSection === 'id-card'">
+                    <app-id-card></app-id-card>
+                </div>
+                <div *ngIf="currentSection === 'sponsorship'">
+                    <app-semester-enroll></app-semester-enroll>
+                </div>
+                <div *ngIf="currentSection === 'assignment'">
+                    <app-semester-enroll></app-semester-enroll>
+                </div>
+                <div *ngIf="currentSection === 'feedback'">
+                    <app-feedback></app-feedback>
+                </div>
+                <div *ngIf="currentSection === 'discussion'">
+                    <app-discussion></app-discussion>
+                </div>
+                <div *ngIf="currentSection === 'semester-enoll'">
+                    <app-semester-enroll></app-semester-enroll>
+                </div>
+            </div>
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" >
-                    <i class="bi bi-file-earmark"></i>
-                    <span>Id Card </span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" >
-                    <i class="bi bi-file-earmark"></i>
-                    <span>Sponsorship </span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" >
-                    <i class="bi bi-file-earmark"></i>
-                    <span>Assignment </span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" >
-                    <i class="bi bi-file-earmark"></i>
-                    <span>Feedback </span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" >
-                    <i class="bi bi-file-earmark"></i>
-                    <span>Discussion </span>
-                </a>
-            </li>
-
-        </ul>
-
-    </aside> -->
+        </main>
+    </div>
+</div>
