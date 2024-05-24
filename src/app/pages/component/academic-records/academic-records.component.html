@@ -2,10 +2,9 @@
     <div class="col-lg-6">
       <div class="card mb-4">
         <div class="card-body text-center">
-          <img src="" alt="userPic" class="rounded-circle img-fluid" style="width: 150px;">
-          <h5 class="my-3">Anish Pokharel</h5>
-          <p class="text-muted">Full Stack Develope</p>
-          <p>Softeare Engineer</p>
+          <h5 class="my-3">Performance Overall</h5>
+          <p class="text-muted">Hi, Anish Pokharel </p>
+          <p>Rollno:20180107</p>
           <div class="d-flex justify-content-center">
             <button class="btn btn-primary">Follow</button>
             <button class="btn btn-outline-primary ms-1">Follow</button>
@@ -13,37 +12,43 @@
         </div>
       </div>
       <div class="card mb-4 mb-lg-0">
-        <div class="card-body p-0">
-          <ul class="list-group list-group-flush rounded-3">
-            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-              <i class="fas fa-home">full Name</i>
-              <p class="mb-0">Anish Pokharel</p>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-              <i class="fas fa-home">full Name</i>
-              <p class="mb-0">Anish Pokharel</p>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-              <i class="fas fa-home">full Name</i>
-              <p class="mb-0">Anish Pokharel</p>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-              <i class="fas fa-home">full Name</i>
-              <p class="mb-0">Anish Pokharel</p>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-              <i class="fas fa-home">full Name</i>
-              <p class="mb-0">Anish Pokharel</p>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-              <i class="fas fa-home">full Name</i>
-              <p class="mb-0">Anish Pokharel</p>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-              <i class="fas fa-home">full Name</i>
-              <p class="mb-0">Anish Pokharel</p>
-            </li>
-          </ul>
+        <div class="card-body p-0 text-center">
+            <h5 class="my-4">Semsester result</h5>
+            <table class="table table-striped">
+                
+                <thead>
+                  <tr >
+                    <th scope="col">S.N</th>
+                    <th scope="col">Club Name</th>
+                    <th scope="col">Position</th>
+                    <th scope="col">Joined Date </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor=" let item of paginatedItems">
+                    <th scope="row">1</th>
+                    <td>{{item.clubName}}</td>
+                    <td>{{item.position}}</td>
+                    <td>{{item.joinedDate}}</td>
+                 
+                  </tr>
+               
+                  
+                </tbody>
+              </table>
+              <nav>
+                <ul class="pagination">
+                  <li class="page-item" [class.disabled]="currentPage === 1">
+                    <a class="page-link" (click)="setPage(currentPage - 1)">Previous</a>
+                  </li>
+                  <li class="page-item" [class.active]="page === currentPage" *ngFor="let page of totalPages">
+                    <a class="page-link" (click)="setPage(page)">{{ page }}</a>
+                  </li>
+                  <li class="page-item" [class.disabled]="currentPage === totalPages.length">
+                    <a class="page-link" (click)="setPage(currentPage + 1)">Next</a>
+                  </li>
+                </ul>
+              </nav>
         </div>
       </div>
     </div>
@@ -51,49 +56,58 @@
       <div class="card mb-4">
         <div class="card-body">
           <div class="row">
-            <div class="col-sm-3">
-              <p class="mb-0">Full Name</p>
-            </div>
-            <div class="col-sm-9">
-              <p class="text-muted mb-0">Anish Pokharel </p>
-            </div>
+            <table class="table ">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Handle</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>&#64;mdo</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>&#64;fat</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>&#64;fat</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>&#64;fat</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>&#64;fat</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>&#64;fat</td>
+                  </tr>
+                 
+                </tbody>
+              </table>
           </div>
           <hr>
-          <div class="row">
-            <div class="col-sm-3">
-              <p class="mb-0">Email</p>
-            </div>
-            <div class="col-sm-9">
-              <p class="text-muted mb-0">anish&#64;gmail.com</p>
-            </div>
-          </div>
-          <hr>
-          <div class="row">
-            <div class="col-sm-3">
-              <p class="mb-0">Phone</p>
-            </div>
-            <div class="col-sm-9">
-              <p class="text-muted mb-0">987654321</p>
-            </div>
-          </div>
-          <hr>
-          <div class="row">
-            <div class="col-sm-3">
-              <p class="mb-0">Mobile</p>
-            </div>
-            <div class="col-sm-9">
-              <p class="text-muted mb-0">1234567890</p>
-            </div>
-          </div>
-          <hr>
-          <div class="row">
-            <div class="col-sm-3">
-              <p class="mb-0">Address</p>
-            </div>
-            <div class="col-sm-9">
-              <p class="text-muted mb-0">Gwarko, Lalitpur, Nepal</p>
-            </div>
-          </div>
+       
         </div>
       </div>
       
