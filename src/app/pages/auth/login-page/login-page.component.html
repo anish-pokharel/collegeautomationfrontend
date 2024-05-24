@@ -1,43 +1,65 @@
-<div class="container-fluid">
-  <div class="row">
-    <!-- Left Blank Side -->
-    <div class="col-lg-8 ">
-      <img src="../../../../assets/image/login.jpg" class="rounded" style="width:100%; height:100vh" alt="">
+<div class="login login-with-news-feed">
+  <!-- begin news-feed -->
+  <div class="news-feed">
+    <div
+      class="news-image"
+      style="background-image: url(../../../../assets/img/bg/bg-home.jpg)"
+    ></div>
+    <div class="news-caption">
+      <h4 class="caption-title"><b>Imars</b></h4>
+      <h4 class="caption-title">Bus Reservation Project</h4>
     </div>
-
-    <!-- Right Side Form -->
-    <div class="col-lg-3  d-flex align-items-center justify-content-center right-side">
-      <div class="form-2-wrapper">
-        <div class="logo text-center">
-          <h2>Logo</h2>
-        </div>
-        <h2 class="text-center mb-4">Sign Into Your Account</h2>
-        <form action="#">
-          <div class="mb-3 form-box">
-            <input type="email" class="form-control" id="email" name="email" placeholder="Enter Your Email" required>
-          </div>
-          <div class="mb-3">
-            <input type="password" class="form-control" id="password" name="password" placeholder="Enter Your Password" required>
-          </div>
-          <div class="mb-3">
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="rememberMe">
-              <label class="form-check-label" for="rememberMe">Remember me</label>
-              <a href="forget-3.html" class="text-decoration-none float-end">Forget Password</a>
-            </div>
-
-          </div>
-          <button type="submit" class="btn btn-outline-secondary login-btn w-100 mb-3">Login</button>
-          <div class="social-login mb-3 type--A">
-            <h5 class="text-center mb-3">Social Login</h5>
-            <button class="btn btn-outline-secondary  mb-3"><i class="fa-brands fa-google text-danger"></i> Sign With Google</button>
-            <button class="btn btn-outline-secondary mb-3"><i class="fa-brands fa-facebook-f text-primary"></i> Sign With Facebook</button>
-          </div>
-        </form>
-
-        <!-- Register Link -->
-        <p class="text-center register-test mt-3">Don't have an account? <a href="register-3.html" class="text-decoration-none">Register here</a></p>
+  </div>
+  <div class="right-content">
+    <div class="login-header" style="margin-top: -30px">
+      <div class="brand text-center" style="font-size: 12px !important">
+        <span> </span> <b>IMARS</b>
       </div>
+      <br />
+
+      <br />
+    </div>
+    <div class="login-content">
+      <form
+        
+       
+        class="margin-bottom-0"
+      >
+        <div class="form-group m-b-15">
+          <input
+            formControlName="Email"
+            type="text"
+            class="form-control form-control-lg inverse-mode"
+            placeholder="Email"
+            required
+          />
+        </div>
+        <div class="form-group" style="margin-bottom: 0px !important">
+          <input
+            formControlName="Password"
+            type="password"
+            class="form-control form-control-lg inverse-mode"
+            placeholder="Password"
+            required
+          />
+        </div>
+        <div class="text-right text-danger m-b-15">
+          <a class="text-danger"
+            >Forget Password?</a
+          >
+        </div>
+        <div class="login-buttons">
+          <button type="submit" class="btn btn-success btn-block btn-lg">
+            Sign me in
+          </button>
+        </div>
+      </form>
+      <div class="m-t-30 m-b-30 p-b-30">
+        Want to be a new member? Click
+        <a routerLink="/registration-page">here</a> to be a New Member.
+      </div>
+      <hr />
+      <p class="text-center text-grey-darker mb-0">"Make a booking"</p>
     </div>
   </div>
 </div>
