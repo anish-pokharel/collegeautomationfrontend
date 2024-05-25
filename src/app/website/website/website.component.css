@@ -1,0 +1,65 @@
+
+/*First Navbar*/
+.navbar-1{
+    display:flex;
+    justify-content: space-around;
+    align-items:center;
+    padding:5px;
+    color:rgb(7, 189, 7);
+    background-color: rgb(31, 26, 26);
+}
+.heading{
+    font-size: xx-large;
+}
+.heading-1{
+    color:white;
+}
+.navbar-btn{
+    display:flex;
+}
+.btn-2{
+margin-left:20px;
+}
+.navbar-1-1{
+    display:flex;
+    justify-content:space-around;
+}
+/*Second Navbar*/
+.navbar-2{
+    display:flex;
+    justify-content:space-evenly;
+    padding:10px 200px 10px 15px;
+    font-size: 17px; 
+     
+}
+
+.navbar-2-2{
+    color:white; 
+    text-decoration: none;
+  
+}
+
+.headline{
+    display:flex;
+    justify-content:center;
+   
+   
+}
+.introduction{
+    display:flex;
+    justify-content: center;
+    
+}
+
+/*Contact Us*/
+.contact-us{
+    border:1px solid black;
+    box-shadow: 0 0 68px 0 rgba(2, 4, 69, .08);
+    font-family: 'Proximanova opt', sans-serif; 
+    color: #4c525a;
+    border: .3px solid rgba(2, 4, 69, .15);
+    border-radius:10px;
+    line-height: 30px;
+}
+
+/*Footer*/
