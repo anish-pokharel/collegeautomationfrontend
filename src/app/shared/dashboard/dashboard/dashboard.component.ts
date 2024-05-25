@@ -39,6 +39,10 @@ export class DashboardComponent {
     this.currentSection = section;
 
   }
+  LogoutButton(){
+    localStorage.clear()
+    this.router.navigate(['/login'])
+  }
 
 
 
