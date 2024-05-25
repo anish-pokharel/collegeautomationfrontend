@@ -32,9 +32,17 @@ export class LoginPageComponent implements OnInit {
   loginButton(){
     if(this.loginForm.valid){
       this.userSignIn.postUserSignIn(this.loginForm.value).subscribe((res)=>{
+        debugger
         if (res){
+          console.log(res);
           console.log(this.loginForm.value)
-          localStorage.setItem('userData',JSON.stringify(this.loginForm.value))
+          console.log(this.loginForm)
+          localStorage.setItem('userData',JSON.stringify(this.loginForm.value));
+          localStorage.setItem('userRole',JSON.stringify(res.role))
+          localStorage.setItem('userToken',JSON.stringify(res.token))
+          debugger
+          this.router.navigate(['/dashboard'])
+          
           alertify.success('Login  Sucessfull')
         }
         else{

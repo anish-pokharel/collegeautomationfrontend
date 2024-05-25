@@ -3,6 +3,7 @@ import { WebsiteComponent } from './website/website/website.component';
 import { LoginPageComponent } from './pages/auth/login-page/login-page.component';
 import { RegisterPageComponent } from './pages/auth/register-page/register-page.component';
 import { DashboardComponent } from './shared/dashboard/dashboard/dashboard.component';
+import { authGuard } from './auth.guard';
 
 export const routes: Routes = [
     {
@@ -19,6 +20,7 @@ export const routes: Routes = [
     },
     {
         path:'dashboard',
-        component:DashboardComponent
+        component:DashboardComponent,
+        canActivate:[authGuard]
     }
 ];

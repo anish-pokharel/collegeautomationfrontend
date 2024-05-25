@@ -94,7 +94,7 @@
         <a href="javascript:;" class="dropdown-item">Calendar</a>
         <a href="javascript:;" class="dropdown-item">Setting</a>
         <div class="dropdown-divider"></div>
-        <a href="javascript:;" class="dropdown-item">Log Out</a>
+        <a (click)="LogoutButton()" class="dropdown-item">Log Out</a>
       </div>
     </li>
   </ul>
@@ -300,6 +300,13 @@
           <a (click)="showSection('discussion')">
             <i class="fa fa-calendar"></i> 
              <span>Discussion</span>
+          </a>
+        </li>
+        
+        <li class="active">
+          <a  (click)="LogoutButton()">
+            <i class="fa fa-calendar"></i> 
+             <span>Logout</span>
           </a>
         </li>
         
