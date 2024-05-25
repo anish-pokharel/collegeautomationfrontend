@@ -1,70 +1,4 @@
-<!-- <div class="container-fluid border">
-    <div class="row my-4">
-        <div class="card col-lg-6 border ">
-            <form action="">
-                <h4 class="text-center my-4">Join Club</h4>
-                <div class="col-lg-10 my-3">
-                    <select class="form-select" id="club">
-                      <option selected>Club STATUS</option>
-                      <option value="1">Political</option>
-                      <option value="2">Non-Political</option>
-                    </select>
-                </div>
-                <div class="col-lg-10 my-3">
-                    <select class="form-select" id="club">
-                      <option selected>Club Name</option>
-                      <option value="1">Annfsu</option>
-                      <option value="2">NeBiSang</option>
-                      <option value="2">Nosk</option>
-                    </select>
-                </div>
-                <div class="col-lg-10 my-3">
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                </div>
-                <button type="button" class="btn btn-primary mb-4">Join Club</button>
-            </form>
-        </div>
-        <div class="col-lg-6 border ">
-            <h4 class="text-center my-4">Joined Club</h4>
-            <table class="table table-striped">
-                
-                <thead>
-                  <tr>
-                    <th scope="col">S.N</th>
-                    <th scope="col">Club Name</th>
-                    <th scope="col">Position</th>
-                    <th scope="col">Joined Date </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>mdo</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>fat</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>twitter</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>twitter</td>
-                  </tr>
-                  
-                </tbody>
-              </table>
-        </div>
-    </div>
-</div> -->
+
 
 <section>
   <div>
@@ -114,14 +48,16 @@
                 <tr >
                   <th scope="col">S.N</th>
                   <th scope="col">Club Name</th>
+                  <th scope="col">Club Status</th>
                   <th scope="col">Position</th>
                   <th scope="col">Joined Date </th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor=" let item of paginatedItems">
-                  <th scope="row">1</th>
+                <tr *ngFor=" let item of paginatedItems let i = index">
+                  <th scope="row">{{i+1}}</th>
                   <td>{{item.clubName}}</td>
+                  <td>{{item.clubPosition}}</td>
                   <td>{{item.position}}</td>
                   <td>{{item.joinedDate}}</td>
                
