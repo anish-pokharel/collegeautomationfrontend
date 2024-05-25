@@ -2,7 +2,6 @@
 
 
 <div id="header" class="header navbar-default">
-  <!-- begin navbar-header -->
   <div class="navbar-header">
     <a href="index.html" class="navbar-brand"><span class="navbar-logo"></span> <b>Color</b> Admin</a>
     <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
@@ -11,7 +10,6 @@
       <span class="icon-bar"></span>
     </button>
   </div>
-  <!-- end navbar-header --><!-- begin header-nav -->
   <ul class="navbar-nav navbar-right">
     <li class="navbar-form">
       <form action="" method="POST" name="search">
@@ -100,111 +98,9 @@
   </ul>
   <!-- end header-nav -->
 </div>
-<!-- <aside id="sidebar" class="sidebar">
 
-    <ul class="sidebar-nav" id="sidebar-nav">
-  
-      <li class="nav-item">
-        <a class="nav-link collapsed collapsed" href="index.html">
-          <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
-        </a>
-      </li>
-  
-     
-  
-      <li class="nav-heading">Pages</li>
-  
-      <li class="nav-item">
-        <a class="nav-link collapsed " (click)="showSection('semester')">
-          <i class="bi bi-person"></i>
-          <span>Semster Enroll</span>
-        </a>
-      </li>
-  
-      <li class="nav-item">
-        <a class="nav-link collapsed " (click)="showSection('attendance-record')" >
-          <i class="bi bi-person"></i>
-          <span>Attendance Records</span>
-        </a>
-      </li>
-  
-      <li class="nav-item">
-        <a class="nav-link collapsed " (click)="showSection('course-enroll')">
-          <i class="bi bi-person"></i>
-          <span>Course Enroll</span>
-        </a>
-      </li>
-  
-      <li class="nav-item">
-        <a class="nav-link collapsed " (click)="showSection('our-courses')">
-          <i class="bi bi-person"></i>
-          <span>Our Courses</span>
-        </a>
-      </li>
-  
-      <li class="nav-item">
-        <a class="nav-link collapsed " (click)="showSection('setting')">
-          <i class="bi bi-person"></i>
-          <span>Setting </span>
-        </a>
-      </li>
-  
-      <li class="nav-item">
-        <a class="nav-link collapsed " (click)="showSection('join-club')">
-          <i class="bi bi-person"></i>
-          <span>Join Club</span>
-        </a>
-      </li>
-  
-      <li class="nav-item">
-        <a class="nav-link collapsed " (click)="showSection('id-card')">
-          <i class="bi bi-person"></i>
-          <span>Id card Renew</span>
-        </a>
-      </li>
-  
-      <li class="nav-item">
-        <a class="nav-link collapsed " (click)="showSection('sponsorship')">
-          <i class="bi bi-person"></i>
-          <span>Sponsorship </span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link collapsed " (click)="showSection('assignment')">
-          <i class="bi bi-person"></i>
-          <span>Assignment </span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link collapsed " (click)="showSection('feedback')">
-          <i class="bi bi-person"></i>
-          <span>Feedback </span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link collapsed " (click)="showSection('discussion')">
-          <i class="bi bi-person"></i>
-          <span>Discussion </span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link collapsed " (click)="showSection('semester-enoll')">
-          <i class="bi bi-person"></i>
-          <span>Semster </span>
-        </a>
-      </li>
- 
-  
-    
-  
-    </ul>
-  
-  </aside> End Sidebar-->
   <div id="sidebar" class="sidebar">
-    <!-- begin sidebar scrollbar -->
     <div data-scrollbar="true" data-height="100%">
-      <!-- begin sidebar user -->
       <ul class="nav">
         <li class="nav-profile">
           <a href="javascript:;" data-toggle="nav-profile">
@@ -226,8 +122,6 @@
           </ul>
         </li>
       </ul>
-      <!-- end sidebar user -->
-      <!-- begin sidebar nav -->
       <ul class="nav"><li class="nav-header">Navigation</li>
       
         <li class="active">
@@ -349,7 +243,7 @@
             <app-id-card></app-id-card>
         </div>
         <div *ngIf="currentSection === 'sponsorship'">
-            <app-semester-enroll></app-semester-enroll>
+            <app-sponsorship></app-sponsorship>
         </div>
         <div *ngIf="currentSection === 'assignment'">
             <app-semester-enroll></app-semester-enroll>

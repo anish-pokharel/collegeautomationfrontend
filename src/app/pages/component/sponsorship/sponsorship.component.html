@@ -1,1 +1,174 @@
-<p>sponsorship works!</p>
+<section>
+    <div>
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="card my-4">
+            <div class="card-body  text-center">
+              <h5 class="card-title">
+                Sponsorship
+              </h5>
+              <form>
+                <div class="col-lg-12 mb-4">
+                  <input class="form-control" type="text" placeholder="Name">
+                </div>
+               
+                <div class="col-lg-12 mb-4">
+                  <select class="form-select" id="club">
+                    <option selected>Faculty</option>
+                    <option value="1">Political</option>
+                    <option value="2">Non-Political</option>
+                  </select>
+                </div>
+                <div class="col-lg-12 mb-4">
+                  <select class="form-select" id="club">
+                    <option selected>Semsester</option>
+                    <option value="1">ANNFSU</option>
+                    <option value="2">NeBiSang</option>
+                    <option value="2">nOSK</option>
+                  </select>
+                  
+                </div>
+                <div class="col-lg-12 mb-4">
+                  <input class="form-control" type="text" placeholder="How Much">
+                </div>
+                <div class="col-lg-12 mb-4">
+                  <input class="form-control" type="text" placeholder="How Much">
+                </div>
+                <div class="col-lg-12 mb-4">
+                  <input class="form-control" type="text" placeholder="How Much">
+                </div>
+                <div class="col-lg-12 mb-4">
+                <button type="button" class="btn btn-primary mb-4">Apply</button>
+              </div>
+              </form>
+            </div>
+          </div>
+          <div class="card-body  text-center">
+            <h5 class="card-title">
+              Joined Club
+            </h5>
+            <table class="table table-striped">
+                
+              <thead>
+                <tr >
+                  <th scope="col">S.N</th>
+                  <th scope="col">Club Name</th>
+                  <th scope="col">Position</th>
+                  <th scope="col">Joined Date </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor=" let item of paginatedItems">
+                  <th scope="row">1</th>
+                  <td>{{item.clubName}}</td>
+                  <td>{{item.position}}</td>
+                  <td>{{item.joinedDate}}</td>
+               
+                </tr>
+             
+                
+              </tbody>
+            </table>
+            <nav>
+              <ul class="pagination">
+                <li class="page-item" [class.disabled]="currentPage === 1">
+                  <a class="page-link" (click)="setPage(currentPage - 1)">Previous</a>
+                </li>
+                <li class="page-item" [class.active]="page === currentPage" *ngFor="let page of totalPages">
+                  <a class="page-link" (click)="setPage(page)">{{ page }}</a>
+                </li>
+                <li class="page-item" [class.disabled]="currentPage === totalPages.length">
+                  <a class="page-link" (click)="setPage(currentPage + 1)">Next</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="card my-4">
+            <div class="card-body  text-center">
+              <h5 class="card-title">
+                Joined Club
+              </h5>
+              <table class="table table-striped">
+                  
+                <thead>
+                  <tr >
+                    <th scope="col">S.N</th>
+                    <th scope="col">Club Name</th>
+                    <th scope="col">Position</th>
+                    <th scope="col">Joined Date </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor=" let item of paginatedItems">
+                    <th scope="row">1</th>
+                    <td>{{item.clubName}}</td>
+                    <td>{{item.position}}</td>
+                    <td>{{item.joinedDate}}</td>
+                 
+                  </tr>
+               
+                  
+                </tbody>
+              </table>
+              <nav>
+                <ul class="pagination">
+                  <li class="page-item" [class.disabled]="currentPage === 1">
+                    <a class="page-link" (click)="setPage(currentPage - 1)">Previous</a>
+                  </li>
+                  <li class="page-item" [class.active]="page === currentPage" *ngFor="let page of totalPages">
+                    <a class="page-link" (click)="setPage(page)">{{ page }}</a>
+                  </li>
+                  <li class="page-item" [class.disabled]="currentPage === totalPages.length">
+                    <a class="page-link" (click)="setPage(currentPage + 1)">Next</a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+            <div class="card-body  text-center">
+              <h5 class="card-title">
+                Joined Club
+              </h5>
+              <table class="table table-striped">
+                  
+                <thead>
+                  <tr >
+                    <th scope="col">S.N</th>
+                    <th scope="col">Club Name</th>
+                    <th scope="col">Position</th>
+                    <th scope="col">Joined Date </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor=" let item of paginatedItems">
+                    <th scope="row">1</th>
+                    <td>{{item.clubName}}</td>
+                    <td>{{item.position}}</td>
+                    <td>{{item.joinedDate}}</td>
+                 
+                  </tr>
+               
+                  
+                </tbody>
+              </table>
+              <nav>
+                <ul class="pagination">
+                  <li class="page-item" [class.disabled]="currentPage === 1">
+                    <a class="page-link" (click)="setPage(currentPage - 1)">Previous</a>
+                  </li>
+                  <li class="page-item" [class.active]="page === currentPage" *ngFor="let page of totalPages">
+                    <a class="page-link" (click)="setPage(page)">{{ page }}</a>
+                  </li>
+                  <li class="page-item" [class.disabled]="currentPage === totalPages.length">
+                    <a class="page-link" (click)="setPage(currentPage + 1)">Next</a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
