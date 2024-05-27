@@ -19,6 +19,7 @@
 }
 .btn-2{
 margin-left:20px;
+color:white;
 }
 .navbar-1-1{
     display:flex;
@@ -53,13 +54,37 @@ margin-left:20px;
 
 /*Contact Us*/
 .contact-us{
-    border:1px solid black;
     box-shadow: 0 0 68px 0 rgba(2, 4, 69, .08);
     font-family: 'Proximanova opt', sans-serif; 
     color: #4c525a;
     border: .3px solid rgba(2, 4, 69, .15);
     border-radius:10px;
     line-height: 30px;
+    padding-top:40px;
 }
-
+/*About Us*/
+.about-us{
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    box-shadow: 0 0 68px 0 rgba(2, 4, 69, .08);
+    font-family: 'Proximanova opt', sans-serif; 
+    color: #4c525a;
+    border: .3px solid rgba(2, 4, 69, .15);
+    border-radius:10px;
+    line-height: 30px;
+    margin-top:50px;
+}
+.about-us-1{
+    flex-direction: column;
+    padding:10px
+}
+.learn-more{
+    border-radius:5px;
+    border:none;
+    font-size:12px;
+    padding:2px 10px;
+   
+}
 /*Footer*/
+
