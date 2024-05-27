@@ -13,6 +13,10 @@ import { JoinClubsComponent } from '../../../pages/component/join-clubs/join-clu
 import { SettingComponent } from '../../../pages/component/setting/setting.component';
 import { SponsorshipComponent } from '../../../pages/component/sponsorship/sponsorship.component';
 import { AssignmentComponent } from '../../../pages/component/assignment/assignment.component';
+import { CourseRecordComponent } from '../../../pages/teacher-component/course-record/course-record.component';
+import { InternalRecordsComponent } from '../../../pages/teacher-component/internal-records/internal-records.component';
+import { ModelQuestionComponent } from '../../../pages/teacher-component/model-question/model-question.component';
+import { AssignmentMaterialsComponent } from '../../../pages/teacher-component/assignment-materials/assignment-materials.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,7 +24,10 @@ import { AssignmentComponent } from '../../../pages/component/assignment/assignm
   imports: [CommonModule, FormsModule, SemesterEnrollComponent,
     AcademicRecordsComponent, AttendanceRecordComponent, CourseEnrollComponent,
     DiscussionComponent, FeedbackComponent, IdCardComponent, JoinClubsComponent,
-    SemesterEnrollComponent, SettingComponent, SponsorshipComponent, AssignmentComponent],
+    SemesterEnrollComponent, SettingComponent, SponsorshipComponent, AssignmentComponent,
+    AssignmentMaterialsComponent,CourseRecordComponent,FeedbackComponent,InternalRecordsComponent,
+    ModelQuestionComponent
+  ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })

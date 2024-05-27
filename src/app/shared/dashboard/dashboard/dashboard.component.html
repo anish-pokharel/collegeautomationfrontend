@@ -98,8 +98,8 @@
   </ul>
   <!-- end header-nav -->
 </div>
-
-  <div id="sidebar" class="sidebar">
+<!-- style="height: 100vh; overflow-y: auto;" -->
+  <div id="sidebar" class="sidebar"   style="height: 100vh; overflow-y: auto;">
     <div data-scrollbar="true" data-height="100%">
       <ul class="nav">
         <li class="nav-profile">
@@ -132,7 +132,7 @@
         </li>
         <li class="active cursor">
           <a (click)="showSection('attendance-record')">
-            <i class="fa fa-calendar"></i> 
+            <i class="fa-solid fa-file"></i>
              <span>Attendance Record</span>
           </a>
         </li>
@@ -196,7 +196,118 @@
              <span>Discussion</span>
           </a>
         </li>
+        <li class="nav-header">Admin</li>
         
+        <li class="active cursor">
+          <a (click)="showSection('discussion')">
+            <i class="fa fa-calendar"></i> 
+             <span>User Management</span>
+          </a>
+        </li>
+        <li class="active cursor">
+          <a (click)="showSection('discussion')">
+            <i class="fa fa-calendar"></i> 
+             <span>Enrollment Key</span>
+          </a>
+        </li>
+        <li class="active cursor">
+          <a (click)="showSection('discussion')">
+            <i class="fa fa-calendar"></i> 
+             <span>Academic Record (Admin)</span>
+          </a>
+        </li>
+        <li class="active cursor">
+          <a (click)="showSection('discussion')">
+            <i class="fa fa-calendar"></i> 
+             <span>Job Vacancy Management</span>
+          </a>
+        </li>
+        <li class="active cursor">
+          <a (click)="showSection('discussion')">
+            <i class="fa fa-calendar"></i> 
+             <span>Listed Course</span>
+          </a>
+        </li>
+        <li class="active cursor">
+          <a (click)="showSection('discussion')">
+            <i class="fa fa-calendar"></i> 
+             <span>Discussion (Admin)</span>
+          </a>
+        </li>
+        <li class="active cursor">
+          <a (click)="showSection('discussion')">
+            <i class="fa fa-calendar"></i> 
+             <span>Profile</span>
+          </a>
+        </li>
+        <li class="nav-header">Club/ Secretary</li>
+        <li class="active cursor">
+          <a (click)="showSection('discussion')">
+            <i class="fa fa-calendar"></i> 
+             <span>Profile</span>
+          </a>
+        </li> <li class="active cursor">
+          <a (click)="showSection('discussion')">
+            <i class="fa fa-calendar"></i> 
+             <span>Discussion</span>
+          </a>
+        </li>
+      
+        <li class="nav-header">Faculty /Teacher</li>
+        <li class="active cursor">
+          <a (click)="showSection('discussion')">
+            <i class="fa fa-calendar"></i> 
+             <span>Profile</span>
+          </a>
+        </li> 
+        <li class="active cursor">
+          <a (click)="showSection('discussion')">
+            <i class="fa fa-calendar"></i> 
+             <span>My Course</span>
+          </a>
+        </li>
+        <li class="active cursor">
+          <a (click)="showSection('attendance-record')">
+            <i class="fa fa-calendar"></i> 
+             <span>Attendance</span>
+          </a>
+        </li>
+        <li class="active cursor">
+          <a (click)="showSection('assignment-record')">
+            <i class="fa fa-calendar"></i> 
+             <span>Assignment / Materials</span>
+          </a>
+        </li>
+        <li class="active cursor">
+          <a (click)="showSection('model-question')">
+            <i class="fa fa-calendar"></i> 
+             <span>Model Question</span>
+          </a>
+        </li>
+        <li class="active cursor">
+          <a (click)="showSection('discussion')">
+            <i class="fa fa-calendar"></i> 
+             <span>Feedback</span>
+          </a>
+        </li>
+        <li class="active cursor">
+          <a (click)="showSection('internal-records')">
+            <i class="fa fa-calendar"></i> 
+             <span>Internal Exam and Internal Marks</span>
+          </a>
+        </li>
+        <li class="active cursor">
+          <a (click)="showSection('discussion')">
+            <i class="fa fa-calendar"></i> 
+             <span>Class Schedule</span>
+          </a>
+        </li>
+        <li class="active cursor">
+          <a (click)="showSection('discussion')">
+            <i class="fa fa-calendar"></i> 
+             <span>Discussion</span>
+          </a>
+        </li>
         <li class="active cursor">
           <a  (click)="LogoutButton()">
             <i class="fa fa-calendar"></i> 
@@ -256,6 +367,21 @@
         </div>
         <div *ngIf="currentSection === 'semester-enoll'">
             <app-semester-enroll></app-semester-enroll>
+        </div>
+        <div *ngIf="currentSection === 'assignment-record'">
+            <app-assignment-materials></app-assignment-materials>
+        </div>
+        <div *ngIf="currentSection === 'attendance-record'">
+            <app-attendance-record></app-attendance-record>
+        </div>
+        <div *ngIf="currentSection === 'internal-records'">
+            <app-internal-records></app-internal-records>
+        </div>
+        <div *ngIf="currentSection === 'model-question'">
+            <app-model-question></app-model-question>
+        </div>
+        <div *ngIf="currentSection === 'course-record'">
+            <app-course-record></app-course-record>
         </div>
     </div>
     </div>
