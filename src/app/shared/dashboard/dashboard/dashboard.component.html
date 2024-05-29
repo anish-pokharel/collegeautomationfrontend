@@ -96,9 +96,7 @@
       </div>
     </li>
   </ul>
-  <!-- end header-nav -->
 </div>
-<!-- style="height: 100vh; overflow-y: auto;" -->
   <div id="sidebar" class="sidebar"   style="height: 100vh; overflow-y: auto;">
     <div data-scrollbar="true" data-height="100%">
       <ul class="nav">
@@ -122,7 +120,7 @@
           </ul>
         </li>
       </ul>
-      <ul class="nav"><li class="nav-header">Navigation</li>
+      <ul class="nav"><li class="nav-header">Student</li>
       
         <li class="active cursor">
           <a (click)="showSection('semester')">
@@ -199,7 +197,7 @@
         <li class="nav-header">Admin</li>
         
         <li class="active cursor">
-          <a (click)="showSection('discussion')">
+          <a (click)="showSection('user-management')">
             <i class="fa fa-calendar"></i> 
              <span>User Management</span>
           </a>
@@ -285,7 +283,7 @@
           </a>
         </li>
         <li class="active cursor">
-          <a (click)="showSection('discussion')">
+          <a (click)="showSection('feedback')">
             <i class="fa fa-calendar"></i> 
              <span>Feedback</span>
           </a>
@@ -293,13 +291,19 @@
         <li class="active cursor">
           <a (click)="showSection('internal-records')">
             <i class="fa fa-calendar"></i> 
-             <span>Internal Exam and Internal Marks</span>
+             <span>Internal Valuations</span>
           </a>
         </li>
         <li class="active cursor">
           <a (click)="showSection('discussion')">
             <i class="fa fa-calendar"></i> 
              <span>Class Schedule</span>
+          </a>
+        </li>
+        <li class="active cursor">
+          <a (click)="showSection('student-work-record')">
+            <i class="fa fa-calendar"></i> 
+             <span>Student Work Record</span>
           </a>
         </li>
         <li class="active cursor">
@@ -316,11 +320,8 @@
         </li>
         
         <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
-        <!-- end sidebar minify button -->
       </ul>
-      <!-- end sidebar nav -->
     </div>
-    <!-- end sidebar scrollbar -->
   </div>
   <div class="sidebar-bg"></div>
   
@@ -371,9 +372,7 @@
         <div *ngIf="currentSection === 'assignment-record'">
             <app-assignment-materials></app-assignment-materials>
         </div>
-        <div *ngIf="currentSection === 'attendance-record'">
-            <app-attendance-record></app-attendance-record>
-        </div>
+       
         <div *ngIf="currentSection === 'internal-records'">
             <app-internal-records></app-internal-records>
         </div>
@@ -382,6 +381,13 @@
         </div>
         <div *ngIf="currentSection === 'course-record'">
             <app-course-record></app-course-record>
+        </div>
+        <div *ngIf="currentSection === 'student-work-record'">
+            <app-student-work></app-student-work>
+        </div>
+        
+        <div *ngIf="currentSection === 'user-management'">
+            <app-user-management></app-user-management>
         </div>
     </div>
     </div>
