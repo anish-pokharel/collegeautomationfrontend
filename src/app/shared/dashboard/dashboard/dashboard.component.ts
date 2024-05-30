@@ -19,6 +19,8 @@ import { ModelQuestionComponent } from '../../../pages/teacher-component/model-q
 import { AssignmentMaterialsComponent } from '../../../pages/teacher-component/assignment-materials/assignment-materials.component';
 import { StudentWorkComponent } from '../../../pages/teacher-component/student-work/student-work.component';
 import { UserManagementComponent } from '../../../pages/admin-component/user-management/user-management.component';
+import { EnrollmentKeyComponent } from '../../../pages/admin-component/enrollment-key/enrollment-key.component';
+import { ProfileComponent } from '../../../pages/component/profile/profile.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -28,7 +30,8 @@ import { UserManagementComponent } from '../../../pages/admin-component/user-man
     DiscussionComponent, FeedbackComponent, IdCardComponent, JoinClubsComponent,
     SemesterEnrollComponent, SettingComponent, SponsorshipComponent, AssignmentComponent,
     AssignmentMaterialsComponent,CourseRecordComponent,FeedbackComponent,InternalRecordsComponent,
-    ModelQuestionComponent,StudentWorkComponent,UserManagementComponent
+    ModelQuestionComponent,StudentWorkComponent,UserManagementComponent,
+    EnrollmentKeyComponent,ProfileComponent
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'

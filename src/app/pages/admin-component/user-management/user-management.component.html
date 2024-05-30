@@ -1,105 +1,130 @@
 <div class="container-fluid">
-
-
-<div class="row">
-    <!-- begin col-3 -->
-    <div class="col-xl-3 col-md-6">
-        <div class="widget widget-stats bg-teal">
-            <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
-            <div class="stats-content">
-                <div class="stats-title">Total Student</div>
-                <div class="stats-number">5000</div>
-                <div class="stats-progress progress">
-                    <div class="progress-bar" style="width: 70.1%;"></div>
+    <div class="row">
+        <div class="col-xl-3 col-md-6">
+            <div class="widget widget-stats bg-teal">
+                <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+                <div class="stats-content">
+                    <div class="stats-title">Total Student</div>
+                    <div class="stats-number">5000</div>
+                    <div class="stats-progress progress">
+                        <div class="progress-bar" style="width: 70.1%;"></div>
+                    </div>
+                    <div class="stats-desc">Better than last week (70.1%)</div>
                 </div>
-                <div class="stats-desc">Better than last week (70.1%)</div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+            <div class="widget widget-stats bg-blue">
+                <div class="stats-icon stats-icon-lg"><i class="fa fa-dollar-sign fa-fw"></i></div>
+                <div class="stats-content">
+                    <div class="stats-title">Total Teacher</div>
+                    <div class="stats-number">190</div>
+                    <div class="stats-progress progress">
+                        <div class="progress-bar" style="width: 40.5%;"></div>
+                    </div>
+                    <div class="stats-desc">Better than last week (40.5%)</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="widget widget-stats bg-indigo">
+                <div class="stats-icon stats-icon-lg"><i class="fa fa-archive fa-fw"></i></div>
+                <div class="stats-content">
+                    <div class="stats-title">Club/Parties</div>
+                    <div class="stats-number">9</div>
+                    <div class="stats-progress progress">
+                        <div class="progress-bar" style="width: 76.3%;"></div>
+                    </div>
+                    <div class="stats-desc">Better than last week (76.3%)</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="widget widget-stats bg-dark">
+                <div class="stats-icon stats-icon-lg"><i class="fa fa-comment-alt fa-fw"></i></div>
+                <div class="stats-content">
+                    <div class="stats-title">Total Subjects</div>
+                    <div class="stats-number">3900</div>
+                    <div class="stats-progress progress">
+                        <div class="progress-bar" style="width: 54.9%;"></div>
+                    </div>
+                    <div class="stats-desc">Better than last week (54.9%)</div>
+                </div>
             </div>
         </div>
     </div>
-    <!-- end col-3 -->
-    <!-- begin col-3 -->
-    <div class="col-xl-3 col-md-6">
-        <div class="widget widget-stats bg-blue">
-            <div class="stats-icon stats-icon-lg"><i class="fa fa-dollar-sign fa-fw"></i></div>
-            <div class="stats-content">
-                <div class="stats-title">Total Teacher</div>
-                <div class="stats-number">190</div>
-                <div class="stats-progress progress">
-                    <div class="progress-bar" style="width: 40.5%;"></div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+
+                    <form [formGroup]="userForm" (ngSubmit)="createUser()" class="row">
+
+                        <div class="col-lg-6 mb-4 ">
+                            <input type="text" id="name" class="form-control" formControlName="name" placeholder="Name"
+                                required>
+                        </div>
+                        <div class="col-lg-6 mb-4">
+                            <input type="email" id="email" formControlName="email" class="form-control"
+                                placeholder="Email" required>
+                        </div>
+                        <!-- <div class="col-lg-6 mb-4">
+                    <input type="number" id="rollno" formControlName="rollno" class="form-control" placeholder="Roll Number"
+                        required>
+                </div> -->
+
+                        <div class="col-lg-6 mb-4">
+                            <input type="password" id="password" formControlName="password" class="form-control"
+                                placeholder="Password" required>
+                        </div>
+                        <div class="col-lg-6 mb-4">
+                            <input type="password" id="confirmPassword" formControlName="confirmPassword"
+                                class="form-control" placeholder="Confirm Password" required>
+                        </div>
+                        <div class="col-lg-6 mb-4">
+                            <input type="text" id="address" formControlName="address" class="form-control"
+                                placeholder="Address" required>
+                        </div>
+                        <div class="col-lg-6 mb-4">
+                            <select id="role" class="form-control" formControlName="role">
+                                <option value="student" selected>Student</option>
+                                <option value="faculty">Faculty</option>
+                                <option value="secretary">Secretary</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </div>
+                        <div class="">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="stats-desc">Better than last week (40.5%)</div>
+
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card my-4">
+                <div class="card-body  text-center">
+                    <h5 class="card-title">
+                        Create Club
+                    </h5>
+                    <form [formGroup]="clubForm" (ngSubmit)="createClub()">
+                        <div class="col-lg-12 mb-4">
+                            <input type="text" formControlName="club-status" class="form-control" placeholder="Club Status">
+
+                        </div>
+                        <div class="col-lg-12 mb-4">
+
+                            <input type="text" formControlName="club-name" class="form-control" placeholder="Club Name">
+                        </div>
+
+                        <div class="col-lg-12 mb-4">
+                            <button type="sunmit" class="btn btn-primary mb-4">Add Club</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-    <!-- end col-3 -->
-    <!-- begin col-3 -->
-    <div class="col-xl-3 col-md-6">
-        <div class="widget widget-stats bg-indigo">
-            <div class="stats-icon stats-icon-lg"><i class="fa fa-archive fa-fw"></i></div>
-            <div class="stats-content">
-                <div class="stats-title">Club/Parties</div>
-                <div class="stats-number">9</div>
-                <div class="stats-progress progress">
-                    <div class="progress-bar" style="width: 76.3%;"></div>
-                </div>
-                <div class="stats-desc">Better than last week (76.3%)</div>
-            </div>
-        </div>
-    </div>
-    <!-- end col-3 -->
-    <!-- begin col-3 -->
-    <div class="col-xl-3 col-md-6">
-        <div class="widget widget-stats bg-dark">
-            <div class="stats-icon stats-icon-lg"><i class="fa fa-comment-alt fa-fw"></i></div>
-            <div class="stats-content">
-                <div class="stats-title">Total Subjects</div>
-                <div class="stats-number">3900</div>
-                <div class="stats-progress progress">
-                    <div class="progress-bar" style="width: 54.9%;"></div>
-                </div>
-                <div class="stats-desc">Better than last week (54.9%)</div>
-            </div>
-        </div>
-    </div>
-    <!-- end col-3 -->
-</div>
-
-<div class="row">
-    <div class="col-lg-6">
-        <form action="" class="row">
-            
-            <div class="col-lg-6 mb-4 ">
-                <input type="text" id="name" name="name" class="form-control"  placeholder="Name" required>
-            </div>
-            <div class="col-lg-6 mb-4">
-                <input type="email" id="email" name="email" class="form-control"  placeholder="Email"  required>
-            </div>
-            <div class="col-lg-6 mb-4">
-                <input type="number" id="rollno" name="rollno" class="form-control"  placeholder="Roll Number"  required>
-            </div>
-            <div class="col-lg-6 mb-4">
-                <input type="text" id="address" name="address" class="form-control"  placeholder="Address"  required>
-            </div>
-            <div class="col-lg-6 mb-4">
-                <input type="password" id="password" name="password" class="form-control"  placeholder="Password"  required>
-            </div>
-            <div class="col-lg-6 mb-4">
-                <input type="password" id="confirmPassword" name="confirmPassword" class="form-control"  placeholder="Confirm Password"  required>
-            </div>
-            <div class="col-lg-6 mb-4">
-                <select id="role" class="form-control" name="role">
-                    <option value="student" selected>Student</option>
-                    <option value="faculty">Faculty</option>
-                    <option value="secretary">Secretary</option>
-                    <option value="admin">Admin</option>
-                </select>
-            </div>
-            <div class="">
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-        </form>
-    </div>
-</div>
-
-
 </div>

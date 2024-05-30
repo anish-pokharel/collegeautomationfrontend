@@ -52,7 +52,7 @@
                                         <td>fat</td>
                                         <td>Sudy well</td>
                                     </tr>
-    
+
                                 </tbody>
                             </table>
                         </div>
@@ -88,9 +88,9 @@
                                         <td>Thornton</td>
                                         <td>fat</td>
                                         <td>Sudy well</td>
-                                        
+
                                     </tr>
-    
+
                                 </tbody>
                             </table>
                         </div>
@@ -116,20 +116,30 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="row">
+                <form class="row" [formGroup]="addStudent" (ngSubmit)="addStudentRecord()">
+                    <div class="col-lg-12">
+                        <input type="text" formControlName="student-name" id="student-name" placeholder="Student-Name"
+                            class="form-control col-lg-12 mb-4">
+                    </div>
+                    <div class="col-lg-12">
 
+                        <input type="number" formControlName="student-roll-no" id="student-roll-no"
+                            placeholder="Student Roll No" class="form-control mb-4 col-lg-12">
+                    </div>
+                    <div class="col-lg-12">
+                        <select class="form-control" formControlName="student-internal-data">
+                            <option value="exam-value" selected>Student Internal Exam Value</option>
+                            <option value="internal-marks">Student Internaal Marks</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-12">
+                        <input type="text" formControlName="remarks" id="remarks" placeholder="remarks"
+                            class="form-control mb-4 col-lg-12">
 
-                    <input type="text" name="student-name" id="student-name" placeholder="Student-Name"
-                        class="form-control col-lg-6 mb-4">
-                    <input type="text" name="student-roll-no" id="student-roll-no" placeholder="Student Roll No"
-                        class="form-control mb-4 col-lg-6">
-
-                    <input type="text" name="student-name" id="student-name" placeholder="Student-Name"
-                        class="form-control mb-4 col-lg-12">
-                    <input type="text" name="remarks" id="remarks" placeholder="remarks" class="form-control mb-4 col-lg-12">
-
-                    <button class="btn btn-primary mb-4 col-lg-12">Add</button>
-
+                    </div>
+                    <div class="col-lg-12">
+                        <button class="btn btn-primary mb-4 col-lg-4" type="submit">Add</button>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">

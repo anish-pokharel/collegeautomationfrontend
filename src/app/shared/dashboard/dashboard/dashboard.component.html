@@ -135,6 +135,12 @@
           </a>
         </li>
         <li class="active cursor">
+          <a (click)="showSection('profile')">
+            <i class="fa-solid fa-file"></i>
+             <span>Profile</span>
+          </a>
+        </li>
+        <li class="active cursor">
           <a (click)="showSection('academic-records')">
             <i class="fa fa-calendar"></i> 
              <span>Academic Record</span>
@@ -203,7 +209,7 @@
           </a>
         </li>
         <li class="active cursor">
-          <a (click)="showSection('discussion')">
+          <a (click)="showSection('enrollment-ke')">
             <i class="fa fa-calendar"></i> 
              <span>Enrollment Key</span>
           </a>
@@ -233,14 +239,14 @@
           </a>
         </li>
         <li class="active cursor">
-          <a (click)="showSection('discussion')">
+          <a (click)="showSection('profile')">
             <i class="fa fa-calendar"></i> 
              <span>Profile</span>
           </a>
         </li>
         <li class="nav-header">Club/ Secretary</li>
         <li class="active cursor">
-          <a (click)="showSection('discussion')">
+          <a (click)="showSection('profile')">
             <i class="fa fa-calendar"></i> 
              <span>Profile</span>
           </a>
@@ -253,7 +259,7 @@
       
         <li class="nav-header">Faculty /Teacher</li>
         <li class="active cursor">
-          <a (click)="showSection('discussion')">
+          <a (click)="showSection('profile')">
             <i class="fa fa-calendar"></i> 
              <span>Profile</span>
           </a>
@@ -354,6 +360,9 @@
         <div *ngIf="currentSection === 'id-card'">
             <app-id-card></app-id-card>
         </div>
+        <div *ngIf="currentSection === 'profile'">
+            <app-profile></app-profile>
+        </div>
         <div *ngIf="currentSection === 'sponsorship'">
             <app-sponsorship></app-sponsorship>
         </div>
@@ -386,6 +395,9 @@
             <app-student-work></app-student-work>
         </div>
         
+        <div *ngIf="currentSection === 'enrollment-ke'">
+            <app-enrollment-key></app-enrollment-key>
+        </div>
         <div *ngIf="currentSection === 'user-management'">
             <app-user-management></app-user-management>
         </div>
