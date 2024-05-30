@@ -43,8 +43,8 @@ export class UserManagementComponent implements OnInit{
   }
   clubFormData(){
     this.clubForm= this.formBuilder.group({
-      'club-status':['',Validators.required],
-      'club-name':['',Validators.required]
+      clubStatus:['',Validators.required],
+      clubName:['',Validators.required]
     })
   }
   createClub(){

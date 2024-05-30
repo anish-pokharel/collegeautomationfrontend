@@ -21,6 +21,7 @@ import { StudentWorkComponent } from '../../../pages/teacher-component/student-w
 import { UserManagementComponent } from '../../../pages/admin-component/user-management/user-management.component';
 import { EnrollmentKeyComponent } from '../../../pages/admin-component/enrollment-key/enrollment-key.component';
 import { ProfileComponent } from '../../../pages/component/profile/profile.component';
+import { JobVacancyComponent } from '../../../pages/admin-component/job-vacancy/job-vacancy.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -31,7 +32,7 @@ import { ProfileComponent } from '../../../pages/component/profile/profile.compo
     SemesterEnrollComponent, SettingComponent, SponsorshipComponent, AssignmentComponent,
     AssignmentMaterialsComponent,CourseRecordComponent,FeedbackComponent,InternalRecordsComponent,
     ModelQuestionComponent,StudentWorkComponent,UserManagementComponent,
-    EnrollmentKeyComponent,ProfileComponent
+    EnrollmentKeyComponent,ProfileComponent,JobVacancyComponent
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'

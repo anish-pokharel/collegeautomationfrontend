@@ -221,7 +221,7 @@
           </a>
         </li>
         <li class="active cursor">
-          <a (click)="showSection('discussion')">
+          <a (click)="showSection('job-vacancy')">
             <i class="fa fa-calendar"></i> 
              <span>Job Vacancy Management</span>
           </a>
@@ -401,5 +401,9 @@
         <div *ngIf="currentSection === 'user-management'">
             <app-user-management></app-user-management>
         </div>
+        <div *ngIf="currentSection === 'job-vacancy'">
+            <app-job-vacancy></app-job-vacancy>
+        </div>
+        
     </div>
     </div>

@@ -15,7 +15,7 @@ export class DiscussionService {
     return this.http.post(environment.api_url+'discussion',obj)
   }
   getdiscussionData():Observable<any>{
-    return this.http.get(environment.api_url+'getdiscussion')
+    return this.http.get<any>(environment.api_url+'getdiscussion')
   }
 
 }

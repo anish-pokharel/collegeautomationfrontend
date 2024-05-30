@@ -15,8 +15,6 @@ constructor(private userService:UserAuthService ){}
   ngOnInit(): void {
   this.userService.getuserDara().subscribe((res)=>{
     console.log("the response is "+res);
-    JSON.stringify(res)
-    console.log(res+'data is ');
     this.userData=res.userData
     console.log('hello'+this.userData);
     console.log(this.userData);

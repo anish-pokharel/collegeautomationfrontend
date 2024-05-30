@@ -14,12 +14,11 @@ import { CommonModule } from '@angular/common';
 export class DiscussionComponent implements OnInit {
   constructor(private formBuilder: FormBuilder , private discussionService:DiscussionService) { }
   discussionTable!: FormGroup;
-  discussionData: []=[]
+  discussionData: any[]=[]
   ngOnInit(): void {
     this.discussionTable = this.formBuilder.group({
-      discussionTopic: ['', Validators.required],
+      discussion_topic: ['', Validators.required],
       date: ['', Validators.required],
-      
       decision_by: ['', Validators.required],
       decision: ['', Validators.required],
     })
@@ -43,18 +42,11 @@ export class DiscussionComponent implements OnInit {
       debugger
     }
   }
-  getDiscissionTable(){
-    this.discussionService.getdiscussionData().subscribe((res)=>{
-      console.log('the response is '+res);
-      JSON.stringify(res)
-      console.log('Now tHE datais '+res);
-debugger
-      this.discussionData= res
-      console.log('the answer is '+this.discussionData);
-      debugger
+  getDiscissionTable() {
+    this.discussionService.getdiscussionData().subscribe((res: any) => {
+      this.discussionData = res.discussion;
+      console.log(this.discussionData);
+    });
 
-
-    })
-  }
-
+}
 }
