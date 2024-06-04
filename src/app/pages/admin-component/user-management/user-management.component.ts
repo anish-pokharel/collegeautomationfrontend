@@ -30,10 +30,17 @@ export class UserManagementComponent implements OnInit{
     if(this.userForm.valid){
       const formData= this.userForm.value;
       console.log(formData);
-      this.userService.postuserRegister(this.userForm.value).subscribe((res)=>{
-        console.log(res);
-        alertify.success('User Added Sucessfully')
-      })
+      const passwordMatch=this.userForm.value.password=== this.userForm.value.confirmPassword;
+      if(passwordMatch){
+        this.userService.postuserRegister(this.userForm.value).subscribe((res)=>{
+          console.log(res);
+          alertify.success('User Added Sucessfully')
+        })
+      }
+      else{
+        alertify.error('Password Doesnot Match')
+      }
+    
     }
     else{
       console.error('Form is inavalid')
