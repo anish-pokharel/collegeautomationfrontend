@@ -22,6 +22,7 @@ import { UserManagementComponent } from '../../../pages/admin-component/user-man
 import { EnrollmentKeyComponent } from '../../../pages/admin-component/enrollment-key/enrollment-key.component';
 import { ProfileComponent } from '../../../pages/component/profile/profile.component';
 import { JobVacancyComponent } from '../../../pages/admin-component/job-vacancy/job-vacancy.component';
+import { ListCourseComponent } from '../../../pages/admin-component/list-course/list-course.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -32,7 +33,7 @@ import { JobVacancyComponent } from '../../../pages/admin-component/job-vacancy/
     SemesterEnrollComponent, SettingComponent, SponsorshipComponent, AssignmentComponent,
     AssignmentMaterialsComponent,CourseRecordComponent,FeedbackComponent,InternalRecordsComponent,
     ModelQuestionComponent,StudentWorkComponent,UserManagementComponent,
-    EnrollmentKeyComponent,ProfileComponent,JobVacancyComponent
+    EnrollmentKeyComponent,ProfileComponent,JobVacancyComponent,ListCourseComponent
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'

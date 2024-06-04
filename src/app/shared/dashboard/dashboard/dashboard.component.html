@@ -1,103 +1,103 @@
 <div id="page-container" class="page-sidebar-fixed page-header-fixed">
 
 
-<div id="header" class="header navbar-default">
-  <div class="navbar-header">
-    <a href="index.html" class="navbar-brand"><span class="navbar-logo"></span> <b>Color</b> Admin</a>
-    <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
+  <div id="header" class="header navbar-default">
+    <div class="navbar-header">
+      <a href="index.html" class="navbar-brand"><span class="navbar-logo"></span> <b>College</b>Automation</a>
+      <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <ul class="navbar-nav navbar-right">
+      <li class="navbar-form">
+        <form action="" method="POST" name="search">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Enter keyword" />
+            <button type="submit" class="btn btn-search"><i class="fa fa-search"></i></button>
+          </div>
+        </form>
+      </li>
+      <li class="dropdown">
+        <a href="#" data-toggle="dropdown" class="dropdown-toggle f-s-14">
+          <i class="fa fa-bell"></i>
+          <span class="label">5</span>
+        </a>
+        <div class="dropdown-menu media-list dropdown-menu-right">
+          <div class="dropdown-header">NOTIFICATIONS (5)</div>
+          <a href="javascript:;" class="dropdown-item media">
+            <div class="media-left">
+              <i class="fa fa-bug media-object bg-silver-darker"></i>
+            </div>
+            <div class="media-body">
+              <h6 class="media-heading">Server Error Reports <i class="fa fa-exclamation-circle text-danger"></i></h6>
+              <div class="text-muted f-s-10">3 minutes ago</div>
+            </div>
+          </a>
+          <a href="javascript:;" class="dropdown-item media">
+            <div class="media-left">
+              <img src="../assets/img/user/user-1.jpg" class="media-object" alt="" />
+              <i class="fab fa-facebook-messenger text-blue media-object-icon"></i>
+            </div>
+            <div class="media-body">
+              <h6 class="media-heading">John Smith</h6>
+              <p>Quisque pulvinar tellus sit amet sem scelerisque tincidunt.</p>
+              <div class="text-muted f-s-10">25 minutes ago</div>
+            </div>
+          </a>
+          <a href="javascript:;" class="dropdown-item media">
+            <div class="media-left">
+              <img src="../assets/img/user/user-2.jpg" class="media-object" alt="" />
+              <i class="fab fa-facebook-messenger text-blue media-object-icon"></i>
+            </div>
+            <div class="media-body">
+              <h6 class="media-heading">Olivia</h6>
+              <p>Quisque pulvinar tellus sit amet sem scelerisque tincidunt.</p>
+              <div class="text-muted f-s-10">35 minutes ago</div>
+            </div>
+          </a>
+          <a href="javascript:;" class="dropdown-item media">
+            <div class="media-left">
+              <i class="fa fa-plus media-object bg-silver-darker"></i>
+            </div>
+            <div class="media-body">
+              <h6 class="media-heading"> New User Registered</h6>
+              <div class="text-muted f-s-10">1 hour ago</div>
+            </div>
+          </a>
+          <a href="javascript:;" class="dropdown-item media">
+            <div class="media-left">
+              <i class="fa fa-envelope media-object bg-silver-darker"></i>
+              <i class="fab fa-google text-warning media-object-icon f-s-14"></i>
+            </div>
+            <div class="media-body">
+              <h6 class="media-heading"> New Email From John</h6>
+              <div class="text-muted f-s-10">2 hour ago</div>
+            </div>
+          </a>
+          <div class="dropdown-footer text-center">
+            <a href="javascript:;">View more</a>
+          </div>
+        </div>
+      </li>
+      <li class="dropdown navbar-user">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <img src="../assets/img/user/user-13.jpg" alt="" />
+          <span class="d-none d-md-inline">Adam Schwartz</span> <b class="caret"></b>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right">
+          <a href="javascript:;" class="dropdown-item">Edit Profile</a>
+          <a href="javascript:;" class="dropdown-item"><span class="badge badge-danger pull-right">2</span> Inbox</a>
+          <a href="javascript:;" class="dropdown-item">Calendar</a>
+          <a href="javascript:;" class="dropdown-item">Setting</a>
+          <div class="dropdown-divider"></div>
+          <a (click)="LogoutButton()" class="dropdown-item">Log Out</a>
+        </div>
+      </li>
+    </ul>
   </div>
-  <ul class="navbar-nav navbar-right">
-    <li class="navbar-form">
-      <form action="" method="POST" name="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Enter keyword" />
-          <button type="submit" class="btn btn-search"><i class="fa fa-search"></i></button>
-        </div>
-      </form>
-    </li>
-    <li class="dropdown">
-      <a href="#" data-toggle="dropdown" class="dropdown-toggle f-s-14">
-        <i class="fa fa-bell"></i>
-        <span class="label">5</span>
-      </a>
-      <div class="dropdown-menu media-list dropdown-menu-right">
-        <div class="dropdown-header">NOTIFICATIONS (5)</div>
-        <a href="javascript:;" class="dropdown-item media">
-          <div class="media-left">
-            <i class="fa fa-bug media-object bg-silver-darker"></i>
-          </div>
-          <div class="media-body">
-            <h6 class="media-heading">Server Error Reports <i class="fa fa-exclamation-circle text-danger"></i></h6>
-            <div class="text-muted f-s-10">3 minutes ago</div>
-          </div>
-        </a>
-        <a href="javascript:;" class="dropdown-item media">
-          <div class="media-left">
-            <img src="../assets/img/user/user-1.jpg" class="media-object" alt="" />
-            <i class="fab fa-facebook-messenger text-blue media-object-icon"></i>
-          </div>
-          <div class="media-body">
-            <h6 class="media-heading">John Smith</h6>
-            <p>Quisque pulvinar tellus sit amet sem scelerisque tincidunt.</p>
-            <div class="text-muted f-s-10">25 minutes ago</div>
-          </div>
-        </a>
-        <a href="javascript:;" class="dropdown-item media">
-          <div class="media-left">
-            <img src="../assets/img/user/user-2.jpg" class="media-object" alt="" />
-            <i class="fab fa-facebook-messenger text-blue media-object-icon"></i>
-          </div>
-          <div class="media-body">
-            <h6 class="media-heading">Olivia</h6>
-            <p>Quisque pulvinar tellus sit amet sem scelerisque tincidunt.</p>
-            <div class="text-muted f-s-10">35 minutes ago</div>
-          </div>
-        </a>
-        <a href="javascript:;" class="dropdown-item media">
-          <div class="media-left">
-            <i class="fa fa-plus media-object bg-silver-darker"></i>
-          </div>
-          <div class="media-body">
-            <h6 class="media-heading"> New User Registered</h6>
-            <div class="text-muted f-s-10">1 hour ago</div>
-          </div>
-        </a>
-        <a href="javascript:;" class="dropdown-item media">
-          <div class="media-left">
-            <i class="fa fa-envelope media-object bg-silver-darker"></i>
-            <i class="fab fa-google text-warning media-object-icon f-s-14"></i>
-          </div>
-          <div class="media-body">
-            <h6 class="media-heading"> New Email From John</h6>
-            <div class="text-muted f-s-10">2 hour ago</div>
-          </div>
-        </a>
-        <div class="dropdown-footer text-center">
-          <a href="javascript:;">View more</a>
-        </div>
-      </div>
-    </li>
-    <li class="dropdown navbar-user">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-        <img src="../assets/img/user/user-13.jpg" alt="" /> 
-        <span class="d-none d-md-inline">Adam Schwartz</span> <b class="caret"></b>
-      </a>
-      <div class="dropdown-menu dropdown-menu-right">
-        <a href="javascript:;" class="dropdown-item">Edit Profile</a>
-        <a href="javascript:;" class="dropdown-item"><span class="badge badge-danger pull-right">2</span> Inbox</a>
-        <a href="javascript:;" class="dropdown-item">Calendar</a>
-        <a href="javascript:;" class="dropdown-item">Setting</a>
-        <div class="dropdown-divider"></div>
-        <a (click)="LogoutButton()" class="dropdown-item">Log Out</a>
-      </div>
-    </li>
-  </ul>
-</div>
-  <div id="sidebar" class="sidebar"   style="height: 100vh; overflow-y: auto;">
+  <div id="sidebar" class="sidebar" style="height: 100vh; overflow-y: auto;">
     <div data-scrollbar="true" data-height="100%">
       <ul class="nav">
         <li class="nav-profile">
@@ -120,290 +120,295 @@
           </ul>
         </li>
       </ul>
-      <ul class="nav"><li class="nav-header">Student</li>
-      
+      <ul class="nav">
+        <li class="nav-header">Student</li>
+
         <li class="active cursor">
           <a (click)="showSection('semester')">
-            <i class="fa fa-calendar"></i> 
-             <span>Semster Enroll</span>
+            <i class="fa fa-calendar"></i>
+            <span>Semster Enroll</span>
           </a>
         </li>
         <li class="active cursor">
           <a (click)="showSection('attendance-record')">
             <i class="fa-solid fa-file"></i>
-             <span>Attendance Record</span>
+            <span>Attendance Record</span>
           </a>
         </li>
         <li class="active cursor">
           <a (click)="showSection('profile')">
             <i class="fa-solid fa-file"></i>
-             <span>Profile</span>
+            <span>Profile</span>
           </a>
         </li>
         <li class="active cursor">
           <a (click)="showSection('academic-records')">
-            <i class="fa fa-calendar"></i> 
-             <span>Academic Record</span>
+            <i class="fa fa-calendar"></i>
+            <span>Academic Record</span>
           </a>
         </li>
         <li class="active cursor">
           <a (click)="showSection('course-enroll')">
-            <i class="fa fa-calendar"></i> 
-             <span>Course enroll</span>
+            <i class="fa fa-calendar"></i>
+            <span>Course enroll</span>
           </a>
         </li>
         <li class="active cursor">
           <a (click)="showSection('our-courses')">
-            <i class="fa fa-calendar"></i> 
-             <span>Our Courses</span>
+            <i class="fa fa-calendar"></i>
+            <span>Our Courses</span>
           </a>
         </li>
         <li class="active cursor">
           <a (click)="showSection('setting')">
-            <i class="fa fa-calendar"></i> 
-             <span>Setting</span>
+            <i class="fa fa-calendar"></i>
+            <span>Setting</span>
           </a>
         </li>
         <li class="active cursor">
           <a (click)="showSection('join-club')">
-            <i class="fa fa-calendar"></i> 
-             <span>Join Club</span>
+            <i class="fa fa-calendar"></i>
+            <span>Join Club</span>
           </a>
         </li>
         <li class="active cursor">
           <a (click)="showSection('id-card')">
-            <i class="fa fa-calendar"></i> 
-             <span>ID Card Renew</span>
+            <i class="fa fa-calendar"></i>
+            <span>ID Card Renew</span>
           </a>
         </li>
         <li class="active cursor">
           <a (click)="showSection('sponsorship')">
-            <i class="fa fa-calendar"></i> 
-             <span>Sponsorship</span>
+            <i class="fa fa-calendar"></i>
+            <span>Sponsorship</span>
           </a>
         </li>
         <li class="active cursor">
           <a (click)="showSection('assignment')">
-            <i class="fa fa-calendar"></i> 
-             <span>Assignment </span>
+            <i class="fa fa-calendar"></i>
+            <span>Assignment </span>
           </a>
         </li>
         <li class="active cursor">
           <a (click)="showSection('feedback')">
-            <i class="fa fa-calendar"></i> 
-             <span>Feedback</span>
+            <i class="fa fa-calendar"></i>
+            <span>Feedback</span>
           </a>
         </li>
         <li class="active cursor">
           <a (click)="showSection('discussion')">
-            <i class="fa fa-calendar"></i> 
-             <span>Discussion</span>
+            <i class="fa fa-calendar"></i>
+            <span>Discussion</span>
           </a>
         </li>
         <li class="nav-header">Admin</li>
-        
+
         <li class="active cursor">
           <a (click)="showSection('user-management')">
-            <i class="fa fa-calendar"></i> 
-             <span>User Management</span>
+            <i class="fa fa-calendar"></i>
+            <span>User Management</span>
           </a>
         </li>
         <li class="active cursor">
           <a (click)="showSection('enrollment-ke')">
-            <i class="fa fa-calendar"></i> 
-             <span>Enrollment Key</span>
+            <i class="fa fa-calendar"></i>
+            <span>Enrollment Key</span>
           </a>
         </li>
         <li class="active cursor">
           <a (click)="showSection('discussion')">
-            <i class="fa fa-calendar"></i> 
-             <span>Academic Record (Admin)</span>
+            <i class="fa fa-calendar"></i>
+            <span>Academic Record (Admin)</span>
           </a>
         </li>
         <li class="active cursor">
           <a (click)="showSection('job-vacancy')">
-            <i class="fa fa-calendar"></i> 
-             <span>Job Vacancy Management</span>
+            <i class="fa fa-calendar"></i>
+            <span>Job Vacancy Management</span>
+          </a>
+        </li>
+        <li class="active cursor">
+          <a (click)="showSection('list-course')">
+            <i class="fa fa-calendar"></i>
+            <span>Listed Course</span>
           </a>
         </li>
         <li class="active cursor">
           <a (click)="showSection('discussion')">
-            <i class="fa fa-calendar"></i> 
-             <span>Listed Course</span>
-          </a>
-        </li>
-        <li class="active cursor">
-          <a (click)="showSection('discussion')">
-            <i class="fa fa-calendar"></i> 
-             <span>Discussion (Admin)</span>
+            <i class="fa fa-calendar"></i>
+            <span>Discussion (Admin)</span>
           </a>
         </li>
         <li class="active cursor">
           <a (click)="showSection('profile')">
-            <i class="fa fa-calendar"></i> 
-             <span>Profile</span>
+            <i class="fa fa-calendar"></i>
+            <span>Profile</span>
           </a>
         </li>
         <li class="nav-header">Club/ Secretary</li>
         <li class="active cursor">
           <a (click)="showSection('profile')">
-            <i class="fa fa-calendar"></i> 
-             <span>Profile</span>
-          </a>
-        </li> <li class="active cursor">
-          <a (click)="showSection('discussion')">
-            <i class="fa fa-calendar"></i> 
-             <span>Discussion</span>
+            <i class="fa fa-calendar"></i>
+            <span>Profile</span>
           </a>
         </li>
-      
+        <li class="active cursor">
+          <a (click)="showSection('discussion')">
+            <i class="fa fa-calendar"></i>
+            <span>Discussion</span>
+          </a>
+        </li>
+
         <li class="nav-header">Faculty /Teacher</li>
         <li class="active cursor">
           <a (click)="showSection('profile')">
-            <i class="fa fa-calendar"></i> 
-             <span>Profile</span>
+            <i class="fa fa-calendar"></i>
+            <span>Profile</span>
           </a>
-        </li> 
+        </li>
         <li class="active cursor">
           <a (click)="showSection('discussion')">
-            <i class="fa fa-calendar"></i> 
-             <span>My Course</span>
+            <i class="fa fa-calendar"></i>
+            <span>My Course</span>
           </a>
         </li>
         <li class="active cursor">
           <a (click)="showSection('attendance-record')">
-            <i class="fa fa-calendar"></i> 
-             <span>Attendance</span>
+            <i class="fa fa-calendar"></i>
+            <span>Attendance</span>
           </a>
         </li>
         <li class="active cursor">
           <a (click)="showSection('assignment-record')">
-            <i class="fa fa-calendar"></i> 
-             <span>Assignment / Materials</span>
+            <i class="fa fa-calendar"></i>
+            <span>Assignment / Materials</span>
           </a>
         </li>
         <li class="active cursor">
           <a (click)="showSection('model-question')">
-            <i class="fa fa-calendar"></i> 
-             <span>Model Question</span>
+            <i class="fa fa-calendar"></i>
+            <span>Model Question</span>
           </a>
         </li>
         <li class="active cursor">
           <a (click)="showSection('feedback')">
-            <i class="fa fa-calendar"></i> 
-             <span>Feedback</span>
+            <i class="fa fa-calendar"></i>
+            <span>Feedback</span>
           </a>
         </li>
         <li class="active cursor">
           <a (click)="showSection('internal-records')">
-            <i class="fa fa-calendar"></i> 
-             <span>Internal Valuations</span>
+            <i class="fa fa-calendar"></i>
+            <span>Internal Valuations</span>
           </a>
         </li>
         <li class="active cursor">
           <a (click)="showSection('discussion')">
-            <i class="fa fa-calendar"></i> 
-             <span>Class Schedule</span>
+            <i class="fa fa-calendar"></i>
+            <span>Class Schedule</span>
           </a>
         </li>
         <li class="active cursor">
           <a (click)="showSection('student-work-record')">
-            <i class="fa fa-calendar"></i> 
-             <span>Student Work Record</span>
+            <i class="fa fa-calendar"></i>
+            <span>Student Work Record</span>
           </a>
         </li>
         <li class="active cursor">
           <a (click)="showSection('discussion')">
-            <i class="fa fa-calendar"></i> 
-             <span>Discussion</span>
+            <i class="fa fa-calendar"></i>
+            <span>Discussion</span>
           </a>
         </li>
         <li class="active cursor">
-          <a  (click)="LogoutButton()">
-            <i class="fa fa-calendar"></i> 
-             <span>Logout</span>
+          <a (click)="LogoutButton()">
+            <i class="fa fa-calendar"></i>
+            <span>Logout</span>
           </a>
         </li>
-        
-        <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
+
+        <!-- <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i
+              class="fa fa-angle-double-left"></i></a></li> -->
       </ul>
     </div>
   </div>
   <div class="sidebar-bg"></div>
-  
-  
-    <div id="content" class="content">
-   
-      <div >
-        <div *ngIf="currentSection === 'semester'">
-            <app-semester-enroll></app-semester-enroll>
-        </div>
-        <div *ngIf="currentSection === 'attendance-record'">
-          <app-attendance-record></app-attendance-record>
-        </div>
-        <div *ngIf="currentSection === 'academic-records'">
-          <app-academic-records></app-academic-records>
-        </div>
-        <div *ngIf="currentSection === 'course-enroll'">
-            <app-course-enroll></app-course-enroll>
-        </div>
-        <div *ngIf="currentSection === 'our-courses'">
-            <app-course-enroll></app-course-enroll>
-        </div>
-        <div *ngIf="currentSection === 'setting'">
-            <app-setting></app-setting>
-        </div>
-        <div *ngIf="currentSection === 'join-club'">
-            <app-join-clubs></app-join-clubs>
-        </div>
-       
-        <div *ngIf="currentSection === 'id-card'">
-            <app-id-card></app-id-card>
-        </div>
-        <div *ngIf="currentSection === 'profile'">
-            <app-profile></app-profile>
-        </div>
-        <div *ngIf="currentSection === 'sponsorship'">
-            <app-sponsorship></app-sponsorship>
-        </div>
-        <div *ngIf="currentSection === 'assignment'">
-          <app-assignment></app-assignment>
-        </div>
-        <div *ngIf="currentSection === 'feedback'">
-            <app-feedback></app-feedback>
-        </div>
-        <div *ngIf="currentSection === 'discussion'">
-            <app-discussion></app-discussion>
-        </div>
-        <div *ngIf="currentSection === 'semester-enoll'">
-            <app-semester-enroll></app-semester-enroll>
-        </div>
-        <div *ngIf="currentSection === 'assignment-record'">
-            <app-assignment-materials></app-assignment-materials>
-        </div>
-       
-        <div *ngIf="currentSection === 'internal-records'">
-            <app-internal-records></app-internal-records>
-        </div>
-        <div *ngIf="currentSection === 'model-question'">
-            <app-model-question></app-model-question>
-        </div>
-        <div *ngIf="currentSection === 'course-record'">
-            <app-course-record></app-course-record>
-        </div>
-        <div *ngIf="currentSection === 'student-work-record'">
-            <app-student-work></app-student-work>
-        </div>
-        
-        <div *ngIf="currentSection === 'enrollment-ke'">
-            <app-enrollment-key></app-enrollment-key>
-        </div>
-        <div *ngIf="currentSection === 'user-management'">
-            <app-user-management></app-user-management>
-        </div>
-        <div *ngIf="currentSection === 'job-vacancy'">
-            <app-job-vacancy></app-job-vacancy>
-        </div>
-        
+
+
+  <div id="content" class="content">
+
+    <div>
+      <div *ngIf="currentSection === 'semester'">
+        <app-semester-enroll></app-semester-enroll>
+      </div>
+      <div *ngIf="currentSection === 'attendance-record'">
+        <app-attendance-record></app-attendance-record>
+      </div>
+      <div *ngIf="currentSection === 'academic-records'">
+        <app-academic-records></app-academic-records>
+      </div>
+      <div *ngIf="currentSection === 'course-enroll'">
+        <app-course-enroll></app-course-enroll>
+      </div>
+      <div *ngIf="currentSection === 'our-courses'">
+        <app-course-enroll></app-course-enroll>
+      </div>
+      <div *ngIf="currentSection === 'setting'">
+        <app-setting></app-setting>
+      </div>
+      <div *ngIf="currentSection === 'join-club'">
+        <app-join-clubs></app-join-clubs>
+      </div>
+
+      <div *ngIf="currentSection === 'id-card'">
+        <app-id-card></app-id-card>
+      </div>
+      <div *ngIf="currentSection === 'profile'">
+        <app-profile></app-profile>
+      </div>
+      <div *ngIf="currentSection === 'sponsorship'">
+        <app-sponsorship></app-sponsorship>
+      </div>
+      <div *ngIf="currentSection === 'assignment'">
+        <app-assignment></app-assignment>
+      </div>
+      <div *ngIf="currentSection === 'feedback'">
+        <app-feedback></app-feedback>
+      </div>
+      <div *ngIf="currentSection === 'discussion'">
+        <app-discussion></app-discussion>
+      </div>
+      <div *ngIf="currentSection === 'semester-enoll'">
+        <app-semester-enroll></app-semester-enroll>
+      </div>
+      <div *ngIf="currentSection === 'assignment-record'">
+        <app-assignment-materials></app-assignment-materials>
+      </div>
+
+      <div *ngIf="currentSection === 'internal-records'">
+        <app-internal-records></app-internal-records>
+      </div>
+      <div *ngIf="currentSection === 'model-question'">
+        <app-model-question></app-model-question>
+      </div>
+      <div *ngIf="currentSection === 'course-record'">
+        <app-course-record></app-course-record>
+      </div>
+      <div *ngIf="currentSection === 'student-work-record'">
+        <app-student-work></app-student-work>
+      </div>
+
+      <div *ngIf="currentSection === 'enrollment-ke'">
+        <app-enrollment-key></app-enrollment-key>
+      </div>
+      <div *ngIf="currentSection === 'user-management'">
+        <app-user-management></app-user-management>
+      </div>
+      <div *ngIf="currentSection === 'job-vacancy'">
+        <app-job-vacancy></app-job-vacancy>
+      </div>
+      <div *ngIf="currentSection === 'list-course'">
+        <app-list-course></app-list-course>
+      </div>
     </div>
-    </div>
+  </div>
