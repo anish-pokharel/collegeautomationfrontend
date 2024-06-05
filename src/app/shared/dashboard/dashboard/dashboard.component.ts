@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SemesterEnrollComponent } from '../../../pages/component/semester-enroll/semester-enroll.component';
@@ -38,10 +38,14 @@ import { ListCourseComponent } from '../../../pages/admin-component/list-course/
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit{
   currentSection: string = 'basic'
+  userRole: string|null | undefined;
   constructor(private router: Router) {
     this.currentSection = 'attendance'
+  }
+  ngOnInit(): void {
+    this.userRole =localStorage.getItem('userRole')
   }
   loginButton() {
     this.router.navigate(['login'])

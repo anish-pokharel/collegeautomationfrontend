@@ -15,6 +15,7 @@ export class DiscussionComponent implements OnInit {
   constructor(private formBuilder: FormBuilder , private discussionService:DiscussionService) { }
   discussionTable!: FormGroup;
   discussionData: any[]=[]
+  userRole: string|null | undefined;
   ngOnInit(): void {
     this.discussionTable = this.formBuilder.group({
       discussion_topic: ['', Validators.required],
@@ -22,7 +23,8 @@ export class DiscussionComponent implements OnInit {
       decision_by: ['', Validators.required],
       decision: ['', Validators.required],
     })
-    this.getDiscissionTable()
+    this.getDiscissionTable();
+    this.userRole =localStorage.getItem('userRole')
 
   }
   addDiscussion() {

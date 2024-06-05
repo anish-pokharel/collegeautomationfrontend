@@ -4,32 +4,34 @@
             <div class="card">
                 <div class="card-body text-center">
                     <h5>Assignment Add</h5>
-                    <form>
+                    <form >
                         <div class="col-lg-12 mb-4">
-                            <select class="form-select" id="assignment-topic">
-                                <option selected>Subject</option>
-                                <option value="1">NP</option>
-                                <option value="2">SQA</option>
+                            <select class="form-select" formControlName="subject">
+                                <option value="NP">NP</option>
+                                <option value="SQA">SQA</option>
                             </select>
                         </div>
                         <div class="col-lg-12 mb-4">
-                            <select class="form-select" id="assignment-list">
-                                <option selected>Assignment</option>
-                                <option value="1">Assignment 1</option>
-                                <option value="2">Assignment 2</option>
-                                <option value="2">Assignment 3</option>
+                            <select class="form-select" formControlName="assignment">
+                                <option value="Assignment 1">Assignment 1</option>
+                                <option value="Assignment 2">Assignment 2</option>
+                                <option value="Assignment 3">Assignment 3</option>
                             </select>
                         </div>
                         <div class="col-lg-12 mb-4">
-                            <input type="file" class="form-control" id="assignment_file" placeholder="Choose File" />
+                            <input type="file" class="form-control" formControlName="assignmentFile" />
                         </div>
                         <div class="col-lg-12 mb-4">
-                            <input type="text" class="form-control" id="rollno" placeholder="Remarks " />
+                            <input type="text" class="form-control" formControlName="rollno" placeholder="Roll No" />
                         </div>
                         <div class="col-lg-12 mb-4">
-                            <button type="button" class="btn btn-primary mb-4">Submit</button>
+                            <input type="text" class="form-control" formControlName="remarks" placeholder="Remarks" />
+                        </div>
+                        <div class="col-lg-12 mb-4">
+                            <button type="submit" class="btn btn-primary mb-4" [disabled]="assignmentForm.invalid">Apply</button>
                         </div>
                     </form>
+
                 </div>
             </div>
             <div class="card mt-4">
@@ -98,7 +100,7 @@
                                 <th scope="col">S.N</th>
                                 <th scope="col">Sujbect Name </th>
                                 <th scope="col">Question</th>
-                              
+
                                 <th scope="col">File</th>
                             </tr>
                         </thead>
@@ -107,7 +109,7 @@
                                 <th scope="row">1</th>
                                 <td>Mark</td>
                                 <td>Otto</td>
-x                                <td>.pdf</td>
+                                x <td>.pdf</td>
                             </tr>
 
 

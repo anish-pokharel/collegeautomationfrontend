@@ -121,6 +121,7 @@
         </li>
       </ul>
       <ul class="nav">
+        <ng-container *ngIf="userRole === 'student'">
         <li class="nav-header">Student</li>
 
         <li class="active cursor">
@@ -201,6 +202,8 @@
             <span>Discussion</span>
           </a>
         </li>
+        </ng-container>
+        <ng-container *ngIf="userRole === 'admin'">
         <li class="nav-header">Admin</li>
 
         <li class="active cursor">
@@ -245,6 +248,8 @@
             <span>Profile</span>
           </a>
         </li>
+        </ng-container>
+        <ng-container *ngIf="userRole === 'secretary'">
         <li class="nav-header">Club/ Secretary</li>
         <li class="active cursor">
           <a (click)="showSection('profile')">
@@ -258,7 +263,8 @@
             <span>Discussion</span>
           </a>
         </li>
-
+        </ng-container>
+        <ng-container *ngIf="userRole === 'faculty'">
         <li class="nav-header">Faculty /Teacher</li>
         <li class="active cursor">
           <a (click)="showSection('profile')">
@@ -320,6 +326,7 @@
             <span>Discussion</span>
           </a>
         </li>
+        </ng-container>
         <li class="active cursor">
           <a (click)="LogoutButton()">
             <i class="fa fa-calendar"></i>

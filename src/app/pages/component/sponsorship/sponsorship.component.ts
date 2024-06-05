@@ -1,10 +1,12 @@
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-sponsorship',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,ReactiveFormsModule],
   templateUrl: './sponsorship.component.html',
   styleUrl: './sponsorship.component.css'
 })
@@ -14,6 +16,7 @@ export class SponsorshipComponent implements OnInit{
   totalItems= 0;
   totalPages:number[]=[];
   paginatedItems:any[]=[]
+  form!:FormGroup
   
   items = [
     { clubName: 'Mark', position: 'Otto', joinedDate: '2022-01-01' },
@@ -27,6 +30,24 @@ export class SponsorshipComponent implements OnInit{
     { clubName: 'Sarah', position: 'Davis', joinedDate: '2022-01-09' },
     { clubName: 'David', position: 'Miller', joinedDate: '2022-01-10' }
   ];
+
+
+  constructor(private fb: FormBuilder, private http: HttpClient) {
+    this.form = this.fb.group({
+      name: ['', Validators.required],
+      faculty: ['', Validators.required],
+      semester: ['', Validators.required],
+      amount1: ['', Validators.required],
+      amount2: ['', Validators.required],
+      amount3: ['', Validators.required]
+    });
+  }
+  onSubmit() {
+    if (this.form.valid) {
+      console.log('Form Value:', this.form.value);
+      }
+  }
+
     ngOnInit(): void {
       this.totalItems = this.items.length;
       this.totalPages = Array(Math.ceil(this.totalItems / this.itemsPerPage)).fill(0).map((x, i) => i + 1);

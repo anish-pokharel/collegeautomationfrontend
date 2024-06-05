@@ -21,4 +21,13 @@ constructor(private userService:UserAuthService ){}
     debugger
   })
 }
+
+showUserProfile(){
+  this.userService.getuserDara().subscribe((res)=>{
+
+  })
+}
+
+
+
 }

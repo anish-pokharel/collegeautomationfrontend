@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserAuthService } from '../../../core/services/user_auth/user-auth.service';
 import { CommonModule } from '@angular/common';
@@ -24,8 +24,8 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm= this.formBuilder.group({
-      email:[''],
-      password:['']
+      email:['',Validators.required],
+      password:['',Validators.required]
     })
   }
 
@@ -33,13 +33,15 @@ export class LoginPageComponent implements OnInit {
     if(this.loginForm.valid){
       this.userSignIn.postUserSignIn(this.loginForm.value).subscribe((res)=>{
         debugger
-        if (res){
+        if (res && res.message === 'Login Sucessfull'){
           console.log(res);
           console.log(this.loginForm.value)
           console.log(this.loginForm)
           localStorage.setItem('userData',JSON.stringify(this.loginForm.value));
-          localStorage.setItem('userRole',JSON.stringify(res.role))
-          localStorage.setItem('userToken',JSON.stringify(res.token))
+          localStorage.setItem('userRole',res.role)
+          // localStorage.setItem('userRole',JSON.stringify(res.role))
+          // localStorage.setItem('userToken',JSON.stringify(res.token))
+          localStorage.setItem('userToken',res.token)
           debugger
           this.router.navigate(['/dashboard'])
           

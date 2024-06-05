@@ -16,8 +16,9 @@ postUserSignIn(obj:any):Observable<any>{
   return this.http.post(environment.api_url+'signin',obj)
 }
 getuserDara():Observable<any>{
-  return this.http.get(environment.api_url+'getUserData')
+  return this.http.get(environment.api_url+'userdata')
 }
+
 
 setUserDara(user:any){
   localStorage.setItem('userData',JSON.stringify(user))
