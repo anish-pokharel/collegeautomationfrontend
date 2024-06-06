@@ -3,17 +3,22 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { UserAuthService } from '../../../core/services/user_auth/user-auth.service';
 import * as alertify from 'alertifyjs';
 import { ClubService } from '../../../core/services/club_service/club.service';
+import { DepartmentService } from '../../../core/services/department-service/department.service';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-user-management',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule,CommonModule],
   templateUrl: './user-management.component.html',
   styleUrl: './user-management.component.css'
 })
 export class UserManagementComponent implements OnInit{
   userForm!:FormGroup;
   clubForm!:FormGroup;
-  constructor(private formBuilder:FormBuilder, private userService:UserAuthService,private clubService:ClubService){}
+  createFacultyForm!:FormGroup;
+  departmentList:any[]=[]
+  constructor(private formBuilder:FormBuilder, private userService:UserAuthService,
+    private clubService:ClubService,private departmentService:DepartmentService){}
   ngOnInit(): void {
     this.userForm=this.formBuilder.group({
       name: ['', Validators.required],
@@ -25,6 +30,8 @@ export class UserManagementComponent implements OnInit{
       role: ['', Validators.required]
     })
     this.clubFormData();
+    this.facultyFormData();
+    this.showDepartmentList();
   }
   createUser(){
     if(this.userForm.valid){
@@ -66,5 +73,28 @@ export class UserManagementComponent implements OnInit{
       alertify.error('Input valid Form')
     }
 
+  }
+  facultyFormData(){
+    this.createFacultyForm= this.formBuilder.group({
+      createFaculty:['',Validators.required],
+      semester:['',Validators.required],
+      hod:['',Validators.required]
+    })
+  }
+  createFaculty(){
+    if(this.createFacultyForm.valid){
+      console.log(this.createFacultyForm.value);
+      this.departmentService.postDepartmentsList(this.createFacultyForm.value).subscribe((res)=>{
+        console.log(res);
+      })
+    }
+
+  }
+  showDepartmentList(){
+    this.departmentService.getDepartmentsList().subscribe((res)=>{
+      console.log(res);
+      this.departmentList= res
+      debugger
+    })
   }
 }

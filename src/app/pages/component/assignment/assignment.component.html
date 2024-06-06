@@ -73,28 +73,20 @@
                     <th scope="col">S.N</th>
                     <th scope="col">Assignment</th>
                     <th scope="col">Subject</th>
+                    <th scope="col">Rollno </th>
                     <th scope="col">Status</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Assignment No. 1</td>
-                    <td>Network Programming</td>
+                  <tr *ngFor="let item of showAssignmentAnswer let i = index ">
+                    <th scope="row">{{i+1}}</th>
+                    <td>{{item.assignment}}</td>
+                    <td>{{item.assignmentFile}}</td>
+                    <td>{{item.rollno}}</td>
                     <td>Completed</td>
+          
                   </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Assignment No. 2</td>
-                    <td>N P</td>
-                    <td>Completed</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Assignment No. 2</td>
-                    <td>COA</td>
-                    <td>Completed</td>
-                  </tr>
+               
                 </tbody>
               </table>
             </div>

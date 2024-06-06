@@ -35,6 +35,7 @@ onSubmit(){
     console.log(formValue);
     this.feedbackService.postFeedbackData(formValue).subscribe((res)=>{
       console.log(res);
+      debugger
     })
     
   }
@@ -42,7 +43,7 @@ onSubmit(){
 getFeedbackList(){
   this.feedbackService.getFeedbackData().subscribe((res)=>{
     console.log(res);
-    this.feedbackTableData=res.feedback;
+    this.feedbackTableData=res.feedbackList;
     debugger
   })
 }
