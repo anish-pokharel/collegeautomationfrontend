@@ -25,7 +25,7 @@ feedBackUserData(){
 }
 ngOnInit(): void {
   this.feedbackForm= this.formBuilder.group({
-    feedbackGroup: ['', Validators.required],
+    feedbackGroup: ['Admin', Validators.required],
     feedbackAbout: ['', Validators.required]
   });
 }
@@ -35,6 +35,8 @@ onSubmit(){
     console.log(formValue);
     this.feedbackService.postFeedbackData(formValue).subscribe((res)=>{
       console.log(res);
+      this.getFeedbackList()
+      this.feedbackForm.reset();
       debugger
     })
     

@@ -19,5 +19,8 @@ postEnrollmentJoin(obj:any):Observable<any>{
     return this.http.post(environment.api_url+'postEnrollmentKeyForm',obj)
 }
 
+delEnrollmentList(id:string):Observable<any>{
+  return this.http.delete<any>(environment.api_url+(`enrollmentDelete/${id}`))
+}
 
 }

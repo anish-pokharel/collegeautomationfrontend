@@ -34,6 +34,8 @@ export class JobVacancyComponent implements OnInit {
     if (this.vacancyForm.valid) {
       this.jobVacancyService.postAnswerAssignment(this.vacancyForm.value).subscribe((res)=>{
         console.log(res);
+        this.showJobVacancy()
+        this.vacancyForm.reset()
         debugger
       })
      
@@ -42,6 +44,15 @@ export class JobVacancyComponent implements OnInit {
   showJobVacancy(){
     this.jobVacancyService.getAnswerAssignment().subscribe((res)=>{
       this.jobVacancyList= res;
+    })
+  }
+  editVacancy(vacancyId:string){
+
+  }
+  deleteVacancy(vacancyId:string){
+    this.jobVacancyService.delVacancyList(vacancyId).subscribe((res)=>{
+      console.log(res);
+      this.showJobVacancy()
     })
   }
 }

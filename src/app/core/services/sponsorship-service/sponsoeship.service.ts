@@ -6,13 +6,15 @@ import { environment } from '../../../../environments/environment.development';
 @Injectable({
   providedIn: 'root'
 })
-export class ClubService {
+export class SponsoeshipService {
 
   constructor(private http:HttpClient) { }
-  postClub(obj:any):Observable<any>{
-    return this.http.post(environment.api_url+'addClub',obj)
+
+
+  postAnswerAssignment(obj:any):Observable<any>{
+    return this.http.post(environment.api_url+'postsponsorship',obj)
   }
-  getClubList():Observable<any>{
-    return this.http.get<any>(environment.api_url+'getClubList')
+  getAnswerAssignment():Observable<any>{
+    return this.http.get<any>(environment.api_url+'getsponsorship')
   }
 }

@@ -14,33 +14,38 @@
                 
                 <div class="col-lg-12 mb-4">
                   <select class="form-select" formControlName="faculty">
-                    <option value="" disabled selected>Faculty</option>
-                    <option value="Political">Political</option>
-                    <option value="Non-Political">Non-Political</option>
-                    <option value="Non-Political">Non-Political</option>
+                    <option *ngFor="let department of departments" [value]="department.createFaculty">
+                      {{ department.createFaculty }}
+                    </option>
+            
                   </select>
                 </div>
               
                 <div class="col-lg-12 mb-4">
                   <select class="form-select" formControlName="semester">
                     <option value="" disabled selected>Semester</option>
-                    <option value="ANNFSU">ANNFSU</option>
-                    <option value="NeBiSang">NeBiSang</option>
-                    <option value="nOSK">nOSK</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
                   </select>
                 </div>
               
                 <div class="col-lg-12 mb-4">
-                  <input class="form-control" formControlName="amount1" type="text" placeholder="Amount 1">
+                  <input class="form-control" formControlName="topic" type="text" placeholder="Topic">
                 </div>
                 <div class="col-lg-12 mb-4">
-                  <input class="form-control" formControlName="amount2" type="text" placeholder="Amount 2">
+                  <input class="form-control" formControlName="money" type="text" placeholder="Amount">
                 </div>
                 <div class="col-lg-12 mb-4">
-                  <input class="form-control" formControlName="amount3" type="text" placeholder="Amount 3">
+                  <input class="form-control" formControlName="reason" type="text" placeholder="Reason">
                 </div>
                 <div class="col-lg-12 mb-4">
-                  <button type="submit" class="btn btn-primary mb-4">Apply</button>
+                  <button type="submit" [disabled]="form.invalid" class="btn btn-primary mb-4">Apply</button>
                 </div>
               </form>
               

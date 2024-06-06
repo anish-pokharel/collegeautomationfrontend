@@ -32,6 +32,8 @@ export class AssignmentComponent {
     if (this.assignmentForm.valid) {
       this.assigmentService.postAnswerAssignment(assignmentFormData).subscribe((res) => {
         console.log(res);
+        this.showData()
+        this.assignmentForm.reset()
       })
 
     }

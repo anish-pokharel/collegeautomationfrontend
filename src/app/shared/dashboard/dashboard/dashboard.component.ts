@@ -23,6 +23,7 @@ import { EnrollmentKeyComponent } from '../../../pages/admin-component/enrollmen
 import { ProfileComponent } from '../../../pages/component/profile/profile.component';
 import { JobVacancyComponent } from '../../../pages/admin-component/job-vacancy/job-vacancy.component';
 import { ListCourseComponent } from '../../../pages/admin-component/list-course/list-course.component';
+import { UserAuthService } from '../../../core/services/user_auth/user-auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -40,9 +41,16 @@ import { ListCourseComponent } from '../../../pages/admin-component/list-course/
 })
 export class DashboardComponent implements OnInit{
   currentSection: string = 'basic'
+  showUserProfileData:any=null;
   userRole: string|null | undefined;
-  constructor(private router: Router) {
+  constructor(private router: Router ,private userService:UserAuthService) {
     this.currentSection = 'attendance'
+    this.userService.getuserDataLogin().subscribe((res)=>{
+      console.log(res);
+      this.showUserProfileData=res.data;
+      console.log(this.showUserProfileData);
+    })
+    
   }
   ngOnInit(): void {
     this.userRole =localStorage.getItem('userRole')

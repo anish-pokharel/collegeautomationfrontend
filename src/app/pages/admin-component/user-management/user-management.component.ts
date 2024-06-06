@@ -42,6 +42,7 @@ export class UserManagementComponent implements OnInit{
         this.userService.postuserRegister(this.userForm.value).subscribe((res)=>{
           console.log(res);
           alertify.success('User Added Sucessfully')
+          this.userForm.reset();
         })
       }
       else{
@@ -67,6 +68,7 @@ export class UserManagementComponent implements OnInit{
       this.clubService.postClub(this.clubForm.value).subscribe((res)=>{
         console.log(res);
         alertify.success("Club added")
+        this.clubForm.reset();
       })
     }
     else{
@@ -77,7 +79,6 @@ export class UserManagementComponent implements OnInit{
   facultyFormData(){
     this.createFacultyForm= this.formBuilder.group({
       createFaculty:['',Validators.required],
-      semester:['',Validators.required],
       hod:['',Validators.required]
     })
   }
@@ -86,6 +87,10 @@ export class UserManagementComponent implements OnInit{
       console.log(this.createFacultyForm.value);
       this.departmentService.postDepartmentsList(this.createFacultyForm.value).subscribe((res)=>{
         console.log(res);
+        alertify.success("Department added")
+        this.showDepartmentList();
+        this.createFacultyForm.reset();
+
       })
     }
 
@@ -96,5 +101,18 @@ export class UserManagementComponent implements OnInit{
       this.departmentList= res
       debugger
     })
+  }
+  editDeaprtment(departmentId:string){
+    console.log('Edit department with ID:', departmentId);
+
+  }
+  deleteDepartment(departmentId:string){
+    console.log('Delete department with ID:', departmentId);
+    this.departmentService.delDepartmentList(departmentId).subscribe((res)=>{
+      console.log(res);
+      this.showDepartmentList();
+      debugger
+    })
+
   }
 }

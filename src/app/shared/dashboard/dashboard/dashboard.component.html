@@ -1,4 +1,4 @@
-<div id="page-container" class="page-sidebar-fixed page-header-fixed">
+<div id="page-container" class="page-sidebar-fixed page-header-fixed" *ngIf="showUserProfileData">
 
 
   <div id="header" class="header navbar-default">
@@ -83,8 +83,8 @@
       </li>
       <li class="dropdown navbar-user">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-          <img src="../assets/img/user/user-13.jpg" alt="" />
-          <span class="d-none d-md-inline">Adam Schwartz</span> <b class="caret"></b>
+          <!-- <img [src]="userProfileData.imageUrl " alt="" /> -->
+          <span class="d-none d-md-inline">{{showUserProfileData.name}}</span> <b class="caret"></b>
         </a>
         <div class="dropdown-menu dropdown-menu-right">
           <a href="javascript:;" class="dropdown-item">Edit Profile</a>
@@ -104,11 +104,11 @@
           <a href="javascript:;" data-toggle="nav-profile">
             <div class="cover with-shadow"></div>
             <div class="image">
-              <img src="../assets/img/user/user-13.jpg" alt="" />
+              <!-- <img [src]="userProfileData.imageUrl " alt="" /> -->
             </div>
             <div class="info">
-              <b class="caret pull-right"></b>Sean Ngu
-              <small>Front end developer</small>
+              <b class="caret pull-right"></b>{{showUserProfileData.name}}
+              <small>{{showUserProfileData.role}}</small>
             </div>
           </a>
         </li>

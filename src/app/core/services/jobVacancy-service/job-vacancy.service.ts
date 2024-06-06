@@ -16,4 +16,7 @@ export class JobVacancyService {
   getAnswerAssignment():Observable<any>{
     return this.http.get<any>(environment.api_url+'getVacancies')
   }
+  delVacancyList(id:string):Observable<any>{
+    return this.http.delete<any>(environment.api_url+(`vacancies/${id}`))
+  }
 }

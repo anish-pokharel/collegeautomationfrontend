@@ -36,7 +36,8 @@ export class DiscussionComponent implements OnInit {
           (res) => {  
       console.log(res);
         alertify.success('Discussion Added');
-        this.getDiscissionTable(); // Refresh discussion data after adding
+        this.getDiscissionTable(); 
+        this.discussionTable.reset()
       },
       (error) => {
         console.error('Error adding discussion:', error);

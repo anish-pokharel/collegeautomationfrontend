@@ -18,6 +18,9 @@ postUserSignIn(obj:any):Observable<any>{
 getuserDara():Observable<any>{
   return this.http.get(environment.api_url+'userdata')
 }
+getuserDataLogin():Observable<any>{
+  return this.http.get(environment.api_url+'getuserdata')
+}
 
 
 setUserDara(user:any){

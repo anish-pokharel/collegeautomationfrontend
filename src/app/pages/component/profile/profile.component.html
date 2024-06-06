@@ -1,24 +1,27 @@
 <!-- begin profile -->
-<div class="profile">
+<div class="profile" >
     <div class="profile-header">
         <!-- BEGIN profile-header-cover -->
         <div class="profile-header-cover"></div>
-        <!-- END profile-header-cover -->
-        <!-- BEGIN profile-header-content -->
-        <div class="profile-header-content">
-            <!-- BEGIN profile-header-img -->
-            <div class="profile-header-img">
-                <img src="../assets/img/user/user-13.jpg" alt="">
-            </div>
-            <!-- END profile-header-img -->
-            <!-- BEGIN profile-header-info -->
-            <div class="profile-header-info">
-                <h4 class="mt-0 mb-1">Sean Ngu</h4>
-                <p class="mb-2">UXUI + Frontend Developer</p>
-                <a href="#" class="btn btn-xs btn-yellow">Edit Profile</a>
-            </div>
-            <!-- END profile-header-info -->
+
+        <!-- <div *ngFor="let item of showUserProfileData"> -->
+
+            <div  class="profile-header-content" *ngIf="showUserProfileData">
+                <!-- BEGIN profile-header-img -->
+                <div class="profile-header-img">
+                    <img src="../assets/img/user/user-13.jpg" alt="">
+                </div>
+                <!-- END profile-header-img -->
+                <!-- BEGIN profile-header-info -->
+                <div class="profile-header-info">
+                    <h4 class="mt-0 mb-1">{{showUserProfileData.name}}</h4>
+                    <p class="mb-2">{{showUserProfileData.address}}</p>
+                    <a  class="btn btn-xs btn-yellow">{{showUserProfileData.role}}</a>
+                </div>
+                <!-- END profile-header-info -->
+            <!-- </div> -->
         </div>
+
         <!-- END profile-header-content -->
         <!-- BEGIN profile-header-tab -->
         <ul class="profile-header-tab nav nav-tabs">
@@ -36,8 +39,8 @@
     <div class="tab-content p-0">
         <!-- begin #profile-post tab -->
         <div class="tab-pane fade show active" id="profile-post">
-<h5>sdfhjgjsdrh</h5>
-            
+            <h5>sdfhjgjsdrh</h5>
+
         </div>
         <!-- end #profile-post tab -->
         <!-- begin #profile-about tab -->

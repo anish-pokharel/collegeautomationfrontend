@@ -10,7 +10,8 @@ import { CommonModule } from '@angular/common';
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent implements OnInit {
-  userData:any[]=[]
+  userData:any[]=[];
+  showUserProfileData:any=null;
 constructor(private userService:UserAuthService ){}
   ngOnInit(): void {
   this.userService.getuserDara().subscribe((res)=>{
@@ -20,12 +21,17 @@ constructor(private userService:UserAuthService ){}
     console.log(this.userData);
     debugger
   })
+  this.showUserProfile()
 }
 
 showUserProfile(){
-  this.userService.getuserDara().subscribe((res)=>{
-
+  this.userService.getuserDataLogin().subscribe((res)=>{
+    console.log(res);
+    this.showUserProfileData=res.data;
+    console.log(this.showUserProfileData);
   })
+  
+  
 }
 
 
