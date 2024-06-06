@@ -14,13 +14,13 @@ import { CommonModule } from '@angular/common';
 export class DiscussionComponent implements OnInit {
   constructor(private formBuilder: FormBuilder , private discussionService:DiscussionService) { }
   discussionTable!: FormGroup;
-  discussionData: any[]=[]
+  discussionData: any[]=[];
   userRole: string|null | undefined;
   ngOnInit(): void {
     this.discussionTable = this.formBuilder.group({
       discussion_topic: ['', Validators.required],
       date: ['', Validators.required],
-      decision_by: ['', Validators.required],
+      decision_by: [''],
       decision: ['', Validators.required],
     })
     this.getDiscissionTable();
@@ -31,10 +31,17 @@ export class DiscussionComponent implements OnInit {
     if (this.discussionTable.valid) {
       const formData = this.discussionTable.value;
       console.log(formData);
-      this.discussionService.postDiscussion(this.discussionTable.value).subscribe((res)=>{
-        console.log(res);
-        alertify.success('Discussion Added')
-      })
+      //this.discussionService.postDiscussion(this.discussionTable.value).subscribe((res)=>{
+        this.discussionService.postDiscussion(formData).subscribe(
+          (res) => {  
+      console.log(res);
+        alertify.success('Discussion Added');
+        this.getDiscissionTable(); // Refresh discussion data after adding
+      },
+      (error) => {
+        console.error('Error adding discussion:', error);
+        alertify.error('Failed to add discussion. Please try again.');
+      });
 
     }
     else{
