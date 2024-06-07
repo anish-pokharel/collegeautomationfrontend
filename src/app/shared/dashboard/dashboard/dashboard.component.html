@@ -263,6 +263,12 @@
             <span>Discussion</span>
           </a>
         </li>
+        <li class="active cursor">
+          <a (click)="showSection('events')">
+            <i class="fa fa-calendar"></i>
+            <span>Events</span>
+          </a>
+        </li>
         </ng-container>
         <ng-container *ngIf="userRole === 'faculty'">
         <li class="nav-header">Faculty /Teacher</li>
@@ -416,6 +422,9 @@
       </div>
       <div *ngIf="currentSection === 'list-course'">
         <app-list-course></app-list-course>
+      </div>
+      <div *ngIf="currentSection === 'events'">
+        <app-events></app-events>
       </div>
     </div>
   </div>

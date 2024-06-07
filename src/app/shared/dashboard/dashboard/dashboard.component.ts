@@ -24,6 +24,7 @@ import { ProfileComponent } from '../../../pages/component/profile/profile.compo
 import { JobVacancyComponent } from '../../../pages/admin-component/job-vacancy/job-vacancy.component';
 import { ListCourseComponent } from '../../../pages/admin-component/list-course/list-course.component';
 import { UserAuthService } from '../../../core/services/user_auth/user-auth.service';
+import { EventsComponent } from '../../../pages/component/events/events.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -34,7 +35,7 @@ import { UserAuthService } from '../../../core/services/user_auth/user-auth.serv
     SemesterEnrollComponent, SettingComponent, SponsorshipComponent, AssignmentComponent,
     AssignmentMaterialsComponent,CourseRecordComponent,FeedbackComponent,InternalRecordsComponent,
     ModelQuestionComponent,StudentWorkComponent,UserManagementComponent,
-    EnrollmentKeyComponent,ProfileComponent,JobVacancyComponent,ListCourseComponent
+    EnrollmentKeyComponent,ProfileComponent,JobVacancyComponent,ListCourseComponent,EventsComponent
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
