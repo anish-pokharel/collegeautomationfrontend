@@ -22,5 +22,8 @@ postEnrollmentJoin(obj:any):Observable<any>{
 delEnrollmentList(id:string):Observable<any>{
   return this.http.delete<any>(environment.api_url+(`enrollmentDelete/${id}`))
 }
+deleteSubjectFromEnrollment(enrollmentId: string, subjectCode: string): Observable<any> {
+  return this.http.delete<any>(environment.api_url + `deleteSubject/${enrollmentId}/${subjectCode}`);
+}
 
 }
