@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserAuthService } from '../../../core/services/user_auth/user-auth.service';
 import { CommonModule } from '@angular/common';
+import { DepartmentService } from '../../../core/services/department-service/department.service';
+import { ClubService } from '../../../core/services/club_service/club.service';
 
 @Component({
   selector: 'app-profile',
@@ -12,7 +14,8 @@ import { CommonModule } from '@angular/common';
 export class ProfileComponent implements OnInit {
   userData:any[]=[];
   showUserProfileData:any=null;
-constructor(private userService:UserAuthService ){}
+  clubList:any[]=[]
+constructor(private userService:UserAuthService,private clubService:ClubService ){}
   ngOnInit(): void {
   this.userService.getuserDara().subscribe((res)=>{
     console.log("the response is "+res);
@@ -21,7 +24,8 @@ constructor(private userService:UserAuthService ){}
     console.log(this.userData);
     debugger
   })
-  this.showUserProfile()
+  this.showUserProfile();
+  this.showClub();
 }
 
 showUserProfile(){
@@ -29,11 +33,20 @@ showUserProfile(){
     console.log(res);
     this.showUserProfileData=res.data;
     console.log(this.showUserProfileData);
-  })
-  
-  
+  })  
 }
 
-
-
+showClub(){
+  this.clubService.getClubList().subscribe((res)=>{
+    console.log(res);
+    this.clubList=res.clubName
+  })
+}
+editClub(clubId:string){}
+deleteClub(clubId:string){
+  this.clubService.delDeleteClubList(clubId).subscribe((res)=>{
+    console.log(res);
+    this.showClub()
+  })
+}
 }

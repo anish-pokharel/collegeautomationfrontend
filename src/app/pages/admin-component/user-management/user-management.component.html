@@ -138,9 +138,13 @@
                     </h5>
                     <form [formGroup]="clubForm" (ngSubmit)="createClub()">
                         <div class="col-lg-12 mb-4">
-                            <input type="text" formControlName="clubStatus" class="form-control"
-                                placeholder="Club Status">
+                            <!-- <input type="text" formControlName="clubStatus" class="form-control"
+                                placeholder="Club Status"> -->
 
+                                <select id="clubStatus" class="form-control" formControlName="clubStatus">
+                                    <option value="Non-Political" selected >Non-Political</option>
+                                    <option value="Political">Political</option>
+                                </select>
                         </div>
                         <div class="col-lg-12 mb-4">
 
