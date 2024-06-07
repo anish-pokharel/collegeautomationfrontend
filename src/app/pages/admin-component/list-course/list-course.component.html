@@ -11,8 +11,8 @@
                         <tr>
                             <th width="1%">SN</th>
                             <th class="text-nowrap">Enrollment Key</th>
-                            <th class="text-nowrap">Semester</th>
                             <th class="text-nowrap">Subject</th>
+                            <th class="text-nowrap">Course Code</th>
                             <th class="text-nowrap">Course Credit</th>
                             <th class="text-nowrap">Teacher</th>
                             <th class="text-nowrap"></th>
@@ -43,7 +43,7 @@
                             </td>
                             <td>
                                 <dl>
-                                    <li *ngFor="let subject of item.subjects">{{ subject.credit }}</li>
+                                    <li *ngFor="let subject of item.subjects">{{ subject.teacher }}</li>
                                 </dl>
                             </td>
                             <td>
