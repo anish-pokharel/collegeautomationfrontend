@@ -7,14 +7,17 @@
         </div>
         <div formArrayName="subjects" *ngFor="let subject of subjects.controls; let i = index" class="input-container">
           <div [formGroupName]="i" class="row align-items-center mb-2">
-            <div class="col-lg-4">
+            <div class="col-lg-3">
               <input type="text" class="form-control" formControlName="name" placeholder="Enter Subject Name">
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-3">
               <input type="text" class="form-control" formControlName="credit" placeholder="Enter Subject Credit">
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-3">
               <input type="text" class="form-control" formControlName="code" placeholder="Enter Subject Code">
+            </div>
+            <div class="col-lg-3">
+              <input type="text" class="form-control" formControlName="teacher" placeholder="Enter Teacher Name">
             </div>
           </div>
         </div>

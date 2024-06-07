@@ -26,5 +26,41 @@
                 </div>
             </form>
         </div>
+    </div> 
+    <div class="card my-4">
+        <div class="card-body">
+
+     
+    <div class="table-responsive">
+        <h5>Total Club </h5>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>SN</th>
+                    <th>Event Name</th>
+                    <th>Event Date</th>
+                    <th>Location</th>
+                    <th>Description</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of eventList  let i=index">
+                    <td>{{i+1}}</td>
+                    <td>{{item.eventName}}</td>
+                    <td>{{item.eventDate}}</td>
+                    <td>{{item.location}}</td>
+                    <td>{{item.description}}</td>
+
+                    <td>
+                        <button class="btn btn-primary" (click)="editEvent(item._id)">Edit</button>
+                        <button class="btn btn-outline-secondary mx-4" (click)="deleteEvent(item._id)" >Delete</button>
+                    </td>
+                </tr>
+             
+            </tbody>
+        </table>
     </div>
+</div>
+</div>
 </div>

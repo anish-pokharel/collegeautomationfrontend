@@ -21,7 +21,8 @@ constructor(private formBuilder:FormBuilder,
 ){
   this.enrollmentForm = this.formBuilder.group({
     enrollmentKey: ['', Validators.required],
-    subjects: this.formBuilder.array([this.createSubject()])
+    subjects: this.formBuilder.array([this.createSubject()]),
+   
   });
 
 
@@ -33,7 +34,8 @@ createSubject(): FormGroup {
   return this.formBuilder.group({
     name: ['', Validators.required],
     credit: ['', Validators.required],
-    code: ['', Validators.required]
+    code: ['', Validators.required],
+    teacher:['',Validators.required]
   });
 }
 

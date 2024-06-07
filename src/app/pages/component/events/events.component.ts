@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { EventService } from '../../../core/services/event-service/event.service';
 
 @Component({
   selector: 'app-events',
@@ -9,15 +10,19 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
   templateUrl: './events.component.html',
   styleUrl: './events.component.css'
 })
-export class EventsComponent {
+export class EventsComponent implements OnInit{
   
-  eventForm!:FormGroup
+  eventForm!:FormGroup;
+  eventList:any[]=[];
 
 
-  constructor(private formBuilder:FormBuilder){
+  constructor(private formBuilder:FormBuilder,private eventService:EventService){
     this.formvalue();
+   
   }
-
+ngOnInit(): void {
+  this.getEventList()
+}
 
   formvalue(){
     this.eventForm=this.formBuilder.group({
@@ -32,7 +37,26 @@ export class EventsComponent {
   onSubmit(){
     if(this.eventForm.valid){
       console.log(this.eventForm.value);
+      this.eventService.postaddEventList(this.eventForm.value).subscribe((res)=>{
+        console.log(res);
+        this.getEventList();
       this.eventForm.reset();
+      })
     }
+  }
+  getEventList(){
+    this.eventService.getEventListList().subscribe((res)=>{
+      console.log(res);
+      this.eventList=res.events;
+    })
+  }
+  editEvent(eventId:string){
+
+  }
+  deleteEvent(eventId:string){
+    this.eventService.delEventList(eventId).subscribe((res)=>{
+      console.log(res);
+      this.getEventList()
+    })
   }
 }

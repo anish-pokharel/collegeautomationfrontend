@@ -9,13 +9,13 @@ import { HttpClient } from '@angular/common/http';
 export class EventService {
 
   constructor(private http:HttpClient) { }
-  postDepartmentsList(obj:any):Observable<any>{
-    return this.http.post(environment.api_url+'postDepartments',obj)
+  postaddEventList(obj:any):Observable<any>{
+    return this.http.post(environment.api_url+'addEvent',obj)
   }
-  getDepartmentsList():Observable<any>{
-    return this.http.get<any>(environment.api_url+'getDepartments')
+  getEventListList():Observable<any>{
+    return this.http.get<any>(environment.api_url+'getEventList')
   }
-  delDepartmentList(id:string):Observable<any>{
-    return this.http.delete<any>(environment.api_url+(`departments/${id}`))
+  delEventList(id:string):Observable<any>{
+    return this.http.delete<any>(environment.api_url+(`delEventList/${id}`))
   }
 }

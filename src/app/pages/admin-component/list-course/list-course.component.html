@@ -14,6 +14,7 @@
                             <th class="text-nowrap">Semester</th>
                             <th class="text-nowrap">Subject</th>
                             <th class="text-nowrap">Course Credit</th>
+                            <th class="text-nowrap">Teacher</th>
                             <th class="text-nowrap"></th>
                         </tr>
                     </thead>
@@ -21,6 +22,7 @@
                         <tr class="odd gradeX" *ngFor="let item of listData let i =index">
                             <td width="1%" class="f-s-600 text-inverse">1</td>
                             <td>{{item.enrollment_key}}</td>
+                            
                             <td>
                                 <ul>
                                     <li *ngFor="let subject of item.subjects">{{ subject.name }}</li>
@@ -37,8 +39,13 @@
                                 </dl>
                             </td>
                             <td>
+
+                                <li *ngFor="let subject of item.subjects">{{ subject.teacher }}</li>
+                            </td>
+                            <td>
                                <button class="btn btn-outline-secondary" (click)="deleteEnrollData(item._id)">Delete</button>
                             </td>
+                            
                         </tr>
 
 
