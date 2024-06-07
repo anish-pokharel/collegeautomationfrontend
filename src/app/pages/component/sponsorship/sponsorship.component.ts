@@ -1,10 +1,14 @@
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { DepartmentService } from '../../../core/services/department-service/department.service';
+import { SponsoeshipService } from '../../../core/services/sponsorship-service/sponsoeship.service';
 
 @Component({
   selector: 'app-sponsorship',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,ReactiveFormsModule],
   templateUrl: './sponsorship.component.html',
   styleUrl: './sponsorship.component.css'
 })
@@ -13,7 +17,9 @@ export class SponsorshipComponent implements OnInit{
   currentPage = 1;
   totalItems= 0;
   totalPages:number[]=[];
-  paginatedItems:any[]=[]
+  paginatedItems:any[]=[];
+  departments:any[]=[];
+  form!:FormGroup
   
   items = [
     { clubName: 'Mark', position: 'Otto', joinedDate: '2022-01-01' },
@@ -27,6 +33,31 @@ export class SponsorshipComponent implements OnInit{
     { clubName: 'Sarah', position: 'Davis', joinedDate: '2022-01-09' },
     { clubName: 'David', position: 'Miller', joinedDate: '2022-01-10' }
   ];
+
+
+  constructor(private fb: FormBuilder, private http: HttpClient,private departmentService:DepartmentService
+    ,private sponsorshipService:SponsoeshipService
+  ) {
+    this.form = this.fb.group({
+      name: ['', Validators.required],
+      faculty: ['', Validators.required],
+      semester: ['', Validators.required],
+      topic: ['', Validators.required],
+      money: ['', Validators.required],
+      reason: ['', Validators.required]
+    });
+    this.getDeaprtmentList();
+  }
+  onSubmit() {
+    if (this.form.valid) {
+      console.log('Form Value:', this.form.value);
+      this.sponsorshipService.postAnswerAssignment(this.form.value).subscribe((res)=>{
+        console.log(res);
+        this.form.reset();
+      })
+      }
+  }
+
     ngOnInit(): void {
       this.totalItems = this.items.length;
       this.totalPages = Array(Math.ceil(this.totalItems / this.itemsPerPage)).fill(0).map((x, i) => i + 1);
@@ -38,5 +69,12 @@ export class SponsorshipComponent implements OnInit{
     const startIndex= (page-1)*this.itemsPerPage;
     const endIndex = startIndex+ this.itemsPerPage;
     this.paginatedItems= this.items.slice(startIndex,endIndex)
+  }
+  getDeaprtmentList(){
+    this.departmentService.getDepartmentsList().subscribe((res)=>{
+      console.log(res);
+      this.departments=res;
+      debugger
+    })
   }
   }

@@ -1,0 +1,57 @@
+<div class="row">
+    <h5 class="text-center">List Course</h5>
+
+    <div class="col-xl-10">
+        <div class="panel panel-inverse">
+
+
+            <div class="panel-body">
+                <table id="data-table-select" class="table table-striped table-bordered table-td-valign-middle">
+                    <thead>
+                        <tr>
+                            <th width="1%">SN</th>
+                            <th class="text-nowrap">Enrollment Key</th>
+                            <th class="text-nowrap">Semester</th>
+                            <th class="text-nowrap">Subject</th>
+                            <th class="text-nowrap">Course Credit</th>
+                            <th class="text-nowrap">Teacher</th>
+                            <th class="text-nowrap"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd gradeX" *ngFor="let item of listData let i =index">
+                            <td width="1%" class="f-s-600 text-inverse">1</td>
+                            <td>{{item.enrollment_key}}</td>
+                            
+                            <td>
+                                <ul>
+                                    <li *ngFor="let subject of item.subjects">{{ subject.name }}</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li *ngFor="let subject of item.subjects">{{ subject.code }}</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <dl>
+                                    <li *ngFor="let subject of item.subjects">{{ subject.credit }}</li>
+                                </dl>
+                            </td>
+                            <td>
+
+                                <li *ngFor="let subject of item.subjects">{{ subject.teacher }}</li>
+                            </td>
+                            <td>
+                               <button class="btn btn-outline-secondary" (click)="deleteEnrollData(item._id)">Delete</button>
+                            </td>
+                            
+                        </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

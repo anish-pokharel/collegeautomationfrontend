@@ -1,43 +1,57 @@
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ClubService } from '../../../core/services/club_service/club.service';
 
 @Component({
   selector: 'app-join-clubs',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,ReactiveFormsModule],
   templateUrl: './join-clubs.component.html',
   styleUrl: './join-clubs.component.css'
 })
 export class JoinClubsComponent implements OnInit{
-itemsPerPage = 5;
-currentPage = 1;
-totalItems= 0;
-totalPages:number[]=[];
-paginatedItems:any[]=[]
+clubForm!:FormGroup
+clubListData:any[]=[]
 
-items = [
-  { clubName: 'Mark', position: 'Otto', joinedDate: '2022-01-01' },
-  { clubName: 'Jacob', position: 'Thornton', joinedDate: '2022-01-02' },
-  { clubName: 'Larry', position: 'the Bird', joinedDate: '2022-01-03' },
-  { clubName: 'John', position: 'Doe', joinedDate: '2022-01-04' },
-  { clubName: 'Jane', position: 'Doe', joinedDate: '2022-01-05' },
-  { clubName: 'Smith', position: 'Jones', joinedDate: '2022-01-06' },
-  { clubName: 'Emily', position: 'Johnson', joinedDate: '2022-01-07' },
-  { clubName: 'Michael', position: 'Brown', joinedDate: '2022-01-08' },
-  { clubName: 'Sarah', position: 'Davis', joinedDate: '2022-01-09' },
-  { clubName: 'David', position: 'Miller', joinedDate: '2022-01-10' }
-];
+constructor(private http:HttpClient, private clubService:ClubService,private formBuilder:FormBuilder){
+  this.clubList();
+
+}
+
+
   ngOnInit(): void {
-    this.totalItems = this.items.length;
-    this.totalPages = Array(Math.ceil(this.totalItems / this.itemsPerPage)).fill(0).map((x, i) => i + 1);
-    this.setPage(1);
+    this.clubForm=this.formBuilder.group({
+      clubStatus:['',Validators.required],
+      clubName:['',Validators.required],
+      reason:['',Validators.required],
+      createdDate:['',],
+    })
+  
 }
-setPage(page:number):void{
-  if(page < 1 || page > this.totalPages.length ) return;
-  this.currentPage= page;
-  const startIndex= (page-1)*this.itemsPerPage;
-  const endIndex = startIndex+ this.itemsPerPage;
-  this.paginatedItems= this.items.slice(startIndex,endIndex)
+onSubmit(){
+  if(this.clubForm.valid){
+    this.clubService.postClub(this.clubForm.value).subscribe((res)=>{
+      console.log(res);
+      this.clubForm.reset()
+      this.clubList()
+    })
+  }
+  else{
+    console.log('Please Enter The Valid Data');
+  }
+
 }
+
+
+clubList(){
+  this.clubService.getClubList().subscribe((res)=>{
+    console.log(res.clubName);
+    this.clubListData= res.clubName
+  })
+}
+
+
+
 }

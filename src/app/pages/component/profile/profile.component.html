@@ -1,0 +1,122 @@
+<!-- begin profile -->
+<div class="profile" >
+    <div class="profile-header">
+        <!-- BEGIN profile-header-cover -->
+        <div class="profile-header-cover"></div>
+
+        <!-- <div *ngFor="let item of showUserProfileData"> -->
+
+            <div  class="profile-header-content" *ngIf="showUserProfileData">
+                <!-- BEGIN profile-header-img -->
+                <div class="profile-header-img">
+                    <img src="../assets/img/user/user-13.jpg" alt="">
+                </div>
+                <!-- END profile-header-img -->
+                <!-- BEGIN profile-header-info -->
+                <div class="profile-header-info">
+                    <h4 class="mt-0 mb-1">{{showUserProfileData.name}}</h4>
+                    <p class="mb-2">{{showUserProfileData.address}}</p>
+                    <a  class="btn btn-xs btn-yellow">{{showUserProfileData.role}}</a>
+                </div>
+                <!-- END profile-header-info -->
+            <!-- </div> -->
+        </div>
+
+        <!-- END profile-header-content -->
+        <!-- BEGIN profile-header-tab -->
+        <ul class="profile-header-tab nav nav-tabs">
+            <li class="nav-item"><a href="#profile-post" class="nav-link active" data-toggle="tab">Club </a></li>
+            <li class="nav-item"><a href="#profile-about" class="nav-link" data-toggle="tab">ABOUT</a></li>
+            <li class="nav-item"><a href="#profile-friends" class="nav-link" data-toggle="tab">FRIENDS</a></li>
+        </ul>
+        <!-- END profile-header-tab -->
+    </div>
+</div>
+<!-- end profile -->
+<!-- begin profile-content -->
+<div class="profile-content">
+    <!-- begin tab-content -->
+    <div class="tab-content p-0">
+        <!-- begin #profile-post tab -->
+        <div class="tab-pane fade show active" id="profile-post">
+            <h5>Total Club </h5>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>SN</th>
+                            <th>Club Status</th>
+                            <th>Club Name</th>
+                            <th>Option</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of clubList  let i=index">
+                            <td>{{i+1}}</td>
+                            <td>{{item.clubStatus}}</td>
+                            <td>{{item.clubName}}</td>
+
+                            <td>
+                                <button class="btn btn-primary" (click)="editClub(item._id)">Edit</button>
+                                <button class="btn btn-outline-secondary mx-4" (click)="deleteClub(item._id)" >Delete</button>
+                            </td>
+                        </tr>
+                     
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <!-- end #profile-post tab -->
+        <!-- begin #profile-about tab -->
+        <div class="tab-pane fade" id="profile-about">
+            <!-- begin table -->
+            <div class="table-responsive form-inline">
+                <h5>hello</h5>
+            </div>
+            <!-- end table -->
+        </div>
+
+
+        <div class="tab-pane fade" id="profile-friends">
+            <h4 class="m-t-0 m-b-20">User</h4>
+            <!-- begin row -->
+            <div class="row row-space-6">
+                <!-- begin col-6 -->
+                <div class="col-xl-4 col-lg-6 m-b-5 p-b-1">
+                    <div class="p-10 bg-white rounded">
+                        <div class="media media-xs overflow-visible align-items-center" *ngFor="let user of userData">
+
+                            <a class="media-left" href="javascript:;">
+                                <img src="../assets/img/user/user-1.jpg" alt="" class="media-object img-circle" />
+                            </a>
+                            <div class="media-body valign-middle">
+                                <b class="text-inverse">{{ user.name }}</b>
+
+                            </div>
+                            <div class="media-body valign-middle text-right overflow-visible">
+                                <div class="btn-group btn-group-sm dropdown">
+                                    <a href="javascript:;" class="btn btn-default">{{user.role}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col-6 -->
+                <!-- begin col-6 -->
+
+                <!-- end col-6 -->
+                <!-- begin col-6 -->
+
+                <!-- end col-6 -->
+                <!-- begin col-6 -->
+
+                <!-- end col-6 -->
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end #profile-friends tab -->
+    </div>
+    <!-- end tab-content -->
+</div>
+<!-- end profile-content -->

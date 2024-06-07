@@ -1,127 +1,75 @@
 <div id="" class="">
-   
-    <h1 class="page-header">
-      Discussion <small> Discussion done </small>
-    </h1>
-    <ul class="timeline">
-      <li>
-        <div class="timeline-time">
-          <span class="date">Date</span>
-          <span class="time">2081/02/12</span>
-        </div>
-        <div class="timeline-icon">
-          <a href="javascript:;">&nbsp;</a>
-        </div>
-        <!-- end timeline-icon -->
-        <!-- begin timeline-body -->
-        <div class="timeline-body">
-          <div class="timeline-header">
-          
-            <span class="username"
-              ><a href="javascript:;">Anish Pokharel</a> <small></small
-            ></span>
-            <span class="views">Topic Name</span>
+
+  <h1 class="page-header">
+    Discussion <small> Discussion done </small>
+    <div *ngIf="userRole !== 'student'" >
+      <button type="button" class="btn btn-primary mt-4" data-toggle="modal" data-target="#exampleModal">
+        Add Discussion
+      </button>
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form (ngSubmit)="addDiscussion()" [formGroup]="discussionTable">
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="discussionTopic"
+                    formControlName="discussion_topic" required>
+                </div>
+                <div class="form-group">
+                  <input type="date" class="form-control" formControlName="date" placeholder="date">
+                </div>
+                <!-- <div class="form-group">
+                  <input type="text" class="form-control" formControlName="decision_by" placeholder="decisionBy">
+                </div> -->
+                <div class="form-group">
+                  <input type="text" class="form-control" formControlName="decision" placeholder="decision">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+              </form>
+            </div>
+
           </div>
-          <div class="timeline-content">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-              faucibus turpis quis tincidunt luctus. Nam sagittis dui in
-              nunc consequat, in imperdiet nunc sagittis.
-            </p>
-          </div>
-        
         </div>
-        
-        <!-- end timeline-body -->
-      </li>
-      <li>
-        <div class="timeline-time">
-          <span class="date">Date</span>
-          <span class="time">2081/02/12</span>
+      </div>
+    </div>
+  </h1>
+  <ul class="timeline">
+    <li *ngFor="let item of discussionData">
+      <div class="timeline-time">
+        <span class="date">Date</span>
+        <span class="time">{{item.date}}</span>
+      </div>
+      <div class="timeline-icon">
+        <a href="javascript:;">&nbsp;</a>
+      </div>
+
+      <div class="timeline-body">
+        <div class="timeline-header">
+
+          <span class="username"><a href="javascript:;">{{item.decision_by}}</a> <small></small></span>
+          <span class="views">{{item.discussion_topic}}</span>
         </div>
-        <div class="timeline-icon">
-          <a href="javascript:;">&nbsp;</a>
+        <div class="timeline-content">
+          <p>
+            {{item.decision}}
+          </p>
         </div>
-        <!-- end timeline-icon -->
-        <!-- begin timeline-body -->
-        <div class="timeline-body">
-          <div class="timeline-header">
-          
-            <span class="username"
-              ><a href="javascript:;">Anish Pokharel</a> <small></small
-            ></span>
-            <span class="views">Topic Name</span>
-          </div>
-          <div class="timeline-content">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-              faucibus turpis quis tincidunt luctus. Nam sagittis dui in
-              nunc consequat, in imperdiet nunc sagittis.
-            </p>
-          </div>
-        
-        </div>
-        <!-- end timeline-body -->
-      </li>
-      <li>
-        <div class="timeline-time">
-          <span class="date">Date</span>
-          <span class="time">2081/02/12</span>
-        </div>
-        <div class="timeline-icon">
-          <a href="javascript:;">&nbsp;</a>
-        </div>
-        <!-- end timeline-icon -->
-        <!-- begin timeline-body -->
-        <div class="timeline-body">
-          <div class="timeline-header">
-          
-            <span class="username"
-              ><a href="javascript:;">Anish Pokharel</a> <small></small
-            ></span>
-            <span class="views">Topic Name</span>
-          </div>
-          <div class="timeline-content">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-              faucibus turpis quis tincidunt luctus. Nam sagittis dui in
-              nunc consequat, in imperdiet nunc sagittis.
-            </p>
-          </div>
-        
-        </div>
-        <!-- end timeline-body -->
-      </li>
-      <li>
-        <div class="timeline-time">
-          <span class="date">Date</span>
-          <span class="time">2081/02/12</span>
-        </div>
-        <div class="timeline-icon">
-          <a href="javascript:;">&nbsp;</a>
-        </div>
-        <!-- end timeline-icon -->
-        <!-- begin timeline-body -->
-        <div class="timeline-body">
-          <div class="timeline-header">
-          
-            <span class="username"
-              ><a href="javascript:;">Anish Pokharel</a> <small></small
-            ></span>
-            <span class="views">Topic Name</span>
-          </div>
-          <div class="timeline-content">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-              faucibus turpis quis tincidunt luctus. Nam sagittis dui in
-              nunc consequat, in imperdiet nunc sagittis.
-            </p>
-          </div>
-        
-        </div>
-        <!-- end timeline-body -->
-      </li>
-    
-    </ul>
-    <!-- end timeline -->
-  </div>
+
+      </div>
+
+    </li>
+
+
+  </ul>
+  <!-- end timeline -->
+</div>

@@ -4,32 +4,31 @@
     <div class="col-lg-6">
         <div class="card mb-4">
             <div class="card-body text-center">
-              <form>
+              <form [formGroup]="assignmentForm" (ngSubmit)="onSubmit()">
                 <div class="col-lg-12 mb-4">
-                  <select class="form-select" id="club">
-                    <option selected>Subject</option>
-                    <option value="1">NP</option>
-                    <option value="2">SQA</option>
+                  <select class="form-select" formControlName="subject">
+                      <option value="NP">NP</option>
+                      <option value="SQA">SQA</option>
                   </select>
-                </div>
-                <div class="col-lg-12 mb-4">
-                  <select class="form-select" id="club">
-                    <option selected>Assignment</option>
-                    <option value="1">Assignment 1</option>
-                    <option value="2">Assignment 2</option>
-                    <option value="2">Assignment 3</option>
+              </div>
+              <div class="col-lg-12 mb-4">
+                  <select class="form-select" formControlName="assignment">
+                      <option value="Assignment 1">Assignment 1</option>
+                      <option value="Assignment 2">Assignment 2</option>
+                      <option value="Assignment 3">Assignment 3</option>
                   </select>
-                </div>
-                <div class="col-lg-12 mb-4">
-                  <input type="file" class="form-control" id="assignment_file" />
-                </div>
-                <div class="col-lg-12 mb-4">
-                  <input type="text" class="form-control" id="rollno" placeholder="Roll No:" />
-                </div>
-                <div class="col-lg-12 mb-4">
-                  <button type="button" class="btn btn-primary mb-4">Completed</button>
-                </div>
-              </form>
+              </div>
+              <div class="col-lg-12 mb-4">
+                  <input type="file" class="form-control" formControlName="assignmentFile" />
+              </div>
+              <div class="col-lg-12 mb-4">
+                  <input type="text" class="form-control" formControlName="rollno" placeholder="Roll No" />
+              </div>
+           
+              <div class="col-lg-12 mb-4">
+                  <button type="submit" class="btn btn-primary mb-4" [disabled]="assignmentForm.invalid">Apply</button>
+              </div>
+          </form>
             </div>
         </div>
         <div class="card mb-4">
@@ -74,28 +73,20 @@
                     <th scope="col">S.N</th>
                     <th scope="col">Assignment</th>
                     <th scope="col">Subject</th>
+                    <th scope="col">Rollno </th>
                     <th scope="col">Status</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Assignment No. 1</td>
-                    <td>Network Programming</td>
+                  <tr *ngFor="let item of showAssignmentAnswer let i = index ">
+                    <th scope="row">{{i+1}}</th>
+                    <td>{{item.assignment}}</td>
+                    <td>{{item.assignmentFile}}</td>
+                    <td>{{item.rollno}}</td>
                     <td>Completed</td>
+          
                   </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Assignment No. 2</td>
-                    <td>N P</td>
-                    <td>Completed</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Assignment No. 2</td>
-                    <td>COA</td>
-                    <td>Completed</td>
-                  </tr>
+               
                 </tbody>
               </table>
             </div>
