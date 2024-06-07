@@ -44,5 +44,12 @@ export class ListCourseComponent {
       });
     });
   }
+  deleteSubject(enrollmentId: string, subjectCode: string): void {
+    this.courseListService.deleteSubjectFromEnrollment(enrollmentId,subjectCode).subscribe((res)=>{
+      console.log(res);
+      this.getEnrollmentList();
+
+    })
+  }
 
 }
