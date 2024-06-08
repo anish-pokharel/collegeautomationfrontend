@@ -26,8 +26,14 @@
         <!-- BEGIN profile-header-tab -->
         <ul class="profile-header-tab nav nav-tabs">
             <li class="nav-item"><a href="#profile-post" class="nav-link active" data-toggle="tab">Club </a></li>
-            <li class="nav-item"><a href="#profile-about" class="nav-link" data-toggle="tab">ABOUT</a></li>
-            <li class="nav-item"><a href="#profile-friends" class="nav-link" data-toggle="tab">FRIENDS</a></li>
+            <li class="nav-item"><a href="#profile-about" class="nav-link" data-toggle="tab">About</a></li>
+            <li class="nav-item"><a href="#profile-friends" class="nav-link" data-toggle="tab">Friends</a></li>
+            <li class="nav-item"><a href="#profile-request" class="nav-link" data-toggle="tab">Request</a></li>
+            <li class="nav-item"><a href="#profile-members" class="nav-link" data-toggle="tab">Members</a></li>
+            <li class="nav-item"><a href="#profile-classes" class="nav-link active" data-toggle="tab">My Classes</a></li>
+            <li class="nav-item"><a href="#profile-students" class="nav-link" data-toggle="tab">My Students</a></li>
+            <li class="nav-item"><a href="#profile-settings" class="nav-link" data-toggle="tab">Settings</a></li>
+    
         </ul>
         <!-- END profile-header-tab -->
     </div>
@@ -76,6 +82,131 @@
             </div>
             <!-- end table -->
         </div>
+        <div class="tab-pane fade" id="profile-request">
+            <!-- begin table -->
+            <div class="table-responsive form-inline">
+                <h5>hello</h5>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>SN</th>
+                                <th>Email</th>
+                                <th>Request</th>
+                                <th>Option</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of clubList  let i=index">
+                                <td>{{i+1}}</td>
+                                
+    
+                                <td>
+                                    <button class="btn btn-primary" (click)="editClub(item._id)">Accept</button>
+                                    <button class="btn btn-outline-secondary mx-4" (click)="deleteClub(item._id)" >Reject</button>
+                                </td>
+                            </tr>
+                         
+                        </tbody>
+                    </table>
+                </div>
+    
+            </div>
+            <!-- end table -->
+        </div>
+        <div class="tab-pane fade" id="profile-members">
+            <!-- begin table -->
+            <div class="table-responsive form-inline">
+                <h5>hello</h5>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>SN</th>
+                                <th>Email</th>
+                                <th>Request</th>
+                                <th>Option</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of clubList  let i=index">
+                                <td>{{i+1}}</td>
+                                
+    
+                                <td>
+                                    <button class="btn btn-primary" (click)="editClub(item._id)">Accept</button>
+                                    <button class="btn btn-outline-secondary mx-4" (click)="deleteClub(item._id)" >Reject</button>
+                                </td>
+                            </tr>
+                         
+                        </tbody>
+                    </table>
+                </div>
+    
+            </div>
+            <!-- end table -->
+        </div>
+        <div class="tab-pane fade show active" id="profile-classes">
+            <h5>My Classes</h5>
+            <!-- Class List Table -->
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Class Name</th>
+                            <th>Subject</th>
+                            <th>Students</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Populate with teacher's classes -->
+                        <tr>
+                            <td>Class A</td>
+                            <td>Mathematics</td>
+                            <td>25</td>
+                            <td>
+                                <button class="btn btn-primary">Edit</button>
+                                <button class="btn btn-outline-secondary mx-4">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- end #profile-classes tab -->
+
+        <!-- begin #profile-students tab -->
+        <div class="tab-pane fade" id="profile-students">
+            <h5>My Students</h5>
+            <!-- Student List Table -->
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Student Name</th>
+                            <th>Grade</th>
+                            <th>Attendance</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Populate with teacher's students -->
+                        <tr>
+                            <td>Student A</td>
+                            <td>A</td>
+                            <td>90%</td>
+                            <td>
+                                <button class="btn btn-primary">View Details</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- end #profile-students tab -->
+
+     
 
 
         <div class="tab-pane fade" id="profile-friends">

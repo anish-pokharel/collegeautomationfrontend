@@ -25,6 +25,7 @@ import { JobVacancyComponent } from '../../../pages/admin-component/job-vacancy/
 import { ListCourseComponent } from '../../../pages/admin-component/list-course/list-course.component';
 import { UserAuthService } from '../../../core/services/user_auth/user-auth.service';
 import { EventsComponent } from '../../../pages/component/events/events.component';
+import { ClassScheduleComponent } from '../../../pages/component/class-schedule/class-schedule.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -36,6 +37,7 @@ import { EventsComponent } from '../../../pages/component/events/events.componen
     AssignmentMaterialsComponent,CourseRecordComponent,FeedbackComponent,InternalRecordsComponent,
     ModelQuestionComponent,StudentWorkComponent,UserManagementComponent,
     EnrollmentKeyComponent,ProfileComponent,JobVacancyComponent,ListCourseComponent,EventsComponent
+    ,ClassScheduleComponent
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'

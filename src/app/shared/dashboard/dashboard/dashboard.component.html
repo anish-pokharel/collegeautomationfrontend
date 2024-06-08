@@ -279,7 +279,7 @@
           </a>
         </li>
         <li class="active cursor">
-          <a (click)="showSection('discussion')">
+          <a (click)="showSection('our-courses')">
             <i class="fa fa-calendar"></i>
             <span>My Course</span>
           </a>
@@ -315,7 +315,7 @@
           </a>
         </li>
         <li class="active cursor">
-          <a (click)="showSection('discussion')">
+          <a (click)="showSection('class-schedule')">
             <i class="fa fa-calendar"></i>
             <span>Class Schedule</span>
           </a>
@@ -425,6 +425,9 @@
       </div>
       <div *ngIf="currentSection === 'events'">
         <app-events></app-events>
+      </div>
+      <div *ngIf="currentSection === 'class-schedule'">
+        <app-class-schedule></app-class-schedule>
       </div>
     </div>
   </div>
