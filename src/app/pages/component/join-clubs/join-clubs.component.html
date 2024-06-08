@@ -12,13 +12,15 @@
             <form [formGroup]="clubForm" (ngSubmit)="onSubmit()">
               <div class="col-lg-12 mb-4">
                 <select class="form-select"  formControlName="clubStatus">
-                
-                  <option  *ngFor="let item of clubListData" [value]="item.clubStatus">{{item.clubStatus}}</option>
+                  <option value="" disabled selected>Select Club Status</option>
+                  <option selected value="Political">Political</option>
+                  <option value="Non-Political">Non-Political</option>
             
                 </select>
               </div>
               <div class="col-lg-12 mb-4">
                 <select class="form-select" formControlName="clubName" >
+                  <option value="" disabled selected>Select Clubame</option>
                   <option  *ngFor="let item of clubListData" [value]="item.clubName">{{item.clubName}}</option>
                 </select>
                 
