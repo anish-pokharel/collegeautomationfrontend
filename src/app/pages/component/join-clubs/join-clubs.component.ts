@@ -23,10 +23,11 @@ constructor(private http:HttpClient, private clubService:ClubService,private for
 
   ngOnInit(): void {
     this.clubForm=this.formBuilder.group({
+      joinedBy:[''],
       clubStatus:['',Validators.required],
       clubName:['',Validators.required],
       reason:['',Validators.required],
-      createdDate:['',],
+      joinedDate:['',],
     })
   
 }
