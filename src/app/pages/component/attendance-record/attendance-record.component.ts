@@ -11,6 +11,7 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angul
 })
 export class AttendanceRecordComponent  implements OnInit {
   attendanceForm!: FormGroup;
+  userRole: string|null | undefined;
 
   students = [
     { id: 1, name: 'Student 1' },

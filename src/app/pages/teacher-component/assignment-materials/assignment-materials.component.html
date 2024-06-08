@@ -4,26 +4,22 @@
             <div class="card">
                 <div class="card-body text-center">
                     <h5>Assignment Add</h5>
-                    <form >
+                    <form [formGroup]="assignmentForm"  (ngSubmit)="onSubmit()" >
                         <div class="col-lg-12 mb-4">
                             <select class="form-select" formControlName="subject">
+                                <option value="" disabled selected>Select subject</option>
                                 <option value="NP">NP</option>
                                 <option value="SQA">SQA</option>
                             </select>
                         </div>
                         <div class="col-lg-12 mb-4">
-                            <select class="form-select" formControlName="assignment">
-                                <option value="Assignment 1">Assignment 1</option>
-                                <option value="Assignment 2">Assignment 2</option>
-                                <option value="Assignment 3">Assignment 3</option>
-                            </select>
+                            
+                            <input type="text" class="form-control" formControlName="assignmentName" placeholder="Enter Assignment name " />
                         </div>
                         <div class="col-lg-12 mb-4">
                             <input type="file" class="form-control" formControlName="assignmentFile" />
                         </div>
-                        <div class="col-lg-12 mb-4">
-                            <input type="text" class="form-control" formControlName="rollno" placeholder="Roll No" />
-                        </div>
+                       
                         <div class="col-lg-12 mb-4">
                             <input type="text" class="form-control" formControlName="remarks" placeholder="Remarks" />
                         </div>
@@ -66,27 +62,24 @@
             <div class="card">
                 <div class="card-body text-center">
                     <h5>Model Question</h5>
-                    <form>
-
+                    <form [formGroup]="modelQuestionForm" (ngSubmit)="onSubmitQuestion()">
                         <div class="col-lg-12 mb-4">
-                            <select class="form-select" id="model-question-list">
-                                <option selected>Model Question</option>
-                                <option value="1">Model Question 1</option>
-                                <option value="2">Model Question 2</option>
-                                <option value="2">Model Question 3</option>
-                            </select>
+                          <input type="text" class="form-control" formControlName="subject" placeholder="Subject Name" />
+                          
                         </div>
                         <div class="col-lg-12 mb-4">
-                            <input type="file" class="form-control" id="model-question-choose"
-                                placeholder="Choose File" />
+                          <input type="text" class="form-control" formControlName="model_question" placeholder="Model Question" />
+                          
                         </div>
                         <div class="col-lg-12 mb-4">
-                            <input type="text" class="form-control" id="subject-name" placeholder="Subject Name" />
+                          <!-- File upload control -->
+                          <input type="file" class="form-control" formControlName="file" />
                         </div>
                         <div class="col-lg-12 mb-4">
-                            <button type="button" class="btn btn-primary mb-4">Submit</button>
+                          <button type="submit" class="btn btn-primary mb-4" [disabled]="!modelQuestionForm.valid">Submit</button>
                         </div>
-                    </form>
+                      </form>
+                      
                 </div>
             </div>
             <div class="card mt-4">

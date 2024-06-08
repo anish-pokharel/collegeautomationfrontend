@@ -14,13 +14,17 @@ import { CommonModule } from '@angular/common';
 export class SemesterEnrollComponent implements OnInit{
   enrollmentKeyForm!:FormGroup
   subject:any[]=[];
+  enrollmentData: any;
+  email:string='';
 constructor(private formBuilder:FormBuilder, private enrollmentService:EnrollmentService){
   this.enrollSubject();
+  this.semSubject()
 }
 
 ngOnInit(): void {
   this.enrollmentKeyForm= this.formBuilder.group({
-    enrollment_key :['', Validators.required]
+    enrollment_key :['', Validators.required],
+    userEmail:['']
   })
 
 }
@@ -35,8 +39,9 @@ enrollButton(){
     console.log(this.enrollmentKeyForm.value);
     this.enrollmentService.postEnrollmentJoin(this.enrollmentKeyForm.value).subscribe((res)=>{
       if(res.matchEnrollmentKey){
-        this.subject= res.subjects
+      
         alertify.success('Enrollment key added ')
+        this.semSubject()
         debugger
       }
       else{
@@ -47,5 +52,15 @@ enrollButton(){
   else{
     alertify.error('Please enter the valid Enrollment Key')
   }
+}
+semSubject(){
+
+    this.enrollmentService.getEnrollmentDataByEmail().subscribe((data)=>{
+      this.subject=data
+      console.log("Subject is "+this.subject);
+      this.enrollmentData = data;
+    })
+
+
 }
 }

@@ -123,29 +123,10 @@
       <ul class="nav">
         <ng-container *ngIf="userRole === 'student'">
         <li class="nav-header">Student</li>
-
-        <li class="active cursor">
-          <a (click)="showSection('semester')">
-            <i class="fa fa-calendar"></i>
-            <span>Semster Enroll</span>
-          </a>
-        </li>
-        <li class="active cursor">
-          <a (click)="showSection('attendance-record')">
-            <i class="fa-solid fa-file"></i>
-            <span>Attendance Record</span>
-          </a>
-        </li>
         <li class="active cursor">
           <a (click)="showSection('profile')">
             <i class="fa-solid fa-file"></i>
             <span>Profile</span>
-          </a>
-        </li>
-        <li class="active cursor">
-          <a (click)="showSection('academic-records')">
-            <i class="fa fa-calendar"></i>
-            <span>Academic Record</span>
           </a>
         </li>
         <li class="active cursor">
@@ -154,6 +135,27 @@
             <span>Course enroll</span>
           </a>
         </li>
+        <li class="active cursor">
+          <a (click)="showSection('attendance-record')">
+            <i class="fa-solid fa-file"></i>
+            <span>Attendance Record</span>
+          </a>
+        </li>
+       
+        <li class="active cursor">
+          <a (click)="showSection('semester')">
+            <i class="fa fa-calendar"></i>
+            <span>Semster Enroll</span>
+          </a>
+        </li>
+       
+        <li class="active cursor">
+          <a (click)="showSection('academic-records')">
+            <i class="fa fa-calendar"></i>
+            <span>Academic Record</span>
+          </a>
+        </li>
+       
         <li class="active cursor">
           <a (click)="showSection('our-courses')">
             <i class="fa fa-calendar"></i>
