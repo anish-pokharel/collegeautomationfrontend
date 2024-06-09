@@ -9,7 +9,7 @@
             <h5 class="card-title">
               Join Club
             </h5>
-            <form [formGroup]="clubForm" (ngSubmit)="onSubmit()">
+            <form [formGroup]="clubForm" (ngSubmit)="onJoin()">
               <div class="col-lg-12 mb-4">
                 <select class="form-select"  formControlName="clubStatus">
                   <option value="" disabled selected>Select Club Status</option>
@@ -29,7 +29,7 @@
                 <textarea class="form-control" placeholder="Why do you wanna join Club" id="reasonjoinclub"  formControlName="reason" rows="3"></textarea>
               </div>
               <div class="col-lg-12 mb-4">
-              <button type="button" [disabled]="clubForm.invalid" class="btn btn-primary mb-4">Join Club</button>
+              <button type="submit" [disabled]="clubForm.invalid" class="btn btn-primary mb-4">Join Club</button>
             </div>
             </form>
           </div>
@@ -79,6 +79,35 @@
             </nav> -->
           </div>
         </div>
+      </div>
+      
+    </div>
+    <div class="card">
+      <div class="container mt-4">
+        <h2 class="mb-4">Club Information</h2>
+        <button class="btn btn-primary mb-3">Print Table</button>
+        <table class="table table-bordered table-striped" id="clubTable">
+          <thead class="thead-dark">
+            <tr>
+              <th>SN</th>
+              <th>Joined By</th>
+              <th>Club Status</th>
+              <th>Club Name</th>
+              <!-- <th>Reason</th> -->
+              <th>Joined Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let club of showJoinedClub let i = index">
+              <td>{{ i+1 }}</td>
+              <td>{{ club.joinedBy }}</td>
+              <td>{{ club.clubStatus }}</td>
+              <td>{{ club.clubName }}</td>
+              <!-- <td>{{ club.reason }}</td> -->
+              <td>{{ club.joinedDate }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
       
     </div>

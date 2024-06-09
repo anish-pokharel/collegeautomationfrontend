@@ -19,6 +19,7 @@ export class SemesterEnrollComponent implements OnInit{
 constructor(private formBuilder:FormBuilder, private enrollmentService:EnrollmentService){
   this.enrollSubject();
   this.semSubject()
+  
 }
 
 ngOnInit(): void {
@@ -60,7 +61,6 @@ semSubject(){
       console.log("Subject is "+this.subject);
       this.enrollmentData = data;
     })
-
-
 }
+
 }

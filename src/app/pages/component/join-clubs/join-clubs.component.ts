@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ClubService } from '../../../core/services/club_service/club.service';
+import * as alertify from 'alertifyjs';
 
 @Component({
   selector: 'app-join-clubs',
@@ -14,9 +15,11 @@ import { ClubService } from '../../../core/services/club_service/club.service';
 export class JoinClubsComponent implements OnInit{
 clubForm!:FormGroup
 clubListData:any[]=[]
+showJoinedClub:any
 
 constructor(private http:HttpClient, private clubService:ClubService,private formBuilder:FormBuilder){
   this.clubList();
+  this.showJoinedClubFunction()
 
 }
 
@@ -31,16 +34,21 @@ constructor(private http:HttpClient, private clubService:ClubService,private for
     })
   
 }
-onSubmit(){
+onJoin(){
+  debugger
   if(this.clubForm.valid){
-    this.clubService.postClub(this.clubForm.value).subscribe((res)=>{
+    this.clubService.postJoinClub(this.clubForm.value).subscribe((res)=>{
       console.log(res);
       this.clubForm.reset()
+      alertify.success('Joined Club Requested ')
       this.clubList()
+      this.showJoinedClubFunction();
+      debugger
     })
   }
   else{
     console.log('Please Enter The Valid Data');
+    alertify.error('Joined Club Failed ')
   }
 
 }
@@ -52,7 +60,12 @@ clubList(){
     this.clubListData= res.clubName
   })
 }
-
+showJoinedClubFunction(){
+this.clubService.getClubListByEmail().subscribe((res)=>{
+  console.log(res+"joined club is ");
+  this.showJoinedClub=res.JoinedClubs;
+})
+}
 
 
 }

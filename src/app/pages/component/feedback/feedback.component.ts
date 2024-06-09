@@ -19,6 +19,7 @@ export class FeedbackComponent implements OnInit {
   itemsPerPage = 5; // Set items per page to 10
   totalPages = 0;
   pages: number[] = [];
+  FeedbackByEmailList:any[]=[]
 
   constructor(private formBuilder: FormBuilder, private feedbackService: FeedbackService) {}
 
@@ -26,9 +27,11 @@ export class FeedbackComponent implements OnInit {
     this.feedbackForm = this.formBuilder.group({
       feedbackBy:[''],
       feedbackGroup: ['Admin', Validators.required],
-      feedbackAbout: ['', Validators.required]
+      feedbackAbout: ['', Validators.required],
+      feedbackFor:['',Validators.required]
     });
     this.getFeedbackList();
+    this.getFeedbackByEmailList();
   }
 
   onSubmit(): void {
@@ -74,4 +77,11 @@ export class FeedbackComponent implements OnInit {
       this.setPage(this.currentPage + 1);
     }
   }
+  getFeedbackByEmailList(){
+    this.feedbackService.getFeedbackByEmail().subscribe((res)=>{
+      console.log(res);
+      this.FeedbackByEmailList=res.feedback
+    })
+  }
+  
 }
