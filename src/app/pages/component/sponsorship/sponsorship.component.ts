@@ -39,12 +39,13 @@ export class SponsorshipComponent implements OnInit{
     ,private sponsorshipService:SponsoeshipService
   ) {
     this.form = this.fb.group({
-      name: ['', Validators.required],
+      name: ['',],
       faculty: ['', Validators.required],
       semester: ['', Validators.required],
       topic: ['', Validators.required],
       money: ['', Validators.required],
-      reason: ['', Validators.required]
+      reason: ['', Validators.required],
+      decision:['']
     });
     this.getDeaprtmentList();
   }
