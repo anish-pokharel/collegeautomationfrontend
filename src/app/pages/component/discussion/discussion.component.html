@@ -6,7 +6,7 @@
       <button type="button" class="btn btn-primary mt-4" data-toggle="modal" data-target="#exampleModal">
         Add Discussion
       </button>
-      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      <div class="modal fade" #exampleModal  id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -48,6 +48,14 @@
       <div class="timeline-time">
         <span class="date">Date</span>
         <span class="time">{{item.date}}</span>
+        <span *ngIf="userRole == 'admin'" class="views">
+
+          <button type="button" class="btn btn-outline-primary btn-sm" (click)="editDiscussion(item._id)"><i class="fas fa-edit"></i></button>
+            <button type="button" class="btn btn-outline-danger btn-sm mx-2" (click)="deleteDiscussion(item._id)" ><i class="fas fa-trash-alt"></i>
+            </button>
+
+
+        </span>
       </div>
       <div class="timeline-icon">
         <a href="javascript:;">&nbsp;</a>
@@ -63,6 +71,7 @@
           <p>
             {{item.decision}}
           </p>
+      
         </div>
 
       </div>

@@ -17,7 +17,11 @@
               <input type="text" class="form-control" formControlName="code" placeholder="Enter Subject Code">
             </div>
             <div class="col-lg-3">
-              <input type="text" class="form-control" formControlName="teacher" placeholder="Enter Teacher Name">
+              <!-- <input type="text" class="form-control" formControlName="teacher" placeholder="Enter Teacher Name"> -->
+              <select class="form-select" formControlName="teacher">
+                <option value="" disabled selected>Select Teacher Name</option>
+                <option *ngFor="let item of showTeacherData" [value]="item.email">{{item.name}}</option>
+              </select>
             </div>
           </div>
         </div>

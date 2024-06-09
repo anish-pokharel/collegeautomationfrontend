@@ -16,10 +16,35 @@ export class JoinClubsComponent implements OnInit{
 clubForm!:FormGroup
 clubListData:any[]=[]
 showJoinedClub:any
+createFacultyForm!:FormGroup;
+createClubForm!:FormGroup;
+userRole: string|null | undefined;
+
 
 constructor(private http:HttpClient, private clubService:ClubService,private formBuilder:FormBuilder){
   this.clubList();
-  this.showJoinedClubFunction()
+  this.showJoinedClubFunction();
+  this.clubFormData();
+
+}
+clubFormData(){
+  this.clubForm= this.formBuilder.group({
+    clubStatus:['',Validators.required],
+    clubName:['',Validators.required]
+  })
+}
+createClub(){
+  if(this.clubForm.valid){
+    console.log(this.clubForm.value);
+    this.clubService.postClub(this.clubForm.value).subscribe((res)=>{
+      console.log(res);
+      alertify.success("Club added")
+      this.clubForm.reset();
+    })
+  }
+  else{
+    alertify.error('Input valid Form')
+  }
 
 }
 
@@ -32,7 +57,7 @@ constructor(private http:HttpClient, private clubService:ClubService,private for
       reason:['',Validators.required],
       joinedDate:['',],
     })
-  
+    this.userRole =localStorage.getItem('userRole')
 }
 onJoin(){
   debugger

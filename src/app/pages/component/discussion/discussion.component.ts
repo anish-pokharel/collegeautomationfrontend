@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DiscussionService } from '../../../core/services/discussion/discussion.service';
 import * as alertify from 'alertifyjs';
 import { CommonModule } from '@angular/common';
+import { NgZone } from '@angular/core';
+// import * as $ from 'jquery';
+
 
 @Component({
   selector: 'app-discussion',
@@ -16,7 +19,8 @@ export class DiscussionComponent implements OnInit {
   discussionTable!: FormGroup;
   discussionData: any[]=[];
   userRole: string|null | undefined;
-  ngOnInit(): void {
+  @ViewChild('exampleModal') editModal!: ElementRef;
+    ngOnInit(): void {
     this.discussionTable = this.formBuilder.group({
       discussion_topic: ['', Validators.required],
       date: ['', Validators.required],
@@ -58,5 +62,28 @@ export class DiscussionComponent implements OnInit {
       console.log(this.discussionData);
     });
 
+}
+editDiscussion(discussinId:string){
+  const discussionToEdit = this.discussionData.find(discussion => discussion._id === discussinId);
+  if (discussionToEdit) {
+   
+    this.discussionTable.patchValue({
+      discussion_topic: discussionToEdit.discussion_topic,
+      date: discussionToEdit.date,
+      decision: discussionToEdit.decision
+    });
+      // this.editModal.nativeElement.classList.add('show');
+    // if (this.editModal) {
+    //   this.editModal.nativeElement.classList.add('show');
+    //   this.editModal.nativeElement.style.display = 'block';
+    // }
+}}
+deleteDiscussion(discussinId:string){
+  debugger
+  this.discussionService.deleteDiscussion(discussinId).subscribe((res)=>{
+    debugger 
+    alertify.success('discussion is deleted')
+    this.getDiscissionTable()
+  })
 }
 }

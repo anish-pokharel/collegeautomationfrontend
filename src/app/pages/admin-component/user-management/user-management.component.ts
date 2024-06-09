@@ -15,8 +15,9 @@ import { CommonModule } from '@angular/common';
 export class UserManagementComponent implements OnInit{
   userForm!:FormGroup;
   clubForm!:FormGroup;
-  createFacultyForm!:FormGroup;
-  departmentList:any[]=[]
+  showTeacherData:any[]=[];
+  showTeacherCount:number=0;
+  
   constructor(private formBuilder:FormBuilder, private userService:UserAuthService,
     private clubService:ClubService,private departmentService:DepartmentService){}
   ngOnInit(): void {
@@ -29,9 +30,8 @@ export class UserManagementComponent implements OnInit{
       confirmPassword: ['', Validators.required],
       role: ['', Validators.required]
     })
-    this.clubFormData();
-    this.facultyFormData();
-    this.showDepartmentList();
+    this.teacherData()
+    
   }
   createUser(){
     if(this.userForm.valid){
@@ -43,6 +43,7 @@ export class UserManagementComponent implements OnInit{
           console.log(res);
           alertify.success('User Added Sucessfully')
           this.userForm.reset();
+          this.teacherData()
         })
       }
       else{
@@ -56,63 +57,12 @@ export class UserManagementComponent implements OnInit{
     }
 
   }
-  clubFormData(){
-    this.clubForm= this.formBuilder.group({
-      clubStatus:['',Validators.required],
-      clubName:['',Validators.required]
+  teacherData(){
+    this.userService.getTeacherData().subscribe((res)=>{
+      this.showTeacherCount=res.count
+      this.showTeacherData=res.faculty
     })
   }
-  createClub(){
-    if(this.clubForm.valid){
-      console.log(this.clubForm.value);
-      this.clubService.postClub(this.clubForm.value).subscribe((res)=>{
-        console.log(res);
-        alertify.success("Club added")
-        this.clubForm.reset();
-      })
-    }
-    else{
-      alertify.error('Input valid Form')
-    }
-
-  }
-  facultyFormData(){
-    this.createFacultyForm= this.formBuilder.group({
-      createFaculty:['',Validators.required],
-      hod:['',Validators.required]
-    })
-  }
-  createFaculty(){
-    if(this.createFacultyForm.valid){
-      console.log(this.createFacultyForm.value);
-      this.departmentService.postDepartmentsList(this.createFacultyForm.value).subscribe((res)=>{
-        console.log(res);
-        alertify.success("Department added")
-        this.showDepartmentList();
-        this.createFacultyForm.reset();
-
-      })
-    }
-
-  }
-  showDepartmentList(){
-    this.departmentService.getDepartmentsList().subscribe((res)=>{
-      console.log(res);
-      this.departmentList= res
-      debugger
-    })
-  }
-  editDeaprtment(departmentId:string){
-    console.log('Edit department with ID:', departmentId);
-
-  }
-  deleteDepartment(departmentId:string){
-    console.log('Delete department with ID:', departmentId);
-    this.departmentService.delDepartmentList(departmentId).subscribe((res)=>{
-      console.log(res);
-      this.showDepartmentList();
-      debugger
-    })
-
-  }
+  
+  
 }
