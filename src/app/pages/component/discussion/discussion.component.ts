@@ -32,6 +32,8 @@ export class DiscussionComponent implements OnInit {
 
   }
   addDiscussion() {
+
+    
     if (this.discussionTable.valid) {
       const formData = this.discussionTable.value;
       console.log(formData);
@@ -66,17 +68,20 @@ export class DiscussionComponent implements OnInit {
 editDiscussion(discussinId:string){
   const discussionToEdit = this.discussionData.find(discussion => discussion._id === discussinId);
   if (discussionToEdit) {
-   
     this.discussionTable.patchValue({
       discussion_topic: discussionToEdit.discussion_topic,
       date: discussionToEdit.date,
       decision: discussionToEdit.decision
     });
       // this.editModal.nativeElement.classList.add('show');
-    // if (this.editModal) {
-    //   this.editModal.nativeElement.classList.add('show');
-    //   this.editModal.nativeElement.style.display = 'block';
-    // }
+    if (this.editModal) {
+      this.editModal.nativeElement.classList.add('show');
+      this.editModal.nativeElement.style.display = 'block';
+    }
+   
+    this.discussionService.updateDiscussion(this.discussionTable.value,discussinId).subscribe((res)=>{
+      console.log(res);
+    })
 }}
 deleteDiscussion(discussinId:string){
   debugger
@@ -85,5 +90,14 @@ deleteDiscussion(discussinId:string){
     alertify.success('discussion is deleted')
     this.getDiscissionTable()
   })
+}
+
+closeModal() {
+  if (this.editModal) {
+    this.editModal.nativeElement.classList.remove('show');
+    this.editModal.nativeElement.style.display = 'none';
+    this.discussionTable.reset()
+
+  }
 }
 }

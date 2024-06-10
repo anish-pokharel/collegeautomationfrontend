@@ -9,7 +9,7 @@ import { environment } from '../../../../environments/environment.development';
 export class ClubService {
 
   constructor(private http:HttpClient) { }
-  postClub(obj:any):Observable<any>{
+  postAddClub(obj:any):Observable<any>{
     return this.http.post(environment.api_url+'addClub',obj)
   }
   getClubList():Observable<any>{

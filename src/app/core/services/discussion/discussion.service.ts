@@ -23,4 +23,7 @@ export class DiscussionService {
   editDiscussion(id: string, obj: any): Observable<any> {
     return this.http.put(environment.api_url + 'discussion/' + id, obj);
   }
+  updateDiscussion(id: string, obj: any): Observable<any> {
+    return this.http.put(environment.api_url + 'discussion/' + id, obj);
+  }
 }

@@ -24,30 +24,43 @@ userRole: string|null | undefined;
 constructor(private http:HttpClient, private clubService:ClubService,private formBuilder:FormBuilder){
   this.clubList();
   this.showJoinedClubFunction();
-  this.clubFormData();
+  this.createClubForm= this.formBuilder.group({
+    clubStatus:['',Validators.required],
+    clubName:['',Validators.required],
+    contactNumber:['',Validators.required],
+    createdDate:['']
+  })
 
 }
-clubFormData(){
-  this.clubForm= this.formBuilder.group({
-    clubStatus:['',Validators.required],
-    clubName:['',Validators.required]
-  })
-}
+
 createClub(){
-  if(this.clubForm.valid){
-    console.log(this.clubForm.value);
-    this.clubService.postClub(this.clubForm.value).subscribe((res)=>{
+  console.log('button is clicked');
+  if(this.createClubForm.valid){
+    console.log(this.createClubForm.value);
+    this.clubService.postAddClub(this.createClubForm.value).subscribe((res)=>{
       console.log(res);
       alertify.success("Club added")
-      this.clubForm.reset();
+      this.createClubForm.reset();
+      this.clubList()
     })
   }
   else{
     alertify.error('Input valid Form')
   }
-
 }
-
+clubList(){
+  this.clubService.getClubList().subscribe((res)=>{
+    console.log(res.clubName);
+    this.clubListData= res.clubName
+  })
+}
+deleteClub(clubId:string){
+  this.clubService.delDeleteClubList(clubId).subscribe((res)=>{
+    console.log(res);
+    alertify.success('Club is deleted Sucessfully')
+    this.clubList();
+  })
+}
 
   ngOnInit(): void {
     this.clubForm=this.formBuilder.group({
@@ -66,7 +79,7 @@ onJoin(){
       console.log(res);
       this.clubForm.reset()
       alertify.success('Joined Club Requested ')
-      this.clubList()
+      
       this.showJoinedClubFunction();
       debugger
     })
@@ -79,12 +92,7 @@ onJoin(){
 }
 
 
-clubList(){
-  this.clubService.getClubList().subscribe((res)=>{
-    console.log(res.clubName);
-    this.clubListData= res.clubName
-  })
-}
+
 showJoinedClubFunction(){
 this.clubService.getClubListByEmail().subscribe((res)=>{
   console.log(res+"joined club is ");
