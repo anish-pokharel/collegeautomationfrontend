@@ -11,10 +11,13 @@ export class SponsoeshipService {
   constructor(private http:HttpClient) { }
 
 
-  postAnswerAssignment(obj:any):Observable<any>{
+  postSponsorshipRequest(obj:any):Observable<any>{
     return this.http.post(environment.api_url+'postsponsorship',obj)
   }
-  getAnswerAssignment():Observable<any>{
+  getSponsorshipRequest():Observable<any>{
     return this.http.get<any>(environment.api_url+'getsponsorship')
+  }
+  getSponsorshipByEmail():Observable<any>{
+    return this.http.get<any>(environment.api_url+'getsponsorshipbyemail')
   }
 }

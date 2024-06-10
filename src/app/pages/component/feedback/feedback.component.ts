@@ -12,42 +12,76 @@ import { CommonModule } from '@angular/common';
   styleUrl: './feedback.component.css'
 })
 export class FeedbackComponent implements OnInit {
-  feedbackForm!:FormGroup;
-  feedbackTableData:any[]=[];
-  constructor(private userData:UserAuthService, private formBuilder:FormBuilder,private feedbackService:FeedbackService){
-    this.feedBackUserData()
-    this.getFeedbackList()
-  }
-feedBackUserData(){
-  this.userData.getuserDara().subscribe((res:any)=>{
-    console.log(res);
-  })
-}
-ngOnInit(): void {
-  this.feedbackForm= this.formBuilder.group({
-    feedbackGroup: ['Admin', Validators.required],
-    feedbackAbout: ['', Validators.required]
-  });
-}
-onSubmit(){
-  if (this.feedbackForm.valid) {
-    const formValue = this.feedbackForm.value;
-    console.log(formValue);
-    this.feedbackService.postFeedbackData(formValue).subscribe((res)=>{
-      console.log(res);
-      this.getFeedbackList()
-      this.feedbackForm.reset();
-      debugger
-    })
-    
-  }
-}
-getFeedbackList(){
-  this.feedbackService.getFeedbackData().subscribe((res)=>{
-    console.log(res);
-    this.feedbackTableData=res.feedbackList;
-    debugger
-  })
-}
+  feedbackForm!: FormGroup;
+  feedbackTableData: any[] = [];
+  pagedFeedbackTableData: any[] = [];
+  currentPage = 1;
+  itemsPerPage = 5; // Set items per page to 10
+  totalPages = 0;
+  pages: number[] = [];
+  FeedbackByEmailList:any[]=[]
 
+  constructor(private formBuilder: FormBuilder, private feedbackService: FeedbackService) {}
+
+  ngOnInit(): void {
+    this.feedbackForm = this.formBuilder.group({
+      feedbackBy:[''],
+      feedbackGroup: ['Admin', Validators.required],
+      feedbackAbout: ['', Validators.required],
+      feedbackFor:['',Validators.required]
+    });
+    this.getFeedbackList();
+    this.getFeedbackByEmailList();
+  }
+
+  onSubmit(): void {
+    if (this.feedbackForm.valid) {
+      const formValue = this.feedbackForm.value;
+      this.feedbackService.postFeedbackData(formValue).subscribe((res: any) => {
+        console.log(res);
+        this.getFeedbackList();
+        this.feedbackForm.reset();
+      });
+    }
+  }
+
+  getFeedbackList(): void {
+    this.feedbackService.getFeedbackData().subscribe((res: any) => {
+      console.log(res);
+      this.feedbackTableData = res.feedbackList;
+      this.calculatePagination();
+    });
+  }
+
+  calculatePagination(): void {
+    this.totalPages = Math.ceil(this.feedbackTableData.length / this.itemsPerPage);
+    this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
+    this.setPage(1); // Set initial page
+  }
+
+  setPage(page: number): void {
+    this.currentPage = page;
+    const startIndex = (page - 1) * this.itemsPerPage;
+    const endIndex = Math.min(startIndex + this.itemsPerPage, this.feedbackTableData.length);
+    this.pagedFeedbackTableData = this.feedbackTableData.slice(startIndex, endIndex);
+  }
+
+  prevPage(): void {
+    if (this.currentPage > 1) {
+      this.setPage(this.currentPage - 1);
+    }
+  }
+
+  nextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.setPage(this.currentPage + 1);
+    }
+  }
+  getFeedbackByEmailList(){
+    this.feedbackService.getFeedbackByEmail().subscribe((res)=>{
+      console.log(res);
+      this.FeedbackByEmailList=res.feedback
+    })
+  }
+  
 }

@@ -13,6 +13,12 @@
                 <option value="Teacher">Teacher</option>
               </select>
             </div>
+            <div class="col-lg-12 mb-4">
+              <select class="form-select" id="feedback-group" formControlName="feedbackFor">
+                <option selected value="Admin">Admin</option>
+                <option value="Teacher">Teacher</option>
+              </select>
+            </div>
 
             <div class="col-lg-12 mb-4">
               <textarea class="form-control" placeholder="Feedback" id="feedback_about" formControlName="feedbackAbout"
@@ -27,7 +33,7 @@
     </div>
     <div class="col-lg-6">
       <div class="row">
-        <div class="card my-4">
+        <!-- <div class="card my-4">
         <div class="col-lg-12">
         <div class="card-title text-center">
           <h5> Feedback Data</h5>
@@ -49,8 +55,90 @@
               </table>
             </div>
           </div>
+        </div> -->
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title">Feedback Data</h5>
+          </div>
+      
+            <div class="">
+              <div class="table-responsive">
+                <table class="table ">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th scope="col">SN</th>
+                      <th scope="col">For</th>
+                      <th scope="col">Feedback</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of pagedFeedbackTableData; let i = index">
+                      <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+                      <td>{{ item.feedbackGroup }}</td>
+                      <td>{{ item.feedbackAbout }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="text-center">
+              <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                  <li class="page-item" [ngClass]="{ 'disabled': currentPage === 1 }">
+                    <a class="page-link" aria-label="Previous" (click)="prevPage()">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <li class="page-item" *ngFor="let page of pages">
+                    <a class="page-link" (click)="setPage(page)">{{ page }}</a>
+                  </li>
+                  <li class="page-item" [ngClass]="{ 'disabled': currentPage === totalPages }">
+                    <a class="page-link" aria-label="Next" (click)="nextPage()">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+    
+          
         </div>
       </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="card">
+      <div class="container mt-4">
+        <h2 class="mb-4">Feedback Given</h2>
+        <button class="btn btn-primary mb-3">Print Table</button>
+        <table class="table table-bordered table-striped" id="clubTable">
+          <thead class="thead-dark">
+            <tr>
+              <th>SN</th>
+              <th>Role</th>
+              <th>Feedback For</th>
+              <th>Feedback</th>
+              <th>Action</th>
+              <!-- <th>Joined Date</th> -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of FeedbackByEmailList let i = index">
+              <td>{{ i+1 }}</td>
+              <td>{{ item.feedbackGroup }}</td>
+              <td>{{ item.feedbackFor }}</td>
+              <td>{{ item.feedbackAbout }}</td>
+          
+              <td><button type="button" class="btn btn-outline-primary"><i class="fas fa-edit"></i></button>
+                <button type="button" class="btn btn-outline-danger mx-2"><i class="fas fa-trash-alt"></i>
+                </button></td>
+              <!-- <td>{{ item.itemName }}</td>
+              <td>{{ item.joinedDate }}</td> -->
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
     </div>
   </div>
 </div>

@@ -16,4 +16,10 @@ export class AssignmentService {
   getAnswerAssignment():Observable<any>{
     return this.http.get<any>(environment.api_url+'getassignments')
   }
+  postGiveAssignment(obj:any):Observable<any>{
+    return this.http.post(environment.api_url+'postGiveAssignments',obj)
+  }
+  getGiveAssignment():Observable<any>{
+    return this.http.get<any>(environment.api_url+'getGiveAssignments')
+  }
 }

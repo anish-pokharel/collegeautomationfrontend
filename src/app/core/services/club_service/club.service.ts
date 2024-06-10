@@ -18,4 +18,10 @@ export class ClubService {
   delDeleteClubList(id:string):Observable<any>{
     return this.http.delete<any>(environment.api_url+(`deleteClub/${id}`))
   }
+  postJoinClub(obj:any):Observable<any>{
+    return this.http.post(environment.api_url+'joinclub',obj)
+  }
+  getClubListByEmail():Observable<any>{
+    return this.http.get<any>(environment.api_url+'getjoinedclubbyemail')
+  }
 }

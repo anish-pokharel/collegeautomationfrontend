@@ -20,7 +20,7 @@ export class AssignmentComponent {
       subject: ['', Validators.required],
       assignment: ['', Validators.required],
       assignmentFile: ['', Validators.required],
-      rollno: ['', Validators.required],
+      rollno: [''],
 
     });
     this.showData();

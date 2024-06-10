@@ -25,5 +25,7 @@ delEnrollmentList(id:string):Observable<any>{
 deleteSubjectFromEnrollment(enrollmentId: string, subjectCode: string): Observable<any> {
   return this.http.delete<any>(environment.api_url + `deleteSubject/${enrollmentId}/${subjectCode}`);
 }
-
+getEnrollmentDataByEmail(): Observable<any> {
+  return this.http.get<any>(environment.api_url+'enrollmentDatabyEmail')
+}
 }
