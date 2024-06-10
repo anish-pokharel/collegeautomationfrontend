@@ -15,9 +15,12 @@
                     </div>
 
                     <div class="col-lg-5 mb-4">
-
-                        <input type="text" formControlName="hod" class="form-control"
-                            placeholder="Head of Department">
+                        <select class="form-select" formControlName="hod">
+                            <option value="" disabled selected>Select Teacher Name</option>
+                            <option *ngFor="let item of showTeacherData" [value]="item.email">{{item.name}}</option>
+                          </select>
+                        <!-- <input type="text" formControlName="hod" class="form-control"
+                            placeholder="Head of Department"> -->
                     </div>
 
                     <div class="col-lg-2 mb-4">
@@ -49,7 +52,7 @@
                             <td>{{item.createFaculty}}</td>
                             <td>{{item.hod}}</td>
                             <td>
-                                <button class="btn btn-primary" (click)="editDeaprtment(item._id)"><i class="fas fa-edit"></i></button>
+                                <button class="btn btn-primary" (click)="editDepartment(item._id)"><i class="fas fa-edit"></i></button>
                                 <button class="btn btn-outline-primary mx-2"
                                     (click)="deleteDepartment(item._id)"><i class="fas fa-trash-alt"></i></button>
                             </td>

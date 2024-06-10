@@ -20,4 +20,7 @@ export class DepartmentService {
   delDepartmentList(id:string):Observable<any>{
     return this.http.delete<any>(environment.api_url+(`departments/${id}`))
   }
+  updateDepartment(id: string, obj: any): Observable<any> {
+    return this.http.put(environment.api_url + (`departments/${id}`), obj);
+  }
 }
