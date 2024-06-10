@@ -26,7 +26,7 @@ export class AssignmentComponent {
     this.showData();
   }
   onSubmit() {
-    console.log('BUTTON IS CLCJFAHJ');
+    console.log('BUTTON IS Clicked');
     console.log(this.assignmentForm.value);
     const assignmentFormData = this.assignmentForm.value
     if (this.assignmentForm.valid) {
@@ -45,5 +45,9 @@ export class AssignmentComponent {
       debugger
     })
 
+  }
+
+  getFileName(filePath: string): string {
+    return filePath.split('/').pop() || filePath;
   }
 }

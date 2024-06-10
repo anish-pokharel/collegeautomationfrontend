@@ -84,7 +84,8 @@
                   <tr *ngFor="let item of showAssignmentAnswer let i = index ">
                     <th scope="row">{{i+1}}</th>
                     <td>{{item.assignment}}</td>
-                    <td>{{item.assignmentFile}}</td>
+                    <!-- <td>{{item.assignmentFile}}</td> -->
+                     <td><a [href]="item.assignmentFile" target="_blank">{{getFileName(item.assignmentFile)}}</a></td>
                     <td>{{item.rollno}}</td>
                     <td>Completed</td>
           
