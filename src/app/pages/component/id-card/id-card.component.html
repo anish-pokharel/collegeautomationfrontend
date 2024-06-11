@@ -2,15 +2,17 @@
 
 <div>
     <div class="row">
-        <div class="col-lg-3 ">
+        <div class="col-lg-3 col-md-4 col-sm-6 col-12" *ngIf="showUserProfileData" >
             <div class="card border ">
-                <div class="id-card text-center my-4">
-                    <img src="https://via.placeholder.com/100" alt="User Photo" class="img-fluid">
-                    <h5>Anish Pokharel</h5>
+                <div class="id-card text-center my-4" >
+                    <img src="https://via.placeholder.com/100" alt="User Photo" class="img-fluid mb-3">
+                    <h5>{{showUserProfileData.name}}</h5>
                     <div class="info">
-                        <p><strong>Roll No:</strong> 191741</p>
-                        <p><strong>Department:</strong> Software Engineer</p>
-                        <p><strong>Valid Until:</strong> 31/12/2024</p>
+                        <p><strong>Email:</strong> {{showUserProfileData.email}}</p>
+                        <p><strong>Roll No:</strong> {{showUserProfileData.rollno}}</p>
+                        <p><strong>Department:</strong> {{showUserProfileData.address}}</p>
+                        <p><strong>Department:</strong> {{showUserProfileData.role}}</p>
+                        <p><strong>Valid Until:</strong> {{showUserProfileData.email}}</p>
                     </div>
                     <div class="barcode">
                         <img src="https://barcode.tec-it.com/barcode.ashx?data=123456789" alt="Barcode" class="img-fluid">
