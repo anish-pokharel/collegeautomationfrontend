@@ -19,6 +19,11 @@
                         <h5 class="card-title">{{ item.name }}</h5>
                         <p class="card-text">{{ item.code }}</p>
                         <a href="#" class="btn btn-primary">{{ item.credit }} Credits</a>
+                        <button type="button" class="btn btn-primary mx-3" data-toggle="modal" data-target="#exampleModal" (click)="openDetailsModal( item._id)">
+                          View Details
+                        </button>
+                        <!-- <button class="btn btn-outline-secondary mx-3"(click)="openDetailsModal(detailsModal, item._id)">
+                          View Details</button> -->
                       </div>
                     </div>
                   </div>
@@ -38,7 +43,32 @@
 
 
 </div>
-
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Subject Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="selectedSubject">
+          <h4><strong>Name:</strong> {{ selectedSubject.name }}</h4>
+          <h5><strong>Code:</strong> {{ selectedSubject.code }}</h5>
+          <h5><strong>Credit:</strong> {{ selectedSubject.credit }}</h5>
+          <h5><strong>Teacher:</strong> {{ selectedSubject.teacher }}</h5>
+        </div>
+        <div *ngIf="!selectedSubject">
+          <h5>Loading...</h5>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- //teacher -->
 
 
@@ -115,3 +145,27 @@
     </div>
   </div>
 </div>
+<!-- 
+
+<ng-template #detailsModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Subject Details</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div *ngIf="selectedSubject">
+      <p><strong>Name:</strong> {{ selectedSubject.name }}</p>
+      <p><strong>Code:</strong> {{ selectedSubject.code }}</p>
+      <p><strong>Credit:</strong> {{ selectedSubject.credit }}</p>
+      <p><strong>Teacher:</strong> {{ selectedSubject.teacher }}</p>
+    </div>
+    <div *ngIf="!selectedSubject">
+      <p>Loading...</p>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template> -->

@@ -12,25 +12,38 @@ import { ModelQuestionService } from '../../../core/services/model-service/model
   styleUrl: './course-enroll.component.css'
 })
 export class CourseEnrollComponent {
-  showCourseList:any;
-  userRole: string|null | undefined;
-  constructor(private http:HttpClient, private enrollmentService:EnrollmentService
-    ,private modelQuestionService:ModelQuestionService
-  ){
+  showCourseList: any;
+  showCourseListforModal: any = {
+    subjects: []
+  };
+  selectedSubject: any = null;
+  userRole: string | null | undefined;
+  constructor(private http: HttpClient, private enrollmentService: EnrollmentService
+    , private modelQuestionService: ModelQuestionService
+  ) {
     this.showCourse();
-  this.userRole =localStorage.getItem('userRole')
+    this.userRole = localStorage.getItem('userRole')
+    // this.openDetailsModal()
 
   }
-showCourse(){
-//   this.enrollmentService.getEnrollmentData().subscribe((res)=>{
-//     console.log(res);
-//     this.showCourseList=res;
-// })
-this.enrollmentService.getEnrollmentDataByEmail().subscribe((data)=>{
-  // this.subject=data
-  // console.log("Subject is "+this.subject);
-  this.showCourseList = data;
-})
+  showCourse() {
+    //   this.enrollmentService.getEnrollmentData().subscribe((res)=>{
+    //     console.log(res);
+    //     this.showCourseList=res;
+    // })
+    this.enrollmentService.getEnrollmentDataByEmail().subscribe((data) => {
+      // this.subject=data
+      // console.log("Subject is "+this.subject);
+      this.showCourseList = data;
+    })
+  }
 
-}
+
+  openDetailsModal(subjectId: string): void {
+    this.enrollmentService.getSubjectDataById(subjectId).subscribe(subject => {
+      console.log(subject);
+      this.selectedSubject = subject;
+      // $('#exampleModal').modal('show'); // Use jQuery to open the modal
+    });
+  }
 }
