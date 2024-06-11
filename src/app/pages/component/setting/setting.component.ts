@@ -19,9 +19,8 @@ export class SettingComponent implements OnInit {
       this.showUserProfileData=res.data;
       console.log(this.showUserProfileData);
     })
-    
-    
   }
  
+  
   
 }
