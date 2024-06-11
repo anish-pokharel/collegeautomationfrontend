@@ -21,7 +21,10 @@ export class DiscussionComponent implements OnInit {
   ) { }
   discussionTable!: FormGroup;
   discussionData: any[] = [];
+  discussionList: any[] = [];
   userRole: string | null | undefined;
+  isEditMode: boolean = false;
+  discussionResultId: string | null = null
   @ViewChild('exampleModal') editModal!: ElementRef;
   ngOnInit(): void {
     this.discussionTable = this.formBuilder.group({
@@ -35,32 +38,54 @@ export class DiscussionComponent implements OnInit {
 
   }
   addDiscussion() {
-
-
-    if (this.discussionTable.valid) {
+    if (this.discussionTable.valid) { 
+      if (this.isEditMode && this.discussionResultId) {
+        this.discussionService.updateDiscussion(this.discussionResultId, this.discussionTable.value).subscribe(res => {
+          alertify.success("Discussion updated");
+          this.getDiscissionTable();
+        }, error => {
+          console.error('Error updating discussion:', error);
+          alertify.error("Error updating discussion");
+        });
+      } else {
       const formData = this.discussionTable.value;
       console.log(formData);
-      //this.discussionService.postDiscussion(this.discussionTable.value).subscribe((res)=>{
       this.discussionService.postDiscussion(formData).subscribe(
         (res) => {
           console.log(res);
           alertify.success('Discussion Added');
           this.getDiscissionTable();
           this.discussionTable.reset()
-        },
-        (error) => {
-          console.error('Error adding discussion:', error);
-          alertify.error('Failed to add discussion. Please try again.');
-        });
+        })
+    }
 
-    }
-    else {
-      alertify.error("Form is invalid")
-      const formData = this.discussionTable.value;
-      console.log(formData);
-      debugger
-    }
+
   }
+  }
+  //   if (this.discussionTable.valid) {
+  //     const formData = this.discussionTable.value;
+  //     console.log(formData);
+  //     //this.discussionService.postDiscussion(this.discussionTable.value).subscribe((res)=>{
+  //     this.discussionService.postDiscussion(formData).subscribe(
+  //       (res) => {
+  //         console.log(res);
+  //         alertify.success('Discussion Added');
+  //         this.getDiscissionTable();
+  //         this.discussionTable.reset()
+  //       },
+  //       (error) => {
+  //         console.error('Error adding discussion:', error);
+  //         alertify.error('Failed to add discussion. Please try again.');
+  //       });
+
+  //   }
+  //   else {
+  //     alertify.error("Form is invalid")
+  //     const formData = this.discussionTable.value;
+  //     console.log(formData);
+  //     debugger
+  //   }
+  // }
   getDiscissionTable() {
     this.discussionService.getdiscussionData().subscribe((res: any) => {
       this.discussionData = res.discussion;
@@ -68,51 +93,44 @@ export class DiscussionComponent implements OnInit {
     });
 
   }
+  editDiscussion(discussionId: string) {
+    this.discussionService.getdiscussionDataById(discussionId).subscribe((res) => {
+      if (!res) {
+        console.error('Discussion not found');
+        return;
+      }
 
-  editDiscussion(discussinId: string) {
-    const discussionToEdit = this.discussionData.find(discussion => discussion._id === discussinId);
-    if (!discussionToEdit) {
-      console.error('Discussion not found');
-      return;
-    }
-  
-    // Patch the form values first
-    this.discussionTable.patchValue({
-      discussion_topic: discussionToEdit.discussion_topic,
-      date: discussionToEdit.date,
-      decision: discussionToEdit.decision
-    });
-  
-    // Show the modal
-    if (this.editModal) {
-      this.editModal.nativeElement.classList.add('show');
-      this.editModal.nativeElement.style.display = 'block';
-    }
-  
-    // Now, call the updateDiscussion service
-    this.discussionService.updateDiscussion(discussinId, this.discussionTable.value).subscribe((res) => {
-      console.log(res);
-      this.confirmationService.showSuccessMessage('Discussion updated successfully');
-      this.getDiscissionTable();
-    }, (error) => {
-      console.error('Error updating discussion:', error);
-      this.confirmationService.showErrorMessage('Error updating discussion');
+      this.isEditMode = true;
+      this.discussionResultId = discussionId;
+      this.discussionTable.patchValue({
+        discussion_topic: res.discussion_topic,
+        date: res.date,
+        decision: res.decision
+      });
+
+      if (this.editModal) {
+        this.editModal.nativeElement.classList.add('show');
+        this.editModal.nativeElement.style.display = 'block';
+      }
+    }, error => {
+      console.error('Error fetching discussion data:', error);
     });
   }
-  
+
+
 
   async deleteDiscussion(discussinId: string) {
     debugger
-    const confirmed =await this.confirmationService.showConfirmationPopup();
-    if(confirmed){
-    
-    this.discussionService.deleteDiscussion(discussinId).subscribe((res) => {
-      debugger
-      this.confirmationService.showSuccessMessage('discussion is deleted')
-      this.getDiscissionTable()
-    })
-  }
-    else{
+    const confirmed = await this.confirmationService.showConfirmationPopup();
+    if (confirmed) {
+
+      this.discussionService.deleteDiscussion(discussinId).subscribe((res) => {
+        debugger
+        this.confirmationService.showSuccessMessage('discussion is deleted')
+        this.getDiscissionTable()
+      })
+    }
+    else {
       this.confirmationService.showErrorMessage('Sorry cannnot be Deleted')
     }
   }

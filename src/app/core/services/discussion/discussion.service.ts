@@ -17,6 +17,9 @@ export class DiscussionService {
   getdiscussionData():Observable<any>{
     return this.http.get<any>(environment.api_url+'getdiscussion')
   }
+  getdiscussionDataById(id:String):Observable<any>{
+    return this.http.get<any>(environment.api_url+(`discussion/${id}`))
+  }
   deleteDiscussion(id:string):Observable<any>{
     return this.http.delete(environment.api_url+(`discussion/${id}`))
   }
