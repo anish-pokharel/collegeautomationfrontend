@@ -3,11 +3,13 @@ import { UserAuthService } from '../../../core/services/user_auth/user-auth.serv
 import { CommonModule } from '@angular/common';
 import { DepartmentService } from '../../../core/services/department-service/department.service';
 import { ClubService } from '../../../core/services/club_service/club.service';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,ReactiveFormsModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
@@ -15,6 +17,7 @@ export class ProfileComponent implements OnInit {
   userData:any[]=[];
   showUserProfileData:any=null;
   clubList:any[]=[]
+  formProfile!:FormGroup;
 constructor(private userService:UserAuthService,private clubService:ClubService ){}
   ngOnInit(): void {
   this.userService.getuserDara().subscribe((res)=>{
@@ -49,4 +52,6 @@ deleteClub(clubId:string){
     this.showClub()
   })
 }
+
+submitProfileForm(){}
 }

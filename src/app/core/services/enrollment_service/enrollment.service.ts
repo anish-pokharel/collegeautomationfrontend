@@ -15,6 +15,9 @@ export class EnrollmentService {
   getEnrollmentData():Observable<any>{
     return this.http.get<any>(environment.api_url+'enrollmentData')
   }
+  getSubjectDataById(id:string):Observable<any>{
+    return this.http.get<any>(environment.api_url+(`subjects/${id}`))
+  }
 postEnrollmentJoin(obj:any):Observable<any>{
     return this.http.post(environment.api_url+'postEnrollmentKeyForm',obj)
 }
