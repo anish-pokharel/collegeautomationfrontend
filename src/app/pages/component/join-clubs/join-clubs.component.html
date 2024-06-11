@@ -94,7 +94,7 @@
               <th>Joined By</th>
               <th>Club Status</th>
               <th>Club Name</th>
-              <!-- <th>Reason</th> -->
+              <th>Status</th>
               <th>Joined Date</th>
             </tr>
           </thead>
@@ -104,6 +104,7 @@
               <td>{{ club.joinedBy }}</td>
               <td>{{ club.clubStatus }}</td>
               <td>{{ club.clubName }}</td>
+              <td>{{ club.clubNames || 'Pending' }}</td>
               <!-- <td>{{ club.reason }}</td> -->
               <td>{{ club.joinedDate }}</td>
             </tr>

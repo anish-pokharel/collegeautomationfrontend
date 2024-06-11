@@ -3,6 +3,7 @@ import { UserAuthService } from '../../../core/services/user_auth/user-auth.serv
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FeedbackService } from '../../../core/services/feedback/feedback.service';
 import { CommonModule } from '@angular/common';
+import { PopUpService } from '../../../core/popup/pop-up.service';
 
 @Component({
   selector: 'app-feedback',
@@ -23,7 +24,7 @@ export class FeedbackComponent implements OnInit {
   showTeacherData:any[]=[]
 
   constructor(private formBuilder: FormBuilder, private feedbackService: FeedbackService
-    ,    private userService:UserAuthService
+    ,    private userService:UserAuthService,private confirmationService:PopUpService
 
   ) {
 this.teacherData()
@@ -35,7 +36,7 @@ this.teacherData()
       feedbackBy:[''],
       feedbackGroup: ['Admin', Validators.required],
       feedbackAbout: ['', Validators.required],
-      feedbackFor:['',Validators.required]
+      feedbackFor:['',]
     });
     this.getFeedbackList();
     this.getFeedbackByEmailList();
@@ -48,11 +49,12 @@ this.teacherData()
         console.log(res);
         this.getFeedbackList();
         this.feedbackForm.reset();
+        this.getFeedbackByEmailList()
       });
     }
   }
 
-  getFeedbackList(): void {
+  getFeedbackList() {
     this.feedbackService.getFeedbackData().subscribe((res: any) => {
       console.log(res);
       this.feedbackTableData = res.feedbackList;
@@ -95,5 +97,18 @@ this.teacherData()
       this.showTeacherData = res.faculty
     })
   }
+  async deleteFeedback(feedbackId:string){
+    const confirmed = await this.confirmationService.showConfirmationPopup()
+    if( confirmed){
+
+    this.feedbackService.delFeedbackClubList(feedbackId).subscribe((res)=>{
+      console.log(res);
+      this.getFeedbackList();
+      this.getFeedbackByEmailList()
+      this.confirmationService.showSuccessMessage('Feedback deleted')
+    })
+  }
+
   
+  }
 }
