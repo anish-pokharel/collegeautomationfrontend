@@ -72,11 +72,7 @@
                             <input type="email" id="email" formControlName="email" class="form-control"
                                 placeholder="Email" required>
                         </div>
-                        <!-- <div class="col-lg-6 mb-4">
-                    <input type="number" id="rollno" formControlName="rollno" class="form-control" placeholder="Roll Number"
-                        required>
-                </div> -->
-
+                      
                         <div class="col-lg-6 mb-4">
                             <input type="password" id="password" formControlName="password" class="form-control"
                                 placeholder="Password" required>
@@ -91,12 +87,18 @@
                         </div>
                         <div class="col-lg-6 mb-4">
                             <select id="role" class="form-control" formControlName="role">
-                                <option value="student" selected>Student</option>
+                                <option value="" disabled selected>Select Role</option>
+                                <option value="student" >Student</option>
                                 <option value="faculty">Faculty</option>
                                 <option value="secretary">Secretary</option>
                                 <option value="admin">Admin</option>
                             </select>
                         </div>
+                        <div class="col-lg-6 mb-4" *ngIf="userForm.get('role')?.value === 'student'">
+                            <input type="text" id="rollno" formControlName="rollno" class="form-control" placeholder="Roll Number"
+                                required>
+                        </div>
+        
                         <div class="">
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>

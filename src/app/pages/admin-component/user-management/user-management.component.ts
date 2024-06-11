@@ -37,7 +37,7 @@ export class UserManagementComponent implements OnInit{
     this.userForm=this.formBuilder.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      // rollno: ['', Validators.required],
+      rollno: ['', ],
       address: ['', Validators.required],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
