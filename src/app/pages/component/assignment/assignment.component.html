@@ -67,15 +67,16 @@
     </div>
     <div class="col-lg-6">
         <div class="card">
-          <div class="card-header">   <h5>Assignment Submit </h5></div>
+          <div class="card-header">   <h5>Assignment Submited </h5></div>
 
             <div class="card-body">
                  <table class="table ">
                 <thead>
                   <tr>
                     <th scope="col">S.N</th>
-                    <th scope="col">Assignment</th>
                     <th scope="col">Subject</th>
+                    <th scope="col">Assignment</th>
+                    <th scope="col">File</th>
                     <th scope="col">Rollno </th>
                     <th scope="col">Status</th>
                   </tr>
@@ -83,10 +84,12 @@
                 <tbody>
                   <tr *ngFor="let item of showAssignmentAnswer let i = index ">
                     <th scope="row">{{i+1}}</th>
+                    <td>{{item.subject}}</td>
                     <td>{{item.assignment}}</td>
-                    <td>{{item.assignmentFile}}</td>
+                    <!-- <td>{{item.assignmentFile}}</td> -->
+                     <td><a [href]="item.assignmentFile" target="_blank">{{getFileName(item.assignmentFile)}}</a></td>
                     <td>{{item.rollno}}</td>
-                    <td>Completed</td>
+                    <td>Submited for Grading</td>
           
                   </tr>
                

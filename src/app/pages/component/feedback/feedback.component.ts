@@ -20,8 +20,15 @@ export class FeedbackComponent implements OnInit {
   totalPages = 0;
   pages: number[] = [];
   FeedbackByEmailList:any[]=[]
+  showTeacherData:any[]=[]
 
-  constructor(private formBuilder: FormBuilder, private feedbackService: FeedbackService) {}
+  constructor(private formBuilder: FormBuilder, private feedbackService: FeedbackService
+    ,    private userService:UserAuthService
+
+  ) {
+this.teacherData()
+
+  }
 
   ngOnInit(): void {
     this.feedbackForm = this.formBuilder.group({
@@ -81,6 +88,11 @@ export class FeedbackComponent implements OnInit {
     this.feedbackService.getFeedbackByEmail().subscribe((res)=>{
       console.log(res);
       this.FeedbackByEmailList=res.feedback
+    })
+  }
+  teacherData() {
+    this.userService.getTeacherData().subscribe((res) => {
+      this.showTeacherData = res.faculty
     })
   }
   

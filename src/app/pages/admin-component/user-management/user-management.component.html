@@ -5,7 +5,7 @@
                 <div class="stats-icon stats-icon-lg"><i class="fa fa-user-graduate fa-fw"></i></div>
                 <div class="stats-content">
                     <div class="stats-title">Total Student</div>
-                    <div class="stats-number">5000</div>
+                    <div class="stats-number">{{showStudentCount}}</div>
                     <div class="stats-progress progress">
                         <div class="progress-bar" style="width: 70.1%;"></div>
                     </div>
@@ -32,7 +32,7 @@
                 <div class="stats-icon stats-icon-lg"><i class="fa fa-users fa-fw"></i></div>
                 <div class="stats-content">
                     <div class="stats-title">Club/Parties</div>
-                    <div class="stats-number">9</div>
+                    <div class="stats-number">{{showSecretaryCount}}</div>
                     <div class="stats-progress progress">
                         <div class="progress-bar" style="width: 76.3%;"></div>
                     </div>
@@ -72,11 +72,7 @@
                             <input type="email" id="email" formControlName="email" class="form-control"
                                 placeholder="Email" required>
                         </div>
-                        <!-- <div class="col-lg-6 mb-4">
-                    <input type="number" id="rollno" formControlName="rollno" class="form-control" placeholder="Roll Number"
-                        required>
-                </div> -->
-
+                      
                         <div class="col-lg-6 mb-4">
                             <input type="password" id="password" formControlName="password" class="form-control"
                                 placeholder="Password" required>
@@ -91,12 +87,18 @@
                         </div>
                         <div class="col-lg-6 mb-4">
                             <select id="role" class="form-control" formControlName="role">
-                                <option value="student" selected>Student</option>
+                                <option value="" disabled selected>Select Role</option>
+                                <option value="student" >Student</option>
                                 <option value="faculty">Faculty</option>
                                 <option value="secretary">Secretary</option>
                                 <option value="admin">Admin</option>
                             </select>
                         </div>
+                        <div class="col-lg-6 mb-4" *ngIf="userForm.get('role')?.value === 'student'">
+                            <input type="text" id="rollno" formControlName="rollno" class="form-control" placeholder="Roll Number"
+                                required>
+                        </div>
+        
                         <div class="">
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>

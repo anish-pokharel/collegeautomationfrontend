@@ -17,14 +17,27 @@ export class UserManagementComponent implements OnInit{
   clubForm!:FormGroup;
   showTeacherData:any[]=[];
   showTeacherCount:number=0;
+  showStudentData:any[]=[];
+  showStudentCount:number=0;
+  showSecretaryData:any[]=[];
+  showSecretaryCount:number=0;
   
   constructor(private formBuilder:FormBuilder, private userService:UserAuthService,
-    private clubService:ClubService,private departmentService:DepartmentService){}
+    private clubService:ClubService,private departmentService:DepartmentService){
+      this.userService.getStudentData().subscribe((res)=>{
+        this.showStudentCount=res.count
+        this.showStudentData=res.student
+      })
+      this.userService.getSecretarytData().subscribe((res)=>{
+        this.showSecretaryCount=res.count
+        this.showSecretaryData=res.secretary
+      })
+    }
   ngOnInit(): void {
     this.userForm=this.formBuilder.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      // rollno: ['', Validators.required],
+      rollno: ['', ],
       address: ['', Validators.required],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
@@ -62,6 +75,7 @@ export class UserManagementComponent implements OnInit{
       this.showTeacherCount=res.count
       this.showTeacherData=res.faculty
     })
+   
   }
   
   

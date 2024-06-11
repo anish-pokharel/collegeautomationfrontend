@@ -15,8 +15,9 @@
             </div>
             <div class="col-lg-12 mb-4">
               <select class="form-select" id="feedback-group" formControlName="feedbackFor">
-                <option selected value="Admin">Admin</option>
-                <option value="Teacher">Teacher</option>
+                <option value="" disabled selected>Select Teacher Name</option>
+                <option *ngFor="let item of showTeacherData" [value]="item.email">{{item.name}}</option>
+
               </select>
             </div>
 

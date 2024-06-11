@@ -49,7 +49,7 @@
                   <th scope="col">Club Name</th>
                   <th scope="col">Club Status</th>
                   <th scope="col">Position</th>
-                  <th scope="col">Joined Date </th>
+                  <th scope="col">Created Date </th>
                 </tr>
               </thead>
               <tbody>
@@ -85,7 +85,7 @@
     </div>
     <div class="card">
       <div class="container mt-4">
-        <h2 class="mb-4">Club Information</h2>
+        <h2 class="mb-4">Joined Club Information</h2>
         <button class="btn btn-primary mb-3">Print Table</button>
         <table class="table table-bordered table-striped" id="clubTable">
           <thead class="thead-dark">
@@ -124,7 +124,7 @@
             Create Club
           </h5>
           <form [formGroup]="createClubForm" class="row" (ngSubmit)="createClub()">
-            <div class="col-lg-5 mb-4">
+            <div class="col-lg-3 mb-4">
               
 
               <select id="clubStatus" class="form-control" formControlName="clubStatus">
@@ -133,13 +133,17 @@
                 <option value="Political">Political</option>
               </select>
             </div>
-            <div class="col-lg-5 mb-4">
+            <div class="col-lg-3 mb-4">
 
               <input type="text" formControlName="clubName" class="form-control" placeholder="Club Name">
             </div>
+            <div class="col-lg-4 mb-4">
+
+              <input type="text" formControlName="contactNumber" class="form-control" placeholder="Club Contact Number">
+            </div>
 
             <div class="col-lg-2 mb-4">
-              <button type="sunmit" class="btn btn-primary mb-4">Add Club</button>
+              <button type="submit" class="btn btn-primary mb-4">Add Club</button>
             </div>
           </form>
         </div>
@@ -166,10 +170,10 @@
             <th>{{i+1}}</th>
             <td>{{item.clubName}}</td>
             <td>{{item.clubStatus}}</td>
-            <td>{{item.position}}</td>
-            <td>{{item.joinedDate}}</td>
+            <td>{{item.contactNumber}}</td>
+            <td>{{item.createdDate}}</td>
             <td><button type="button" class="btn btn-outline-primary"><i class="fas fa-edit"></i></button>
-              <button type="button" class="btn btn-outline-danger mx-2"><i class="fas fa-trash-alt"></i>
+              <button type="button" class="btn btn-outline-danger mx-2" (click)="deleteClub(item._id)"><i class="fas fa-trash-alt"></i>
               </button></td>
           </tr>
         </tbody>

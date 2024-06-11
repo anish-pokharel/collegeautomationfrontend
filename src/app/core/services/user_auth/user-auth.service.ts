@@ -24,6 +24,12 @@ getuserDataLogin():Observable<any>{
 getTeacherData():Observable<any>{
   return this.http.get(environment.api_url+'user/faculty')
 }
+getStudentData():Observable<any>{
+  return this.http.get(environment.api_url+'user/student')
+}
+getSecretarytData():Observable<any>{
+  return this.http.get(environment.api_url+'user/secretary')
+}
 
 
 setUserDara(user:any){

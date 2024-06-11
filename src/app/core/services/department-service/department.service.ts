@@ -17,7 +17,13 @@ export class DepartmentService {
   getDepartmentsList():Observable<any>{
     return this.http.get<any>(environment.api_url+'getDepartments')
   }
+  getDepartmentsListById(id:string):Observable<any>{
+    return this.http.get<any>(environment.api_url+(`departments/${id}`))
+  }
   delDepartmentList(id:string):Observable<any>{
     return this.http.delete<any>(environment.api_url+(`departments/${id}`))
+  }
+  updateDepartment(id: string, obj: any): Observable<any> {
+    return this.http.put(environment.api_url + (`departments/${id}`), obj);
   }
 }

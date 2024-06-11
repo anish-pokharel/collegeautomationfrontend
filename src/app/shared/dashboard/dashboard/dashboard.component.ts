@@ -27,6 +27,7 @@ import { UserAuthService } from '../../../core/services/user_auth/user-auth.serv
 import { EventsComponent } from '../../../pages/component/events/events.component';
 import { ClassScheduleComponent } from '../../../pages/component/class-schedule/class-schedule.component';
 import { DepartmentComponent } from '../../../pages/component/department/department.component';
+import { OurCourseComponent } from '../../../pages/component/our-course/our-course.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -38,7 +39,7 @@ import { DepartmentComponent } from '../../../pages/component/department/departm
     AssignmentMaterialsComponent,CourseRecordComponent,FeedbackComponent,InternalRecordsComponent,
     ModelQuestionComponent,StudentWorkComponent,UserManagementComponent,
     EnrollmentKeyComponent,ProfileComponent,JobVacancyComponent,ListCourseComponent,EventsComponent
-    ,ClassScheduleComponent,DepartmentComponent
+    ,ClassScheduleComponent,DepartmentComponent,OurCourseComponent
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
