@@ -13,11 +13,11 @@ import { EnrollmentService } from '../../../core/services/enrollment_service/enr
 })
 export class AssignmentComponent {
   assignmentForm!: FormGroup;
-  showAssignmentAnswer:any[]=[];
-  showAssignmentQuestion:any[]=[];
-  subjectList:any[]=[];
+  showAssignmentAnswer: any[] = [];
+  showAssignmentQuestion: any[] = [];
+  subjectList: any[] = [];
   constructor(private formBuilder: FormBuilder, private assigmentService: AssignmentService,
-    private enrollmentService:EnrollmentService
+    private enrollmentService: EnrollmentService
   ) {
   }
   ngOnInit(): void {
@@ -45,10 +45,10 @@ export class AssignmentComponent {
 
     }
   }
-  showData(){
-    this.assigmentService.getAnswerAssignment().subscribe((res)=>{
+  showData() {
+    this.assigmentService.getAnswerAssignment().subscribe((res) => {
       console.log(res);
-      this.showAssignmentAnswer= res;
+      this.showAssignmentAnswer = res;
       debugger
     })
   }
@@ -57,16 +57,17 @@ export class AssignmentComponent {
     return filePath.split('/').pop() || filePath;
   }
 
-getSubjectList(){
-  this.enrollmentService.getSubjectDataList().subscribe((res)=>{
-    console.log(res);
-    this.subjectList=res;
-  })
-}
-  getAssignmentQuestion(){
-    this.assigmentService.getGiveAssignment().subscribe((res)=>{
+  getSubjectList() {
+    this.enrollmentService.getSubjectDataList().subscribe((res) => {
       console.log(res);
-      this.showAssignmentQuestion=res
+      this.subjectList = res.subjects;
+      debugger
+    })
+  }
+  getAssignmentQuestion() {
+    this.assigmentService.getGiveAssignment().subscribe((res) => {
+      console.log(res);
+      this.showAssignmentQuestion = res
     })
   }
 }

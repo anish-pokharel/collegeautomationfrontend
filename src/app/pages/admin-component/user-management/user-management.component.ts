@@ -40,7 +40,7 @@ export class UserManagementComponent implements OnInit{
   ngOnInit(): void {
     this.userForm=this.formBuilder.group({
       name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required]],
       rollno: ['', ],
       address: ['', Validators.required],
       password: ['', Validators.required],
