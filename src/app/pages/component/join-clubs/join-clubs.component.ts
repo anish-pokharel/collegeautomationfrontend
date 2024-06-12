@@ -17,6 +17,8 @@ export class JoinClubsComponent implements OnInit{
 clubForm!:FormGroup
 clubListData:any[]=[]
 showJoinedClub:any
+showJoinedClubRejected:any
+showJoinedClubAccepted:any
 createFacultyForm!:FormGroup;
 createClubForm!:FormGroup;
 userRole: string|null | undefined;
@@ -75,6 +77,7 @@ deleteClub(clubId:string){
       clubName:['',Validators.required],
       reason:['',Validators.required],
       joinedDate:['',],
+      decision:['']
     })
     this.userRole =localStorage.getItem('userRole')
     this.getClubEmail();
@@ -104,7 +107,9 @@ onJoin(){
 showJoinedClubFunction(){
 this.clubService.getClubListByEmail().subscribe((res)=>{
   console.log(res+"joined club is ");
-  this.showJoinedClub=res.JoinedClubs;
+  this.showJoinedClub=res.Requested_Clubs;
+  this.showJoinedClubAccepted=res.Accepted_Clubs
+  this.showJoinedClubRejected=res.Rejected_Clubs
 })
 }
 
