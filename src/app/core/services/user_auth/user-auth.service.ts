@@ -32,6 +32,7 @@ getSecretarytData():Observable<any>{
 }
 
 
+
 setUserDara(user:any){
   localStorage.setItem('userData',JSON.stringify(user))
 }

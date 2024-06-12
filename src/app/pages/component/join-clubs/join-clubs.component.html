@@ -126,11 +126,11 @@
           </h5>
           <form [formGroup]="createClubForm" class="row" (ngSubmit)="createClub()">
             <div class="col-lg-3 mb-4">
-              
+
 
               <select id="clubStatus" class="form-control" formControlName="clubStatus">
                 <option value="" disabled selected>Select Club Status</option>
-                <option value="Non-Political" >Non-Political</option>
+                <option value="Non-Political">Non-Political</option>
                 <option value="Political">Political</option>
               </select>
             </div>
@@ -138,9 +138,15 @@
 
               <input type="text" formControlName="clubName" class="form-control" placeholder="Club Name">
             </div>
-            <div class="col-lg-4 mb-4">
+            <div class="col-lg-3 mb-4">
 
               <input type="text" formControlName="contactNumber" class="form-control" placeholder="Club Contact Number">
+            </div>
+            <div class="col-lg-3 mb-4">
+              <select class="form-select" formControlName="contactEmail">
+                <option value="" disabled selected>Select Sectary Email</option>
+                <option *ngFor="let item of secretaryList" [value]="item.email">{{item.name}}</option>
+              </select>
             </div>
 
             <div class="col-lg-2 mb-4">
@@ -161,6 +167,7 @@
             <th>S.N</th>
             <th>Club Name</th>
             <th>Club Status</th>
+            <th>Contact Email</th>
             <th>Contact Number</th>
             <th>Created Date </th>
             <th>Action</th>
@@ -171,11 +178,14 @@
             <th>{{i+1}}</th>
             <td>{{item.clubName}}</td>
             <td>{{item.clubStatus}}</td>
+            <td>{{item.contactEmail}}</td>
             <td>{{item.contactNumber}}</td>
             <td>{{item.createdDate}}</td>
             <td><button type="button" class="btn btn-outline-primary"><i class="fas fa-edit"></i></button>
-              <button type="button" class="btn btn-outline-danger mx-2" (click)="deleteClub(item._id)"><i class="fas fa-trash-alt"></i>
-              </button></td>
+              <button type="button" class="btn btn-outline-danger mx-2" (click)="deleteClub(item._id)"><i
+                  class="fas fa-trash-alt"></i>
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>
