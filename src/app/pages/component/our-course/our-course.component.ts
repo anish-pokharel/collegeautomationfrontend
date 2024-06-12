@@ -11,22 +11,37 @@ import { CommonModule } from '@angular/common';
   styleUrl: './our-course.component.css'
 })
 export class OurCourseComponent implements OnInit {
-  listData: any[] = []
-constructor(private http:HttpClient,  private courseListService: EnrollmentService)
-{
+  listData: any[] = [];
+  userRole: string | null | undefined;
+  subjectList: any[] = []
+  constructor(private http: HttpClient, private courseListService: EnrollmentService,
+    private enrollmentService: EnrollmentService
+  ) {
+    this.userRole = localStorage.getItem('userRole')
+    this.getCoursetList();
+  }
+  getCoursetList() {
+    this.courseListService.getEnrollmentData().subscribe((res) => {
+      console.log(res);
+      this.listData = res
+      console.log(this.listData);
+      debugger
+    })
+  }
 
-  this.getCoursetList();
-}
-getCoursetList() {
-  this.courseListService.getEnrollmentData().subscribe((res) => {
+  ngOnInit(): void {
+    this.getSubjectList()
+
+  }
+
+
+
+
+getSubjectList(){
+  this.enrollmentService.getSubjectDataList().subscribe((res) => {
     console.log(res);
-    this.listData = res
-    console.log(this.listData);
-    debugger
+    this.subjectList = res;
   })
 }
 
-  ngOnInit(): void {
-  
-}
 }

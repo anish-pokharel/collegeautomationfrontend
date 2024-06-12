@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ClubService } from '../../../core/services/club_service/club.service';
 import * as alertify from 'alertifyjs';
+import { UserAuthService } from '../../../core/services/user_auth/user-auth.service';
 
 @Component({
   selector: 'app-join-clubs',
@@ -19,15 +20,20 @@ showJoinedClub:any
 createFacultyForm!:FormGroup;
 createClubForm!:FormGroup;
 userRole: string|null | undefined;
+secretaryList:any[]=[]
 
 
-constructor(private http:HttpClient, private clubService:ClubService,private formBuilder:FormBuilder){
+constructor(private http:HttpClient, private clubService:ClubService,private formBuilder:FormBuilder
+,private userService:UserAuthService
+
+){
   this.clubList();
   this.showJoinedClubFunction();
   this.createClubForm= this.formBuilder.group({
     clubStatus:['',Validators.required],
     clubName:['',Validators.required],
     contactNumber:['',Validators.required],
+    contactEmail:['',Validators.required],
     createdDate:['']
   })
 
@@ -71,6 +77,8 @@ deleteClub(clubId:string){
       joinedDate:['',],
     })
     this.userRole =localStorage.getItem('userRole')
+    this.getClubEmail();
+
 }
 onJoin(){
   debugger
@@ -98,6 +106,14 @@ this.clubService.getClubListByEmail().subscribe((res)=>{
   console.log(res+"joined club is ");
   this.showJoinedClub=res.JoinedClubs;
 })
+}
+
+getClubEmail(){
+  this.userService.getSecretarytData().subscribe((res)=>{
+    console.log(res);
+    this.secretaryList=res.secretary;
+    debugger
+  })
 }
 
 

@@ -8,9 +8,7 @@
           <div class="col-lg-12 mb-4">
             <select class="form-select" formControlName="subject">
               <option value="" disabled selected>Select Subject</option>
-
-              <option value="NP" selected>NP</option>
-              <option value="SQA">SQA</option>
+              <option *ngFor="let item of subjectList" [value]="item.name">{{item.name}}</option>
             </select>
           </div>
           <div class="col-lg-12 mb-4">
@@ -41,6 +39,7 @@
         <h5>Assignment List</h5>
       </div>
       <div class="card-body">
+        <div class="table-responsive">
         <table class="table ">
           <thead class="thead-dark">
 
@@ -48,26 +47,19 @@
               <th scope="col">S.N</th>
               <th scope="col">Assignment</th>
               <th scope="col">Subject</th>
+              <th scope="col">File</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Assignment No. 1</td>
-              <td>Network Programming</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Assignment No. 2</td>
-              <td>N P</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Assignment No. 2</td>
-              <td>COA</td>
+            <tr *ngFor="let item of showAssignmentQuestion; let i = index">
+              <th scope="row">{{i + 1}}</th>
+              <td>{{item.subject}}</td>
+              <td>{{item.assignment}}</td>
+              <td>{{item.file}}</td>
             </tr>
           </tbody>
         </table>
+        </div>
       </div>
     </div>
 </div>
@@ -76,45 +68,41 @@
   <div class="col-lg-12">
     <div class="card">
       <div class="card-header">
-        <h5>Assignment Submited </h5>
+        <h5>Assignment Submitted</h5>
       </div>
-
+  
       <div class="card-body">
-        <table class="table ">
-          <thead class="thead-dark">
-
-            <tr>
-              <th scope="col">S.N</th>
-              <th scope="col">Subject</th>
-              <th scope="col">Assignment</th>
-              <th scope="col">File</th>
-              <th scope="col">Rollno </th>
-              <th scope="col">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of showAssignmentAnswer let i = index ">
-              <th scope="row">{{i+1}}</th>
-              <td>{{item.subject}}</td>
-              <td>{{item.assignment}}</td>
-              <!-- <td>{{item.assignmentFile}}</td> -->
-              <td>
-                <!-- <a [href]="item.assignmentFile" target="_blank">{{getFileName(item.assignmentFile)}}</a> -->
-                <a [href]="item.assignmentFile" target="_blank" download>
-                  <!-- <i class="fas fa-file-download"></i> {{ getFileName(item.assignmentFile) }} -->
-                  <i class="fas fa-file-download"></i> 
-                </a>
-              
-              </td>
-              <td>{{item.rollno}}</td>
-              <td>Submited for Grading</td>
-
-            </tr>
-
-          </tbody>
-        </table>
+        <div class="table-responsive">
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">S.N</th>
+                <th scope="col">Subject</th>
+                <th scope="col">Assignment</th>
+                <th scope="col">File</th>
+                <th scope="col">Rollno</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of showAssignmentAnswer; let i = index">
+                <th scope="row">{{i + 1}}</th>
+                <td>{{item.subject}}</td>
+                <td>{{item.assignment}}</td>
+                <td>
+                  <a [href]="item.assignmentFile" target="_blank" download>
+                    <i class="fas fa-file-download"></i>
+                  </a>
+                </td>
+                <td>{{item.rollno}}</td>
+                <td>Submitted for Grading</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
+  
 </div>
 </div>

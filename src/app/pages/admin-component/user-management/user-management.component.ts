@@ -5,6 +5,7 @@ import * as alertify from 'alertifyjs';
 import { ClubService } from '../../../core/services/club_service/club.service';
 import { DepartmentService } from '../../../core/services/department-service/department.service';
 import { CommonModule } from '@angular/common';
+import { EnrollmentService } from '../../../core/services/enrollment_service/enrollment.service';
 @Component({
   selector: 'app-user-management',
   standalone: true,
@@ -17,13 +18,16 @@ export class UserManagementComponent implements OnInit{
   clubForm!:FormGroup;
   showTeacherData:any[]=[];
   showTeacherCount:number=0;
+  subjectListCount:number=0;
   showStudentData:any[]=[];
   showStudentCount:number=0;
   showSecretaryData:any[]=[];
   showSecretaryCount:number=0;
   
   constructor(private formBuilder:FormBuilder, private userService:UserAuthService,
-    private clubService:ClubService,private departmentService:DepartmentService){
+    private clubService:ClubService,private departmentService:DepartmentService,
+    private enrollmentService:EnrollmentService
+  ){
       this.userService.getStudentData().subscribe((res)=>{
         this.showStudentCount=res.count
         this.showStudentData=res.student
@@ -36,14 +40,15 @@ export class UserManagementComponent implements OnInit{
   ngOnInit(): void {
     this.userForm=this.formBuilder.group({
       name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required]],
       rollno: ['', ],
       address: ['', Validators.required],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
       role: ['', Validators.required]
     })
-    this.teacherData()
+    this.teacherData();
+    this.getSubjectList()
     
   }
   createUser(){
@@ -75,8 +80,14 @@ export class UserManagementComponent implements OnInit{
       this.showTeacherCount=res.count
       this.showTeacherData=res.faculty
     })
-   
   }
+  getSubjectList(){
+    this.enrollmentService.getSubjectDataListAll().subscribe((res)=>{
+      console.log(res);
+      this.subjectListCount=res.count;
+    })
+  }
+  
   
   
 }

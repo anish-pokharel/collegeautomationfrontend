@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AssignmentService } from '../../../core/services/assignment-service/assignment.service';
 import { ModelQuestionService } from '../../../core/services/model-service/model-question.service';
+import { EnrollmentService } from '../../../core/services/enrollment_service/enrollment.service';
 
 @Component({
   selector: 'app-assignment-materials',
@@ -15,10 +16,13 @@ export class AssignmentMaterialsComponent implements OnInit {
 
   assignmentForm!:FormGroup;
   modelQuestionForm!: FormGroup;
+  subjectList:any[]=[];
 
   constructor(private formBuilder:FormBuilder,private assignmentService:AssignmentService,
-    private modelAssignment:ModelQuestionService
+    private modelAssignment:ModelQuestionService,    private enrollmentService:EnrollmentService
+
    ){
+    this.getSubjectList()
   }
   ngOnInit(): void {
     this.assignmentForm = this.formBuilder.group({
@@ -52,6 +56,15 @@ export class AssignmentMaterialsComponent implements OnInit {
       console.log(res);
     }) 
     }
+  }
+
+
+  getSubjectList(){
+    this.enrollmentService.getSubjectDataList().subscribe((res)=>{
+      console.log(res);
+      this.subjectList=res.subjects;
+      debugger
+    })
   }
   
 }

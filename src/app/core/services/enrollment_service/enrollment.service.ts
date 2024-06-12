@@ -15,6 +15,12 @@ export class EnrollmentService {
   getEnrollmentData():Observable<any>{
     return this.http.get<any>(environment.api_url+'enrollmentData')
   }
+  getSubjectDataList():Observable<any>{
+    return this.http.get<any>(environment.api_url+'enrollmentData/subjects')
+  }
+  getSubjectDataListAll():Observable<any>{
+    return this.http.get<any>(environment.api_url+'subjectsList')
+  }
   getSubjectDataById(id:string):Observable<any>{
     return this.http.get<any>(environment.api_url+(`subjects/${id}`))
   }

@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AssignmentService } from '../../../core/services/assignment-service/assignment.service';
+import { EnrollmentService } from '../../../core/services/enrollment_service/enrollment.service';
 
 @Component({
   selector: 'app-assignment',
@@ -12,8 +13,12 @@ import { AssignmentService } from '../../../core/services/assignment-service/ass
 })
 export class AssignmentComponent {
   assignmentForm!: FormGroup;
-  showAssignmentAnswer:any[]=[]
-  constructor(private formBuilder: FormBuilder, private assigmentService: AssignmentService) {
+  showAssignmentAnswer: any[] = [];
+  showAssignmentQuestion: any[] = [];
+  subjectList: any[] = [];
+  constructor(private formBuilder: FormBuilder, private assigmentService: AssignmentService,
+    private enrollmentService: EnrollmentService
+  ) {
   }
   ngOnInit(): void {
     this.assignmentForm = this.formBuilder.group({
@@ -24,6 +29,8 @@ export class AssignmentComponent {
 
     });
     this.showData();
+    this.getAssignmentQuestion();
+    this.getSubjectList();
   }
   onSubmit() {
     console.log('BUTTON IS Clicked');
@@ -38,16 +45,29 @@ export class AssignmentComponent {
 
     }
   }
-  showData(){
-    this.assigmentService.getAnswerAssignment().subscribe((res)=>{
+  showData() {
+    this.assigmentService.getAnswerAssignment().subscribe((res) => {
       console.log(res);
-      this.showAssignmentAnswer= res;
+      this.showAssignmentAnswer = res;
       debugger
     })
-
   }
 
   getFileName(filePath: string): string {
     return filePath.split('/').pop() || filePath;
+  }
+
+  getSubjectList() {
+    this.enrollmentService.getSubjectDataList().subscribe((res) => {
+      console.log(res);
+      this.subjectList = res.subjects;
+      debugger
+    })
+  }
+  getAssignmentQuestion() {
+    this.assigmentService.getGiveAssignment().subscribe((res) => {
+      console.log(res);
+      this.showAssignmentQuestion = res
+    })
   }
 }

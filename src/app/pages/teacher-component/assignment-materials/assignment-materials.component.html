@@ -8,8 +8,7 @@
                         <div class="col-lg-12 mb-4">
                             <select class="form-select" formControlName="subject">
                                 <option value="" disabled selected>Select subject</option>
-                                <option value="NP">NP</option>
-                                <option value="SQA">SQA</option>
+                                <option *ngFor="let item of subjectList" [value]="item.name">{{item.name}}</option>
                             </select>
                         </div>
                         <div class="col-lg-12 mb-4">
@@ -35,6 +34,7 @@
                     <h5 class="my-4">
                         Assignment List
                     </h5>
+                    <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead>
                             <tr>
@@ -55,6 +55,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -64,8 +65,10 @@
                     <h5>Model Question</h5>
                     <form [formGroup]="modelQuestionForm" (ngSubmit)="onSubmitQuestion()">
                         <div class="col-lg-12 mb-4">
-                          <input type="text" class="form-control" formControlName="subject" placeholder="Subject Name" />
-                          
+                            <select class="form-select" formControlName="subject">
+                                <option value="" disabled selected>Select subject</option>
+                                <option *ngFor="let item of subjectList" [value]="item.name">{{item.name}}</option>
+                            </select>                          
                         </div>
                         <div class="col-lg-12 mb-4">
                           <input type="text" class="form-control" formControlName="model_question" placeholder="Model Question" />
@@ -87,6 +90,7 @@
                     <h5 class="my-4">
                         Model Question
                     </h5>
+                    <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead>
                             <tr>
@@ -102,12 +106,13 @@
                                 <th scope="row">1</th>
                                 <td>Mark</td>
                                 <td>Otto</td>
-                                x <td>.pdf</td>
+                                <td>.pdf</td>
                             </tr>
 
 
                         </tbody>
                     </table>
+                </div>
                 </div>
             </div>
         </div>
