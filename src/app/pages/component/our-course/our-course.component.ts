@@ -40,7 +40,7 @@ export class OurCourseComponent implements OnInit {
 getSubjectList(){
   this.enrollmentService.getSubjectDataList().subscribe((res) => {
     console.log(res);
-    this.subjectList = res;
+    this.subjectList = res.subjects;
   })
 }
 
