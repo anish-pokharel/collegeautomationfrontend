@@ -3,7 +3,7 @@ import { UserAuthService } from '../../../core/services/user_auth/user-auth.serv
 import { CommonModule } from '@angular/common';
 import { DepartmentService } from '../../../core/services/department-service/department.service';
 import { ClubService } from '../../../core/services/club_service/club.service';
-import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 
 @Component({
@@ -18,7 +18,19 @@ export class ProfileComponent implements OnInit {
   showUserProfileData:any=null;
   clubList:any[]=[]
   formProfile!:FormGroup;
-constructor(private userService:UserAuthService,private clubService:ClubService ){}
+constructor(private userService:UserAuthService,private clubService:ClubService ,private formBuilder:FormBuilder ){
+
+  this.formProfile = this.formBuilder.group({
+    photo: [null, Validators.required], // Assuming you handle file upload separately
+    address: ['', Validators.required],
+    biography: [''],
+    facebook: [''],
+    instagram: [''],
+    whataspp: [''],
+    website: ['']
+  });
+
+}
   ngOnInit(): void {
   this.userService.getuserDara().subscribe((res)=>{
     console.log("the response is "+res);
@@ -52,6 +64,5 @@ deleteClub(clubId:string){
     this.showClub()
   })
 }
-
 submitProfileForm(){}
 }

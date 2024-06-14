@@ -15,6 +15,9 @@ export class EventService {
   getEventListList():Observable<any>{
     return this.http.get<any>(environment.api_url+'getEventList')
   }
+  getEventByEmailAPI():Observable<any>{
+    return this.http.get<any>(environment.api_url+'getEventbyemail')
+  }
   delEventList(id:string):Observable<any>{
     return this.http.delete<any>(environment.api_url+(`delEventList/${id}`))
   }

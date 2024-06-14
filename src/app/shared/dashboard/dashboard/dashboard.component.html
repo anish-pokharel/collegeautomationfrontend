@@ -84,7 +84,7 @@
       <li class="dropdown navbar-user text-light">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <!-- <img [src]="showUserProfileData.imageUrl " alt="https://as1.ftcdn.net/v2/jpg/03/39/45/96/1000_F_339459697_XAFacNQmwnvJRqe1Fe9VOptPWMUxlZP8.jpg" /> -->
-            <img src="https://as1.ftcdn.net/v2/jpg/03/39/45/96/1000_F_339459697_XAFacNQmwnvJRqe1Fe9VOptPWMUxlZP8.jpg" alt="https://as1.ftcdn.net/v2/jpg/03/39/45/96/1000_F_339459697_XAFacNQmwnvJRqe1Fe9VOptPWMUxlZP8.jpg" />
+            <img src="../../../../assets/img/user/ishanimars.jpg" />
             <span class="d-none d-md-inline">{{showUserProfileData.name}}</span>
             <b class="caret"></b>
         </a>
@@ -109,7 +109,7 @@
           <a href="javascript:;" data-toggle="nav-profile">
             <!-- <div class="cover with-shadow"></div> -->
             <div class="image">
-              <img src="userProfileData.imageUrl " alt="edrfsdf" />
+              <img src="../../../../assets/img/user/ishanimars.jpg" alt="edrfsdf" />
             </div>
             <div class="info">
               <b class="caret pull-right"></b>  <a (click)="showSection('setting')">{{showUserProfileData.name}}</a>
@@ -252,6 +252,12 @@
             </a>
           </li>
           <li class="active cursor">
+            <a (click)="showSection('events')">
+              <i class="fas fa-calendar-check"></i>
+              <span>Events</span>
+            </a>
+          </li>
+          <li class="active cursor">
             <a (click)="showSection('job-vacancy')">
               <i class="fas fa-briefcase"></i>
               <span>Job Vacancy Management</span>
@@ -284,6 +290,12 @@
             <a (click)="showSection('discussion')">
               <i class="fas fa-comments"></i>
               <span>Discussion</span>
+            </a>
+          </li>
+          <li class="active cursor">
+            <a (click)="showSection('join-club')">
+              <i class="fas fa-comments"></i>
+              <span>Club</span>
             </a>
           </li>
           <li class="active cursor">
