@@ -43,7 +43,6 @@ export class CourseEnrollComponent {
     this.enrollmentService.getSubjectDataById(subjectId).subscribe(subject => {
       console.log(subject);
       this.selectedSubject = subject;
-      // $('#exampleModal').modal('show'); // Use jQuery to open the modal
     });
   }
 }

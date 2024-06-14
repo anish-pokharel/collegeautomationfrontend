@@ -16,6 +16,9 @@ export class AssignmentComponent {
   showAssignmentAnswer: any[] = [];
   showAssignmentQuestion: any[] = [];
   subjectList: any[] = [];
+  showAssignmentsByEnrolledSubjects: any[] = [];
+  showassignmentsbyemail: any[] = [];
+  filteredAssignments: any[] = [];
   constructor(private formBuilder: FormBuilder, private assigmentService: AssignmentService,
     private enrollmentService: EnrollmentService
   ) {
@@ -25,24 +28,38 @@ export class AssignmentComponent {
       subject: ['', Validators.required],
       assignment: ['', Validators.required],
       assignmentFile: ['', Validators.required],
-      rollno: [''],
-
     });
     this.showData();
     this.getAssignmentQuestion();
     this.getSubjectList();
+    this.getAssignmentsByEnrolledSubjectsFunction();
+    this.getassignmentsbyemailFunction();
   }
-  onSubmit() {
-    console.log('BUTTON IS Clicked');
-    console.log(this.assignmentForm.value);
-    const assignmentFormData = this.assignmentForm.value
+  onSubmit(): void {
     if (this.assignmentForm.valid) {
-      this.assigmentService.postAnswerAssignment(assignmentFormData).subscribe((res) => {
-        console.log(res);
-        this.showData()
-        this.assignmentForm.reset()
-      })
+      const formData = new FormData();
+      formData.append('subject', this.assignmentForm.get('subject')!.value);
+      formData.append('assignment', this.assignmentForm.get('assignment')!.value);
+      formData.append('assignmentFile', this.assignmentForm.get('assignmentFile')!.value);
 
+      this.assigmentService.postAnswerAssignment(formData).subscribe(
+        res => {
+          console.log('Assignment submitted successfully:', res);
+          this.assignmentForm.reset();
+        },
+        error => {
+          console.error('Error submitting assignment:', error);
+        }
+      );
+    }
+  }
+
+  onFileChange(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      this.assignmentForm.patchValue({
+        assignmentFile: file
+      });
     }
   }
   showData() {
@@ -68,6 +85,19 @@ export class AssignmentComponent {
     this.assigmentService.getGiveAssignment().subscribe((res) => {
       console.log(res);
       this.showAssignmentQuestion = res
+    })
+  }
+  getAssignmentsByEnrolledSubjectsFunction() {
+    this.assigmentService.getAssignmentsByEnrolledSubjects().subscribe((res) => {
+      console.log(res);
+      this.showAssignmentsByEnrolledSubjects = res.assignments
+    })
+  }
+  getassignmentsbyemailFunction() {
+    this.assigmentService.getassignmentsbyemailStudent().subscribe((res) => {
+      console.log(res);
+      this.showassignmentsbyemail = res.Assignment
+      debugger
     })
   }
 }

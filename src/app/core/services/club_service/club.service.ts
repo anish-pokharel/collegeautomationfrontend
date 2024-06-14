@@ -24,4 +24,7 @@ export class ClubService {
   getClubListByEmail():Observable<any>{
     return this.http.get<any>(environment.api_url+'getjoinedclubbyemail')
   }
+  getJoinedClubbyClubnameApi():Observable<any>{
+    return this.http.get<any>(environment.api_url+'getjoinedclubbyclubname')
+  }
 }

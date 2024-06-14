@@ -8,30 +8,23 @@
           <div class="col-lg-12 mb-4">
             <select class="form-select" formControlName="subject">
               <option value="" disabled selected>Select Subject</option>
-              <!-- <option *ngFor="let item of subjectList" [value]="item.name">{{item.name}}</option> -->
-              <option  value="SJD">SJD</option>
-              <option  value="df">df</option>
+              <option *ngFor="let item of showAssignmentsByEnrolledSubjects" [value]="item.subject">{{ item.subject }}</option>
             </select>
           </div>
           <div class="col-lg-12 mb-4">
             <select class="form-select" formControlName="assignment">
-              <option value="" disabled selected>Select Assignment
-              <option>
-
-              <option value="Assignment 1" selected>Assignment 1</option>
-              <option value="Assignment 2">Assignment 2</option>
-              <option value="Assignment 3">Assignment 3</option>
+              <option value="" disabled selected>Select Assignment Name</option>
+              <option *ngFor="let item of showAssignmentsByEnrolledSubjects" [value]="item.assignmentName">{{ item.assignmentName }}</option>
             </select>
           </div>
           <div class="col-lg-12 mb-4">
-            <input type="file" class="form-control" formControlName="assignmentFile" />
+            <input type="file" class="form-control" (change)="onFileChange($event)" />
           </div>
-
-
           <div class="col-lg-12 mb-4">
             <button type="submit" class="btn btn-primary mb-4" [disabled]="assignmentForm.invalid">Apply</button>
           </div>
         </form>
+        
       </div>
     </div>
   </div>
@@ -47,17 +40,27 @@
 
             <tr>
               <th scope="col">S.N</th>
-              <th scope="col">Assignment</th>
               <th scope="col">Subject</th>
+            
+              <th scope="col">Assignment Name</th>
               <th scope="col">File</th>
+              <th scope="col">Remarks</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of showAssignmentQuestion; let i = index">
+            <tr *ngFor="let item of showAssignmentsByEnrolledSubjects; let i = index">
               <th scope="row">{{i + 1}}</th>
               <td>{{item.subject}}</td>
-              <td>{{item.assignment}}</td>
-              <td>{{item.file}}</td>
+              <td>{{item.assignmentName}}</td>
+              <td>
+                <!-- {{item.assignmentFile}} -->
+
+                <a [href]="item.assignmentFile" target="_blank" download>
+                  <i class="fas fa-file-download"></i>
+                </a>
+
+              </td>
+              <td>{{item.remarks}}</td>
             </tr>
           </tbody>
         </table>
@@ -87,7 +90,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of showAssignmentAnswer; let i = index">
+              <tr *ngFor="let item of showassignmentsbyemail; let i = index">
                 <th scope="row">{{i + 1}}</th>
                 <td>{{item.subject}}</td>
                 <td>{{item.assignment}}</td>
@@ -96,7 +99,7 @@
                     <i class="fas fa-file-download"></i>
                   </a>
                 </td>
-                <td>{{item.rollno}}</td>
+                <td>{{item.rollno || null}}</td>
                 <td>Submitted for Grading</td>
               </tr>
             </tbody>

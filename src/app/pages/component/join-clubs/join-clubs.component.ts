@@ -23,6 +23,7 @@ createFacultyForm!:FormGroup;
 createClubForm!:FormGroup;
 userRole: string|null | undefined;
 secretaryList:any[]=[]
+JoinedClubbyClubName:any[]=[]
 
 
 constructor(private http:HttpClient, private clubService:ClubService,private formBuilder:FormBuilder
@@ -77,7 +78,7 @@ deleteClub(clubId:string){
       clubName:['',Validators.required],
       reason:['',Validators.required],
       joinedDate:['',],
-      decision:['']
+      decision:['Pending']
     })
     this.userRole =localStorage.getItem('userRole')
     this.getClubEmail();
@@ -110,6 +111,15 @@ this.clubService.getClubListByEmail().subscribe((res)=>{
   this.showJoinedClub=res.Requested_Clubs;
   this.showJoinedClubAccepted=res.Accepted_Clubs
   this.showJoinedClubRejected=res.Rejected_Clubs
+})
+}
+
+showJoinedClubbyClubNameFunction(){
+this.clubService.getJoinedClubbyClubnameApi().subscribe((res)=>{
+  console.log(res+"joined club is ");
+  this.JoinedClubbyClubName=res
+  debugger
+ 
 })
 }
 

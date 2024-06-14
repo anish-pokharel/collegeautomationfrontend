@@ -27,8 +27,8 @@
         <ul class="profile-header-tab nav nav-tabs">
             <li class="nav-item"><a href="#profile-student-about" class="nav-link active" data-toggle="tab">About </a>
             </li>
-            <li class="nav-item"><a href="#profile-friends" class="nav-link" data-toggle="tab">Friends</a></li>
-            <li class="nav-item"><a href="#profile-request" class="nav-link" data-toggle="tab">Request</a></li>
+            <!-- <li class="nav-item"><a href="#profile-friends" class="nav-link" data-toggle="tab">Friends</a></li>
+            <li class="nav-item"><a href="#profile-request" class="nav-link" data-toggle="tab">Request</a></li> -->
 
 
         </ul>
@@ -71,13 +71,11 @@
                     <form [formGroup]="formProfile" (ngSubmit)="submitProfileForm()">
                         <div class="form-group">
                             <label for="name">Name:</label>
-                            <input type="text" id="name" class="form-control" formControlName="name"
-                                required>
+                            <input type="text" id="name" class="form-control" formControlName="name" required>
                         </div>
                         <div class="form-group">
                             <label for="photo">Profile Picture:</label>
-                            <input type="file" id="photo" class="form-control" formControlphoto="photo"
-                                required>
+                            <input type="file" id="photo" class="form-control" formControlphoto="photo" required>
                         </div>
                         <div class="form-group">
                             <label for="email">Email:</label>
@@ -209,7 +207,7 @@
         </div> -->
 
 
-        <div class="tab-pane fade" id="profile-request">
+        <!-- <div class="tab-pane fade" id="profile-request">
             <div class="table-responsive form-inline">
                 <h5>hello</h5>
                 <div class="table-responsive">
@@ -240,16 +238,9 @@
 
             </div>
         </div>
-
-
-
-
-
         <div class="tab-pane fade show" id="profile-friends">
             <h4 class="m-t-0 m-b-20">User</h4>
-            <!-- begin row -->
             <div class="row row-space-6">
-                <!-- begin col-6 -->
                 <div class="col-xl-4 col-lg-6 m-b-5 p-b-1">
                     <div class="p-10 bg-white rounded">
                         <div class="media media-xs overflow-visible align-items-center" *ngFor="let user of userData">
@@ -269,18 +260,8 @@
                         </div>
                     </div>
                 </div>
-                <!-- end col-6 -->
-                <!-- begin col-6 -->
-
-                <!-- end col-6 -->
-                <!-- begin col-6 -->
-
-                <!-- end col-6 -->
-                <!-- begin col-6 -->
-
-                <!-- end col-6 -->
+                
             </div>
-            <!-- end row -->
-        </div>
+        </div> -->
     </div>
 </div>

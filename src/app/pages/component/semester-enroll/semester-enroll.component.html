@@ -5,69 +5,41 @@
     <button type="submit" class="btn btn-primary mt-3"> Enroll </button>
   </form>
   <div class="row my-4">
-    <div class="col-lg-6">
+    <div class="col-lg-12">
       <div class="card">
-        <div class="card-body text-center">
+        <div class="card-header">
           <h5>Enrolled Subjects</h5>
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">S.N</th>
-                <th scope="col">Subject</th>
-                <th scope="col">Credit</th>
-                <th scope="col">Course Code</th>
-              </tr>
-            </thead>
-            <tbody >
-              <tr *ngFor="let item of enrollmentData.subjects let i= index">
-                <th scope="row">{{i+1}}</th>
-                <td>{{item.name}}</td>
-                <td>{{item.credit}}</td>
-                <td>{{item.code}}</td>
-               
-              </tr>
-             
-            </tbody>
-          </table>
-          <!-- <button type="submit" class="btn btn-outline-primary">Enrolled Subjects</button> -->
         </div>
-
-      </div>
-    </div>
-    <div class="col-lg-6">
-      <div class="card">
-
         <div class="card-body text-center">
-          <h5>Completed Semster </h5>
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">S.N</th>
-                <th scope="col">Semester</th>
-                <th scope="col">Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Seven</td>
-                <td>Completed</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Six</td>
-                <td>Completed</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Five</td>
-                <td>Completed</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="table-responsive" *ngIf="enrollmentData.subjects && enrollmentData.subjects.length > 0; else noData">
+            <table class="table table-striped">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">S.N</th>
+                  <th scope="col">Subject</th>
+                  <th scope="col">Credit</th>
+                  <th scope="col">Course Code</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of enrollmentData.subjects; let i = index">
+                  <th scope="row">{{ i + 1 }}</th>
+                  <td>{{ item.name }}</td>
+                  <td>{{ item.credit }}</td>
+                  <td>{{ item.code }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <ng-template #noData>
+            <div class="alert alert-info" role="alert">
+              You are not enrolled in any subjects yet.
+            </div>
+          </ng-template>
         </div>
-
       </div>
     </div>
   </div>
+  
+
 </div>
