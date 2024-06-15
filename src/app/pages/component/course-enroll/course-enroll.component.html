@@ -1,48 +1,4 @@
-<!-- <div class="container-fluid" *ngIf="userRole == 'student'">
-  <div class="container-fluid"  >
-    <h5>Courses</h5>
-    <div class="row">
-      <div class="col-12">
-        <h5 class="text-center">Course Enrolls</h5>
-        <div class="row">
-      
-          <div class="col-lg-12 col-md-12 col-sm-12 my-3" >
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">{{ item.enrollment_key }}</h5>
-             
-                <div class="row">
-                  <div class="col-lg-3 col-md-4 col-sm-4 my-2"  *ngFor="let item of showCourseList.subjects">
-                    <div class="card">
-                      <img class="card-img-top" src="../../../../assets/img/card.jpg" alt="Card image cap">
-                      <div class="card-body">
-                        <h5 class="card-title">{{ item.name }}</h5>
-                        <p class="card-text">{{ item.code }}</p>
-                        <a href="#" class="btn btn-outline-primary btn-sm">Credit:{{ item.credit }} </a>
-                        <button type="button" class="btn btn-outline-secondary btn-sm mx-1 mt-2 mt-sm-0" data-toggle="modal" data-target="#exampleModal" (click)="openDetailsModal(item._id)">
-                          View More
-                        </button>
-                   
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-12 col-md-12 col-sm-12 my-3" *ngIf="showCourseList && showCourseList.subjects.length === 0">
-                    <div class="alert alert-info" role="alert">
-                      You are not enrolled in any courses yet.
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-        </div>
-      </div>
-    </div>
-  </div>
 
-
-</div> -->
 <div class="container-fluid" *ngIf="userRole == 'student'">
   <div class="container-fluid">
     <h5>Courses</h5>
@@ -50,13 +6,10 @@
       <div class="col-12">
         <h5 class="text-center">Course Enrolls</h5>
         <div class="row">
-          <!-- Check if there are any subjects -->
           <div *ngIf="showCourseList && showCourseList.subjects && showCourseList.subjects.length > 0; else noCourses">
-            <!-- Outer Loop for Course Items -->
             <div class="col-lg-12 col-md-12 col-sm-12 my-3">
               <div class="card">
                 <div class="card-body">
-                  <!-- Inner Loop for Subjects -->
                   <div class="row">
                     <div class="col-lg-3 col-md-4 col-sm-4 my-2" *ngFor="let item of showCourseList.subjects">
                       <div class="card">
@@ -64,7 +17,7 @@
                         <div class="card-body">
                           <h5 class="card-title">{{ item.name }}</h5>
                           <p class="card-text">{{ item.code }}</p>
-                          <a href="#" class="btn btn-outline-primary btn-sm">Credit: {{ item.credit }}</a>
+                          <a  class="btn btn-outline-primary btn-sm">Credit: {{ item.credit }}</a>
                           <button type="button" class="btn btn-outline-secondary btn-sm mx-1 mt-2 mt-sm-0" data-toggle="modal" data-target="#exampleModal" (click)="openDetailsModal(item._id)">
                             View More
                           </button>
@@ -76,7 +29,6 @@
               </div>
             </div>
           </div>
-          <!-- No Courses Enrolled Message -->
           <ng-template #noCourses>
             <div class="col-lg-12 col-md-12 col-sm-12 my-3">
               <div class="alert alert-info" role="alert">

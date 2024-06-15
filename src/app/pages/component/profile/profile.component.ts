@@ -18,6 +18,7 @@ export class ProfileComponent implements OnInit {
   showUserProfileData:any=null;
   clubList:any[]=[]
   formProfile!:FormGroup;
+  userRole: string|null | undefined;
 constructor(private userService:UserAuthService,private clubService:ClubService ,private formBuilder:FormBuilder ){
 
   this.formProfile = this.formBuilder.group({
@@ -39,6 +40,8 @@ constructor(private userService:UserAuthService,private clubService:ClubService 
     console.log(this.userData);
     debugger
   })
+  this.userRole =localStorage.getItem('userRole')
+
   this.showUserProfile();
   this.showClub();
 }
