@@ -20,4 +20,7 @@ export class SponsoeshipService {
   getSponsorshipByEmail():Observable<any>{
     return this.http.get<any>(environment.api_url+'getsponsorshipbyemail')
   }
+  delSponsorshipList(id:string):Observable<any>{
+    return this.http.delete<any>(environment.api_url+(`delsponsorship/${id}`))
+  }
 }

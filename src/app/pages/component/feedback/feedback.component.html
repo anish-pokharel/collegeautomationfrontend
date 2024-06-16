@@ -34,29 +34,6 @@
     </div>
     <div class="col-lg-6">
       <div class="row">
-        <!-- <div class="card my-4">
-        <div class="col-lg-12">
-        <div class="card-title text-center">
-          <h5> Feedback Data</h5>
-              <table class="table table-bordered">
-                <thead>
-                  <tr>
-                    <th scope="col">SN</th>
-                    <th scope="col">For</th>
-                    <th scope="col">Feedback</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let item of feedbackTableData let i = index">
-                    <th scope="row">{{i+1}}</th>
-                    <td>{{item.feedbackGroup}}</td>
-                    <td>{{item.feedbackAbout}}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div> -->
         <div class="card">
           <div class="card-header">
             <h5 class="card-title">Feedback Data</h5>
@@ -130,11 +107,11 @@
               <td>{{ item.feedbackFor }}</td>
               <td>{{ item.feedbackAbout }}</td>
           
-              <td><button type="button" class="btn btn-outline-primary"><i class="fas fa-edit"></i></button>
+              <td>
+                <!-- <button type="button" class="btn btn-outline-primary"><i class="fas fa-edit"></i></button> -->
                 <button type="button" class="btn btn-outline-danger mx-2" (click)="deleteFeedback(item._id)"><i class="fas fa-trash-alt"></i>
                 </button></td>
-              <!-- <td>{{ item.itemName }}</td>
-              <td>{{ item.joinedDate }}</td> -->
+              
             </tr>
           </tbody>
         </table>

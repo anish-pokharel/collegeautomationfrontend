@@ -40,10 +40,10 @@ export class UserManagementComponent implements OnInit{
   ngOnInit(): void {
     this.userForm=this.formBuilder.group({
       name: ['', Validators.required],
-      email: ['', [Validators.required]],
-      rollno: [0, ],
+      email: ['', [Validators.required, Validators.email]],
+      rollno: [null, ],
       address: ['', Validators.required],
-      password: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required],
       role: ['', Validators.required]
     })
@@ -64,14 +64,24 @@ export class UserManagementComponent implements OnInit{
           this.teacherData()
         })
       }
-      else{
-        alertify.error('Password Doesnot Match')
+      else
+      {
+        const passwordControl= this.userForm.get('password');
+        const confirmPasswordControl =this.userForm.get('confirmPassword');
+        if(passwordControl?.errors?.['minLength']){
+          alertify.error('Password must be atleast 6 Characters long')
+        }
+
+        else{
+          alertify.error('Password doesnot')
+        }
+
+        
       }
     
     }
     else{
-      console.error('Form is inavalid')
-      alertify.error('Input Valid Form')
+      alertify.error('Please, Enter the valid input')
     }
 
   }
