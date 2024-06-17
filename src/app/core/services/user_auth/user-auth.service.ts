@@ -30,8 +30,12 @@ getStudentData():Observable<any>{
 getSecretarytData():Observable<any>{
   return this.http.get(environment.api_url+'user/secretary')
 }
-// updateUserProfile(userId: string, formData: FormData): Observable<any> {
-//    return this.http.put<any>(environment.api_url + `userdata/${userId}`);
+delTeacherList(id:string):Observable<any>{
+  return this.http.delete<any>(environment.api_url+(`deleteTeacher/${id}`))
+  // return this.http.delete<any>(environment.api_url+(`userdata/${userId}`))
+}
+// updateUserProfile(userId: string, formData: any): Observable<any> {
+//    return this.http.put(environment.api_url +(`userdata/${userId}`), formData);
 // }
 
 

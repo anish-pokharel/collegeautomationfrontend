@@ -22,13 +22,13 @@ export class ProfileComponent implements OnInit {
 constructor(private userService:UserAuthService,private clubService:ClubService ,private formBuilder:FormBuilder ){
 
   this.formProfile = this.formBuilder.group({
-    photo: [null, Validators.required], // Assuming you handle file upload separately
-    address: ['', Validators.required],
-    biography: [''],
-    facebook: [''],
-    instagram: [''],
-    whataspp: [''],
-    website: ['']
+    photo: [''], // No need for validators, file input doesn't support "required"
+      address: [''],
+      biography: [''],
+      facebook: [''],
+      instagram: [''],
+      whatsapp: [''],
+      website: ['']
   });
 
 }
@@ -38,7 +38,6 @@ constructor(private userService:UserAuthService,private clubService:ClubService 
     this.userData=res.userData
     console.log('hello'+this.userData);
     console.log(this.userData);
-    debugger
   })
   this.userRole =localStorage.getItem('userRole')
 
@@ -67,5 +66,37 @@ deleteClub(clubId:string){
     this.showClub()
   })
 }
-submitProfileForm(){}
+submitProfileForm(userId:string){   
+//   if (this.formProfile.valid) {
+//     debugger
+//     const formData = new FormData();
+//     debugger
+//     formData.append('photo', this.formProfile.get('photo')!.value);
+//     formData.append('address', this.formProfile.get('address')!.value);
+//     formData.append('biography', this.formProfile.get('biography')!.value);
+//     formData.append('facebook', this.formProfile.get('facebook')!.value);
+//     formData.append('instagram', this.formProfile.get('instagram')!.value);
+//     formData.append('whatsapp', this.formProfile.get('whatsapp')!.value);
+//     formData.append('website', this.formProfile.get('website')!.value);
+    
+//       debugger
+  
+//   this.userService.updateUserProfile(userId, formData).subscribe(
+//     (response) => {
+      
+// debugger
+//       console.log('Profile updated successfully:', response);
+//     },
+//     (error) => {
+//       debugger
+
+//       console.error('Error updating profile:', error);
+//     }
+//   );
+// } else {
+//   debugger
+
+//   this.formProfile.markAllAsTouched();
+// }
+}
 }

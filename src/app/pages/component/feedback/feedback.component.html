@@ -1,19 +1,19 @@
 <div>
   <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-12">
       <div class="card my-4">
         <div class="card-body  text-center">
           <h5 class="card-title">
             Feedback
           </h5>
-          <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
-            <div class="col-lg-12 mb-4">
+          <form class="row" [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+            <div class="col-lg-6 mb-4">
               <select class="form-select" id="feedback-group" formControlName="feedbackGroup">
                 <option selected value="Admin">Admin</option>
                 <option value="Teacher">Teacher</option>
               </select>
             </div>
-            <div class="col-lg-12 mb-4">
+            <div class="col-lg-6 mb-4">
               <select class="form-select" id="feedback-group" *ngIf="feedbackForm.get('feedbackGroup')?.value === 'Teacher'" formControlName="feedbackFor">
                 <option value="" disabled selected>Select Teacher Name</option>
                 <option *ngFor="let item of showTeacherData" [value]="item.email">{{item.name}}</option>
@@ -32,7 +32,7 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-6">
+    <!-- <div class="col-lg-6">
       <div class="row">
         <div class="card">
           <div class="card-header">
@@ -82,7 +82,7 @@
           
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
   <div class="row">
     <div class="card">

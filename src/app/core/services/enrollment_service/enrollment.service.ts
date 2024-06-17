@@ -37,4 +37,7 @@ deleteSubjectFromEnrollment(enrollmentId: string, subjectCode: string): Observab
 getEnrollmentDataByEmail(): Observable<any> {
   return this.http.get<any>(environment.api_url+'enrollmentDatabyEmail')
 }
+getenrollmentDatabyEnrolledsubject(): Observable<any> {
+  return this.http.get<any>(environment.api_url+'enrollmentDatabyEnrolledsubject')
+}
 }
