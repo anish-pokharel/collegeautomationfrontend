@@ -14,13 +14,43 @@
                         <p><strong>Department:</strong> {{showUserProfileData.role}}</p>
                         <p><strong>Valid Until:</strong> {{showUserProfileData.email}}</p>
                     </div>
-                    <div class="barcode">
+                    <!-- <div class="barcode">
                         <img src="https://barcode.tec-it.com/barcode.ashx?data=123456789" alt="Barcode" class="img-fluid">
-                    </div>
+                    </div> -->
                 </div>
             </div> 
 
         </div>
-        <div class="col-lg-9"></div>
+        <div class="col-lg-9">
+            <h2 class="mb-4">Request for New ID Card</h2>
+    <form>
+      <div class="form-group">
+        <label for="fullName">Full Name</label>
+        <input type="text" class="form-control" id="fullName" placeholder="Enter your full name" required>
+      </div>
+      <div class="form-group">
+        <label for="department">Department</label>
+        <input type="text" department="form-control" id="department" placeholder="Enter your Department" required>
+      </div>
+      <div class="form-group">
+        <label for="rollnor">Roll No</label>
+        <input type="text" class="form-control" id="rollnor" placeholder="Enter your Roll No" required>
+      </div>
+      <div class="form-group">
+        <label for="reason">Reason for Request</label>
+        <textarea class="form-control" id="reason" rows="3" placeholder="Explain why you need a new ID card" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="contactEmail">Contact Email</label>
+        <input type="email" class="form-control" id="contactEmail" placeholder="Enter your contact email" required>
+      </div>
+      <div class="form-group">
+        <label for="contactNumber">Contact Number</label>
+        <input type="tel" class="form-control" id="contactNumber" placeholder="Enter your contact number" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit Request</button>
+    </form>
+
+        </div>
     </div>
 </div>

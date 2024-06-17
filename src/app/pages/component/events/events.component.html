@@ -23,8 +23,7 @@
                         placeholder="Enter event description"></textarea>
                 </div>
                 <div class="col-lg-4">
-
-                    <button type="submit" class="btn btn-primary" [disabled]="eventForm.invalid">Submit</button>
+                    <button type="submit" class="btn btn-primary"  [disabled]="eventForm.invalid">{{ isEditMode ? 'Update' : 'Create' }}</button>
                 </div>
             </form>
         </div>

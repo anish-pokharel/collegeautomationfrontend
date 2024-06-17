@@ -1,35 +1,44 @@
 <!-- src/app/enrollment-form/enrollment-form.component.html -->
 <div class="container-fluid">
-    <form [formGroup]="enrollmentForm" (ngSubmit)="submitForm()">
+  <form [formGroup]="enrollmentForm" (ngSubmit)="submitForm()">
+    <div class="container">
       <div class="row">
-        <div class="col-lg-12 mb-3">
+        <div class="col-12 mb-3">
           <input type="text" class="form-control" formControlName="enrollmentKey" placeholder="Enter Enrollment Key">
         </div>
-        <div formArrayName="subjects" *ngFor="let subject of subjects.controls; let i = index" class="input-container">
-          <div [formGroupName]="i" class="row align-items-center mb-2">
-            <div class="col-lg-3">
-              <input type="text" class="form-control" formControlName="name" placeholder="Enter Subject Name">
-            </div>
-            <div class="col-lg-3">
-              <input type="text" class="form-control" formControlName="credit" placeholder="Enter Subject Credit">
-            </div>
-            <div class="col-lg-3">
-              <input type="text" class="form-control" formControlName="code" placeholder="Enter Subject Code">
-            </div>
-            <div class="col-lg-3">
-              <!-- <input type="text" class="form-control" formControlName="teacher" placeholder="Enter Teacher Name"> -->
-              <select class="form-select" formControlName="teacher">
-                <option value="" disabled selected>Select Teacher Name</option>
-                <option *ngFor="let item of showTeacherData" [value]="item.email">{{item.name}}</option>
-              </select>
-            </div>
+      </div>
+      <div class="row">
+        <div class="col-12 mb-3">
+          <input type="text" class="form-control" formControlName="semester" placeholder="Enter Semester">
+        </div>
+      </div>
+      <div formArrayName="subjects" *ngFor="let subject of subjects.controls; let i = index" class="mb-2">
+        <div [formGroupName]="i" class="row align-items-center">
+          <div class="col-12 col-md-3 mb-2 mb-md-0">
+            <input type="text" class="form-control" formControlName="name" placeholder="Enter Subject Name">
+          </div>
+          <div class="col-12 col-md-3 mb-2 mb-md-0">
+            <input type="text" class="form-control" formControlName="credit" placeholder="Enter Subject Credit">
+          </div>
+          <div class="col-12 col-md-3 mb-2 mb-md-0">
+            <input type="text" class="form-control" formControlName="code" placeholder="Enter Subject Code">
+          </div>
+          <div class="col-12 col-md-3">
+            <select class="form-select" formControlName="teacher">
+              <option value="" disabled selected>Select Teacher Name</option>
+              <option *ngFor="let item of showTeacherData" [value]="item.email">{{item.name}}</option>
+            </select>
           </div>
         </div>
-        <div class="d-flex justify-content-between w-100">
+      </div>
+      <div class="row mt-3">
+        <div class="col-12 d-flex justify-content-between">
           <button type="button" class="btn btn-primary" (click)="addSubject()">Add Subject</button>
           <button type="submit" class="btn btn-outline-primary">Submit</button>
         </div>
       </div>
-    </form>
+    </div>
+  </form>
+  
   </div>
   

@@ -18,7 +18,13 @@ export class EventService {
   getEventByEmailAPI():Observable<any>{
     return this.http.get<any>(environment.api_url+'getEventbyemail')
   }
+  getEventId(id:string):Observable<any>{
+    return this.http.get<any>(environment.api_url+(`getEvent/${id}`))
+  }
   delEventList(id:string):Observable<any>{
     return this.http.delete<any>(environment.api_url+(`delEventList/${id}`))
+  }
+  updateEventList(id: string, obj: any): Observable<any> {
+    return this.http.put(environment.api_url + (`updateEvent/${id}`), obj);
   }
 }

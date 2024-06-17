@@ -16,8 +16,13 @@ export class ClubService {
     return this.http.get<any>(environment.api_url+'getClubList')
   }
   getClubListById(id:string):Observable<any>{
-    return this.http.delete<any>(environment.api_url+(`getClubList/${id}`))
+    return this.http.get<any>(environment.api_url+(`getClubList/${id}`))
   }
+  updateClubList(id: string, obj: any): Observable<any> {
+    return this.http.put(environment.api_url + (`updateClub/${id}`), obj);
+  }
+
+
   delDeleteClubList(id:string):Observable<any>{
     return this.http.delete<any>(environment.api_url+(`deleteClub/${id}`))
   }

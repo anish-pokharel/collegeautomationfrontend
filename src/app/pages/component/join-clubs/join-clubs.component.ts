@@ -62,8 +62,24 @@ export class JoinClubsComponent implements OnInit {
 
   }
   createClub() {
-    console.log('button is clicked');
+    console.log('button is clicked'); 
     if (this.createClubForm.valid) {
+
+
+      if (this.isEditMode && this.addClubId) {
+        this.clubService.updateClubList(this.addClubId, this.createClubForm.value).subscribe(res => {
+          alertify.success("Discussion updated");
+          this.clubList();
+          this.createClubForm.reset();
+        }, error => {
+          console.error('Error updating discussion:', error);
+          alertify.error("Error updating discussion");
+          this.createClubForm.reset();
+        });
+      }
+      else{
+
+
       console.log(this.createClubForm.value);
       this.clubService.postAddClub(this.createClubForm.value).subscribe((res) => {
         console.log(res);
@@ -72,6 +88,7 @@ export class JoinClubsComponent implements OnInit {
         this.clubList()
       })
     }
+  }
     else {
       alertify.error('Input valid Form')
     }
@@ -93,10 +110,10 @@ export class JoinClubsComponent implements OnInit {
       this.addClubId = clubId;
       this.createClubForm.patchValue({
         clubStatus: res.clubStatus,
-        clubName: res.clubStatus,
-        contactNumber: res.clubStatus,
-        contactEmail: res.clubStatus,
-        createdDate: res.clubStatus,
+        clubName: res.clubName,
+        contactNumber: res.contactNumber,
+        contactEmail: res.contactEmail,
+        createdDate: res.createdDate,
       })
       debugger
       console.log('Form values patched:', this.createClubForm.value);

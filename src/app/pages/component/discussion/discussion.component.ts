@@ -62,30 +62,7 @@ export class DiscussionComponent implements OnInit {
 
   }
   }
-  //   if (this.discussionTable.valid) {
-  //     const formData = this.discussionTable.value;
-  //     console.log(formData);
-  //     //this.discussionService.postDiscussion(this.discussionTable.value).subscribe((res)=>{
-  //     this.discussionService.postDiscussion(formData).subscribe(
-  //       (res) => {
-  //         console.log(res);
-  //         alertify.success('Discussion Added');
-  //         this.getDiscissionTable();
-  //         this.discussionTable.reset()
-  //       },
-  //       (error) => {
-  //         console.error('Error adding discussion:', error);
-  //         alertify.error('Failed to add discussion. Please try again.');
-  //       });
-
-  //   }
-  //   else {
-  //     alertify.error("Form is invalid")
-  //     const formData = this.discussionTable.value;
-  //     console.log(formData);
-  //     debugger
-  //   }
-  // }
+  
   getDiscissionTable() {
     this.discussionService.getdiscussionData().subscribe((res: any) => {
       this.discussionData = res.discussion;
@@ -105,7 +82,8 @@ export class DiscussionComponent implements OnInit {
       this.discussionTable.patchValue({
         discussion_topic: res.discussion_topic,
         date: res.date,
-        decision: res.decision
+        decision: res.decision,
+        decision_by:res.decision_by
       });
 
       if (this.editModal) {

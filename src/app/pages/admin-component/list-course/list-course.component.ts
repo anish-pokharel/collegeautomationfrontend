@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { EnrollmentService } from '../../../core/services/enrollment_service/enrollment.service';
 import { CommonModule } from '@angular/common';
 import * as alertify from 'alertifyjs';
+import { PopUpService } from '../../../core/popup/pop-up.service';
 
 
 @Component({
@@ -14,7 +15,10 @@ import * as alertify from 'alertifyjs';
 })
 export class ListCourseComponent {
   listData: any[] = []
-  constructor(private http: HttpClient, private courseListService: EnrollmentService) {
+  constructor(private http: HttpClient, private courseListService: EnrollmentService,
+    private confirmationService:PopUpService
+
+  ) {
     this.getEnrollmentList();
   }
   getEnrollmentList() {
@@ -44,12 +48,22 @@ export class ListCourseComponent {
       });
     });
   }
-  deleteSubject(enrollmentId: string, subjectCode: string): void {
-    this.courseListService.deleteSubjectFromEnrollment(enrollmentId,subjectCode).subscribe((res)=>{
-      console.log(res);
-      this.getEnrollmentList();
+  async deleteSubject(enrollmentId: string, subjectCode: string): Promise<void> {
+    const confirmed = this.showConfirmationPopup();
+    if (await confirmed) {
 
-    })
+      this.courseListService.deleteSubjectFromEnrollment(enrollmentId, subjectCode).subscribe((res) => {
+        console.log(res);
+        this.getEnrollmentList();
+        this.confirmationService.showSuccessMessage('Delete Sucessfully')
+
+      })
+    }
+    else{
+      this.confirmationService.showErrorMessage('Sorry Cannnot be Deleted')
+    }
   }
+
+
 
 }
