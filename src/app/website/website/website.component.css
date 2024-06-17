@@ -5,7 +5,7 @@
  /* background-color:  #edeff1;*/
 }
 h3{
-    color:rgb(23, 196, 23);
+     color:rgb(23, 196, 23);
 }
 .btn1{
   border-radius: 90px;
@@ -27,12 +27,11 @@ h3{
     display:flex;
     align-items:center;
     flex-wrap:wrap;
-   
 }
-.navbar-brand{
-  font-size:18px;
-  padding: 5px;
 
+.navbar-brand{
+ 
+  padding: 5px;
 }
 .navbar-brand:hover{
   color:rgb(42, 238, 42);
