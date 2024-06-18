@@ -35,4 +35,7 @@ export class ClubService {
   getJoinedClubbyClubnameApi():Observable<any>{
     return this.http.get<any>(environment.api_url+'getjoinedclubbyclubname')
   }
+  updateClubStatus(id: string, decision: string): Observable<any> {
+    return this.http.put(environment.api_url + (`joinclubbyid/${id}`), {decision});
+  }
 }

@@ -10,19 +10,22 @@ import { PopUpService } from '../../../core/popup/pop-up.service';
 @Component({
   selector: 'app-sponsorship',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './sponsorship.component.html',
   styleUrl: './sponsorship.component.css'
 })
-export class SponsorshipComponent implements OnInit{
- 
-  departments:any[]=[];
-  form!:FormGroup
-  sponsorshipByEmailList:any[]=[]
+export class SponsorshipComponent implements OnInit {
+
+  departments: any[] = [];
+  form!: FormGroup
+  sponsorshipByEmailList: any[] = []
+  sponsorshipByAdminList: any[] = []
+  userRole: string | null | undefined;
 
 
-  constructor(private fb: FormBuilder, private http: HttpClient,private departmentService:DepartmentService
-    ,private sponsorshipService:SponsoeshipService,private confirmationService:PopUpService
+
+  constructor(private fb: FormBuilder, private http: HttpClient, private departmentService: DepartmentService
+    , private sponsorshipService: SponsoeshipService, private confirmationService: PopUpService
   ) {
     this.form = this.fb.group({
       name: ['',],
@@ -31,44 +34,54 @@ export class SponsorshipComponent implements OnInit{
       topic: ['', Validators.required],
       money: ['', Validators.required],
       reason: ['', Validators.required],
-      decision:['Pending']
+      decision: ['Pending'],
+      sponsor: ['admin@gmailcom']
     });
     this.getDeaprtmentList();
     this.getSponsorshipByEmailList();
+    this.getSponsorshipByAdminList();
   }
   onSubmit() {
     if (this.form.valid) {
       console.log('Form Value:', this.form.value);
-      this.sponsorshipService.postSponsorshipRequest(this.form.value).subscribe((res)=>{
+      this.sponsorshipService.postSponsorshipRequest(this.form.value).subscribe((res) => {
         console.log(res);
         alertify.success('Sponsorship Requested')
         this.form.reset();
         this.getSponsorshipByEmailList();
       })
-      }
+    }
   }
 
-    ngOnInit(): void {
-    
+  ngOnInit(): void {
+    this.userRole = localStorage.getItem('userRole')
+
   }
-  getSponsorshipByEmailList(){
-    this.sponsorshipService.getSponsorshipByEmail().subscribe((res)=>{
+  getSponsorshipByEmailList() {
+    this.sponsorshipService.getSponsorshipByEmail().subscribe((res) => {
       console.log(res);
-      this.sponsorshipByEmailList=res.Sponsorship
+      this.sponsorshipByEmailList = res.Sponsorship
     })
   }
- 
-  getDeaprtmentList(){
-    this.departmentService.getDepartmentsList().subscribe((res)=>{
+
+  getSponsorshipByAdminList() {
+    this.sponsorshipService.getSponsorshipByAdmin().subscribe((res) => {
       console.log(res);
-      this.departments=res;
+      this.sponsorshipByAdminList = res.sponsorship
+    })
+  }
+
+  getDeaprtmentList() {
+    this.departmentService.getDepartmentsList().subscribe((res) => {
+      console.log(res);
+      this.departments = res;
       debugger
     })
   }
-  async deleteSpon(sponsorshipId:string){
-    const confirmed= await this.confirmationService.showConfirmationPopup()
-    if( confirmed){
-      this.sponsorshipService.delSponsorshipList(sponsorshipId).subscribe((res)=>{
+  async deleteSpon(sponsorshipId: string) {
+    const confirmed = await this.confirmationService.showConfirmationPopup()
+    if (confirmed) {
+      this.sponsorshipService.delSponsorshipList(sponsorshipId).subscribe((res) => {
         console.log(res);
         this.getSponsorshipByEmailList();
         this.getDeaprtmentList();
@@ -76,5 +89,16 @@ export class SponsorshipComponent implements OnInit{
       })
     }
   }
-  
+  updateSponsorship(id: string, decision: string) {
+    this.sponsorshipService.updateSponsorship(id, decision).subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.error('Error updating sponsorship:', error);
+      }
+    );
   }
+
+
+}

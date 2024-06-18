@@ -21,6 +21,8 @@ export class ProfileComponent implements OnInit {
   formProfile!:FormGroup;
   userRole: string|null | undefined;
   selectedFile: File | null = null;
+  profileData: any = {};
+
 
 constructor(private userService:UserAuthService,private clubService:ClubService ,private formBuilder:FormBuilder ){
 
@@ -36,6 +38,25 @@ constructor(private userService:UserAuthService,private clubService:ClubService 
   });
 
 }
+getProfile() {
+  this.userService.getProfile().subscribe(
+    data => {
+      this.profileData = data;
+      this.formProfile.patchValue({
+        address: data.address,
+        biography: data.biography,
+        facebook: data.facebook,
+        instagram: data.instagram,
+        whatsapp: data.whatsapp,
+        website: data.website
+      });
+    },
+    (error: HttpErrorResponse) => {
+      console.error('Error fetching profile:', error);
+      alert('Error fetching profile: ' + (error.error.message || error.message));
+    }
+  );
+}
   ngOnInit(): void {
   this.userService.getuserDara().subscribe((res)=>{
     console.log("the response is "+res);
@@ -47,6 +68,7 @@ constructor(private userService:UserAuthService,private clubService:ClubService 
 
   this.showUserProfile();
   this.showClub();
+  this.getProfile();
 }
 
 showUserProfile(){

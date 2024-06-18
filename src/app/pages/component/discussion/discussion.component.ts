@@ -24,7 +24,8 @@ export class DiscussionComponent implements OnInit {
   discussionList: any[] = [];
   userRole: string | null | undefined;
   isEditMode: boolean = false;
-  discussionResultId: string | null = null
+  discussionResultId: string | null = null;
+  minDate: string | undefined;
   @ViewChild('exampleModal') editModal!: ElementRef;
   ngOnInit(): void {
     this.discussionTable = this.formBuilder.group({
@@ -35,7 +36,17 @@ export class DiscussionComponent implements OnInit {
     })
     this.getDiscissionTable();
     this.userRole = localStorage.getItem('userRole')
+    const today = new Date();
+  const minDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() );
+  this.minDate =this.formatDate(minDate)
 
+  }
+
+  formatDate(date: Date): string {
+    const year = date.getFullYear();
+    const month = `${date.getMonth() + 1}`.padStart(2, '0');
+    const day = `${date.getDate()}`.padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
   addDiscussion() {
     if (this.discussionTable.valid) { 

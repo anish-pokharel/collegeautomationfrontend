@@ -15,6 +15,7 @@ import { PopUpService } from '../../../core/popup/pop-up.service';
 export class FeedbackComponent implements OnInit {
   feedbackForm!: FormGroup;
   feedbackTableData: any[] = [];
+  feedbackTableRoleData: any[] = [];
   pagedFeedbackTableData: any[] = [];
   currentPage = 1;
   itemsPerPage = 5; // Set items per page to 10
@@ -40,6 +41,7 @@ this.teacherData()
     });
     this.getFeedbackList();
     this.getFeedbackByEmailList();
+    this.getFeedbackbyroleData();
   }
 
   onSubmit(): void {
@@ -58,6 +60,13 @@ this.teacherData()
     this.feedbackService.getFeedbackData().subscribe((res: any) => {
       console.log(res);
       this.feedbackTableData = res.feedbackList;
+      this.calculatePagination();
+    });
+  }
+  getFeedbackbyroleData() {
+    this.feedbackService.getFeedbackbyroleData().subscribe((res: any) => {
+      console.log(res);
+      this.feedbackTableRoleData = res.feedbackByName;
       this.calculatePagination();
     });
   }

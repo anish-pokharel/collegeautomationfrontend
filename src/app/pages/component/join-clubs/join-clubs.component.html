@@ -19,7 +19,7 @@
               <div class="col-lg-12 mb-4">
                 <select class="form-select" formControlName="clubName">
                   <option value="" disabled selected>Select Clubame</option>
-                  <option *ngFor="let item of clubListData" [value]="item.clubName">{{item.clubName}}</option>
+                  <option *ngFor="let item of filteredClubList" [value]="item.clubName">{{item.clubName}}</option>
                 </select>
 
               </div>
@@ -188,13 +188,13 @@
 
 
       <div class="table-responsive">
-        <h5>Total Club </h5>
+        <h5> Club Requested</h5>
         <div class="table-responsive">
           <table class="table table-bordered table-striped">
             <thead>
               <tr>
                 <th>SN</th>
-                <th>Club Name</th>
+                <th> Name</th>
                 <th>Reason</th>
                 <th>Joined Date</th>
                 <th>Decision</th>
@@ -202,23 +202,58 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of JoinedClubbyClubName  let i=index">
-                <td>{{i+1}}</td>
-                <td>{{item.clubName}}</td>
-                <td>{{item.reason}}</td>
-                <td>{{item.joinedDate}}</td>
-                <td>{{item.decision}}</td>
-
+              <tr *ngFor="let item of JoinedClubbyClubName.Requested_Clubs; let i = index"
+                  [ngClass]="{
+                    'table-success': item.decision === 'Accepted',
+                    'table-danger': item.decision === 'Rejected',
+                    'table-light': item.decision === 'Pending'
+                  }">
+                <td>{{ i + 1 }}</td>
+                <td>{{ item.joinedBy }}</td>
+                <td>{{ item.reason }}</td>
+                <td>{{ item.joinedDate }}</td>
+                <td>{{ item.decision }}</td>
                 <td>
-                  <button class="btn btn-outline-secondary mx-4" (click)="deleteRequest(item._id)"><i
-                      class="fas fa-check-circle"></i>
+                  <button *ngIf="item.decision === 'Pending'" class="btn btn-outline-secondary mx-4"
+                          (click)="updateSponsorship(item._id, 'Accepted')">
+                    <i class="fas fa-check-circle"></i> Accept
                   </button>
-                  <button class="btn btn-outline-danger " (click)="deleteRequest(item._id)"><i
-                      class="fas fa-times-circle"></i>
+                  <button *ngIf="item.decision === 'Pending'" class="btn btn-outline-danger"
+                          (click)="updateSponsorship(item._id, 'Rejected')">
+                    <i class="fas fa-times-circle"></i> Reject
                   </button>
                 </td>
               </tr>
-
+        
+              <tr *ngFor="let item of JoinedClubbyClubName.Accepted_Clubs; let i = index"
+                  [ngClass]="{
+                    'table-success': item.decision === 'Accepted',
+                    'table-danger': item.decision === 'Rejected',
+                    'table-light': item.decision === 'Pending'
+                  }">
+                <td>{{ i + 1 }}</td>
+                <td>{{ item.joinedBy }}</td>
+                <td>{{ item.reason }}</td>
+                <td>{{ item.joinedDate }}</td>
+                <td>{{ item.decision }}</td>
+                <td>
+                </td>
+              </tr>
+        
+              <tr *ngFor="let item of JoinedClubbyClubName.Rejected_Clubs; let i = index"
+                  [ngClass]="{
+                    'table-success': item.decision === 'Accepted',
+                    'table-danger': item.decision === 'Rejected',
+                    'table-light': item.decision === 'Pending'
+                  }">
+                <td>{{ i + 1 }}</td>
+                <td>{{ item.joinedBy }}</td>
+                <td>{{ item.reason }}</td>
+                <td>{{ item.joinedDate }}</td>
+                <td>{{ item.decision }}</td>
+                <td>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>

@@ -40,6 +40,9 @@ delTeacherList(id:string):Observable<any>{
 saveProfile(data: FormData): Observable<any> {
   return this.http.post<any>(environment.api_url+'profile',data)
 }
+getProfile(): Observable<any> {
+  return this.http.get<any>(environment.api_url+'profile')
+}
 
 
 setUserDara(user:any){
