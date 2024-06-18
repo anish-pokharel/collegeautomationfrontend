@@ -36,10 +36,12 @@
             <div class="alert alert-info" role="alert">
               You are not enrolled in any subjects yet.
             </div>
+        
           </ng-template>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#completedSemesterModal">
+          <button class="btn btn-outline-danger" (click)="deleteEnrollment()">Complete Semester</button>
+          <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#completedSemesterModal">
             Completed Semester
-          </button>
+          </button> -->
         </div>
       </div>
     </div>
@@ -59,23 +61,25 @@
         </button>
       </div>
       <div class="modal-body">
-        <form class="row">
-          <div class="mb-3 col-lg-6" *ngFor="let subject of enrollmentData.subjects">
-            <label for="subject{{ subject.id }}" class="form-label">Subject Name:</label>
-            <input type="text" class="form-control" id="subject{{ subject.id }}" [value]="subject.name" readonly>
-          </div>
-          <div class="mb-3 col-lg-6">
-            <label for="goal" class="form-label">Your goal for this Grade:</label>
-            <select id="grade" class="form-select" formControlName="grade">
-              <option *ngFor="let option of options" [value]="option">{{ option }}</option>
-
-            </select>
+        <form [formGroup]="completedSemesterForm" class="row">
+          <div class="mb-3 col-lg-12" *ngFor="let subject of enrollmentData.subjects">
+            <div class="row">
+              <div class="col-lg-6">
+                <input type="text" class="form-control" formControlName="subject" id="subject{{ subject.id }}" [value]="subject.name" readonly>
+              </div>
+              <div class="col-lg-6">
+                <select id="grade" class="form-select" formControlName="grade">
+                  <option *ngFor="let option of options" [value]="option">{{ option }}</option>
+                </select>
+              </div>
+            </div>
           </div>
         </form>
       </div>
+      
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" (click)="saveTarget()">Save changes</button>
       </div>
     </div>
   </div>

@@ -37,6 +37,9 @@ export class EnrollmentService {
   getEnrollmentDataByEmail(): Observable<any> {
     return this.http.get<any>(environment.api_url + 'enrollmentDatabyEmail')
   }
+  deleteEnrollmentData(): Observable<any> {
+    return this.http.delete<any>(environment.api_url + 'enrollmentDatabyEmail')
+  }
   getenrollmentDatabyEnrolledsubject(): Observable<any> {
     return this.http.get<any>(environment.api_url + 'enrollmentDatabyEnrolledsubject')
   }

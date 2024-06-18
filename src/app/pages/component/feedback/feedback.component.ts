@@ -36,7 +36,7 @@ this.teacherData()
       feedbackBy:[''],
       feedbackGroup: ['Admin', Validators.required],
       feedbackAbout: ['', Validators.required],
-      feedbackFor:['Admin',]
+      feedbackFor:['admin@gmailcom',]
     });
     this.getFeedbackList();
     this.getFeedbackByEmailList();

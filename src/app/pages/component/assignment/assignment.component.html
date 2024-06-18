@@ -1,7 +1,7 @@
 <h5>Assignment</h5>
 
 <div class="row">
-  <div class="col-lg-6">
+  <div class="col-lg-4">
     <div class="card mb-4">
       <div class="card-body text-center">
         <form [formGroup]="assignmentForm" (ngSubmit)="onSubmit()">
@@ -28,7 +28,7 @@
       </div>
     </div>
   </div>
-  <div class="col-lg-6">
+  <div class="col-lg-8">
     <div class="card mb-4">
       <div class="card-header">
         <h5>Assignment List</h5>
@@ -45,6 +45,7 @@
               <th scope="col">Assignment Name</th>
               <th scope="col">File</th>
               <th scope="col">Remarks</th>
+              <th scope="col">Due Date</th>
             </tr>
           </thead>
           <tbody>
@@ -61,6 +62,7 @@
 
               </td>
               <td>{{item.remarks}}</td>
+              <td>{{item.dueDate}}</td>
             </tr>
           </tbody>
         </table>
@@ -99,8 +101,8 @@
                     <i class="fas fa-file-download"></i>
                   </a>
                 </td>
-                <td>{{item.rollno || null}}</td>
-                <td>Submitted for Grading</td>
+                <td>{{item.rollno || 'N/A'}}</td>
+                <td>{{ item.status }}</td>
               </tr>
             </tbody>
           </table>

@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -14,6 +15,10 @@ export class AcademicRecordsComponent implements OnInit{
   totalItems= 0;
   totalPages:number[]=[];
   paginatedItems:any[]=[]
+  userRole: string | null | undefined;
+  selectedFile: File | null = null;
+
+  constructor(private http: HttpClient) { }
   
   items = [
     { clubName: 'Mark', position: 'Otto', joinedDate: '2022-01-01' },
@@ -31,6 +36,8 @@ export class AcademicRecordsComponent implements OnInit{
       this.totalItems = this.items.length;
       this.totalPages = Array(Math.ceil(this.totalItems / this.itemsPerPage)).fill(0).map((x, i) => i + 1);
       this.setPage(1);
+      this.userRole = localStorage.getItem('userRole')
+
   }
   setPage(page:number):void{
     if(page < 1 || page > this.totalPages.length ) return;
@@ -39,5 +46,29 @@ export class AcademicRecordsComponent implements OnInit{
     const endIndex = startIndex+ this.itemsPerPage;
     this.paginatedItems= this.items.slice(startIndex,endIndex)
   }
+
+  onFileChange(event: any) {
+    this.selectedFile = event.target.files[0];
   }
-  
+
+  uploadFile() {
+    if (!this.selectedFile) {
+      alert('Please select a file first.');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('file', this.selectedFile);
+
+    this.http.post<any>('http://localhost:3200/upload', formData).subscribe(
+      (response) => {
+        console.log(response);
+        alert('File uploaded successfully!');
+      },
+      (error: HttpErrorResponse) => {
+        console.error('Error uploading file:', error); // Enhanced error logging
+        alert('Error uploading file: ' + (error.error.message || error.message)); // Display error message
+      }
+    );
+  }
+}

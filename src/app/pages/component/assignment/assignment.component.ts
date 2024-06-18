@@ -53,6 +53,18 @@ export class AssignmentComponent {
       );
     }
   }
+  calculateStatusForAssignments(): void {
+    // Example logic to determine status (you can adjust this based on your criteria)
+    const today = new Date(); // Current date
+    this.showassignmentsbyemail.forEach(assignment => {
+      const dueDate = new Date(assignment.dueDate); // Assuming assignment.dueDate is a Date object or string
+      if (assignment.submissionDate <= dueDate) {
+        assignment.status = 'Submitted on Time';
+      } else {
+        assignment.status = 'Submitted Late';
+      }
+    });
+  }
 
   onFileChange(event: any): void {
     const file = event.target.files[0];
@@ -97,6 +109,8 @@ export class AssignmentComponent {
     this.assigmentService.getassignmentsbyemailStudent().subscribe((res) => {
       console.log(res);
       this.showassignmentsbyemail = res.Assignment
+      this.calculateStatusForAssignments(); 
+
       debugger
     })
   }

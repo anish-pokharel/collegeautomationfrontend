@@ -65,6 +65,49 @@ semSubject(){
       console.log("Subject is "+this.subject);
       this.enrollmentData = data;
     })
-}
-completeSemester() {}}
+} 
+initializeForm(): void {
+  if (this.enrollmentData && this.enrollmentData.subjects) {
+    const formControls = this.enrollmentData.subjects.map((subject: any) =>
+      this.formBuilder.group({
+        name: [{ value: subject.name, disabled: true }],
+        grade: ['', Validators.required]
+      })
+    );
 
+    this.completedSemesterForm = this.formBuilder.group({
+      subjects: this.formBuilder.array(formControls)
+    });
+  } else {
+    console.error('Enrollment data or subjects are missing:', this.enrollmentData);
+    alertify.error('Enrollment data or subjects are missing');
+  }
+}
+deleteEnrollment() {
+  this.enrollmentService.deleteEnrollmentData().subscribe(
+    (response) => {
+      alert('Enrolled subject deleted successfully');
+      this.semSubject()
+    },
+    (error) => {
+      console.error('Error deleting enrollment data:', error);
+      alert('Error deleting enrollment data');
+    }
+  );
+}
+saveTarget(): void {
+  if (this.completedSemesterForm) {
+    if (this.completedSemesterForm.valid) {
+      console.log('Form values:', this.completedSemesterForm.value);
+      alert('Form is valid. Values saved to console.');
+      // You can perform further actions like sending data to backend, etc.
+    } else {
+      console.warn('Form is not valid:', this.completedSemesterForm.errors);
+      alert('Form is not valid. Please fill all required fields.');
+    }
+  } else {
+    console.error('Completed Semester Form is not initialized or null:', this.completedSemesterForm);
+    alert('Form is not initialized or null. Please check the form initialization.');
+  }
+}
+}

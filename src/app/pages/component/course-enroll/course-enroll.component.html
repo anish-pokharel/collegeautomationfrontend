@@ -1,6 +1,6 @@
 
 <div class="container-fluid" *ngIf="userRole == 'student'">
-  <div class="container-fluid">
+  
     <h5>Courses</h5>
     <div class="row">
       <div class="col-12">
@@ -18,9 +18,10 @@
                           <h5 class="card-title">{{ item.name }}</h5>
                           <p class="card-text">{{ item.code }}</p>
                           <a  class="btn btn-outline-primary btn-sm">Credit: {{ item.credit }}</a>
-                          <button type="button" class="btn btn-outline-secondary btn-sm mx-1 mt-2 mt-sm-0" data-toggle="modal" data-target="#exampleModal" (click)="openDetailsModal(item._id)">
-                            View More
-                          </button>
+                          <button type="button" class="btn btn-outline-secondary btn-sm mx-1 mt-2 mt-sm-0"
+                          data-toggle="modal" data-target="#exampleModal" (click)="openDetailsModal(item._id)">
+                    View More
+                  </button>
                         </div>
                       </div>
                     </div>
@@ -39,7 +40,6 @@
         </div>
       </div>
     </div>
-  </div>
 </div>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
