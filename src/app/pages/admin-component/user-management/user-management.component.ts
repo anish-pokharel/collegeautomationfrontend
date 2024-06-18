@@ -42,7 +42,7 @@ export class UserManagementComponent implements OnInit {
     this.userForm = this.formBuilder.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      rollno: ['0'],
+      rollno: [null],
       address: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required],
@@ -54,13 +54,13 @@ export class UserManagementComponent implements OnInit {
   }
   createUser() {
     if (this.userForm.valid) {
-      debugger
       const formData = this.userForm.value;
       console.log(formData);
       const passwordMatch = this.userForm.value.password === this.userForm.value.confirmPassword;
       if (passwordMatch) {
         this.userService.postuserRegister(this.userForm.value).subscribe((res) => {
           console.log(res);
+          debugger
           alertify.success('User Added Sucessfully')
           this.userForm.reset();
           this.teacherData()

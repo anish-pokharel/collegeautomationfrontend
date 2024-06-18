@@ -13,9 +13,13 @@ import { CommonModule } from '@angular/common';
 })
 export class SemesterEnrollComponent implements OnInit{
   enrollmentKeyForm!:FormGroup
+  completedSemesterForm!:FormGroup
   subject:any[]=[];
   enrollmentData: any;
   email:string='';
+  options = [
+    'A', 'A-', 'B-', 'B', 'B+', 'C+', 'C', 'C-', 'D', 'D+'
+  ];
 constructor(private formBuilder:FormBuilder, private enrollmentService:EnrollmentService){
   this.enrollSubject();
   this.semSubject()
@@ -62,5 +66,5 @@ semSubject(){
       this.enrollmentData = data;
     })
 }
+completeSemester() {}}
 
-}
