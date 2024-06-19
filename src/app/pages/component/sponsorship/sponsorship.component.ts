@@ -93,6 +93,7 @@ export class SponsorshipComponent implements OnInit {
     this.sponsorshipService.updateSponsorship(id, decision).subscribe(
       (response) => {
         console.log(response);
+        this.getSponsorshipByAdminList()
       },
       (error) => {
         console.error('Error updating sponsorship:', error);

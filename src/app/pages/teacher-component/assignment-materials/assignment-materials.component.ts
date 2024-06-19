@@ -70,15 +70,18 @@ export class AssignmentMaterialsComponent implements OnInit {
           console.log(res);
           this.assignmentForm.reset();
           this.confirmationService.showSuccessMessage('Added successfully');
+          this.showAssignmentList();
         },
         (err) => {
           console.error(err);
           this.confirmationService.showErrorMessage('Sorry, cannot add a file');
+          this.showAssignmentList();
           debugger
         }
       );
     } else {
       this.confirmationService.showErrorMessage('Please fill all required fields');
+      this.showAssignmentList();
     }
   }
 
@@ -127,14 +130,20 @@ export class AssignmentMaterialsComponent implements OnInit {
           console.log(res);
           this.modelQuestionForm.reset();
           this.confirmationService.showSuccessMessage('Model question added successfully');
+          this.showModelQuestionList();
+
         },
         (err) => {
           console.error(err);
           this.confirmationService.showErrorMessage('Cannot add model assignment');
+          this.showModelQuestionList();
+
         }
       );
     } else {
       this.confirmationService.showErrorMessage('Please fill all required fields');
+      this.showModelQuestionList();
+
     }
   }
 

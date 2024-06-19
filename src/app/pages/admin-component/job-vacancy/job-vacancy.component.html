@@ -32,7 +32,7 @@
               <input type="text" formControlName="vacancySalary" class="col-lg-12 form-control" placeholder="Salary">
             </div>
             <div class="col-lg-4 mb-4">
-              <button type="submit" class="btn btn-primary">Create</button>
+              <button type="submit" class="btn btn-primary">{{ isEditMode ? 'Update' : 'Create' }}</button>
             </div>
           </form>
 

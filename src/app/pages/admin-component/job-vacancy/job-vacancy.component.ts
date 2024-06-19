@@ -9,16 +9,20 @@ import * as alertify from 'alertifyjs';
 @Component({
   selector: 'app-job-vacancy',
   standalone: true,
-  imports: [ReactiveFormsModule,CommonModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './job-vacancy.component.html',
   styleUrl: './job-vacancy.component.css'
 })
 export class JobVacancyComponent implements OnInit {
   vacancyForm: FormGroup;
-  jobVacancyList:any[]=[];
+  jobVacancyList: any[] = [];
+  isEditMode: boolean = false;
+  addVacancyId: string | null = null;
 
-  constructor(private fb: FormBuilder, private http: HttpClient,private jobVacancyService:JobVacancyService ,
-    private confirmationService:PopUpService
+
+
+  constructor(private fb: FormBuilder, private http: HttpClient, private jobVacancyService: JobVacancyService,
+    private confirmationService: PopUpService
   ) {
     this.vacancyForm = this.fb.group({
       vacancyPosition: ['', Validators.required],
@@ -26,71 +30,105 @@ export class JobVacancyComponent implements OnInit {
       vacancyLevel: ['', Validators.required],
       vacancySubject: ['', Validators.required],
       vacancyQualification: ['', Validators.required],
-      time: ['fullTime', Validators.required],
+      time: ['', Validators.required],
       vacancySalary: ['', Validators.required]
     });
   }
 
   ngOnInit(): void {
     this.showJobVacancy()
-   } 
+  }
   onSubmit() {
     if (this.vacancyForm.valid) {
-      this.jobVacancyService.postAnswerAssignment(this.vacancyForm.value).subscribe((res)=>{
-        console.log(res);
-        this.showJobVacancy()
-        this.vacancyForm.reset()
-        this.confirmationService.showSuccessMessage('Vacancy Added')
-      })
+      if (this.isEditMode && this.addVacancyId) {
+        this.jobVacancyService.updateVacancy(this.addVacancyId, this.vacancyForm.value).subscribe(
+          (res) => {
+            console.log('Vacancy updated successfully:', res);
+            alertify.success('Vacancy updated successfully');
+            this.vacancyForm.reset();
+            this.isEditMode = false;
+            this.showJobVacancy(); // Refresh vacancy list
+          },
+          (error) => {
+            console.error('Error updating vacancy:', error);
+            alertify.error('Error updating vacancy');
+            this.vacancyForm.reset();
+          }
+        );
+      } else {
+        this.jobVacancyService.postAnswerAssignment(this.vacancyForm.value).subscribe(
+          (res) => {
+            console.log('Vacancy added successfully:', res);
+            this.showJobVacancy(); // Refresh vacancy list
+            this.vacancyForm.reset();
+            this.confirmationService.showSuccessMessage('Vacancy Added');
+          },
+          (error) => {
+            console.error('Error adding vacancy:', error);
+            this.confirmationService.showErrorMessage('Error adding vacancy');
+          }
+        );
+      }
+    } else {
+      this.confirmationService.showErrorMessage('Please enter valid vacancy details');
     }
-    else{
-      this.confirmationService.showErrorMessage('Please Enter the valid Vacancy ')
-    }
-  }
-  showJobVacancy(){
-    this.jobVacancyService.getAnswerAssignment().subscribe((res)=>{
-      this.jobVacancyList= res;
-    })
-  }
-  editVacancy(vacancyId: string) {
-    const vacancyToUpdate = this.jobVacancyList.find(vacancy => vacancy._id === vacancyId);
-    if (!vacancyToUpdate) {
-      console.error('Vacancy not found');
-      return;
-    }
-    this.vacancyForm.patchValue({
-      vacancyPosition: vacancyToUpdate.vacancyPosition,
-      vacancyExperience: vacancyToUpdate.vacancyExperience,
-      vacancyLevel: vacancyToUpdate.vacancyLevel,
-      vacancySubject: vacancyToUpdate.vacancySubject,
-      vacancyQualification: vacancyToUpdate.vacancyQualification,
-      time: vacancyToUpdate.time,
-      vacancySalary: vacancyToUpdate.vacancySalary,
-    });
-  
-    console.log('Form values patched:', this.vacancyForm.value);
-     
-    this.jobVacancyService.updateVacancy(vacancyId, this.vacancyForm.value).subscribe((res) => {
-      console.log(res);
-      this.confirmationService.showSuccessMessage('Vacancy updated successfully');
-      this.showJobVacancy();
-    }, (error) => {
-      console.error('Error updating vacancy:', error);
-      this.confirmationService.showErrorMessage('Error updating vacancy');
-    });
   }
 
-  async deleteVacancy(vacancyId:string){
-    const confirmed = await this.confirmationService.showConfirmationPopup();
-    if(confirmed){
-    this.jobVacancyService.delVacancyList(vacancyId).subscribe((res)=>{
-      console.log(res);
-     this.confirmationService.showSuccessMessage('Delete Sucessfully Done');
-      this.showJobVacancy()
+  showJobVacancy() {
+    this.jobVacancyService.getAnswerAssignment().subscribe((res) => {
+      this.jobVacancyList = res;
     })
   }
-  else{
-    this.confirmationService.showErrorMessage('Sorry Cannot be Deleted');
+
+  editVacancy(vacancyId: string) {
+    console.log('Editing vacancy:', vacancyId);
+
+    this.jobVacancyService.getVacancyById(vacancyId).subscribe(
+      (res) => {
+        console.log('Response from getVacancyById:', res);
+
+        if (!res) {
+          this.confirmationService.showErrorMessage('Vacancy not found or unable to fetch details.');
+          return;
+        }
+
+        this.isEditMode = true;
+        this.addVacancyId = vacancyId;
+
+        // Patch form values
+        this.vacancyForm.patchValue({
+          vacancyPosition: res.vacancyPosition || '',
+          vacancyExperience: res.vacancyExperience || '',
+          vacancyLevel: res.vacancyLevel || '',
+          vacancySubject: res.vacancySubject || '',
+          vacancyQualification: res.vacancyQualification || '',
+          time: res.time || '',
+          vacancySalary: res.vacancySalary || '',
+        });
+
+        console.log('Form values patched:', this.vacancyForm.value);
+      },
+      (error) => {
+        console.error('Error fetching vacancy details:', error);
+        this.confirmationService.showErrorMessage('Error fetching vacancy details. Please try again later.');
+      }
+    );
   }
+
+
+
+
+  async deleteVacancy(vacancyId: string) {
+    const confirmed = await this.confirmationService.showConfirmationPopup();
+    if (confirmed) {
+      this.jobVacancyService.delVacancyList(vacancyId).subscribe((res) => {
+        console.log(res);
+        this.confirmationService.showSuccessMessage('Delete Sucessfully Done');
+        this.showJobVacancy()
+      })
+    }
+    else {
+      this.confirmationService.showErrorMessage('Sorry Cannot be Deleted');
+    }
   }
 }

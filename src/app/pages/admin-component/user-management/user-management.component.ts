@@ -29,14 +29,8 @@ export class UserManagementComponent implements OnInit {
     private clubService: ClubService, private departmentService: DepartmentService,
     private enrollmentService: EnrollmentService, private confirmationService: PopUpService
   ) {
-    this.userService.getStudentData().subscribe((res) => {
-      this.showStudentCount = res.count
-      this.showStudentData = res.student
-    })
-    this.userService.getSecretarytData().subscribe((res) => {
-      this.showSecretaryCount = res.count
-      this.showSecretaryData = res.secretary
-    })
+  
+    
   }
   ngOnInit(): void {
     this.userForm = this.formBuilder.group({
@@ -50,6 +44,8 @@ export class UserManagementComponent implements OnInit {
     })
     this.teacherData();
     this.getSubjectList()
+    this.secretaryCount()
+    this.studentCount()
 
   }
   createUser() {
@@ -64,6 +60,8 @@ export class UserManagementComponent implements OnInit {
           alertify.success('User Added Sucessfully')
           this.userForm.reset();
           this.teacherData()
+          this.secretaryCount()
+          this.studentCount()
         })
       }
       else {
@@ -81,6 +79,18 @@ export class UserManagementComponent implements OnInit {
       alertify.error('Please, Enter the valid input')
       console.log(this.userForm.value);
     }
+  }
+  studentCount(){
+    this.userService.getStudentData().subscribe((res) => {
+      this.showStudentCount = res.count
+      this.showStudentData = res.student
+    })
+  }
+  secretaryCount(){
+    this.userService.getSecretarytData().subscribe((res) => {
+      this.showSecretaryCount = res.count
+      this.showSecretaryData = res.secretary
+    })
   }
   teacherData() {
     this.userService.getTeacherData().subscribe((res) => {

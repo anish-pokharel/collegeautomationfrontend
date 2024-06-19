@@ -3,11 +3,13 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AssignmentService } from '../../../core/services/assignment-service/assignment.service';
 import { EnrollmentService } from '../../../core/services/enrollment_service/enrollment.service';
+import { NgxPaginationModule } from 'ngx-pagination'; // Import ngx-pagination module
+
 
 @Component({
   selector: 'app-assignment',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule,NgxPaginationModule],
   templateUrl: './assignment.component.html',
   styleUrl: './assignment.component.css'
 })
@@ -17,8 +19,16 @@ export class AssignmentComponent {
   showAssignmentQuestion: any[] = [];
   subjectList: any[] = [];
   showAssignmentsByEnrolledSubjects: any[] = [];
-  showassignmentsbyemail: any[] = [];
   filteredAssignments: any[] = [];
+  uniqueSubjects: string[] = [];
+  showassignmentsbyemail: any[] = [];
+
+  p1: number = 1; 
+  p2: number = 1;
+
+
+
+
   constructor(private formBuilder: FormBuilder, private assigmentService: AssignmentService,
     private enrollmentService: EnrollmentService
   ) {
@@ -28,6 +38,9 @@ export class AssignmentComponent {
       subject: ['', Validators.required],
       assignment: ['', Validators.required],
       assignmentFile: ['', Validators.required],
+    });
+    this.assignmentForm.get('subject')?.valueChanges.subscribe(selectedSubject => {
+      this.filterAssignmentsBySubject(selectedSubject);
     });
     this.showData();
     this.getAssignmentQuestion();
@@ -46,9 +59,13 @@ export class AssignmentComponent {
         res => {
           console.log('Assignment submitted successfully:', res);
           this.assignmentForm.reset();
+          this.getassignmentsbyemailFunction();
+
         },
         error => {
           console.error('Error submitting assignment:', error);
+          this.getassignmentsbyemailFunction();
+
         }
       );
     }
@@ -103,7 +120,23 @@ export class AssignmentComponent {
     this.assigmentService.getAssignmentsByEnrolledSubjects().subscribe((res) => {
       console.log(res);
       this.showAssignmentsByEnrolledSubjects = res.assignments
+      this.uniqueSubjects = this.getUniqueSubjects(this.showAssignmentsByEnrolledSubjects);
+      this.filterAssignmentsBySubject(this.assignmentForm.get('subject')?.value);
+
+
     })
+  }
+  filterAssignmentsBySubject(subject: string) {
+    if (!subject) {
+      this.filteredAssignments = [];
+    } else {
+      this.filteredAssignments = this.showAssignmentsByEnrolledSubjects.filter(item => item.subject === subject);
+    }
+  }
+  getUniqueSubjects(assignments: any[]): string[] {
+    const subjectsSet = new Set<string>();
+    assignments.forEach(item => subjectsSet.add(item.subject));
+    return Array.from(subjectsSet);
   }
   getassignmentsbyemailFunction() {
     this.assigmentService.getassignmentsbyemailStudent().subscribe((res) => {

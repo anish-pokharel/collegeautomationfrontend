@@ -6,7 +6,7 @@ declare let alertify: any;
 export class PopUpService {
   showConfirmationPopup(): Promise<boolean> {
     return new Promise((resolve) => {
-      alertify.confirm('Confirmation', 'Are you sure you want to delete this enrollment?', () => {
+      alertify.confirm('Confirmation', 'Are you sure you want to Delete?', () => {
         resolve(true);
       }, () => {
         resolve(false);

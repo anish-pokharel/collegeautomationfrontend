@@ -19,7 +19,10 @@ export class JobVacancyService {
   delVacancyList(id:string):Observable<any>{
     return this.http.delete<any>(environment.api_url+(`vacancies/${id}`))
   }
+  getVacancyById(id:string):Observable<any>{
+    return this.http.get<any>(environment.api_url+(`vacancies/${id}`))
+  }
   updateVacancy(id:string,obj:any):Observable<any>{
-    return this.http.delete<any>(environment.api_url+(`vacancies/${id}`),obj)
+    return this.http.post<any>(environment.api_url+(`vacancies/${id}`),obj)
   }
 }

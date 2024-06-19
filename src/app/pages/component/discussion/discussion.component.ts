@@ -54,6 +54,7 @@ export class DiscussionComponent implements OnInit {
         this.discussionService.updateDiscussion(this.discussionResultId, this.discussionTable.value).subscribe(res => {
           alertify.success("Discussion updated");
           this.getDiscissionTable();
+          this.discussionTable.reset();
         }, error => {
           console.error('Error updating discussion:', error);
           alertify.error("Error updating discussion");

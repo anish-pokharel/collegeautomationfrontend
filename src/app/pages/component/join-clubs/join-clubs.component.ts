@@ -102,6 +102,8 @@ export class JoinClubsComponent implements OnInit {
           alertify.success("Discussion updated");
           this.clubList();
           this.createClubForm.reset();
+          this.isEditMode = false;
+
         }, error => {
           console.error('Error updating discussion:', error);
           alertify.error("Error updating discussion");

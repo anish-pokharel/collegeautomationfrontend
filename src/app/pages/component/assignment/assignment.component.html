@@ -8,13 +8,13 @@
           <div class="col-lg-12 mb-4">
             <select class="form-select" formControlName="subject">
               <option value="" disabled selected>Select Subject</option>
-              <option *ngFor="let item of showAssignmentsByEnrolledSubjects" [value]="item.subject">{{ item.subject }}</option>
+              <option *ngFor="let subject of uniqueSubjects" [value]="subject">{{ subject }}</option>
             </select>
           </div>
           <div class="col-lg-12 mb-4">
             <select class="form-select" formControlName="assignment">
               <option value="" disabled selected>Select Assignment Name</option>
-              <option *ngFor="let item of showAssignmentsByEnrolledSubjects" [value]="item.assignmentName">{{ item.assignmentName }}</option>
+      <option *ngFor="let item of filteredAssignments" [value]="item.assignmentName">{{ item.assignmentName }}</option>
             </select>
           </div>
           <div class="col-lg-12 mb-4">
@@ -49,8 +49,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of showAssignmentsByEnrolledSubjects; let i = index">
-              <th scope="row">{{i + 1}}</th>
+            <tr
+            *ngFor="let item of showAssignmentsByEnrolledSubjects | paginate: { itemsPerPage: 5, currentPage: p1 }; let i = index">
+              <!-- <td>{{ (p1 - 1) * 5 + showAssignmentsByEnrolledSubjects.indexOf(item) + 1 }}</td> -->
+              <th scope="row">{{ i + 1 + (p1 - 1) * 5 }}</th> 
+
               <td>{{item.subject}}</td>
               <td>{{item.assignmentName}}</td>
               <td>
@@ -67,6 +70,8 @@
           </tbody>
         </table>
         </div>
+        <pagination-controls (pageChange)="p1 = $event"></pagination-controls>
+
       </div>
     </div>
 </div>
@@ -92,21 +97,24 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of showassignmentsbyemail; let i = index">
-                <th scope="row">{{i + 1}}</th>
-                <td>{{item.subject}}</td>
-                <td>{{item.assignment}}</td>
+              <tr *ngFor="let item of showassignmentsbyemail; let i=index">
+                <td>{{i+1}}</td>
+                <!-- <td>{{ (p2 - 1) * 5 + showassignmentsbyemail.indexOf(item) + 1 }}</td> -->
+                <td>{{ item.subject }}</td>
+                <td>{{ item.assignment }}</td>
                 <td>
                   <a [href]="item.assignmentFile" target="_blank" download>
                     <i class="fas fa-file-download"></i>
                   </a>
                 </td>
-                <td>{{item.rollno || 'N/A'}}</td>
+                <td>{{ item.rollno || 'N/A' }}</td>
                 <td>{{ item.status }}</td>
               </tr>
             </tbody>
           </table>
         </div>
+        <!-- Pagination for Assignment Submitted -->
+        <!-- <pagination-controls (pageChange)="p2 = $event" [id]="'pagination2'"></pagination-controls> -->
       </div>
     </div>
   </div>

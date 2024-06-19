@@ -17,6 +17,7 @@ export class SemesterEnrollComponent implements OnInit{
   subject:any[]=[];
   enrollmentData: any;
   email:string='';
+  subjectNotFound: boolean = false;
   options = [
     'A', 'A-', 'B-', 'B', 'B+', 'C+', 'C', 'C-', 'D', 'D+'
   ];
@@ -64,7 +65,17 @@ semSubject(){
       this.subject=data
       console.log("Subject is "+this.subject);
       this.enrollmentData = data;
-    })
+      this.subjectNotFound = false;
+    },error=>{
+      if (error.message === "subject not found") {
+        this.subjectNotFound = true;
+      } else {
+        console.error('Error fetching enrollment data:', error);
+      }
+
+    }
+  
+  )
 } 
 initializeForm(): void {
   if (this.enrollmentData && this.enrollmentData.subjects) {

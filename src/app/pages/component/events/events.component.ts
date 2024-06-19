@@ -19,6 +19,7 @@ export class EventsComponent implements OnInit{
   minDate: string | undefined;
   isEditMode:boolean= false;
   updateEvenID:string | null = null;
+  userRole: string | null | undefined;
 
 
 
@@ -29,6 +30,7 @@ export class EventsComponent implements OnInit{
    
   }
 ngOnInit(): void {
+  this.userRole = localStorage.getItem('userRole')
   this.getEventList();
   this.getEventListByEmailFunction();
   const today = new Date();
@@ -63,9 +65,13 @@ ngOnInit(): void {
           this.getEventList();
           this.eventForm.reset();
           this.getEventListByEmailFunction()
+          this.isEditMode=false;
+
         }, error => {
           this.confirmationService.showErrorMessage('Error updating discussion')
           this.eventForm.reset();
+          this.isEditMode=false;
+
         });
       }
       else{
@@ -82,7 +88,7 @@ ngOnInit(): void {
   getEventList(){
     this.eventService.getEventListList().subscribe((res)=>{
       console.log(res);
-      this.eventList=res.events;
+      this.eventList=res;
     })
   }
   getEventListByEmailFunction(){
