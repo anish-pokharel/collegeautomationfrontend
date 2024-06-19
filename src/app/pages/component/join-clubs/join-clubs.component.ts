@@ -19,7 +19,12 @@ interface Club {
   reason: string;
   joinedDate: string;
   decision: string;
-  // Add more properties as needed
+}
+
+interface ClubEmail{
+  Requested_Clubs: Club[];
+  Accepted_Clubs: Club[];
+  Rejected_Clubs: Club[];
 }
 @Component({
   selector: 'app-join-clubs',
@@ -31,7 +36,11 @@ interface Club {
 export class JoinClubsComponent implements OnInit {
   clubForm!: FormGroup
   clubListData: any[] = []
-  showJoinedClub: any
+  showJoinedClub:ClubEmail={
+    Requested_Clubs: [],
+    Accepted_Clubs: [],
+    Rejected_Clubs: []
+  }
 
   createFacultyForm!: FormGroup;
   createClubForm!: FormGroup;
@@ -199,6 +208,12 @@ export class JoinClubsComponent implements OnInit {
     this.clubService.getClubListByEmail().subscribe((res) => {
       console.log(res + "joined club is ");
       this.showJoinedClub = res
+
+      // this.showJoinedClub=[
+      //   ...res.Requested_Clubs,
+      //   ...res.Accepted_Clubs,
+      //   ...res.Rejected_Clubs
+      // ]
     })
   }
 

@@ -79,21 +79,36 @@
             <tr>
               <th>SN</th>
               <th>Joined By</th>
-              <th>Club Status</th>
               <th>Club Name</th>
-              <th>Status</th>
+              <th>Reason</th>
               <th>Joined Date</th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let club of showJoinedClub let i = index">
+            <tr *ngFor="let club of showJoinedClub.Requested_Clubs let i = index">
               <td>{{ i+1 }}</td>
               <td>{{ club.joinedBy }}</td>
-              <td>{{ club.clubStatus }}</td>
               <td>{{ club.clubName }}</td>
-              <td>{{ club.clubNames || 'Pending' }}</td>
-              <!-- <td>{{ club.reason }}</td> -->
+              <td>{{ club.reason }}</td>
               <td>{{ club.joinedDate }}</td>
+              <td>{{ club.decision }}</td>
+            </tr>
+            <tr *ngFor="let club of showJoinedClub.Accepted_Clubs let i = index">
+              <td>{{ i+1 }}</td>
+              <td>{{ club.joinedBy }}</td>
+              <td>{{ club.clubName }}</td>
+              <td>{{ club.reason }}</td>
+              <td>{{ club.joinedDate }}</td>
+              <td>{{ club.decision }}</td>
+            </tr>
+            <tr *ngFor="let club of showJoinedClub.Rejected_Clubs let i = index">
+              <td>{{ i+1 }}</td>
+              <td>{{ club.joinedBy }}</td>
+              <td>{{ club.clubName }}</td>
+              <td>{{ club.reason }}</td>
+              <td>{{ club.joinedDate }}</td>
+              <td>{{ club.decision }}</td>
             </tr>
           </tbody>
         </table>
