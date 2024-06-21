@@ -9,7 +9,7 @@
         <div class="profile-header-content" *ngIf="showUserProfileData">
             <!-- BEGIN profile-header-img -->
             <div class="profile-header-img">
-                <img src="../assets/img/user/user-13.jpg" alt="">
+                <img src="../../../../assets/img/user/ishanimars.jpg" alt="">
             </div>
             <!-- END profile-header-img -->
             <!-- BEGIN profile-header-info -->
@@ -27,8 +27,8 @@
         <ul class="profile-header-tab nav nav-tabs">
             <li class="nav-item"><a href="#profile-student-about" class="nav-link active" data-toggle="tab">About </a>
             </li>
-            <li class="nav-item"><a href="#profile-friends" class="nav-link" data-toggle="tab">Friends</a></li>
-            <li class="nav-item"><a href="#profile-request" class="nav-link" data-toggle="tab">Request</a></li>
+            <!-- <li class="nav-item"><a href="#profile-friends" class="nav-link" data-toggle="tab">Friends</a></li>
+            <li class="nav-item"><a href="#profile-request" class="nav-link" data-toggle="tab">Request</a></li> -->
 
 
         </ul>
@@ -46,15 +46,15 @@
                     <div class="row">
                         <!-- Profile Picture -->
                         <div class="col-md-4">
-                            <img src="path/to/profile-picture.jpg" class="img-fluid rounded-circle"
+                            <img src="../../../../assets/img/user/ishanimars.jpg" class="img-fluid rounded-circle"
                                 alt="Profile Picture">
                         </div>
-                        <!-- Personal Information -->
+                
                         <div class="col-md-8">
                             <h6>Personal Information</h6>
                             <p><strong>Name:</strong> {{showUserProfileData.name}}</p>
                             <p><strong>Email:</strong> {{showUserProfileData.email}}</p>
-                            <p><strong>Roll No:</strong>{{ showUserProfileData.rollno}}</p>
+                            <p  *ngIf="userRole == 'student'"><strong>Roll No:</strong>{{ showUserProfileData.rollno}}</p>
                             <p><strong>Address:</strong> {{showUserProfileData.address}}</p>
                             <p><strong>Role:</strong> {{showUserProfileData.role}}</p>
                         </div>
@@ -69,37 +69,17 @@
                 </div>
                 <div class="card-body">
                     <form [formGroup]="formProfile" (ngSubmit)="submitProfileForm()">
-                        <div class="form-group">
-                            <label for="name">Name:</label>
-                            <input type="text" id="name" class="form-control" formControlName="name"
-                                required>
-                        </div>
+                       
                         <div class="form-group">
                             <label for="photo">Profile Picture:</label>
-                            <input type="file" id="photo" class="form-control" formControlphoto="photo"
-                                required>
+                            <input type="file" id="photo" class="form-control" formControlName="photo" required>
                         </div>
-                        <div class="form-group">
-                            <label for="email">Email:</label>
-                            <input type="email" id="email" class="form-control" formControlName="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="rollNo">Roll No:</label>
-                            <input type="text" id="rollNo" class="form-control" formControlName="rollNo">
-                        </div>
+                   
                         <div class="form-group">
                             <label for="address">Address:</label>
                             <input type="text" id="address" class="form-control" formControlName="address" required>
                         </div>
-                        <div class="form-group">
-                            <label for="role">Role:</label>
-                            <select id="role" class="form-control" formControlName="role" required>
-                                <option value="student">Student</option>
-                                <option value="faculty">Faculty</option>
-                                <option value="secretary">Secretary</option>
-                                <option value="admin">Admin</option>
-                            </select>
-                        </div>
+                       
 
                         <div class="form-group">
                             <label for="biography">Biography:</label>
@@ -209,7 +189,7 @@
         </div> -->
 
 
-        <div class="tab-pane fade" id="profile-request">
+        <!-- <div class="tab-pane fade" id="profile-request">
             <div class="table-responsive form-inline">
                 <h5>hello</h5>
                 <div class="table-responsive">
@@ -240,16 +220,9 @@
 
             </div>
         </div>
-
-
-
-
-
         <div class="tab-pane fade show" id="profile-friends">
             <h4 class="m-t-0 m-b-20">User</h4>
-            <!-- begin row -->
             <div class="row row-space-6">
-                <!-- begin col-6 -->
                 <div class="col-xl-4 col-lg-6 m-b-5 p-b-1">
                     <div class="p-10 bg-white rounded">
                         <div class="media media-xs overflow-visible align-items-center" *ngFor="let user of userData">
@@ -269,18 +242,8 @@
                         </div>
                     </div>
                 </div>
-                <!-- end col-6 -->
-                <!-- begin col-6 -->
-
-                <!-- end col-6 -->
-                <!-- begin col-6 -->
-
-                <!-- end col-6 -->
-                <!-- begin col-6 -->
-
-                <!-- end col-6 -->
+                
             </div>
-            <!-- end row -->
-        </div>
+        </div> -->
     </div>
 </div>

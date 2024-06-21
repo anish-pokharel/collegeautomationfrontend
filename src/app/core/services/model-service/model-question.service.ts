@@ -16,4 +16,7 @@ export class ModelQuestionService {
   getModelQuestion():Observable<any>{
     return this.http.get<any>(environment.api_url+'model-questions')
   }
+  getQuestionsByEnrolledSubjectAPI():Observable<any>{
+    return this.http.get<any>(environment.api_url+'getQuestionsByEnrolledSubject')
+  }
 }

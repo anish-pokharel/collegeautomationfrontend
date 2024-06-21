@@ -2,18 +2,20 @@
     <div class="card">
         <div class="card-body">
             <h2 class="mb-4">Event Form</h2>
-            <form class="row" [formGroup]="eventForm" (ngSubmit)="onSubmit()" >
+            <form class="row" [formGroup]="eventForm" (ngSubmit)="onSubmit()">
                 <div class="mb-3 col-lg-4">
                     <label for="eventName" class="form-label">Event Name</label>
-                    <input type="text" class="form-control" formControlName="eventName" placeholder="Enter event name" required>
+                    <input type="text" class="form-control" formControlName="eventName" placeholder="Enter event name"
+                        required>
                 </div>
                 <div class="mb-3 col-lg-4">
                     <label for="eventDate" class="form-label">Event Date</label>
-                    <input type="date" class="form-control" formControlName="eventDate" required>
+                    <input type="date" class="form-control" formControlName="eventDate" [min]="minDate" required>
                 </div>
                 <div class="mb-3 col-lg-4">
                     <label for="location" class="form-label">Location</label>
-                    <input type="text" class="form-control" formControlName="location" placeholder="Enter event location" required>
+                    <input type="text" class="form-control" formControlName="location"
+                        placeholder="Enter event location" required>
                 </div>
                 <div class="mb-3 col-lg-12">
                     <label for="description" class="form-label">Description</label>
@@ -26,41 +28,44 @@
                 </div>
             </form>
         </div>
-    </div> 
+    </div>
     <div class="card my-4">
         <div class="card-body">
 
-     
-    <div class="table-responsive">
-        <h5>Total Club </h5>
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>SN</th>
-                    <th>Event Name</th>
-                    <th>Event Date</th>
-                    <th>Location</th>
-                    <th>Description</th>
-                    <th>Description</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let item of eventList  let i=index">
-                    <td>{{i+1}}</td>
-                    <td>{{item.eventName}}</td>
-                    <td>{{item.eventDate}}</td>
-                    <td>{{item.location}}</td>
-                    <td>{{item.description}}</td>
 
-                    <td>
-                        <button class="btn btn-primary" (click)="editEvent(item._id)">Edit</button>
-                        <button class="btn btn-outline-secondary mx-4" (click)="deleteEvent(item._id)" >Delete</button>
-                    </td>
-                </tr>
-             
-            </tbody>
-        </table>
+            <div class="table-responsive">
+                <h5>Total Events </h5>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>SN</th>
+                                <th>Event Name</th>
+                                <th>Event Date</th>
+                                <th>Location</th>
+                                <th>Description</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of eventEmailList  let i=index">
+                                <td>{{i+1}}</td>
+                                <td>{{item.eventName}}</td>
+                                <td>{{item.eventDate}}</td>
+                                <td>{{item.location}}</td>
+                                <td>{{item.description}}</td>
+
+                                <td>
+                                    <button class="btn btn-primary" (click)="editEvent(item._id)">Edit</button>
+                                    <button class="btn btn-outline-secondary mx-4"
+                                        (click)="deleteEvent(item._id)">Delete</button>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-</div>
 </div>

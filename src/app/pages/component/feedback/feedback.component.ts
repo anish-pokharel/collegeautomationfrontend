@@ -108,7 +108,5 @@ this.teacherData()
       this.confirmationService.showSuccessMessage('Feedback deleted')
     })
   }
-
-  
-  }
+ }
 }

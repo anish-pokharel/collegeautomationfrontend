@@ -22,4 +22,13 @@ export class AssignmentService {
   getGiveAssignment():Observable<any>{
     return this.http.get<any>(environment.api_url+'getGiveAssignments')
   }
+  getAssignmentsByEnrolledSubjects():Observable<any>{
+    return this.http.get<any>(environment.api_url+'getAssignmentsByEnrolledSubject')
+  }
+  getassignmentsbyemailStudent():Observable<any>{
+    return this.http.get<any>(environment.api_url+'getassignmentsbyemail')
+  }
+  getAssignmentsBySubjectAPI():Observable<any>{
+    return this.http.get<any>(environment.api_url+'getassignmentsbysubject')
+  }
 }

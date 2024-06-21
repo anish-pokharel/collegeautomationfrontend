@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { DepartmentService } from '../../../core/services/department-service/department.service';
 import { SponsoeshipService } from '../../../core/services/sponsorship-service/sponsoeship.service';
 import * as alertify from 'alertifyjs';
+import { PopUpService } from '../../../core/popup/pop-up.service';
 
 @Component({
   selector: 'app-sponsorship',
@@ -21,7 +22,7 @@ export class SponsorshipComponent implements OnInit{
 
 
   constructor(private fb: FormBuilder, private http: HttpClient,private departmentService:DepartmentService
-    ,private sponsorshipService:SponsoeshipService
+    ,private sponsorshipService:SponsoeshipService,private confirmationService:PopUpService
   ) {
     this.form = this.fb.group({
       name: ['',],
@@ -63,6 +64,17 @@ export class SponsorshipComponent implements OnInit{
       this.departments=res;
       debugger
     })
+  }
+  async deleteSpon(sponsorshipId:string){
+    const confirmed= await this.confirmationService.showConfirmationPopup()
+    if( confirmed){
+      this.sponsorshipService.delSponsorshipList(sponsorshipId).subscribe((res)=>{
+        console.log(res);
+        this.getSponsorshipByEmailList();
+        this.getDeaprtmentList();
+        this.confirmationService.showSuccessMessage('Deleted Sucessfully')
+      })
+    }
   }
   
   }

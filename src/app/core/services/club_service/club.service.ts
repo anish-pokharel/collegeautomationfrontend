@@ -15,6 +15,9 @@ export class ClubService {
   getClubList():Observable<any>{
     return this.http.get<any>(environment.api_url+'getClubList')
   }
+  getClubListById(id:string):Observable<any>{
+    return this.http.delete<any>(environment.api_url+(`getClubList/${id}`))
+  }
   delDeleteClubList(id:string):Observable<any>{
     return this.http.delete<any>(environment.api_url+(`deleteClub/${id}`))
   }
@@ -23,5 +26,8 @@ export class ClubService {
   }
   getClubListByEmail():Observable<any>{
     return this.http.get<any>(environment.api_url+'getjoinedclubbyemail')
+  }
+  getJoinedClubbyClubnameApi():Observable<any>{
+    return this.http.get<any>(environment.api_url+'getjoinedclubbyclubname')
   }
 }
