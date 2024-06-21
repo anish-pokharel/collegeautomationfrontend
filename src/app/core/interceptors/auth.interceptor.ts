@@ -17,7 +17,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
         Authorization: `Bearer ${authToken}`
       }
     });
-    debugger
+
     return next(authReq)
   }
 return next(req) 
@@ -42,7 +42,7 @@ return next(req)
 //     next: HttpHandler
 //   ): Observable<HttpEvent<any>> {
 //     const authToken = localStorage.getItem('userToken');
-//     debugger
+// 
 
 //     if (req.headers.get('No-Auth') === 'True') {
 //       return next.handle(req);

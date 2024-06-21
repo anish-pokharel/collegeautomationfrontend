@@ -17,14 +17,20 @@ export class EventsComponent implements OnInit{
   eventList:any[]=[];
   eventEmailList:any[]=[];
   minDate: string | undefined;
+  isEditMode:boolean= false;
+  updateEvenID:string | null = null;
+  userRole: string | null | undefined;
 
 
 
-  constructor(private formBuilder:FormBuilder,private eventService:EventService,private confirmationService:PopUpService){
+
+  constructor(private formBuilder:FormBuilder,private eventService:EventService,
+    private confirmationService:PopUpService){
     this.formvalue();
    
   }
 ngOnInit(): void {
+  this.userRole = localStorage.getItem('userRole')
   this.getEventList();
   this.getEventListByEmailFunction();
   const today = new Date();
@@ -52,7 +58,24 @@ ngOnInit(): void {
   }
   onSubmit(){
     if(this.eventForm.valid){
-      console.log(this.eventForm.value);
+
+      if (this.isEditMode && this.updateEvenID) {
+        this.eventService.updateEventList(this.updateEvenID, this.eventForm.value).subscribe(res => {
+          this.confirmationService.showSuccessMessage('Edited Sucessfully')
+          this.getEventList();
+          this.eventForm.reset();
+          this.getEventListByEmailFunction()
+          this.isEditMode=false;
+
+        }, error => {
+          this.confirmationService.showErrorMessage('Error updating discussion')
+          this.eventForm.reset();
+          this.isEditMode=false;
+
+        });
+      }
+      else{
+        console.log(this.eventForm.value);
       this.eventService.postaddEventList(this.eventForm.value).subscribe((res)=>{
         console.log(res);
         this.getEventList();
@@ -61,10 +84,11 @@ ngOnInit(): void {
       })
     }
   }
+  }
   getEventList(){
     this.eventService.getEventListList().subscribe((res)=>{
       console.log(res);
-      this.eventList=res.events;
+      this.eventList=res;
     })
   }
   getEventListByEmailFunction(){
@@ -74,6 +98,22 @@ ngOnInit(): void {
     })
   }
   editEvent(eventId:string){
+    this.eventService.getEventId(eventId).subscribe((res)=>{
+      if(!res){
+        this.confirmationService.showErrorMessage('Event is not found')
+      }
+      this.isEditMode=true;
+      this.updateEvenID=eventId;
+      this.eventForm.patchValue({
+        eventName:res.event.eventName,
+        eventDate: res.event.eventDate,
+        location:res.event.location,
+        description:res.event.description,
+        createdDate:res.event.createdDate
+      })
+      debugger
+      console.log('Form value Patched',this.eventForm.value);
+    })
 
   }
   async deleteEvent(eventId:string){

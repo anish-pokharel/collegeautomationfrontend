@@ -17,10 +17,16 @@ export class SponsoeshipService {
   getSponsorshipRequest():Observable<any>{
     return this.http.get<any>(environment.api_url+'getsponsorship')
   }
+  getSponsorshipByAdmin():Observable<any>{
+    return this.http.get<any>(environment.api_url+'getsponsorshipbyrole')
+  }
   getSponsorshipByEmail():Observable<any>{
     return this.http.get<any>(environment.api_url+'getsponsorshipbyemail')
   }
   delSponsorshipList(id:string):Observable<any>{
     return this.http.delete<any>(environment.api_url+(`delsponsorship/${id}`))
   }
-}
+  updateSponsorship(id: string, decision: string): Observable<any> {
+    return this.http.put(environment.api_url + (`putsponsorshipbyid/${id}`), {decision});
+  }
+  }

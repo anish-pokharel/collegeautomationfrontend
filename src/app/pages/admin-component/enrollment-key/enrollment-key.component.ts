@@ -24,6 +24,7 @@ export class EnrollmentKeyComponent implements OnInit {
   ) {
     this.enrollmentForm = this.formBuilder.group({
       enrollmentKey: ['', Validators.required],
+      semester: ['', Validators.required],
       subjects: this.formBuilder.array([this.createSubject()]),
 
     });

@@ -7,7 +7,25 @@ import * as alertify from 'alertifyjs';
 import { UserAuthService } from '../../../core/services/user_auth/user-auth.service';
 import { PopUpService } from '../../../core/popup/pop-up.service';
 import { ActivatedRoute } from '@angular/router';
+interface ClubData {
+  Requested_Clubs: Club[];
+  Accepted_Clubs: Club[];
+  Rejected_Clubs: Club[];
+}
+interface Club {
+  _id: string;
+  joinedBy: string;
+  clubName: string;
+  reason: string;
+  joinedDate: string;
+  decision: string;
+}
 
+interface ClubEmail{
+  Requested_Clubs: Club[];
+  Accepted_Clubs: Club[];
+  Rejected_Clubs: Club[];
+}
 @Component({
   selector: 'app-join-clubs',
   standalone: true,
@@ -18,17 +36,27 @@ import { ActivatedRoute } from '@angular/router';
 export class JoinClubsComponent implements OnInit {
   clubForm!: FormGroup
   clubListData: any[] = []
-  showJoinedClub: any
-  showJoinedClubRejected: any
-  showJoinedClubAccepted: any
+  showJoinedClub:ClubEmail={
+    Requested_Clubs: [],
+    Accepted_Clubs: [],
+    Rejected_Clubs: []
+  }
+
   createFacultyForm!: FormGroup;
   createClubForm!: FormGroup;
   userRole: string | null | undefined;
   secretaryList: any[] = []
-  JoinedClubbyClubName: any[] = []
+  JoinedClubbyClubName: ClubData = {
+    Requested_Clubs: [],
+    Accepted_Clubs: [],
+    Rejected_Clubs: []
+  };
   requestedJoinClub: any[] = []
   isEditMode: boolean = false;
   addClubId: string | null = null;
+  clubListDataForm: any[] = []; 
+  selectedClub: any = null;
+  filteredClubList: any[] | undefined;
 
 
 
@@ -54,6 +82,9 @@ export class JoinClubsComponent implements OnInit {
       joinedDate: ['',],
       decision: ['Pending']
     })
+    this.clubForm.get('clubStatus')?.valueChanges.subscribe((value) => {
+      this.filterClubNames(value);
+    });
     this.userRole = localStorage.getItem('userRole')
     this.getClubEmail();
     this.showJoinedClubbyClubNameFunction();
@@ -62,8 +93,26 @@ export class JoinClubsComponent implements OnInit {
 
   }
   createClub() {
-    console.log('button is clicked');
+    console.log('button is clicked'); 
     if (this.createClubForm.valid) {
+
+
+      if (this.isEditMode && this.addClubId) {
+        this.clubService.updateClubList(this.addClubId, this.createClubForm.value).subscribe(res => {
+          alertify.success("Discussion updated");
+          this.clubList();
+          this.createClubForm.reset();
+          this.isEditMode = false;
+
+        }, error => {
+          console.error('Error updating discussion:', error);
+          alertify.error("Error updating discussion");
+          this.createClubForm.reset();
+        });
+      }
+      else{
+
+
       console.log(this.createClubForm.value);
       this.clubService.postAddClub(this.createClubForm.value).subscribe((res) => {
         console.log(res);
@@ -72,14 +121,26 @@ export class JoinClubsComponent implements OnInit {
         this.clubList()
       })
     }
+  }
     else {
       alertify.error('Input valid Form')
     }
   }
+  
+  filterClubNames(status: string) {
+    if (status === 'Political' || status === 'Non-Political') {
+      this.filteredClubList = this.clubListData.filter(club => club.clubStatus === status);
+    } else {
+      this.filteredClubList = this.clubListData; // Reset to full list if status is invalid
+    }
+  }
+
   clubList() {
     this.clubService.getClubList().subscribe((res) => {
       console.log(res.clubName);
       this.clubListData = res.clubName
+      this.filteredClubList = this.clubListData; 
+
     })
   }
   editClub(clubId: string) {
@@ -93,10 +154,10 @@ export class JoinClubsComponent implements OnInit {
       this.addClubId = clubId;
       this.createClubForm.patchValue({
         clubStatus: res.clubStatus,
-        clubName: res.clubStatus,
-        contactNumber: res.clubStatus,
-        contactEmail: res.clubStatus,
-        createdDate: res.clubStatus,
+        clubName: res.clubName,
+        contactNumber: res.contactNumber,
+        contactEmail: res.contactEmail,
+        createdDate: res.createdDate,
       })
       debugger
       console.log('Form values patched:', this.createClubForm.value);
@@ -104,6 +165,9 @@ export class JoinClubsComponent implements OnInit {
     })
     debugger
 
+  }
+  onClubSelected(clubName: string) {
+    this.selectedClub = this.clubListData.find(club => club.clubName === clubName);
   }
   async deleteClub(clubId: string) {
     const confirmed = await this.confirmationService.showConfirmationPopup()
@@ -145,16 +209,20 @@ export class JoinClubsComponent implements OnInit {
   showJoinedClubFunction() {
     this.clubService.getClubListByEmail().subscribe((res) => {
       console.log(res + "joined club is ");
-      this.showJoinedClub = res.Requested_Clubs;
-      this.showJoinedClubAccepted = res.Accepted_Clubs
-      this.showJoinedClubRejected = res.Rejected_Clubs
+      this.showJoinedClub = res
+
+      // this.showJoinedClub=[
+      //   ...res.Requested_Clubs,
+      //   ...res.Accepted_Clubs,
+      //   ...res.Rejected_Clubs
+      // ]
     })
   }
 
   showJoinedClubbyClubNameFunction() {
     this.clubService.getJoinedClubbyClubnameApi().subscribe((res) => {
       console.log(res + "joined club is ");
-      this.JoinedClubbyClubName = res.Requested_Clubs
+      this.JoinedClubbyClubName = res
 
       debugger
 
@@ -168,6 +236,15 @@ export class JoinClubsComponent implements OnInit {
       debugger
     })
   }
-  deleteRequest(RequestId: string) { }
+  updateSponsorship(id: string, decision: string) {
+    this.clubService.updateClubStatus(id, decision).subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.error('Error updating sponsorship:', error);
+      }
+    );
+  }
 
 }

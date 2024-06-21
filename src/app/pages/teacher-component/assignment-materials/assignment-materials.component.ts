@@ -5,11 +5,13 @@ import { AssignmentService } from '../../../core/services/assignment-service/ass
 import { ModelQuestionService } from '../../../core/services/model-service/model-question.service';
 import { EnrollmentService } from '../../../core/services/enrollment_service/enrollment.service';
 import { PopUpService } from '../../../core/popup/pop-up.service';
+import { NgxPaginationModule } from 'ngx-pagination';
+
 
 @Component({
   selector: 'app-assignment-materials',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule,NgxPaginationModule],
   templateUrl: './assignment-materials.component.html',
   styleUrl: './assignment-materials.component.css'
 })
@@ -20,6 +22,8 @@ export class AssignmentMaterialsComponent implements OnInit {
   subjectList: any[] = [];
   assignmentList:any[]=[]
   modelQuestionList:any[]=[]
+  p: number = 1
+  mq: number = 1
 
   constructor(private formBuilder: FormBuilder, private assignmentService: AssignmentService,
     private modelAssignment: ModelQuestionService, private enrollmentService: EnrollmentService,
@@ -35,6 +39,7 @@ export class AssignmentMaterialsComponent implements OnInit {
       subject: ['', Validators.required],
       assignmentName: ['', Validators.required],
       assignmentFile: ['', Validators.required],
+      dueDate: [null, Validators.required],
       remarks: ['', Validators.required],
     });
     this.modelQuestionForm = this.formBuilder.group({
@@ -58,21 +63,25 @@ export class AssignmentMaterialsComponent implements OnInit {
       formData.append('assignmentName', this.assignmentForm.get('assignmentName')!.value);
       formData.append('assignmentFile', this.assignmentForm.get('assignmentFile')!.value);
       formData.append('remarks', this.assignmentForm.get('remarks')!.value);
+      formData.append('dueDate', this.assignmentForm.get('dueDate')!.value);
 
       this.assignmentService.postGiveAssignment(formData).subscribe(
         (res) => {
           console.log(res);
           this.assignmentForm.reset();
           this.confirmationService.showSuccessMessage('Added successfully');
+          this.showAssignmentList();
         },
         (err) => {
           console.error(err);
           this.confirmationService.showErrorMessage('Sorry, cannot add a file');
+          this.showAssignmentList();
           debugger
         }
       );
     } else {
       this.confirmationService.showErrorMessage('Please fill all required fields');
+      this.showAssignmentList();
     }
   }
 
@@ -121,14 +130,20 @@ export class AssignmentMaterialsComponent implements OnInit {
           console.log(res);
           this.modelQuestionForm.reset();
           this.confirmationService.showSuccessMessage('Model question added successfully');
+          this.showModelQuestionList();
+
         },
         (err) => {
           console.error(err);
           this.confirmationService.showErrorMessage('Cannot add model assignment');
+          this.showModelQuestionList();
+
         }
       );
     } else {
       this.confirmationService.showErrorMessage('Please fill all required fields');
+      this.showModelQuestionList();
+
     }
   }
 

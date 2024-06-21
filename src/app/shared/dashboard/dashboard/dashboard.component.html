@@ -152,24 +152,14 @@
               <span>Semester Enroll</span>
             </a>
           </li>
-          <li class="active cursor">
-            <a (click)="showSection('academic-records')">
-              <i class="fas fa-graduation-cap"></i>
-              <span>Academic Record</span>
-            </a>
-          </li>
+       
           <li class="active cursor">
             <a (click)="showSection('our-courses')">
               <i class="fas fa-book-open"></i>
               <span>Our Courses</span>
             </a>
           </li>
-          <li class="active cursor">
-            <a (click)="showSection('setting')">
-              <i class="fas fa-cog"></i>
-              <span>Setting</span>
-            </a>
-          </li>
+        
           <li class="active cursor">
             <a (click)="showSection('join-club')">
               <i class="fas fa-users"></i>
@@ -207,9 +197,27 @@
             </a>
           </li>
           <li class="active cursor">
+            <a (click)="showSection('events')">
+              <i class="fas fa-calendar-check"></i>
+              <span>Events</span>
+            </a>
+          </li>
+          <li class="active cursor">
             <a (click)="showSection('discussion')">
               <i class="fas fa-comments"></i>
               <span>Discussion</span>
+            </a>
+          </li>
+          <li class="active cursor">
+            <a (click)="showSection('setting')">
+              <i class="fas fa-cog"></i>
+              <span>Setting</span>
+            </a>
+          </li>
+          <li class="active cursor">
+            <a (click)="showSection('academic-records')">
+              <i class="fas fa-graduation-cap"></i>
+              <span>Academic Record</span>
             </a>
           </li>
         </ng-container>
@@ -246,7 +254,7 @@
             </a>
           </li>
           <li class="active cursor">
-            <a (click)="showSection('academic-record-admin')">
+            <a (click)="showSection('academic-records')">
               <i class="fas fa-graduation-cap"></i>
               <span>Academic Record (Admin)</span>
             </a>
@@ -263,7 +271,12 @@
               <span>Job Vacancy Management</span>
             </a>
           </li>
-          
+          <li class="active cursor">
+            <a (click)="showSection('sponsorship')">
+              <i class="fas fa-hand-holding-usd"></i>
+              <span>Sponsorship</span>
+            </a>
+          </li>
           <li class="active cursor">
             <a (click)="showSection('discussion')">
               <i class="fas fa-comments"></i>

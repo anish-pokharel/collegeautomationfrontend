@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment.development';
@@ -30,10 +30,22 @@ getStudentData():Observable<any>{
 getSecretarytData():Observable<any>{
   return this.http.get(environment.api_url+'user/secretary')
 }
-// updateUserProfile(userId: string, formData: FormData): Observable<any> {
-//    return this.http.put<any>(environment.api_url + `userdata/${userId}`);
+delTeacherList(id:string):Observable<any>{
+  return this.http.delete<any>(environment.api_url+(`deleteTeacher/${id}`))
+  // return this.http.delete<any>(environment.api_url+(`userdata/${userId}`))
+}
+// updateUserProfile(userId: string, formData: any): Observable<any> {
+//    return this.http.put(environment.api_url +(`userdata/${userId}`), formData);
 // }
-
+saveProfile(data: FormData): Observable<any> {
+  return this.http.post<any>(environment.api_url+'profile',data)
+}
+getProfile(): Observable<any> {
+  return this.http.get<any>(environment.api_url+'profile')
+}
+changePassword(userId: string, data: any, options: { headers: HttpHeaders }): Observable<any> {
+  return this.http.put(environment.api_url+(`password/${userId}`), data, options);
+}
 
 
 setUserDara(user:any){

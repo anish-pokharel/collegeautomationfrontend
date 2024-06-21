@@ -24,6 +24,7 @@
                         <tr class="odd gradeX" *ngFor="let item of listData let i =index">
                           <td class="f-s-600 text-inverse">{{ i + 1 }}</td>
                           <td>{{ item.enrollment_key }}</td>
+                          <td>{{ item.semester }}</td>
                           <td>
                             <ul class="list-unstyled">
                                 <li *ngFor="let subject of item.subjects" class="mb-2">{{ subject.name }}</li></ul>

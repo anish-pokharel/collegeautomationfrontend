@@ -27,12 +27,16 @@ export class ClassScheduleComponent implements OnInit{
       className: ['', Validators.required],
       time: ['', Validators.required],
       location: ['', Validators.required],
-      instructor: ['', Validators.required]
+      instructor: ['']
     });
   }
 
   submitClassSchedule() {
-    // Handle form submission here
-    console.log(this.classScheduleForm.value);
+    if (this.classScheduleForm.valid) {
+      console.log(this.classScheduleForm.value);
+
+    } else {
+      this.classScheduleForm.markAllAsTouched();
+    }
   }
 }

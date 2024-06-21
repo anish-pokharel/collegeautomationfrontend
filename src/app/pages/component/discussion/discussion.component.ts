@@ -24,7 +24,8 @@ export class DiscussionComponent implements OnInit {
   discussionList: any[] = [];
   userRole: string | null | undefined;
   isEditMode: boolean = false;
-  discussionResultId: string | null = null
+  discussionResultId: string | null = null;
+  minDate: string | undefined;
   @ViewChild('exampleModal') editModal!: ElementRef;
   ngOnInit(): void {
     this.discussionTable = this.formBuilder.group({
@@ -35,7 +36,17 @@ export class DiscussionComponent implements OnInit {
     })
     this.getDiscissionTable();
     this.userRole = localStorage.getItem('userRole')
+    const today = new Date();
+  const minDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() );
+  this.minDate =this.formatDate(minDate)
 
+  }
+
+  formatDate(date: Date): string {
+    const year = date.getFullYear();
+    const month = `${date.getMonth() + 1}`.padStart(2, '0');
+    const day = `${date.getDate()}`.padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
   addDiscussion() {
     if (this.discussionTable.valid) { 
@@ -43,6 +54,7 @@ export class DiscussionComponent implements OnInit {
         this.discussionService.updateDiscussion(this.discussionResultId, this.discussionTable.value).subscribe(res => {
           alertify.success("Discussion updated");
           this.getDiscissionTable();
+          this.discussionTable.reset();
         }, error => {
           console.error('Error updating discussion:', error);
           alertify.error("Error updating discussion");
@@ -62,30 +74,7 @@ export class DiscussionComponent implements OnInit {
 
   }
   }
-  //   if (this.discussionTable.valid) {
-  //     const formData = this.discussionTable.value;
-  //     console.log(formData);
-  //     //this.discussionService.postDiscussion(this.discussionTable.value).subscribe((res)=>{
-  //     this.discussionService.postDiscussion(formData).subscribe(
-  //       (res) => {
-  //         console.log(res);
-  //         alertify.success('Discussion Added');
-  //         this.getDiscissionTable();
-  //         this.discussionTable.reset()
-  //       },
-  //       (error) => {
-  //         console.error('Error adding discussion:', error);
-  //         alertify.error('Failed to add discussion. Please try again.');
-  //       });
-
-  //   }
-  //   else {
-  //     alertify.error("Form is invalid")
-  //     const formData = this.discussionTable.value;
-  //     console.log(formData);
-  //     debugger
-  //   }
-  // }
+  
   getDiscissionTable() {
     this.discussionService.getdiscussionData().subscribe((res: any) => {
       this.discussionData = res.discussion;
@@ -105,7 +94,8 @@ export class DiscussionComponent implements OnInit {
       this.discussionTable.patchValue({
         discussion_topic: res.discussion_topic,
         date: res.date,
-        decision: res.decision
+        decision: res.decision,
+        decision_by:res.decision_by
       });
 
       if (this.editModal) {
