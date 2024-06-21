@@ -28,6 +28,8 @@ export class AttendanceRecordComponent implements OnInit {
   email!: string;
   otp!: string;
   name!: string;
+  enteredDateOtp!: string;
+
 
 
 
@@ -83,43 +85,12 @@ export class AttendanceRecordComponent implements OnInit {
       .subscribe(
         response => {
           console.log('Attendance marked successfully');
-          // Handle success (e.g., show confirmation to user)
         },
         error => {
           console.error('Error marking attendance:', error);
-          // Handle error (e.g., show error message to user)
         }
       );
   }
 }
-//   verifyOtp(){
-//     this.otpService.verifyOtp({
-     
-//       Name: this.name,
-//       Email: this.email,
-//       Rollno: this.rollno,
-//       Subject: this.enteredSubject,
-//       Remarks: this.enteredRemarks,
-//       Date: this.enteredDate,
-//       EnteredOtp: this.enteredOtp,
-    
-//     })
-//     .subscribe(
-//       (response) => {
-//         this.verified = true;
-//         this.invalidOtp = false;
-//         this.error = '';
-//       },
-//       (error) => {
-//         if (error.status === 400) {
-//           this.invalidOtp = true;
-//           this.error = '';
-//         } else {
-//           this.error = error.error;
-//         }
-//       }
-//     );
-// }
 
-  
  

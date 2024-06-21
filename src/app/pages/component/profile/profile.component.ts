@@ -5,6 +5,8 @@ import { DepartmentService } from '../../../core/services/department-service/dep
 import { ClubService } from '../../../core/services/club_service/club.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
+
 
 
 @Component({
@@ -19,6 +21,7 @@ export class ProfileComponent implements OnInit {
   showUserProfileData:any=null;
   clubList:any[]=[]
   formProfile!:FormGroup;
+  changePasswordForm!:FormGroup;
   userRole: string|null | undefined;
   selectedFile: File | null = null;
   profileData: any = {};
@@ -64,11 +67,19 @@ getProfile() {
     console.log('hello'+this.userData);
     console.log(this.userData);
   })
+  this.changePasswordForm = this.formBuilder.group({
+    oldpassword: ['', Validators.required],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+    confirmPassword: ['', Validators.required]
+  }, { validator: this.passwordMatchValidator });
   this.userRole =localStorage.getItem('userRole')
 
   this.showUserProfile();
   this.showClub();
   this.getProfile();
+}
+passwordMatchValidator(formGroup: FormGroup) {
+  return formGroup.get('password')!.value === formGroup.get('confirmPassword')!.value ? null : { mismatch: true };
 }
 
 showUserProfile(){
@@ -95,6 +106,25 @@ deleteClub(clubId:string){
 onFileChange(event: any) {
   this.selectedFile = event.target.files[0];
 }
+onPasswordChange(){
+  if (this.changePasswordForm.valid) {
+    const formData = this.changePasswordForm.value;
+    const userId = this.showUserProfileData._id;
+    
+    const headers = new HttpHeaders().set('Authorization', 'Bearer your-token'); // Replace with your actual token
+
+    this.userService.changePassword(userId, formData, { headers }).subscribe(
+      response => {
+        alert('Password updated successfully');
+        this.changePasswordForm.reset()
+      },
+      error => {
+        alert('Something went wrong');
+      }
+    );
+  }
+}
+
 
 onSubmit() {
   const formData = new FormData();

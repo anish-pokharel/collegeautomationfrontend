@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment.development';
@@ -42,6 +42,9 @@ saveProfile(data: FormData): Observable<any> {
 }
 getProfile(): Observable<any> {
   return this.http.get<any>(environment.api_url+'profile')
+}
+changePassword(userId: string, data: any, options: { headers: HttpHeaders }): Observable<any> {
+  return this.http.put(environment.api_url+(`password/${userId}`), data, options);
 }
 
 
