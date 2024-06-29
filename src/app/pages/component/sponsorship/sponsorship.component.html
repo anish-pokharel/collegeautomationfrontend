@@ -141,15 +141,18 @@
                 <td>{{item.decision}}</td>
 
                 <td>
-                  <button *ngIf="item.decision === 'Pending'" class="btn btn-outline-secondary mx-4"
-                    (click)="updateSponsorship(item._id, 'accepted')">
-                    <i class="fas fa-check-circle"></i> Accept
-                  </button>
-                  <button *ngIf="item.decision === 'Pending'" class="btn btn-outline-danger"
-                    (click)="updateSponsorship(item._id, 'rejected')">
-                    <i class="fas fa-times-circle"></i> Reject
-                  </button>
+                  <div class="d-flex flex-column flex-md-row align-items-center">
+                    <button *ngIf="item.decision === 'Pending'" class="btn btn-outline-secondary mb-2 mb-md-0 mr-md-4"
+                      (click)="updateSponsorship(item._id, 'accepted')">
+                      <i class="fas fa-check-circle"></i> 
+                    </button>
+                    <button *ngIf="item.decision === 'Pending'" class="btn btn-outline-danger"
+                      (click)="updateSponsorship(item._id, 'rejected')">
+                      <i class="fas fa-times-circle"></i> 
+                    </button>
+                  </div>
                 </td>
+                
               </tr>
 
             </tbody>

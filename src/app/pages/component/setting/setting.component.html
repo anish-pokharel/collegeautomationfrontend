@@ -12,24 +12,24 @@
         </div>
       </div>
     </div>
-    <div class="card mb-4 mb-lg-0">
+    <div class="card mb-4 mb-lg-0" *ngIf="userData">
       <div class="card-body p-0">
         <ul class="list-group list-group-flush rounded-3">
           <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-            <i class="fas fa-home">full Name</i>
-            <p class="mb-0">{{ showUserProfileData.name }}</p>
+            <i class="fab fa-facebook">Facebook</i>
+            <p class="mb-0">{{ userData.facebook }}</p>
           </li>
           <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-            <i class="fas fa-home">Email</i>
-            <p class="mb-0">{{ showUserProfileData.email }}</p>
+            <i class="fab fa-instagram">Instagram</i>
+            <p class="mb-0">{{ userData.instagram }}</p>
           </li>
           <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-            <i class="fas fa-home">Address</i>
-            <p class="mb-0">{{ showUserProfileData.address }}</p>
+            <i class="fab fa-whatsapp">WhatsApp</i>
+            <p class="mb-0">{{ userData.whatsapp }}</p>
           </li>
           <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-            <i class="fas fa-home">Role</i>
-            <p class="mb-0">{{ showUserProfileData.role }}</p>
+    <i class="fas fa-globe">Website</i>
+            <p class="mb-0">{{ userData.website }}</p>
           </li>
 
         </ul>

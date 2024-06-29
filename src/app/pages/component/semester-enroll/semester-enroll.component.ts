@@ -39,7 +39,7 @@ enrollSubject(){
   debugger
 }
 enrollButton(){
-  const token = localStorage.getItem('token'); // Assuming the token is stored in localStorage
+  const token = localStorage.getItem('token'); 
 
   if(this.enrollmentKeyForm.valid){
     console.log(this.enrollmentKeyForm.value);
@@ -59,41 +59,39 @@ enrollButton(){
     alertify.error('Please enter the valid Enrollment Key')
   }
 }
-semSubject(){
-
-    this.enrollmentService.getEnrollmentDataByEmail().subscribe((data)=>{
-      this.subject=data
-      console.log("Subject is "+this.subject);
+semSubject() {
+  this.enrollmentService.getEnrollmentDataByEmail().subscribe(
+    (data) => {
       this.enrollmentData = data;
       this.subjectNotFound = false;
-    },error=>{
-      if (error.message === "subject not found") {
+    },
+    (error) => {
+      if (error.error.message === "subject not found") {
         this.subjectNotFound = true;
       } else {
         console.error('Error fetching enrollment data:', error);
       }
-
     }
-  
-  )
-} 
-initializeForm(): void {
-  if (this.enrollmentData && this.enrollmentData.subjects) {
-    const formControls = this.enrollmentData.subjects.map((subject: any) =>
-      this.formBuilder.group({
-        name: [{ value: subject.name, disabled: true }],
-        grade: ['', Validators.required]
-      })
-    );
-
-    this.completedSemesterForm = this.formBuilder.group({
-      subjects: this.formBuilder.array(formControls)
-    });
-  } else {
-    console.error('Enrollment data or subjects are missing:', this.enrollmentData);
-    alertify.error('Enrollment data or subjects are missing');
-  }
+  );
 }
+
+// initializeForm(): void {
+//   if (this.enrollmentData && this.enrollmentData.subjects) {
+//     const formControls = this.enrollmentData.subjects.map((subject: any) =>
+//       this.formBuilder.group({
+//         name: [{ value: subject.name, disabled: true }],
+//         grade: ['', Validators.required]
+//       })
+//     );
+
+//     this.completedSemesterForm = this.formBuilder.group({
+//       subjects: this.formBuilder.array(formControls)
+//     });
+//   } else {
+//     console.error('Enrollment data or subjects are missing:', this.enrollmentData);
+//     alertify.error('Enrollment data or subjects are missing');
+//   }
+// }
 deleteEnrollment() {
   this.enrollmentService.deleteEnrollmentData().subscribe(
     (response) => {

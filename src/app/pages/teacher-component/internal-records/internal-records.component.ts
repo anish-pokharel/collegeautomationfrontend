@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { EnrollmentService } from '../../../core/services/enrollment_service/enrollment.service';
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -12,72 +13,37 @@ import { CommonModule } from '@angular/common';
   styleUrl: './internal-records.component.css'
 })
 export class InternalRecordsComponent implements OnInit{
+  selectedFile!: File;
 
-  enrollmentDatabyEnrolledsubject:any[]=[]
-  addStudent!:FormGroup;
-  studentMarksForm!:FormGroup;
-  constructor(private formBuilder:FormBuilder,private enrollmentservice: EnrollmentService,){}
+  constructor(private formBuilder:FormBuilder,private enrollmentservice: EnrollmentService,private http: HttpClient){}
  
   ngOnInit(): void {
-    this.addStudent= this.formBuilder.group({
-      'student-name': ['', Validators.required],
-      'student-roll-no': [0, Validators.required],
-      'student-internal-data': ['', Validators.required],
-      'remarks': ['']
-    })
-    this.enrollmentservice.getenrollmentDatabyEnrolledsubject().subscribe((res) => {
-      console.log(res);
-      this.enrollmentDatabyEnrolledsubject = res.users
-      console.log(this.enrollmentDatabyEnrolledsubject);
-    })
-    this.initializeForm();
-
    
+    }
+
+    onFileSelected(event: any): void {
+      this.selectedFile = event.target.files[0];
+    }
   
-  }
-  initializeForm(): void {
-    this.studentMarksForm = this.formBuilder.group({
-      students: this.formBuilder.array([])  // FormArray to hold multiple students
-    });
-
-    // Populate form controls dynamically based on enrollmentDatabyEnrolledsubject
-    this.enrollmentDatabyEnrolledsubject.forEach(student => {
-      const studentFormGroup = this.formBuilder.group({
-        name: [student.name, Validators.required],
-        email: [student.email, Validators.required],
-        rollno: [student.rollno, Validators.required],
-        marks: ['', Validators.required]
-      });
-
-      // Push each student form group into the form array
-      (this.studentMarksForm.get('students') as FormArray).push(studentFormGroup);
-    });
-  }
-
-  submitForm(): void {
-   
-    if (this.studentMarksForm.valid) {
-      const formData = this.studentMarksForm.value;
-      console.log(formData);
-
-      // Here you can send formData to your backend or handle as needed
-      // Example of sending data to backend:
-      // this.yourService.submitFormData(formData).subscribe(response => {
-      //   console.log('Form submitted successfully');
-      // }, error => {
-      //   console.error('Error submitting form', error);
-      // });
-    } else {
-      // Handle form validation errors if any
-      console.error('Form is invalid');
+    onUpload(): void {
+      const valuationType = (document.getElementById('valuationType') as HTMLSelectElement).value;
+  
+      if (!this.selectedFile) {
+        alert('Please select a file');
+        return;
+      }
+  
+      const uploadData = new FormData();
+      uploadData.append('file', this.selectedFile, this.selectedFile.name);
+      uploadData.append('type', valuationType);
+  
+      this.http.post('http://localhost:3200/internalUpload', uploadData)
+        .subscribe(response => {
+          console.log('Upload successful', response);
+          alert('Upload successful');
+        }, error => {
+          console.error('Upload error', error);
+          alert('Upload error');
+        });
     }
   }
-  addStudentRecord() {
-   if(this.addStudent.valid){
-    console.log(this.addStudent.value);
-   }
-   else{
-    console.error('Form is not valid')
-   }
-    }
-}

@@ -82,23 +82,19 @@
         </div>
       </li> -->
       <li class="dropdown navbar-user text-light">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <!-- <img [src]="showUserProfileData.imageUrl " alt="https://as1.ftcdn.net/v2/jpg/03/39/45/96/1000_F_339459697_XAFacNQmwnvJRqe1Fe9VOptPWMUxlZP8.jpg" /> -->
+        <a  class="dropdown-toggle" data-toggle="dropdown">
             <img src="../../../../assets/img/user/ishanimars.jpg" />
             <span class="d-none d-md-inline">{{showUserProfileData.name}}</span>
             <b class="caret"></b>
         </a>
         <div class="dropdown-menu dropdown-menu-right bg-dark">
             <a (click)="showSection('profile')" class="dropdown-item text-light">Edit Profile</a>
-            <!-- <a href="javascript:;" class="dropdown-item text-light">
-                <span class="badge badge-danger pull-right">2</span> Inbox
-            </a> -->
-            <!-- <a href="javascript:;" class="dropdown-item text-light">Calendar</a> -->
             <a (click)="showSection('setting')" class="dropdown-item text-light">Setting</a>
             <div class="dropdown-divider"></div>
             <a (click)="LogoutButton()" class="dropdown-item text-light">Log Out</a>
         </div>
     </li>
+    
     
     </ul>
   </div>
@@ -362,12 +358,7 @@
               <span>Internal Valuations</span>
             </a>
           </li>
-          <li class="active cursor">
-            <a (click)="showSection('class-schedule')">
-              <i class="fas fa-calendar-alt"></i>
-              <span>Class Schedule</span>
-            </a>
-          </li>
+         
           <li class="active cursor">
             <a (click)="showSection('student-work-record')">
               <i class="fas fa-book-open"></i>

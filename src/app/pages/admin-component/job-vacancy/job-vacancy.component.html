@@ -68,9 +68,16 @@
               <td>{{item.vacancyQualification}}</td>
               <td>{{item.vacancySalary}}</td>
               <td>
-                <button class="btn btn-outline-primary" (click)="editVacancy(item._id)"><i class="fas fa-edit"></i></button>
-                <button class="btn btn-outline-danger"(click)="deleteVacancy(item._id)" ><i class="fas fa-trash-alt"></i></button>
+                <div class="d-flex justify-content-center justify-content-md-start">
+                  <button class="btn btn-outline-primary me-2 mb-2 mb-md-0" (click)="editVacancy(item._id)">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button class="btn btn-outline-danger" (click)="deleteVacancy(item._id)">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                </div>
               </td>
+              
             </tr>
           </tbody>
         </table>

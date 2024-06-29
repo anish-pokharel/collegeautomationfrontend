@@ -23,7 +23,6 @@ export class CourseEnrollComponent {
   ) {
     this.showCourse();
     this.userRole = localStorage.getItem('userRole')
-    // this.openDetailsModal()
 
   }
   showCourse() {
@@ -42,6 +41,7 @@ export class CourseEnrollComponent {
   openDetailsModal(subjectId: string): void {
     this.enrollmentService.getSubjectDataById(subjectId).subscribe(subject => {
       console.log(subject);
+      debugger
       this.selectedSubject = subject;
     });
   }

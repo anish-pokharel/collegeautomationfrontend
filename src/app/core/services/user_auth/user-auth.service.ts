@@ -41,7 +41,7 @@ saveProfile(data: FormData): Observable<any> {
   return this.http.post<any>(environment.api_url+'profile',data)
 }
 getProfile(): Observable<any> {
-  return this.http.get<any>(environment.api_url+'profile')
+  return this.http.get<any>(environment.api_url+'profileData')
 }
 changePassword(userId: string, data: any, options: { headers: HttpHeaders }): Observable<any> {
   return this.http.put(environment.api_url+(`password/${userId}`), data, options);

@@ -42,6 +42,7 @@ export class AttendanceRecordComponent implements OnInit {
     this.enrollmentservice.getenrollmentDatabyEnrolledsubject().subscribe((res) => {
       console.log(res);
       this.enrollmentDatabyEnrolledsubject = res.users
+      debugger
     })
     this.userService.getuserDataLogin().subscribe((res)=>{
       console.log(res);

@@ -128,8 +128,6 @@
           </h5>
           <form [formGroup]="createClubForm" class="row" (ngSubmit)="createClub()">
             <div class="col-lg-3 mb-4">
-
-
               <select id="clubStatus" class="form-control" formControlName="clubStatus">
                 <option value="" disabled selected>Select Club Status</option>
                 <option value="Non-Political">Non-Political</option>
@@ -137,11 +135,9 @@
               </select>
             </div>
             <div class="col-lg-3 mb-4">
-
               <input type="text" formControlName="clubName" class="form-control" placeholder="Club Name">
             </div>
             <div class="col-lg-3 mb-4">
-
               <input type="text" formControlName="contactNumber" class="form-control" placeholder="Club Contact Number">
             </div>
             <div class="col-lg-3 mb-4">
@@ -150,11 +146,11 @@
                 <option *ngFor="let item of secretaryList" [value]="item.email">{{item.name}}</option>
               </select>
             </div>
-
             <div class="col-lg-2 mb-4">
               <button type="submit" class="btn btn-primary">{{ isEditMode ? 'Update' : 'Create' }}</button>
             </div>
           </form>
+          
         </div>
       </div>
 

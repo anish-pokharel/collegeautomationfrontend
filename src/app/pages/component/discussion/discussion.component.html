@@ -3,7 +3,7 @@
   <h1 class="page-header">
     Discussion <small> Discussion done </small>
     <div *ngIf="userRole !== 'student'" >
-      <button type="button" class="btn btn-primary mt-4" data-toggle="modal" data-target="#exampleModal">
+      <button type="button" (click)="OpenModal()" class="btn btn-primary mt-4" data-toggle="modal" data-target="#exampleModal">
         Add Discussion
       </button>
       <div class="modal fade" #exampleModal  id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -80,5 +80,4 @@
 
 
   </ul>
-  <!-- end timeline -->
-</div>
+  </div>

@@ -57,6 +57,7 @@ export class JoinClubsComponent implements OnInit {
   clubListDataForm: any[] = []; 
   selectedClub: any = null;
   filteredClubList: any[] | undefined;
+  currentSecretaryEmail: string | null = null;
 
 
 
@@ -92,41 +93,60 @@ export class JoinClubsComponent implements OnInit {
     this.isEditMode = !!this.addClubId;
 
   }
-  createClub() {
-    console.log('button is clicked'); 
+  loadCurrentClubDetails() {
+    this.clubService.getClubListById(this.addClubId!).subscribe((res) => {
+      this.currentSecretaryEmail = res.contactEmail;
+      this.createClubForm.patchValue({
+        clubStatus: res.clubStatus,
+        clubName: res.clubName,
+        contactNumber: res.contactNumber,
+        contactEmail: res.contactEmail,
+        createdDate: res.createdDate
+      });
+      this.getClubEmail();  // Reload secretaries after patching form values
+    });
+  }
+createClub() {
     if (this.createClubForm.valid) {
-
-
       if (this.isEditMode && this.addClubId) {
-        this.clubService.updateClubList(this.addClubId, this.createClubForm.value).subscribe(res => {
-          alertify.success("Discussion updated");
-          this.clubList();
-          this.createClubForm.reset();
-          this.isEditMode = false;
-
-        }, error => {
-          console.error('Error updating discussion:', error);
-          alertify.error("Error updating discussion");
-          this.createClubForm.reset();
-        });
+        this.clubService.updateClubList(this.addClubId, this.createClubForm.value).subscribe(
+          res => {
+            alertify.success("Club updated successfully");
+            this.clubList();
+            this.createClubForm.reset();
+            this.isEditMode = false;
+          },
+          error => {
+            console.error('Error updating club:', error);
+            alertify.error("Error updating club");
+            this.createClubForm.reset();
+          }
+        );
+      } else {
+        this.clubService.postAddClub(this.createClubForm.value).subscribe(
+          res => {
+            alertify.success("Club added successfully");
+            this.createClubForm.reset();
+            this.clubList();
+          },
+          error => {
+            console.error('Error adding club:', error);
+            alertify.error("Error adding club");
+          }
+        );
       }
-      else{
-
-
-      console.log(this.createClubForm.value);
-      this.clubService.postAddClub(this.createClubForm.value).subscribe((res) => {
-        console.log(res);
-        alertify.success("Club added")
-        this.createClubForm.reset();
-        this.clubList()
-      })
+    } else {
+      alertify.error('Please fill in the form correctly');
     }
   }
-    else {
-      alertify.error('Input valid Form')
-    }
-  }
-  
+  // loadCurrentClubDetails() {
+  //   // Load the current club details if in edit mode
+  //   this.clubService.getCurrentClubDetails().subscribe((club: any) => {
+  //     this.currentSecretaryEmail = club.contactEmail;
+  //     this.createClubForm.patchValue(club);
+  //     this.loadSecretaries();  // Reload the secretaries to apply the filter
+  //   });
+  // }
   filterClubNames(status: string) {
     if (status === 'Political' || status === 'Non-Political') {
       this.filteredClubList = this.clubListData.filter(club => club.clubStatus === status);
@@ -143,6 +163,7 @@ export class JoinClubsComponent implements OnInit {
 
     })
   }
+  
   editClub(clubId: string) {
     console.log(clubId+'hello');
     debugger

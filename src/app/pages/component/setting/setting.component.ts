@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 })
 export class SettingComponent implements OnInit {
   showUserProfileData: any= null
+  userData:any =null
   constructor(private userService:UserAuthService ){
   }
   ngOnInit(): void {
@@ -18,6 +19,11 @@ export class SettingComponent implements OnInit {
       console.log(res);
       this.showUserProfileData=res.data;
       console.log(this.showUserProfileData);
+    })
+    this.userService.getProfile().subscribe((res)=>{
+      console.log(res);
+      this.userData=res
+    debugger
     })
   }
  

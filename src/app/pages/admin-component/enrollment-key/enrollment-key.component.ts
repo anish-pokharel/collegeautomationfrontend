@@ -4,6 +4,7 @@ import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Va
 import { EnrollmentService } from '../../../core/services/enrollment_service/enrollment.service';
 import * as alertify from 'alertifyjs';
 import { UserAuthService } from '../../../core/services/user_auth/user-auth.service';
+import { DepartmentService } from '../../../core/services/department-service/department.service';
 
 @Component({
   selector: 'app-enrollment-key',
@@ -15,16 +16,19 @@ import { UserAuthService } from '../../../core/services/user_auth/user-auth.serv
 export class EnrollmentKeyComponent implements OnInit {
   enrollmentForm!: FormGroup;
   showTeacherData:any[]=[]
+  departmentData:any[]=[]
   // subjects:any[]=[{name :'',credit:'', code:''}]
 
   constructor(private formBuilder: FormBuilder,
     private enrollmentService: EnrollmentService,
-    private userService:UserAuthService
+    private userService:UserAuthService,
+    private departmentService:DepartmentService
 
   ) {
     this.enrollmentForm = this.formBuilder.group({
       enrollmentKey: ['', Validators.required],
       semester: ['', Validators.required],
+      department: ['', Validators.required],
       subjects: this.formBuilder.array([this.createSubject()]),
 
     });
@@ -33,6 +37,11 @@ export class EnrollmentKeyComponent implements OnInit {
   }
   ngOnInit(): void {
     this.teacherData();
+    this.departmentService.getDepartmentsList().subscribe((res)=>{
+      console.log(res);
+      this.departmentData=res
+      debugger
+    })
 
   }
   createSubject(): FormGroup {

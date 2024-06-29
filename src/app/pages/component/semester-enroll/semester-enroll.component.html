@@ -1,8 +1,8 @@
 <h5>Semster Enroll </h5>
 <div class="my-4">
-  <form [formGroup]="enrollmentKeyForm" (ngSubmit)="enrollButton()" class="col-lg-3">
-    <input type="text" class="form-control" placeholder="Enter Semster Enrollment Key" formControlName="enrollment_key">
-    <button  *ngIf="subjectNotFound" type="submit" class="btn btn-primary mt-3"> Enroll </button>
+  <form   [formGroup]="enrollmentKeyForm" (ngSubmit)="enrollButton()" class="col-lg-3">
+    <input   type="text" class="form-control" placeholder="Enter Semster Enrollment Key" formControlName="enrollment_key">
+    <button *ngIf="subjectNotFound" type="submit" class="btn btn-primary mt-3"> Enroll </button>
   </form>
   <div class="row my-4">
     <div class="col-lg-12">
@@ -38,7 +38,7 @@
             </div>
         
           </ng-template>
-          <button class="btn btn-outline-danger" (click)="deleteEnrollment()">Complete Semester</button>
+          <button  *ngIf="!subjectNotFound" class="btn btn-outline-danger" (click)="deleteEnrollment()">Complete Semester</button>
    
         </div>
       </div>

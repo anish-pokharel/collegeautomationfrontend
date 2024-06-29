@@ -37,8 +37,8 @@ export class DiscussionComponent implements OnInit {
     this.getDiscissionTable();
     this.userRole = localStorage.getItem('userRole')
     const today = new Date();
-  const minDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() );
-  this.minDate =this.formatDate(minDate)
+    const minDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    this.minDate = this.formatDate(minDate)
 
   }
 
@@ -49,32 +49,37 @@ export class DiscussionComponent implements OnInit {
     return `${year}-${month}-${day}`;
   }
   addDiscussion() {
-    if (this.discussionTable.valid) { 
+    debugger
+    console.log('button is clicked');
+    if (this.discussionTable.valid) {
       if (this.isEditMode && this.discussionResultId) {
         this.discussionService.updateDiscussion(this.discussionResultId, this.discussionTable.value).subscribe(res => {
           alertify.success("Discussion updated");
           this.getDiscissionTable();
           this.discussionTable.reset();
+          this.closeModal();
         }, error => {
           console.error('Error updating discussion:', error);
           alertify.error("Error updating discussion");
         });
-      } else {
-      const formData = this.discussionTable.value;
-      console.log(formData);
-      this.discussionService.postDiscussion(formData).subscribe(
-        (res) => {
-          console.log(res);
-          alertify.success('Discussion Added');
-          this.getDiscissionTable();
-          this.discussionTable.reset()
-        })
+      } 
+      else {
+        const formData = this.discussionTable.value;
+        console.log(formData);
+        this.discussionService.postDiscussion(formData).subscribe(
+          (res) => {
+            console.log(res);
+            alertify.success('Discussion Added');
+            this.getDiscissionTable();
+            this.discussionTable.reset()
+            this.closeModal();
+          })
+      }
+
+
     }
-
-
   }
-  }
-  
+
   getDiscissionTable() {
     this.discussionService.getdiscussionData().subscribe((res: any) => {
       this.discussionData = res.discussion;
@@ -95,7 +100,7 @@ export class DiscussionComponent implements OnInit {
         discussion_topic: res.discussion_topic,
         date: res.date,
         decision: res.decision,
-        decision_by:res.decision_by
+        decision_by: res.decision_by
       });
 
       if (this.editModal) {
@@ -131,6 +136,13 @@ export class DiscussionComponent implements OnInit {
       this.editModal.nativeElement.style.display = 'none';
       this.discussionTable.reset()
 
+    }
+  }
+  OpenModal() {
+    if (this.editModal) {
+      this.editModal.nativeElement.classList.add('show');
+      this.editModal.nativeElement.style.display = 'block';
+      this.discussionTable.reset();
     }
   }
 }

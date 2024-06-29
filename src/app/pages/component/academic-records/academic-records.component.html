@@ -147,9 +147,15 @@
   </div>
 </div>
 
-
-<div>
-  <p>Hello admin</p>
-  <input type="file" (change)="onFileChange($event)" />
-  <button (click)="uploadFile()">Upload File</button>
+<div class="container mt-5">
+  <div class="card shadow">
+    <div class="card-body">
+      <h5 class="card-title">File Upload</h5>
+      <div class="form-group">
+        <label for="fileInput">Choose File</label>
+        <input type="file" class="form-control-file" id="fileInput" (change)="onFileChange($event)">
+      </div>
+      <button class="btn btn-primary" (click)="uploadFile()">Upload File</button>
+    </div>
+  </div>
 </div>

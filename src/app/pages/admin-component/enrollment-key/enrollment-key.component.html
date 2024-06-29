@@ -3,15 +3,26 @@
   <form [formGroup]="enrollmentForm" (ngSubmit)="submitForm()">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-12 mb-3">
+        <div class="col-4 mb-3">
           <input type="text" class="form-control" formControlName="enrollmentKey" placeholder="Enter Enrollment Key">
         </div>
+        <div class="col-4 mb-3">
+          <input type="text" class="form-control" formControlName="semester" placeholder="Enter Semester">
+        </div>
+        <div class="col-4 mb-3">
+          <select class="form-control" formControlName="department">
+            <option value="">Select Department</option>
+            <option *ngFor="let dept of departmentData" [value]="dept.createFaculty">{{ dept.createFaculty }}</option>
+
+          </select>
+        </div>
+        
       </div>
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-12 mb-3">
           <input type="text" class="form-control" formControlName="semester" placeholder="Enter Semester">
         </div>
-      </div>
+      </div> -->
       <div formArrayName="subjects" *ngFor="let subject of subjects.controls; let i = index" class="mb-2">
         <div [formGroupName]="i" class="row align-items-center">
           <div class="col-12 col-md-3 mb-2 mb-md-0">
