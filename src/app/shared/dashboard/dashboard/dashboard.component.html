@@ -83,7 +83,8 @@
       </li> -->
       <li class="dropdown navbar-user text-light">
         <a  class="dropdown-toggle" data-toggle="dropdown">
-            <img src="../../../../assets/img/user/ishanimars.jpg" />
+                            <img [src]="showUserProfileData.photo" alt="">
+
             <span class="d-none d-md-inline">{{showUserProfileData.name}}</span>
             <b class="caret"></b>
         </a>
@@ -105,7 +106,8 @@
           <a href="javascript:;" data-toggle="nav-profile">
             <!-- <div class="cover with-shadow"></div> -->
             <div class="image">
-              <img src="../../../../assets/img/user/ishanimars.jpg" alt="edrfsdf" />
+                        <img [src]="showUserProfileData.photo" alt="">
+
             </div>
             <div class="info">
               <b class="caret pull-right"></b>  <a (click)="showSection('setting')">{{showUserProfileData.name}}</a>
