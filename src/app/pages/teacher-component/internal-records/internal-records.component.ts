@@ -13,12 +13,17 @@ import { HttpClient } from '@angular/common/http';
   styleUrl: './internal-records.component.css'
 })
 export class InternalRecordsComponent implements OnInit{
-  selectedFile!: File;
-
+  valuationForm!: FormGroup;
+  selectedFile: File | null = null;
+  subjectList:any[]=[]
   constructor(private formBuilder:FormBuilder,private enrollmentservice: EnrollmentService,private http: HttpClient){}
  
   ngOnInit(): void {
-   
+    this.valuationForm = this.formBuilder.group({
+      type: ['', Validators.required],
+      subject: ['', Validators.required]
+    });
+    this.getSubjectList()
     }
 
     onFileSelected(event: any): void {
@@ -26,24 +31,32 @@ export class InternalRecordsComponent implements OnInit{
     }
   
     onUpload(): void {
-      const valuationType = (document.getElementById('valuationType') as HTMLSelectElement).value;
-  
-      if (!this.selectedFile) {
-        alert('Please select a file');
+      if (this.valuationForm.invalid || !this.selectedFile) {
+        alert('Please fill all required fields and select a file.');
         return;
       }
   
-      const uploadData = new FormData();
-      uploadData.append('file', this.selectedFile, this.selectedFile.name);
-      uploadData.append('type', valuationType);
+      const formData = new FormData();
+      formData.append('file', this.selectedFile, this.selectedFile.name);
+      formData.append('type', this.valuationForm.get('type')?.value);
+      formData.append('subject', this.valuationForm.get('subject')?.value);
   
-      this.http.post('http://localhost:3200/internalUpload', uploadData)
-        .subscribe(response => {
-          console.log('Upload successful', response);
-          alert('Upload successful');
-        }, error => {
-          console.error('Upload error', error);
-          alert('Upload error');
-        });
+      this.http.post('http://localhost:3200/internalUpload', formData)
+        .subscribe(
+          response => {
+            console.log('Upload successful', response);
+            alert('Upload successful');
+          },
+          error => {
+            console.error('Upload error', error);
+            alert('Upload error');
+          }
+        );
+    }
+    getSubjectList(){
+      this.enrollmentservice.getSubjectDataList().subscribe((res) => {
+        console.log(res);
+        this.subjectList = res.subjects;
+      })
     }
   }
