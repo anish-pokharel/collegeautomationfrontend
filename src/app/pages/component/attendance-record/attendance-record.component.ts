@@ -65,7 +65,22 @@ export class AttendanceRecordComponent implements OnInit {
   submitAttendance() {
 
   }
-
+  sendAllOtps(): void {
+    this.enrollmentDatabyEnrolledsubject.forEach(item => {
+      const obj = {
+        studentId: item.rollno,
+        email: item.email
+      };
+      this.otpService.sendOtp(obj).subscribe(
+        response => {
+          console.log(`OTP sent successfully to ${item.email}`, response);
+        },
+        error => {
+          console.error(`Error sending OTP to ${item.email}`, error);
+        }
+      );
+    });
+  }
   
   sendOtp(item: any): void {
     const obj = {

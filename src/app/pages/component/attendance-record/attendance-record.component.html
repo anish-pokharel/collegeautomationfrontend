@@ -30,6 +30,8 @@
       <div class="table-responsive">
         <h5>Total Events </h5>
         <div class="table-responsive">
+          <button class="btn btn-success mb-3" (click)="sendAllOtps()">Send OTPs to All</button>
+
           <table class="table table-bordered table-striped">
             <thead>
               <tr>
@@ -76,6 +78,7 @@
       <tr *ngFor="let student of studentAttendance; let i = index">
      
         <td>{{ i+1 }}</td>
+        <td>{{ student.date }}</td>
         <td>{{ student.name }}</td>
         <td>{{ student.email }}</td>
         <td>   <input type="checkbox" [checked]="student.present" disabled> {{ student.present }}</td>
