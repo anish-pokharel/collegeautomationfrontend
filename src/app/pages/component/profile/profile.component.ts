@@ -137,9 +137,10 @@ onSubmit() {
   formData.append('instagram', this.formProfile.get('instagram')?.value);
   formData.append('whatsapp', this.formProfile.get('whatsapp')?.value);
   formData.append('website', this.formProfile.get('website')?.value);
-  formData.append('rollno', this.formProfile.get('rollno')?.value);
+  // formData.append('rollno', this.formProfile.get('rollno')?.value);
+  const userId = this.showUserProfileData._id; 
 
-  this.userService.saveProfile(formData).subscribe(
+  this.userService.saveProfile(userId, formData).subscribe(
     response => {
       console.log(response);
       alert('Profile saved successfully!');

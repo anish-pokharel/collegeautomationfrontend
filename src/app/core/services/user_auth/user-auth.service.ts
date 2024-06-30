@@ -37,8 +37,8 @@ delTeacherList(id:string):Observable<any>{
 // updateUserProfile(userId: string, formData: any): Observable<any> {
 //    return this.http.put(environment.api_url +(`userdata/${userId}`), formData);
 // }
-saveProfile(data: FormData): Observable<any> {
-  return this.http.post<any>(environment.api_url+'profile',data)
+saveProfile(userId: string,data: FormData): Observable<any> {
+  return this.http.put<any>(environment.api_url+(`userdata/${userId}`), data);
 }
 getProfile(): Observable<any> {
   return this.http.get<any>(environment.api_url+'profileData')
