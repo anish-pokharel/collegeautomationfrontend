@@ -38,6 +38,7 @@ export class AssignmentComponent {
       subject: ['', Validators.required],
       assignment: ['', Validators.required],
       assignmentFile: ['', Validators.required],
+      submitteddate:['']
     });
     this.assignmentForm.get('subject')?.valueChanges.subscribe(selectedSubject => {
       this.filterAssignmentsBySubject(selectedSubject);
@@ -54,7 +55,8 @@ export class AssignmentComponent {
       formData.append('subject', this.assignmentForm.get('subject')!.value);
       formData.append('assignment', this.assignmentForm.get('assignment')!.value);
       formData.append('assignmentFile', this.assignmentForm.get('assignmentFile')!.value);
-
+      formData.append('submitteddate', this.assignmentForm.get('submitteddate')!.value);
+      
       this.assigmentService.postAnswerAssignment(formData).subscribe(
         res => {
           console.log('Assignment submitted successfully:', res);
