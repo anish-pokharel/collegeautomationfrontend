@@ -126,30 +126,50 @@
           <h5 class="card-title">
             Create Club
           </h5>
-          <form [formGroup]="createClubForm" class="row" (ngSubmit)="createClub()">
+          <form [formGroup]="createClubForm" (ngSubmit)="createClub()" class="row">
             <div class="col-lg-3 mb-4">
               <select id="clubStatus" class="form-control" formControlName="clubStatus">
                 <option value="" disabled selected>Select Club Status</option>
                 <option value="Non-Political">Non-Political</option>
                 <option value="Political">Political</option>
               </select>
+              <div *ngIf="createClubForm.get('clubStatus')?.invalid && (createClubForm.get('clubStatus')?.dirty || createClubForm.get('clubStatus')?.touched)">
+                <small class="text-danger" *ngIf="createClubForm.get('clubStatus')?.errors?.['required']">Club Status is required.</small>
+              </div>
             </div>
+          
             <div class="col-lg-3 mb-4">
               <input type="text" formControlName="clubName" class="form-control" placeholder="Club Name">
+              <div *ngIf="createClubForm.get('clubName')?.invalid && (createClubForm.get('clubName')?.dirty || createClubForm.get('clubName')?.touched)">
+                <small class="text-danger" *ngIf="createClubForm.get('clubName')?.errors?.['required']">Club Name is required.</small>
+                <small class="text-danger" *ngIf="createClubForm.get('clubName')?.errors?.['pattern']">Club Name should only contain alphanumeric characters and spaces.</small>
+              </div>
             </div>
+          
             <div class="col-lg-3 mb-4">
               <input type="text" formControlName="contactNumber" class="form-control" placeholder="Club Contact Number">
+              <div *ngIf="createClubForm.get('contactNumber')?.invalid && (createClubForm.get('contactNumber')?.dirty || createClubForm.get('contactNumber')?.touched)">
+                <small class="text-danger" *ngIf="createClubForm.get('contactNumber')?.errors?.['required']">Contact Number is required.</small>
+                <small class="text-danger" *ngIf="createClubForm.get('contactNumber')?.errors?.['pattern']">Contact Number must be exactly 10 digits.</small>
+              </div>
             </div>
+          
             <div class="col-lg-3 mb-4">
               <select class="form-select" formControlName="contactEmail">
-                <option value="" disabled selected>Select Sectary Email</option>
+                <option value="" disabled selected>Select Secretary Email</option>
                 <option *ngFor="let item of secretaryList" [value]="item.email">{{item.name}}</option>
               </select>
+              <div *ngIf="createClubForm.get('contactEmail')?.invalid && (createClubForm.get('contactEmail')?.dirty || createClubForm.get('contactEmail')?.touched)">
+                <small class="text-danger" *ngIf="createClubForm.get('contactEmail')?.errors?.['required']">Secretary Email is required.</small>
+                <small class="text-danger" *ngIf="createClubForm.get('contactEmail')?.errors?.['email']">Invalid Secretary Email.</small>
+              </div>
             </div>
+          
             <div class="col-lg-2 mb-4">
               <button type="submit" class="btn btn-primary">{{ isEditMode ? 'Update' : 'Create' }}</button>
             </div>
           </form>
+          
           
         </div>
       </div>

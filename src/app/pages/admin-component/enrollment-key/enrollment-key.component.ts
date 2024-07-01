@@ -14,41 +14,42 @@ import { DepartmentService } from '../../../core/services/department-service/dep
   styleUrl: './enrollment-key.component.css'
 })
 export class EnrollmentKeyComponent implements OnInit {
-  enrollmentForm!: FormGroup;
-  showTeacherData:any[]=[]
-  departmentData:any[]=[]
-  // subjects:any[]=[{name :'',credit:'', code:''}]
+  enrollmentForm: FormGroup;
+  showTeacherData: any[] = [];
+  departmentData: any[] = [];
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(
+    private formBuilder: FormBuilder,
     private enrollmentService: EnrollmentService,
-    private userService:UserAuthService,
-    private departmentService:DepartmentService
-
+    private userService: UserAuthService,
+    private departmentService: DepartmentService
   ) {
     this.enrollmentForm = this.formBuilder.group({
       enrollmentKey: ['', Validators.required],
-      semester: ['', Validators.required],
+      semester: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
       department: ['', Validators.required],
-      subjects: this.formBuilder.array([this.createSubject()]),
-
+      subjects: this.formBuilder.array([this.createSubject()])
     });
-
-
   }
+
   ngOnInit(): void {
     this.teacherData();
-    this.departmentService.getDepartmentsList().subscribe((res)=>{
-      console.log(res);
-      this.departmentData=res
-      debugger
-    })
-
+    this.departmentService.getDepartmentsList().subscribe((res) => {
+      this.departmentData = res; // Assuming res is an array received from the service
+    });
   }
+
+  getSubjectControl(index: number, controlName: string): any {
+    const subjectsArray = this.enrollmentForm.get('subjects') as FormArray;
+    const subjectGroup = subjectsArray.at(index) as FormGroup;
+    return subjectGroup.get(controlName);
+  }
+
   createSubject(): FormGroup {
     return this.formBuilder.group({
-      name: ['', Validators.required],
-      credit: ['', Validators.required],
-      code: ['', Validators.required],
+      name: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]+$')]],
+      credit: ['', [Validators.required, Validators.pattern('^[0-9]+(?:\.[0-9]+)?$')]],
+      code: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9]+$')]],
       teacher: ['', Validators.required]
     });
   }
@@ -61,28 +62,37 @@ export class EnrollmentKeyComponent implements OnInit {
     this.subjects.push(this.createSubject());
   }
 
-  submitForm() {
-    console.log('object');
-    const check = this.enrollmentForm.valid
-    debugger
+  submitForm(): void {
     if (this.enrollmentForm.valid) {
       console.log(this.enrollmentForm.value);
-      this.enrollmentService.postEnrollment(this.enrollmentForm.value).subscribe((res) => {
-        if (res) {
-          console.log(res);
-          alertify.success('Enrollment is added');
-          this.enrollmentForm.reset()
-        } else {
-          alertify.error('Response is empty');
+      this.enrollmentService.postEnrollment(this.enrollmentForm.value).subscribe(
+        (res) => {
+          if (res) {
+            console.log(res);
+            alertify.success('Enrollment is added');
+            this.enrollmentForm.reset();
+          } else {
+            alertify.error('Response is empty');
+          }
+        },
+        (error) => {
+          console.error('Error submitting form:', error);
+          alertify.error('Failed to submit enrollment');
         }
-      });
+      );
     } else {
       alertify.error('Sorry, the form is invalid');
     }
   }
-  teacherData() {
-    this.userService.getTeacherData().subscribe((res) => {
-      this.showTeacherData = res.faculty
-    })
+
+  teacherData(): void {
+    this.userService.getTeacherData().subscribe(
+      (res) => {
+        this.showTeacherData = res.faculty; // Assuming res is an object with faculty array
+      },
+      (error) => {
+        console.error('Error fetching teacher data:', error);
+      }
+    );
   }
 }

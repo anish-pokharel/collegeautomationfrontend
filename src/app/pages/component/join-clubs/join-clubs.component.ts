@@ -68,8 +68,11 @@ export class JoinClubsComponent implements OnInit {
     this.showJoinedClubFunction();
     this.createClubForm = this.formBuilder.group({
       clubStatus: ['', Validators.required],
-      clubName: ['', Validators.required],
-      contactNumber: ['', Validators.required],
+      clubName: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9 ]+$')]], 
+      contactNumber: ['', [
+        Validators.required,
+        Validators.pattern(/^\d{10}$/) 
+      ]],
       contactEmail: ['', Validators.required],
       createdDate: ['']
     })
@@ -130,8 +133,11 @@ createClub() {
             this.clubList();
           },
           error => {
-            console.error('Error adding club:', error);
-            alertify.error("Error adding club");
+            if (error.error && error.error.message) {
+              alertify.error(error.error.message);
+            } else {
+              alertify.error('Something went wrong');
+            }
           }
         );
       }
@@ -205,26 +211,30 @@ createClub() {
 
   }
 
- 
   onJoin() {
-    debugger
+    debugger;
     if (this.clubForm.valid) {
-      this.clubService.postJoinClub(this.clubForm.value).subscribe((res) => {
-        console.log(res);
-        this.clubForm.reset()
-        alertify.success('Joined Club Requested ')
-
-        this.showJoinedClubFunction();
-        debugger
-      })
+        this.clubService.postJoinClub(this.clubForm.value).subscribe(
+            (res) => {
+                console.log(res);
+                this.clubForm.reset();
+                alertify.success('Join Club Request Sent');
+                this.showJoinedClubFunction();
+                debugger;
+            },
+            (error) => {
+                if (error.error && error.error.message) {
+                    alertify.error(error.error.message);
+                } else {
+                    alertify.error('Join Club Failed');
+                }
+            }
+        );
+    } else {
+        console.log('Please Enter The Valid Data');
+        alertify.error('Join Club Failed');
     }
-    else {
-      console.log('Please Enter The Valid Data');
-      alertify.error('Joined Club Failed ')
-    }
-
-  }
-
+}
 
 
   showJoinedClubFunction() {
