@@ -4,11 +4,12 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { FeedbackService } from '../../../core/services/feedback/feedback.service';
 import { CommonModule } from '@angular/common';
 import { PopUpService } from '../../../core/popup/pop-up.service';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
   selector: 'app-feedback',
   standalone: true,
-  imports: [ReactiveFormsModule,CommonModule],
+  imports: [ReactiveFormsModule,CommonModule,NgxPaginationModule],
   templateUrl: './feedback.component.html',
   styleUrl: './feedback.component.css'
 })
@@ -23,6 +24,8 @@ export class FeedbackComponent implements OnInit {
   pages: number[] = [];
   FeedbackByEmailList:any[]=[]
   showTeacherData:any[]=[]
+  // currentPage = 1;
+
 
   constructor(private formBuilder: FormBuilder, private feedbackService: FeedbackService
     ,    private userService:UserAuthService,private confirmationService:PopUpService

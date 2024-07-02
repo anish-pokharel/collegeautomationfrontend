@@ -6,11 +6,12 @@ import { DepartmentService } from '../../../core/services/department-service/dep
 import { SponsoeshipService } from '../../../core/services/sponsorship-service/sponsoeship.service';
 import * as alertify from 'alertifyjs';
 import { PopUpService } from '../../../core/popup/pop-up.service';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
   selector: 'app-sponsorship',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule,NgxPaginationModule],
   templateUrl: './sponsorship.component.html',
   styleUrl: './sponsorship.component.css'
 })
@@ -22,6 +23,7 @@ export class SponsorshipComponent implements OnInit {
   sponsorshipByAdminList: any[] = []
   userRole: string | null | undefined;
 
+  currentPage = 1;
 
 
   constructor(private fb: FormBuilder, private http: HttpClient, private departmentService: DepartmentService

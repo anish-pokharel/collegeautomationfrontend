@@ -1,6 +1,6 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { AssignmentService } from '../../../core/services/assignment-service/assignment.service';
 import { ModelQuestionService } from '../../../core/services/model-service/model-question.service';
 import { EnrollmentService } from '../../../core/services/enrollment_service/enrollment.service';
@@ -37,16 +37,30 @@ export class AssignmentMaterialsComponent implements OnInit {
   ngOnInit(): void {
     this.assignmentForm = this.formBuilder.group({
       subject: ['', Validators.required],
-      assignmentName: ['', Validators.required],
+      assignmentName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9 ]+$/)]],
       assignmentFile: ['', Validators.required],
-      dueDate: [null, Validators.required],
-      remarks: ['', Validators.required],
+      dueDate: [this.getFormattedDueDate(7), [Validators.required, this.dueDateValidator(7)]],
+      remarks: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9 .,?!]*$/)]]
     });
     this.modelQuestionForm = this.formBuilder.group({
       subject: ['', Validators.required],
       model_question: ['', Validators.required],
       file:  ['', Validators.required],
     });
+  }
+  getFormattedDueDate(daysToAdd: number): string {
+    const today = new Date();
+    today.setDate(today.getDate() + daysToAdd);
+    return formatDate(today, 'yyyy-MM-dd', 'en-US');
+  }
+  dueDateValidator(minDays: number): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const today = new Date();
+      const dueDate = new Date(control.value);
+      const minDate = new Date(today.setDate(today.getDate() + minDays));
+
+      return dueDate >= minDate ? null : { 'dueDateInvalid': true };
+    };
   }
   onFileChange(event: any): void {
     const file = event.target.files[0];
