@@ -32,14 +32,17 @@ export class DepartmentComponent implements OnInit {
     this.facultyId = this.route.snapshot.paramMap.get('id');
     this.isEditMode = !!this.facultyId;
 
-    
+
     this.facultyFormData();
     this.showDepartmentList();
   }
 
   facultyFormData() {
     this.createFacultyForm = this.formBuilder.group({
-      createFaculty: ['', Validators.required],
+      createFaculty: ['', [
+        Validators.required,
+        Validators.pattern('^[a-zA-Z ]+$') 
+      ]],
       hod: ['', Validators.required]
     })
   }
@@ -51,24 +54,34 @@ export class DepartmentComponent implements OnInit {
           alertify.success("Faculty updated");
           this.showDepartmentList();
           this.createFacultyForm.reset();
-          this.isEditMode=false;
-          this.facultyId=null;
+          this.isEditMode = false;
+          this.facultyId = null;
         }, error => {
           console.error('Error updating faculty:', error);
           alertify.error("Error updating faculty");
         });
       } else {
-        this.departmentService.postDepartmentsList(this.createFacultyForm.value).subscribe(res => {
-          console.log(res);
-          alertify.success("Faculty added");
-          this.showDepartmentList();
-          this.createFacultyForm.reset();
-        }, error => {
-          console.error('Error creating faculty:', error);
-          alertify.error("Error creating faculty");
-        });
+        // this.departmentService.postDepartmentsList(this.createFacultyForm.value).subscribe(res => {
+          if (this.createFacultyForm.valid) {
+            this.departmentService.postDepartmentsList(this.createFacultyForm.value).subscribe(
+              (response) => {
+                console.log(response);
+                alertify.success('Faculty created successfully');
+                this.createFacultyForm.reset();
+              },
+              (error) => {
+                if (error.error && error.error.message) {
+                  alertify.error(error.error.message);
+                } else {
+                  alertify.error('Something went wrong');
+                }
+              }
+            );
+          } else {
+            alertify.error('Please fill in all fields correctly');
+          }
+        }
       }
-    }
   }
   showDepartmentList() {
     this.departmentService.getDepartmentsList().subscribe((res) => {

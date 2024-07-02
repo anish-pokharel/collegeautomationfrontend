@@ -4,29 +4,61 @@
             <h2 class="mb-4">Event Form</h2>
             <form class="row" [formGroup]="eventForm" (ngSubmit)="onSubmit()">
                 <div class="mb-3 col-lg-4">
-                    <label for="eventName" class="form-label">Event Name</label>
-                    <input type="text" class="form-control" formControlName="eventName" placeholder="Enter event name"
-                        required>
+                  <label for="eventName" class="form-label">Event Name</label>
+                  <input type="text" class="form-control" formControlName="eventName" placeholder="Enter event name" required>
+                  <div *ngIf="eventForm.get('eventName')?.invalid && (eventForm.get('eventName')?.dirty || eventForm.get('eventName')?.touched)"
+                       class="text-danger">
+                    <div *ngIf="eventForm.get('eventName')?.errors?.['required']">
+                      Event Name is required
+                    </div>
+                    <div *ngIf="eventForm.get('eventName')?.errors?.['pattern']">
+                      Event Name must contain only alphabets and spaces
+                    </div>
+                  </div>
                 </div>
                 <div class="mb-3 col-lg-4">
                     <label for="eventDate" class="form-label">Event Date</label>
                     <input type="date" class="form-control" formControlName="eventDate" [min]="minDate" required>
-                </div>
+                    <div *ngIf="eventForm.get('eventDate')?.invalid && (eventForm.get('eventDate')?.dirty || eventForm.get('eventDate')?.touched)"
+                         class="text-danger">
+                      <div *ngIf="eventForm.get('eventDate')?.errors?.['required']">
+                        Event Date is required
+                      </div>
+                      <div *ngIf="eventForm.get('eventDate')?.errors?.['invalidDate']">
+                        Event Date must be today or later
+                      </div>
+                    </div>
+                  </div>
                 <div class="mb-3 col-lg-4">
-                    <label for="location" class="form-label">Location</label>
-                    <input type="text" class="form-control" formControlName="location"
-                        placeholder="Enter event location" required>
+                  <label for="location" class="form-label">Location</label>
+                  <input type="text" class="form-control" formControlName="location" placeholder="Enter event location" required>
+                  <div *ngIf="eventForm.get('location')?.invalid && (eventForm.get('location')?.dirty || eventForm.get('location')?.touched)"
+                       class="text-danger">
+                    <div *ngIf="eventForm.get('location')?.errors?.['required']">
+                      Location is required
+                    </div>
+                    <div *ngIf="eventForm.get('location')?.errors?.['pattern']">
+                      Location must not contain special characters
+                    </div>
+                  </div>
                 </div>
                 <div class="mb-3 col-lg-12">
-                    <label for="description" class="form-label">Description</label>
-                    <textarea class="form-control" formControlName="description" rows="3"
-                        placeholder="Enter event description"></textarea>
+                  <label for="description" class="form-label">Description</label>
+                  <textarea class="form-control" formControlName="description" rows="3" placeholder="Enter event description"></textarea>
+                  <div *ngIf="eventForm.get('description')?.invalid && (eventForm.get('description')?.dirty || eventForm.get('description')?.touched)"
+                       class="text-danger">
+                    <div *ngIf="eventForm.get('description')?.errors?.['required']">
+                      Description is required
+                    </div>
+                  </div>
                 </div>
                 <div class="col-lg-4">
-                    <button type="submit" class="btn btn-primary" [disabled]="eventForm.invalid">{{ isEditMode ?
-                        'Update' : 'Create' }}</button>
+                  <button type="submit" class="btn btn-primary" [disabled]="eventForm.invalid">
+                    {{ isEditMode ? 'Update' : 'Create' }}
+                  </button>
                 </div>
-            </form>
+              </form>
+              
         </div>
     </div>
     <div class="card my-4">

@@ -34,7 +34,7 @@ export class UserManagementComponent implements OnInit {
   }
   ngOnInit(): void {
     this.userForm = this.formBuilder.group({
-      name: ['', Validators.required],
+      name: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]], // Pattern for letters and spaces
       email: ['', [Validators.required, Validators.email]],
       rollno: [null],
       address: ['', Validators.required],

@@ -25,13 +25,14 @@ export class JobVacancyComponent implements OnInit {
     private confirmationService: PopUpService
   ) {
     this.vacancyForm = this.fb.group({
-      vacancyPosition: ['', Validators.required],
-      vacancyExperience: ['', Validators.required],
-      vacancyLevel: ['', Validators.required],
-      vacancySubject: ['', Validators.required],
-      vacancyQualification: ['', Validators.required],
+      vacancyPosition: ['', [Validators.required, Validators.pattern(/^[a-zA-Z ]*$/)]], 
+      vacancyExperience: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9 ]*$/)]],
+      vacancyLevel: ['', [Validators.required, Validators.pattern(/^[a-zA-Z ]*$/)]], 
+      vacancySubject: ['', [Validators.required,Validators.pattern(/^[a-zA-Z ]*$/)]],  
+      vacancyQualification: ['', [Validators.required, Validators.pattern(/^[a-zA-Z ]*$/)]], 
       time: ['', Validators.required],
-      vacancySalary: ['', Validators.required]
+      vacancySalary: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]]
+    
     });
   }
 

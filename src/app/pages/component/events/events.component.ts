@@ -43,12 +43,25 @@ ngOnInit(): void {
 
     this.eventForm=this.formBuilder.group({
       eventName:['',Validators.required],
-      eventDate: [, [Validators.required]],
+      eventDate: ['', [Validators.required, this.dateValidator()]], // Custom date validator
       location:['',Validators.required],
       description:['',Validators.required],
       createdDate:['']
     })
 
+  }
+  dateValidator() {
+    return (control: { value: any; }) => {
+      const inputDate = control.value;
+      const today = new Date();
+      today.setDate(today.getDate() + 2); // Today + 2 days
+      const minDate = this.formatDate(today);
+
+      if (inputDate < minDate) {
+        return { invalidDate: true };
+      }
+      return null;
+    };
   }
   formatDate(date: Date): string {
     const year = date.getFullYear();

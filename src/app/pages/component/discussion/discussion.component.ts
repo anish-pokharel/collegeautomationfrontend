@@ -29,8 +29,8 @@ export class DiscussionComponent implements OnInit {
   @ViewChild('exampleModal') editModal!: ElementRef;
   ngOnInit(): void {
     this.discussionTable = this.formBuilder.group({
-      discussion_topic: ['', Validators.required],
-      date: ['', Validators.required],
+      discussion_topic: ['', [Validators.required, Validators.pattern('^[A-Za-z]+$')]],
+      date: ['', [Validators.required, Validators.pattern('^\\d{4}-\\d{2}-\\d{2}$')]], // Ensures date is in YYYY-MM-DD format
       decision_by: [''],
       decision: ['', Validators.required],
     })
