@@ -19,23 +19,48 @@
             <div class="modal-body">
               <form (ngSubmit)="addDiscussion()" [formGroup]="discussionTable">
                 <div class="form-group">
-                  <input type="text" class="form-control" placeholder="discussionTopic"
-                    formControlName="discussion_topic" required>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Discussion Topic"
+                    formControlName="discussion_topic"
+                    required
+                  >
+                  <div *ngIf="discussionTable.get('discussion_topic')?.invalid && (discussionTable.get('discussion_topic')?.dirty || discussionTable.get('discussion_topic')?.touched)">
+                    <small *ngIf="discussionTable.get('discussion_topic')?.errors?.['required']" class="text-danger">Discussion topic is required.</small>
+                    <small *ngIf="discussionTable.get('discussion_topic')?.errors?.['pattern']" class="text-danger">Discussion topic can only contain alphabetic characters.</small>
+                  </div>
                 </div>
                 <div class="form-group">
-                  <input type="date" class="form-control" formControlName="date" placeholder="date"  [min]="minDate" >
+                  <input
+                    type="date"
+                    class="form-control"
+                    formControlName="date"
+                    placeholder="Date"
+                    [min]="minDate"
+                  >
+                  <div *ngIf="discussionTable.get('date')?.invalid && (discussionTable.get('date')?.dirty || discussionTable.get('date')?.touched)">
+                    <small *ngIf="discussionTable.get('date')?.errors?.['required']" class="text-danger">Date is required.</small>
+                    <small *ngIf="discussionTable.get('date')?.errors?.['pattern']" class="text-danger">Invalid date format. Expected YYYY-MM-DD.</small>
+                  </div>
                 </div>
-                <!-- <div class="form-group">
-                  <input type="text" class="form-control" formControlName="decision_by" placeholder="decisionBy">
-                </div> -->
                 <div class="form-group">
-                  <input type="text" class="form-control" formControlName="decision" placeholder="decision">
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="decision"
+                    placeholder="Decision"
+                  >
+                  <div *ngIf="discussionTable.get('decision')?.invalid && (discussionTable.get('decision')?.dirty || discussionTable.get('decision')?.touched)">
+                    <small *ngIf="discussionTable.get('decision')?.errors?.['required']" class="text-danger">Decision is required.</small>
+                  </div>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModal()">Close</button>
                   <button type="submit" class="btn btn-primary">{{ isEditMode ? 'Update' : 'Create' }}</button>
                 </div>
               </form>
+              
             </div>
 
           </div>
