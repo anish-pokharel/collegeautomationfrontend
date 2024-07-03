@@ -30,6 +30,9 @@ export class AttendanceRecordComponent implements OnInit {
   name!: string;
   enteredDateOtp!: string;
 
+  location: string | undefined;
+
+
 
 
 
@@ -58,34 +61,36 @@ export class AttendanceRecordComponent implements OnInit {
       this.studentAttendance = student.attendance;
 
     })
+    this.getUserLocation();
   }
   
  
+  getUserLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          this.location = `Latitude: ${position.coords.latitude}, Longitude: ${position.coords.longitude}`;
+        },
+        (error) => {
+          console.error('Error getting location', error);
+          this.location = 'Unable to retrieve location';
+        }
+      );
+    } else {
+      this.location = 'Geolocation is not supported by this browser.';
+    }
+  }
 
   submitAttendance() {
 
   }
-  sendAllOtps(): void {
-    this.enrollmentDatabyEnrolledsubject.forEach(item => {
-      const obj = {
-        studentId: item.rollno,
-        email: item.email
-      };
-      this.otpService.sendOtp(obj).subscribe(
-        response => {
-          console.log(`OTP sent successfully to ${item.email}`, response);
-        },
-        error => {
-          console.error(`Error sending OTP to ${item.email}`, error);
-        }
-      );
-    });
-  }
-  
+ 
+
   sendOtp(item: any): void {
     const obj = {
       studentId: item.rollno,
-      email: item.email
+      email: item.email,
+      location: this.location 
     };
     this.otpService.sendOtp(obj).subscribe(
       response => {
@@ -96,17 +101,77 @@ export class AttendanceRecordComponent implements OnInit {
       }
     );
   }
+
+  sendAllOtps(): void {
+    this.enrollmentDatabyEnrolledsubject.forEach(item => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const location = {
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude
+            };
+            const obj = {
+              studentId: item.rollno,
+              email: item.email,
+              location
+            };
+            this.otpService.sendOtp(obj).subscribe(
+              response => {
+                console.log(`OTP sent successfully to ${item.email}`, response);
+              },
+              error => {
+                console.error(`Error sending OTP to ${item.email}`, error);
+              }
+            );
+          },
+          (error) => {
+            console.error('Error getting location', error);
+          }
+        );
+      } else {
+        console.error('Geolocation is not supported by this browser.');
+      }
+    });
+  }
+  
   verifyOTP() {
-    this.otpService.verifyOtp(this.email, this.otp)
-      .subscribe(
-        response => {
-          console.log('Attendance marked successfully');
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const location = {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+          };
+          this.otpService.verifyOtp(this.email, this.otp, location)
+            .subscribe(
+              response => {
+                if (response.success) {
+                  this.verified = true;
+                  this.invalidOtp = false;
+                  this.error = '';
+                } else {
+                  this.verified = false;
+                  this.invalidOtp = true;
+                  this.error = response.error;
+                }
+                console.log('Attendance marked successfully');
+              },
+              error => {
+                this.error = 'Error verifying OTP: ' + error.message;
+                console.error('Error marking attendance:', error);
+              }
+            );
         },
-        error => {
-          console.error('Error marking attendance:', error);
+        (error) => {
+          this.error = 'Error getting location: ' + error.message;
+          console.error('Error getting location', error);
         }
       );
+    } else {
+      this.error = 'Geolocation is not supported by this browser.';
+    }
   }
-}
+  
 
- 
+}
