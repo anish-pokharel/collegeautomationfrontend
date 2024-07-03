@@ -17,7 +17,8 @@ export class OtpService {
   getAttendance():Observable<any>{
     return this.http.get(environment.api_url+'attendance')
   }
-  verifyOtp(email: string, otp: string):Observable<any>{
-    return this.http.post(environment.api_url+'verify-otp',{ email, otp, })
+  verifyOtp(email: string, otp: string, location: {latitude: number, longitude: number}): Observable<any> {
+    return this.http.post(environment.api_url + 'verify-otp', { email, otp, location });
   }
+  
 }
