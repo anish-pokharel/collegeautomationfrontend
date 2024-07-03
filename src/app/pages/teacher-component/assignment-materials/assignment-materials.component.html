@@ -5,31 +5,45 @@
                 <div class="card-body text-center">
                     <h5>Assignment Add</h5>
                     <form [formGroup]="assignmentForm" (ngSubmit)="onSubmit()">
-                        <div class="col-lg-12 mb-4">
-                            <select class="form-select" formControlName="subject">
-                                <option value="" disabled selected>Select subject</option>
-                                <option *ngFor="let item of subjectList" [value]="item.name">{{item.name}}</option>
-                            </select>
+                      <div class="col-lg-12 mb-4">
+                        <select class="form-select" formControlName="subject">
+                          <option value="" disabled selected>Select subject</option>
+                          <option *ngFor="let item of subjectList" [value]="item.name">{{item.name}}</option>
+                        </select>
+                      </div>
+                      <div class="col-lg-12 mb-4">
+                        <input type="text" class="form-control" formControlName="assignmentName" placeholder="Enter Assignment name" />
+                        <div *ngIf="assignmentForm.controls['assignmentName'].invalid && (assignmentForm.controls['assignmentName'].dirty || assignmentForm.controls['assignmentName'].touched)">
+                          <small class="text-danger" *ngIf="assignmentForm.controls['assignmentName'].errors?.['required']">Assignment name is required.</small>
+                          <small class="text-danger" *ngIf="assignmentForm.controls['assignmentName'].errors?.['pattern']">Invalid assignment name. Only alphanumeric characters and spaces are allowed.</small>
                         </div>
-                        <div class="col-lg-12 mb-4">
-
-                            <input type="text" class="form-control" formControlName="assignmentName"
-                                placeholder="Enter Assignment name " />
+                      </div>
+                      <div class="col-lg-12 mb-4">
+                        <input type="file" class="form-control" (change)="onFileChange($event)" />
+                        <div *ngIf="assignmentForm.controls['assignmentFile'].invalid && (assignmentForm.controls['assignmentFile'].dirty || assignmentForm.controls['assignmentFile'].touched)">
+                          <small class="text-danger">Assignment file is required.</small>
                         </div>
-                        <div class="col-lg-12 mb-4">
-                            <input type="file" class="form-control" (change)="onFileChange($event)" />
+                      </div>
+                      <div class="col-lg-12 mb-4">
+                        <input type="date" class="form-control" formControlName="dueDate" placeholder="Due Date" />
+                        <div *ngIf="assignmentForm.controls['dueDate'].invalid && (assignmentForm.controls['dueDate'].dirty || assignmentForm.controls['dueDate'].touched)">
+                          <small class="text-danger" *ngIf="assignmentForm.controls['dueDate'].errors?.['required']">Due date is required.</small>
+                          <small class="text-danger" *ngIf="assignmentForm.controls['dueDate'].errors?.['dueDateInvalid']">Due date must be at least 7 days from today.</small>
                         </div>
-                        <div class="col-lg-12 mb-4">
-                            <input type="date" class="form-control" formControlName="dueDate" placeholder="Due Date" />
+                      </div>
+                      <div class="col-lg-12 mb-4">
+                        <input type="text" class="form-control" formControlName="remarks" placeholder="Remarks" />
+                        <div *ngIf="assignmentForm.controls['remarks'].invalid && (assignmentForm.controls['remarks'].dirty || assignmentForm.controls['remarks'].touched)">
+                          <small class="text-danger" *ngIf="assignmentForm.controls['remarks'].errors?.['required']">Remarks are required.</small>
+                          <small class="text-danger" *ngIf="assignmentForm.controls['remarks'].errors?.['pattern']">Invalid remarks. Only alphanumeric characters, spaces, and punctuation are allowed.</small>
                         </div>
-                        <div class="col-lg-12 mb-4">
-                            <input type="text" class="form-control" formControlName="remarks" placeholder="Remarks" />
-                        </div>
-                        <div class="col-lg-12 mb-4">
-                            <button type="submit" class="btn btn-primary mb-4"
-                                [disabled]="assignmentForm.invalid">Apply</button>
-                        </div>
+                      </div>
+                      <div class="col-lg-12 mb-4">
+                        <button type="submit" class="btn btn-primary mb-4" [disabled]="assignmentForm.invalid">Apply</button>
+                      </div>
                     </form>
+                    
+                      
 
                 </div>
             </div>

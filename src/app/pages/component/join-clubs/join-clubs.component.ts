@@ -7,6 +7,8 @@ import * as alertify from 'alertifyjs';
 import { UserAuthService } from '../../../core/services/user_auth/user-auth.service';
 import { PopUpService } from '../../../core/popup/pop-up.service';
 import { ActivatedRoute } from '@angular/router';
+import { NgxPaginationModule } from 'ngx-pagination';
+
 interface ClubData {
   Requested_Clubs: Club[];
   Accepted_Clubs: Club[];
@@ -19,7 +21,9 @@ interface Club {
   reason: string;
   joinedDate: string;
   decision: string;
+  type: string;
 }
+
 
 interface ClubEmail{
   Requested_Clubs: Club[];
@@ -29,18 +33,25 @@ interface ClubEmail{
 @Component({
   selector: 'app-join-clubs',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule,NgxPaginationModule],
   templateUrl: './join-clubs.component.html',
   styleUrl: './join-clubs.component.css'
 })
 export class JoinClubsComponent implements OnInit {
   clubForm!: FormGroup
   clubListData: any[] = []
-  showJoinedClub:ClubEmail={
+  showJoinedClub: {
+    Requested_Clubs: Club[];
+    Accepted_Clubs: Club[];
+    Rejected_Clubs: Club[];
+  } = {
     Requested_Clubs: [],
     Accepted_Clubs: [],
     Rejected_Clubs: []
-  }
+  };
+
+  allClubs: Club[] = [];
+  page: number = 1;
 
   createFacultyForm!: FormGroup;
   createClubForm!: FormGroup;
@@ -237,18 +248,18 @@ createClub() {
 }
 
 
-  showJoinedClubFunction() {
-    this.clubService.getClubListByEmail().subscribe((res) => {
-      console.log(res + "joined club is ");
-      this.showJoinedClub = res
+showJoinedClubFunction() {
+  this.clubService.getClubListByEmail().subscribe((res: any) => {
+    this.showJoinedClub = res;
 
-      // this.showJoinedClub=[
-      //   ...res.Requested_Clubs,
-      //   ...res.Accepted_Clubs,
-      //   ...res.Rejected_Clubs
-      // ]
-    })
-  }
+    this.allClubs = [
+      ...this.showJoinedClub.Requested_Clubs.map(club => ({ ...club, type: 'Requested' })),
+      ...this.showJoinedClub.Accepted_Clubs.map(club => ({ ...club, type: 'Accepted' })),
+      ...this.showJoinedClub.Rejected_Clubs.map(club => ({ ...club, type: 'Rejected' }))
+    ];
+  });
+}
+
 
   showJoinedClubbyClubNameFunction() {
     this.clubService.getJoinedClubbyClubnameApi().subscribe((res) => {

@@ -3,11 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { EventService } from '../../../core/services/event-service/event.service';
 import { PopUpService } from '../../../core/popup/pop-up.service';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
   selector: 'app-events',
   standalone: true,
-  imports: [ReactiveFormsModule,CommonModule],
+  imports: [ReactiveFormsModule,CommonModule,NgxPaginationModule],
   templateUrl: './events.component.html',
   styleUrl: './events.component.css'
 })
@@ -20,6 +21,7 @@ export class EventsComponent implements OnInit{
   isEditMode:boolean= false;
   updateEvenID:string | null = null;
   userRole: string | null | undefined;
+  currentPage = 1;
 
 
 

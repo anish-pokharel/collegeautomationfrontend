@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ModelQuestionService } from '../../../core/services/model-service/model-question.service';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PopUpService } from '../../../core/popup/pop-up.service';
 import { EnrollmentService } from '../../../core/services/enrollment_service/enrollment.service';
 import { AssignmentService } from '../../../core/services/assignment-service/assignment.service';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
   selector: 'app-model-question',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule],
+  imports: [CommonModule,ReactiveFormsModule,NgxPaginationModule,FormsModule],
   templateUrl: './model-question.component.html',
   styleUrl: './model-question.component.css'
 })
@@ -19,9 +20,14 @@ export class ModelQuestionComponent implements OnInit {
   modelQuestionForm!: FormGroup;
   subjectList: any[] = [];
   assignmentList:any[]=[]
+  currentPage = 1;
 
+  searchTerm: string = '';
 
-  getQuestionsByEnrolledSubjectData:any[]=[]
+  getQuestionsByEnrolledSubjectData: any[] = [];
+  filteredQuestions: any[] = [];
+
+  // getQuestionsByEnrolledSubjectData:any[]=[]
 constructor(private modelService:ModelQuestionService, private confirmationService: PopUpService,
   private enrollmentService: EnrollmentService,private assignmentService: AssignmentService,private formBuilder: FormBuilder
 
@@ -45,7 +51,14 @@ constructor(private modelService:ModelQuestionService, private confirmationServi
     this.modelService.getQuestionsByEnrolledSubjectAPI().subscribe((res)=>{
       console.log(res);
       this.getQuestionsByEnrolledSubjectData=res.Model_Questions
+      this.filteredQuestions = res.Model_Questions;
+
     })
+  }
+  searchQuestions() {
+    this.filteredQuestions = this.getQuestionsByEnrolledSubjectData.filter(item =>
+      item.subject.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
   }
   onSubmitQuestion(): void {
     if (this.modelQuestionForm.valid) {
