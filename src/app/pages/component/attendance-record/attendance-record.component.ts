@@ -57,10 +57,16 @@ export class AttendanceRecordComponent implements OnInit {
         // this.subject =  res.data.subject;
         // this.remarks =  res.data.remarks;
     })
-    this.otpService.getAttendance().subscribe((student) => {
+    this.otpService.getAttendanceEmail().subscribe((student) => {
       this.studentAttendance = student.attendance;
+      debugger
 
     })
+    // this.otpService.getAttendanceTeacher().subscribe((resp) => {
+    //   console.log(resp);
+    //   debugger
+
+    // })
     this.getUserLocation();
   }
   

@@ -10,7 +10,7 @@ export class UserAuthService {
 
   constructor(private http:HttpClient) { }
 postuserRegister(obj:any):Observable<any>{
-  return this.http.post(environment.api_url+'signup',obj)
+  return this.http.post(environment.api_url+'signupUser',obj)
 }
 postUserSignIn(obj:any):Observable<any>{
   return this.http.post(environment.api_url+'signin',obj)
@@ -29,6 +29,9 @@ getStudentData():Observable<any>{
 }
 getSecretarytData():Observable<any>{
   return this.http.get(environment.api_url+'user/secretary')
+}
+getIdCardData():Observable<any>{
+  return this.http.get(environment.api_url+'idcard')
 }
 delTeacherList(id:string):Observable<any>{
   return this.http.delete<any>(environment.api_url+(`deleteTeacher/${id}`))

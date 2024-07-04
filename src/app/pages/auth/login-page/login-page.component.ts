@@ -31,6 +31,7 @@ export class LoginPageComponent implements OnInit {
 
   loginButton(){
     if(this.loginForm.valid){
+      debugger
       this.userSignIn.postUserSignIn(this.loginForm.value).subscribe((res)=>{
         debugger
         if (res && res.message === 'Login Sucessfull'){
