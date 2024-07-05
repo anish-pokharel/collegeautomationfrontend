@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {  Router } from '@angular/router';
 
 @Component({
@@ -8,14 +8,23 @@ import {  Router } from '@angular/router';
   templateUrl: './website.component.html',
   styleUrl: './website.component.css'
 })
-export class WebsiteComponent {
+export class WebsiteComponent implements OnInit {
   constructor(private router:Router) {
-    
   }
   loginButton(){
     this.router.navigate(['login'])
   }
   registerButton(){
     this.router.navigate(['register'])
+  }
+  checkUserToken(): void {
+    const userToken = localStorage.getItem('userToken');
+    if (userToken) {
+      this.router.navigate(['/dashboard']);
+    }
+  }
+  ngOnInit(): void {
+    this.checkUserToken();
+    
   }
 }

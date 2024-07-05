@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of, tap } from 'rxjs';
 import { environment } from '../../../../environments/environment.development';
 
 @Injectable({
@@ -9,6 +9,14 @@ import { environment } from '../../../../environments/environment.development';
 export class UserAuthService {
 
   constructor(private http:HttpClient) { }
+  login(credentials: { email: string; password: string }) {
+    return this.http.post<any>('http://localhost:3000/login', credentials).pipe(
+      tap(({ accessToken }) => {
+        localStorage.setItem('accessToken', accessToken);
+      })
+    );
+  }
+
 postuserRegister(obj:any):Observable<any>{
   return this.http.post(environment.api_url+'signupUser',obj)
 }
@@ -73,10 +81,10 @@ getUserToken() {
   return localStorage.getItem('userToken');
 }
 
-isLoggedIn(): boolean {
-  return !!this.getUserToken();
+isLoggedIn(): Observable<boolean> {
+  const authToken = localStorage.getItem('userToken');
+  return of(!!authToken); // Convert the existence of authToken into a boolean
 }
-
 logout() {
   localStorage.removeItem('userData');
   localStorage.removeItem('userRole');

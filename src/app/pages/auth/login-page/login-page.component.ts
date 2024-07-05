@@ -27,8 +27,14 @@ export class LoginPageComponent implements OnInit {
       email:['',Validators.required],
       password:['',Validators.required]
     })
+    this.checkUserToken()
   }
-
+  checkUserToken(): void {
+    const userToken = localStorage.getItem('userToken');
+    if (userToken) {
+      this.router.navigate(['/dashboard']);
+    }
+  }
   loginButton(){
     if(this.loginForm.valid){
       debugger
