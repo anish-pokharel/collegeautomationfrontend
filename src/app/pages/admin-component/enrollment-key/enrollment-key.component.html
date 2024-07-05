@@ -54,12 +54,6 @@
             Teacher Name is required
           </div>
         </div>
-        <div class="col-12 col-md-3 mb-2 mb-md-0">
-          <input type="file" (change)="onFileChange($event, i)" class="form-control" placeholder="Upload Image">
-          <div *ngIf="getSubjectControl(i, 'image')?.invalid && getSubjectControl(i, 'image')?.touched" class="text-danger">
-            Subject Image is required
-          </div>
-        </div>
       </div>
     </div>
 
