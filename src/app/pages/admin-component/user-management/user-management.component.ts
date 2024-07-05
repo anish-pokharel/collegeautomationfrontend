@@ -41,12 +41,30 @@ export class UserManagementComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required],
       role: ['', Validators.required]
-    })
+    });
+
+    this.userForm.get('role')?.valueChanges.subscribe(role => {
+      this.setRollNoValidation(role);
+    });
     this.teacherData();
     this.getSubjectList()
     this.secretaryCount()
     this.studentCount()
 
+  }
+  setRollNoValidation(role: string): void {
+    const rollnoControl = this.userForm.get('rollno');
+    if (role === 'student') {
+      rollnoControl?.setValidators([Validators.required]);
+    } else {
+      rollnoControl?.clearValidators();
+    }
+    rollnoControl?.updateValueAndValidity();
+  }
+
+  onRoleChange(): void {
+    const role = this.userForm.get('role')?.value;
+    this.setRollNoValidation(role);
   }
   createUser() {
     if (this.userForm.valid) {

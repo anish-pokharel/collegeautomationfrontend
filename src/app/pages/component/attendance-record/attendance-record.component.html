@@ -1,19 +1,11 @@
 <div id="" class="" *ngIf="userRole == 'student'">
   <div class="row">
-    <div class="col-lg-12">
-      <label>Enter OTP:</label>
-
-    </div>
-    <div class="row">
-
       <div class="row">
         <div class="col-lg-12">
           <label>Enter OTP:</label>
-          <input type="text"  placeholder="OTP" [(ngModel)]="otp">
-          <!-- <input type="text" placeholder="SUBJECT" [(ngModel)]="enteredSubject"> -->
-          <!-- <input type="date" placeholder="date" [(ngModel)]="enteredDate">
-          <input type="remarks"  placeholder="Remarks"[(ngModel)]="enteredRemarks"> -->
-          <button type="submit" (click)="verifyOTP()">Verify OTP</button>
+          <input type="text" class="form-control" placeholder="OTP" [(ngModel)]="otp">
+     
+          <button type="submit" class="btn btn-primary my-2" (click)="verifyOTP()">Verify OTP</button>
         </div>
       </div>
       <p *ngIf="verified">Attendance marked present!</p>
@@ -22,7 +14,6 @@
       <!-- end col-10 -->
     </div>
   </div>
-</div>
 
   <div *ngIf="userRole == 'faculty'">
     <div>
@@ -36,7 +27,7 @@
             <thead>
               <tr>
                 <th>SN</th>
-                <th> Date</th>
+                <th> Name</th>
                 <th>Email</th>
                 <th>Rollno</th>
                 <th>Action</th>
@@ -73,14 +64,16 @@
         <th>SN</th>
         <th>Date</th>
         <th>Email</th>
-        <th>Present</th>
+        <th>Status</th>
       </tr>
       <tr *ngFor="let student of studentAttendance; let i = index">
      
         <td>{{ i+1 }}</td>
         <td>{{ student.date }}</td>
-        <td>{{ student.name }}</td>
         <td>{{ student.email }}</td>
+        <!-- <td>{{ student.name }}</td> -->
+        <td>{{ student.present ? 'Present' : 'Absent' }}</td>
+
         <td>   <input type="checkbox" [checked]="student.present" disabled> {{ student.present }}</td>
       </tr>
     </table>
