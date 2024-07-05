@@ -1,3 +1,4 @@
+<!-- login.component.html -->
 <div class="login login-with-news-feed">
   <!-- News feed section -->
   <div class="news-feed">
@@ -22,12 +23,11 @@
                  type="text"
                  class="form-control form-control-lg inverse-mode"
                  placeholder="Email"
-                 pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
                  required
           />
           <div *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)">
             <small *ngIf="loginForm.get('email')?.errors?.['required']" class="text-danger">Email is required.</small>
-            <small *ngIf="loginForm.get('email')?.errors?.['pattern']" class="text-danger">Invalid email format.</small>
+            <small *ngIf="loginForm.get('email')?.errors?.['email']" class="text-danger">Invalid email format.</small>
           </div>
         </div>
 
@@ -67,9 +67,6 @@
   </div>
 </div>
 
-
-<!-- <button (click)="openForgotPasswordModal()">Forgot Password?</button> -->
-
 <!-- Modal for Forgot Password -->
 <div class="modal" [class.active]="showForgotPasswordModal">
   <div class="modal-content">
@@ -79,14 +76,24 @@
       <div class="form-group">
         <label for="email">Email</label>
         <input type="email" formControlName="email" id="email" required>
+        <div *ngIf="forgotPasswordForm.get('email')?.invalid && (forgotPasswordForm.get('email')?.dirty || forgotPasswordForm.get('email')?.touched)">
+          <small *ngIf="forgotPasswordForm.get('email')?.errors?.['required']" class="text-danger">Email is required.</small>
+          <small *ngIf="forgotPasswordForm.get('email')?.errors?.['email']" class="text-danger">Invalid email format.</small>
+        </div>
       </div>
-      <div class="form-group">
+      <div class="form-group" *ngIf="token">
         <label for="newPassword">New Password</label>
         <input type="password" formControlName="newPassword" id="newPassword" required>
+        <div *ngIf="forgotPasswordForm.get('newPassword')?.invalid && (forgotPasswordForm.get('newPassword')?.dirty || forgotPasswordForm.get('newPassword')?.touched)">
+          <small *ngIf="forgotPasswordForm.get('newPassword')?.errors?.['required']" class="text-danger">New Password is required.</small>
+        </div>
       </div>
-      <div class="form-group">
+      <div class="form-group" *ngIf="token">
         <label for="confirmPassword">Confirm Password</label>
         <input type="password" formControlName="confirmPassword" id="confirmPassword" required>
+        <div *ngIf="forgotPasswordForm.get('confirmPassword')?.invalid && (forgotPasswordForm.get('confirmPassword')?.dirty || forgotPasswordForm.get('confirmPassword')?.touched)">
+          <small *ngIf="forgotPasswordForm.get('confirmPassword')?.errors?.['required']" class="text-danger">Confirm Password is required.</small>
+        </div>
       </div>
       <button type="submit" [disabled]="forgotPasswordForm.invalid">Reset Password</button>
     </form>

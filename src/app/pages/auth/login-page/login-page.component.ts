@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserAuthService } from '../../../core/services/user_auth/user-auth.service';
 import { CommonModule } from '@angular/common';
 import * as alertify from 'alertifyjs';
+import { PasswordService } from '../../../core/services/password.service';
 
 
 @Component({
@@ -17,11 +18,15 @@ export class LoginPageComponent implements OnInit {
   loginForm!: FormGroup;
   forgotPasswordForm!: FormGroup;
   showForgotPasswordModal: boolean = false;
+  token: string | null = null;
+
 
   constructor(
     private userSignIn: UserAuthService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute,
+    private passwordResetService: PasswordService
 
   ) { }
 
@@ -35,9 +40,16 @@ export class LoginPageComponent implements OnInit {
       newPassword: ['', Validators.required],
       confirmPassword: ['', Validators.required]
     });
+    this.route.queryParams.subscribe((params: any) => {
+      this.token = params['token'] || null;
+      if (this.token) {
+        this.showForgotPasswordModal = true;
+      }
+    });
 
     this.checkUserToken()
   }
+  
   checkUserToken(): void {
     const userToken = localStorage.getItem('userToken');
     if (userToken) {
@@ -84,15 +96,30 @@ export class LoginPageComponent implements OnInit {
     this.showForgotPasswordModal = false;
     this.forgotPasswordForm.reset();
   }
-
-  // Submit Forgot Password form
-  submitForgotPassword(): void {
-    if (this.forgotPasswordForm.valid) {
-      // Implement password reset logic here
-      alert('Reset Password Logic'); // Replace with actual logic to reset password
-      this.closeForgotPasswordModal(); // Close the modal after successful submission
+  submitForgotPassword() {
+    if (this.token) {
+      const { newPassword, confirmPassword } = this.forgotPasswordForm.value;
+      this.passwordResetService.resetPassword(this.token, newPassword, confirmPassword).subscribe(
+        response => {
+          alert('Password reset successful');
+          this.showForgotPasswordModal = false;
+          this.router.navigate(['/login']);
+        },
+        error => {
+          alert('Failed to reset password');
+        }
+      );
     } else {
-      alertify.error('Please fill all fields correctly');
+      const { email } = this.forgotPasswordForm.value;
+      this.passwordResetService.requestResetPassword(email).subscribe(
+        response => {
+          alert('Password reset link sent to your email');
+          this.showForgotPasswordModal = false;
+        },
+        error => {
+          alert('Failed to send password reset link');
+        }
+      );
     }
   }
 
