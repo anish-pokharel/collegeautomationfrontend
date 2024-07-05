@@ -36,7 +36,7 @@ export class UserManagementComponent implements OnInit {
     this.userForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]], // Pattern for letters and spaces
       email: ['', [Validators.required, Validators.email]],
-      rollno: [null],
+      rollno: [null, Validators.pattern('[0-9]*')], 
       address: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required],

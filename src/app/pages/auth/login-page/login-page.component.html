@@ -1,63 +1,67 @@
 <div class="login login-with-news-feed">
-  <!-- begin news-feed -->
+  <!-- News feed section -->
   <div class="news-feed">
-    <div
-      class="news-image"
-      style="background-image: url(../../../../assets/img/bg/bg-home.jpg)"
-    ></div>
+    <div class="news-image" style="background-image: url(../../../../assets/img/bg/bg-home.jpg)"></div>
     <div class="news-caption">
       <h4 class="caption-title"><b>College</b></h4>
       <h4 class="caption-title">Automation</h4>
     </div>
   </div>
+
+  <!-- Login form section -->
   <div class="right-content">
     <div class="login-header" style="margin-top: -30px">
       <div class="brand text-center" style="font-size: 12px !important">
-        <span> </span> <b>COLLEGE AUTOMATION</b>
+        <span></span> <b>COLLEGE AUTOMATION</b>
       </div>
-      <br />
-
-      <br />
     </div>
     <div class="login-content">
-      <form
-       [formGroup]="loginForm"
-        class="margin-bottom-0"
-      >
+      <form [formGroup]="loginForm" class="margin-bottom-0">
         <div class="form-group m-b-15">
-          <input
-            formControlName="email"
-            type="text"
-            class="form-control form-control-lg inverse-mode"
-            placeholder="Email"
-            required
+          <input formControlName="email"
+                 type="text"
+                 class="form-control form-control-lg inverse-mode"
+                 placeholder="Email"
+                 pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                 required
           />
+          <div *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)">
+            <small *ngIf="loginForm.get('email')?.errors?.['required']" class="text-danger">Email is required.</small>
+            <small *ngIf="loginForm.get('email')?.errors?.['pattern']" class="text-danger">Invalid email format.</small>
+          </div>
         </div>
+
         <div class="form-group" style="margin-bottom: 0px !important">
-          <input
-            formControlName="password"
-            type="password"
-            class="form-control form-control-lg inverse-mode"
-            placeholder="Password"
-            required
+          <input formControlName="password"
+                 type="password"
+                 class="form-control form-control-lg inverse-mode"
+                 placeholder="Password"
+                 required
           />
+          <div *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)">
+            <small *ngIf="loginForm.get('password')?.errors?.['required']" class="text-danger">Password is required.</small>
+          </div>
         </div>
+
         <div class="text-right text-danger m-b-15">
-          <a class="text-danger"
-            >Forget Password?</a
-          >
+          <a class="text-danger">Forgot Password?</a>
         </div>
+
         <div class="login-buttons">
-          <button type="submit" (click)="loginButton()" class="btn btn-success btn-block btn-lg">
+          <button type="submit" class="btn btn-success btn-block btn-lg" (click)="loginButton()">
             Sign me in
           </button>
         </div>
       </form>
+
       <div class="m-t-30 m-b-30 p-b-30">
         Want to be a new member? Click
         <a routerLink="/registration-page">here</a> to be a New Member.
       </div>
+
       <hr />
+
+      <!-- Footer message -->
       <p class="text-center text-grey-darker mb-0">"Ease your academic journey"</p>
     </div>
   </div>
