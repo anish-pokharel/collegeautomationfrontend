@@ -43,9 +43,9 @@ export class UserManagementComponent implements OnInit {
       role: ['', Validators.required]
     });
 
-    this.userForm.get('role')?.valueChanges.subscribe(role => {
-      this.setRollNoValidation(role);
-    });
+    // this.userForm.get('role')?.valueChanges.subscribe(role => {
+    //   this.setRollNoValidation(role);
+    // });
     this.teacherData();
     this.getSubjectList()
     this.secretaryCount()
@@ -62,31 +62,31 @@ export class UserManagementComponent implements OnInit {
   //   }
   //   rollnoControl?.updateValueAndValidity();
   // }
-  setRollNoValidation(role: string): void {
-    const rollnoControl = this.userForm.get('rollno');
-    if (role === 'student') {
-      rollnoControl?.setValidators([Validators.required]);
-      rollnoControl?.setValue(null); // Clear the roll number for students
-    } else if (role === 'admin' || role === 'faculty' || role === 'secretary') {
-      const randomRollNumber = this.generateRandomRollNumber(10000, 99999); // Adjust the range as needed
-      rollnoControl?.setValue(randomRollNumber.toString()); // Ensure it's stored as a string if needed
-      rollnoControl?.clearValidators();
-    } else {
-      rollnoControl?.clearValidators();
-      const randomRollNumber = this.generateRandomRollNumber(10000, 99999); // Assign random number for other roles
-      rollnoControl?.setValue(randomRollNumber.toString()); // Ensure it's stored as a string if needed
-    }
-    rollnoControl?.updateValueAndValidity();
-  }
+  // setRollNoValidation(role: string): void {
+  //   const rollnoControl = this.userForm.get('rollno');
+  //   if (role === 'student') {
+  //     rollnoControl?.setValidators([Validators.required]);
+  //     rollnoControl?.setValue(null); // Clear the roll number for students
+  //   } else if (role === 'admin' || role === 'faculty' || role === 'secretary') {
+  //     const randomRollNumber = this.generateRandomRollNumber(10000, 99999); // Adjust the range as needed
+  //     rollnoControl?.setValue(randomRollNumber.toString()); // Ensure it's stored as a string if needed
+  //     rollnoControl?.clearValidators();
+  //   } else {
+  //     rollnoControl?.clearValidators();
+  //     const randomRollNumber = this.generateRandomRollNumber(10000, 99999); // Assign random number for other roles
+  //     rollnoControl?.setValue(randomRollNumber.toString()); // Ensure it's stored as a string if needed
+  //   }
+  //   rollnoControl?.updateValueAndValidity();
+  // }
 
-  generateRandomRollNumber(min: number, max: number): number {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
+  // generateRandomRollNumber(min: number, max: number): number {
+  //   return Math.floor(Math.random() * (max - min + 1)) + min;
+  // }
 
-  onRoleChange(): void {
-    const role = this.userForm.get('role')?.value;
-    this.setRollNoValidation(role);
-  }
+  // onRoleChange(): void {
+  //   const role = this.userForm.get('role')?.value;
+  //   this.setRollNoValidation(role);
+  // }
   createUser() {
     if (this.userForm.valid) {
       const formData = this.userForm.value;
