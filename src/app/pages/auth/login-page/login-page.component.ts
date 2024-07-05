@@ -15,6 +15,9 @@ import * as alertify from 'alertifyjs';
 })
 export class LoginPageComponent implements OnInit {
   loginForm!: FormGroup;
+  forgotPasswordForm!: FormGroup;
+  showForgotPasswordModal: boolean = false;
+
   constructor(
     private userSignIn: UserAuthService,
     private formBuilder: FormBuilder,
@@ -27,6 +30,12 @@ export class LoginPageComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     })
+    this.forgotPasswordForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      newPassword: ['', Validators.required],
+      confirmPassword: ['', Validators.required]
+    });
+
     this.checkUserToken()
   }
   checkUserToken(): void {
@@ -65,6 +74,26 @@ export class LoginPageComponent implements OnInit {
     }
   }
 
+// Open the Forgot Password modal
+  openForgotPasswordModal(): void {
+    this.showForgotPasswordModal = true;
+  }
 
+  // Close the Forgot Password modal
+  closeForgotPasswordModal(): void {
+    this.showForgotPasswordModal = false;
+    this.forgotPasswordForm.reset();
+  }
+
+  // Submit Forgot Password form
+  submitForgotPassword(): void {
+    if (this.forgotPasswordForm.valid) {
+      // Implement password reset logic here
+      alert('Reset Password Logic'); // Replace with actual logic to reset password
+      this.closeForgotPasswordModal(); // Close the modal after successful submission
+    } else {
+      alertify.error('Please fill all fields correctly');
+    }
+  }
 
 }

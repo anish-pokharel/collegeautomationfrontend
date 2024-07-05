@@ -44,7 +44,7 @@
         </div>
 
         <div class="text-right text-danger m-b-15">
-          <a class="text-danger">Forgot Password?</a>
+          <a class="text-danger" (click)="openForgotPasswordModal()">Forgot Password?</a>
         </div>
 
         <div class="login-buttons">
@@ -64,5 +64,31 @@
       <!-- Footer message -->
       <p class="text-center text-grey-darker mb-0">"Ease your academic journey"</p>
     </div>
+  </div>
+</div>
+
+
+<!-- <button (click)="openForgotPasswordModal()">Forgot Password?</button> -->
+
+<!-- Modal for Forgot Password -->
+<div class="modal" [class.active]="showForgotPasswordModal">
+  <div class="modal-content">
+    <span class="close" (click)="closeForgotPasswordModal()">&times;</span>
+    <h2>Forgot Password</h2>
+    <form [formGroup]="forgotPasswordForm" (ngSubmit)="submitForgotPassword()">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" formControlName="email" id="email" required>
+      </div>
+      <div class="form-group">
+        <label for="newPassword">New Password</label>
+        <input type="password" formControlName="newPassword" id="newPassword" required>
+      </div>
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" formControlName="confirmPassword" id="confirmPassword" required>
+      </div>
+      <button type="submit" [disabled]="forgotPasswordForm.invalid">Reset Password</button>
+    </form>
   </div>
 </div>
