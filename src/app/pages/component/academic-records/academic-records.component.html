@@ -146,16 +146,32 @@
     </div>
   </div>
 </div>
-
-<div class="container mt-5">
+<div class="container mt-5" *ngIf="userRole == 'admin'">
   <div class="card shadow">
     <div class="card-body">
       <h5 class="card-title">File Upload</h5>
-      <div class="form-group">
-        <label for="fileInput">Choose File</label>
-        <input type="file" class="form-control-file" id="fileInput" (change)="onFileChange($event)">
-      </div>
-      <button class="btn btn-primary" (click)="uploadFile()">Upload File</button>
+      <form [formGroup]="uploadForm" (ngSubmit)="uploadFile()">
+        <div class="form-group">
+          <label for="fileInput">Choose File</label>
+          <input type="file" class="form-control-file" id="fileInput" (change)="onFileChange($event)" formControlName="file">
+          <div *ngIf="uploadForm.get('file')?.invalid && (uploadForm.get('file')?.dirty || uploadForm.get('file')?.touched)">
+            <small *ngIf="uploadForm.get('file')?.errors?.['required']" class="text-danger">File is required.</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="type">Type</label>
+          <select id="type" class="form-control" formControlName="type">
+            <option value="" disabled selected>Select Type</option>
+            <option value="Routine">Routine</option>
+            <option value="SemesterResult">SemesterResult</option>
+          </select>
+          <div *ngIf="uploadForm.get('type')?.invalid && (uploadForm.get('type')?.dirty || uploadForm.get('type')?.touched)">
+            <small *ngIf="uploadForm.get('type')?.errors?.['required']" class="text-danger">Type is required.</small>
+          </div>
+        </div>
+    
+        <button type="submit" class="btn btn-primary">Upload File</button>
+      </form>
     </div>
   </div>
 </div>
