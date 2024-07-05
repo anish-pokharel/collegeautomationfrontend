@@ -91,31 +91,42 @@
                     </div>
                     <!-- Role Select -->
                     <div class="col-lg-6 mb-4">
-                      <select id="role" class="form-control" formControlName="role" (change)="onRoleChange()">
+                      <select id="role" class="form-control" formControlName="role">
                         <option value="" disabled selected>Select Role</option>
                         <option value="student">Student</option>
                         <option value="faculty">Faculty</option>
                         <option value="secretary">Secretary</option>
-                        <option value="admin">Admin</option>
+                        <!-- <option value="admin">Admin</option> -->
                       </select>
                       <div *ngIf="userForm.get('role')?.invalid && (userForm.get('role')?.dirty || userForm.get('role')?.touched)">
                         <small *ngIf="userForm.get('role')?.errors?.['required']" class="text-danger">Role is required.</small>
                       </div>
                     </div>
-                    <!-- Roll Number Input for Students -->
-                    <div class="col-lg-6 mb-4" *ngIf="userForm.get('role')?.value === 'student'">
-                      <input type="number" id="rollno" formControlName="rollno" class="form-control" placeholder="Roll Number" min="0">
+                    <!-- Roll Number Input based on Role -->
+                    <div class="col-lg-6 mb-4" *ngIf="userForm.get('role')?.value">
+                      <ng-container *ngIf="userForm.get('role')?.value === 'student'; else nonStudent">
+                        <label for="rollno">Roll Number</label>
+                      </ng-container>
+                      <ng-template #nonStudent>
+                        <ng-container *ngIf="userForm.get('role')?.value === 'faculty'; else nonFaculty">
+                          <label for="rollno">Teacher ID</label>
+                        </ng-container>
+                        <ng-template #nonFaculty>
+                          <label for="rollno" *ngIf="userForm.get('role')?.value === 'secretary'">Secretary Number</label>
+                          <label for="rollno" *ngIf="userForm.get('role')?.value === 'admin'">Admin Number</label>
+                        </ng-template>
+                      </ng-template>
+                      <input type="number" id="rollno" formControlName="rollno" class="form-control" placeholder="Roll Number" min="0" readonly>
                       <div *ngIf="userForm.get('rollno')?.invalid && (userForm.get('rollno')?.dirty || userForm.get('rollno')?.touched)">
                         <small *ngIf="userForm.get('rollno')?.errors?.['required']" class="text-danger">Roll Number is required.</small>
                         <small *ngIf="userForm.get('rollno')?.errors?.['min']" class="text-danger">Roll Number cannot be negative.</small>
                       </div>
                     </div>
                     <!-- Submit Button -->
-                    <div class="">
+                    <div class="col-lg-12">
                       <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                   </form>
-                  
                   
                 </div>
 
