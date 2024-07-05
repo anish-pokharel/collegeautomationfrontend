@@ -116,7 +116,7 @@
                           <label for="rollno" *ngIf="userForm.get('role')?.value === 'admin'">Admin Number</label>
                         </ng-template>
                       </ng-template>
-                      <input type="number" id="rollno" formControlName="rollno" class="form-control" placeholder="Roll Number" min="0" readonly>
+                      <input type="number" id="rollno" formControlName="rollno" class="form-control" placeholder="Roll Number" min="0" >
                       <div *ngIf="userForm.get('rollno')?.invalid && (userForm.get('rollno')?.dirty || userForm.get('rollno')?.touched)">
                         <small *ngIf="userForm.get('rollno')?.errors?.['required']" class="text-danger">Roll Number is required.</small>
                         <small *ngIf="userForm.get('rollno')?.errors?.['min']" class="text-danger">Roll Number cannot be negative.</small>
