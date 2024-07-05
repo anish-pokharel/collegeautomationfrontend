@@ -129,99 +129,70 @@
     
         <div class="row">
     
-          <div class="col-lg-3 col-md-6">
+          <div class="col-lg-4 col-md-6">
             <div class="count-box">
               <i class="fas fa-user-graduate"></i>
-              <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter">232</span>
+              <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter">{{showStudentCount}}</span>
               <p>Student</p>
             </div>
           </div>
     
-          <div class="col-lg-3 col-md-6 mt-5 mt-md-0">
+          <div class="col-lg-4 col-md-6 mt-5 mt-md-0">
             <div class="count-box">
               <i class="fas fa-chalkboard-teacher"></i>
-              <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter">521</span>
+              <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter">{{showTeacherCount}}</span>
               <p>Teacher</p>
             </div>
           </div>
     
-          <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
+          <div class="col-lg-4 col-md-6 mt-5 mt-lg-0">
             <div class="count-box">
               <i class="fas fa-users"></i>
-              <span data-purecounter-start="0" data-purecounter-end="1463" data-purecounter-duration="1" class="purecounter">1463</span>
+              <span data-purecounter-start="0" data-purecounter-end="1463" data-purecounter-duration="1" class="purecounter">{{showSecretaryCount}}</span>
               <p>Club</p>
             </div>
           </div>
     
-          <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
+          <!-- <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
             <div class="count-box">
               <i class="fas fa-book"></i>
-              <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter">15</span>
+              <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter">{{subjectListCount}}</span>
               <p>Subject</p>
             </div>
-          </div>
+          </div> -->
     
         </div>
     
       </div>
     </section>
-    
     <section id="events" class="bg-light">
       <div class="container">
         <div class="section-title">
           <h2>Events</h2>
+          <!-- Link to view all events if needed -->
           <a href="/login" class="btn btn-outline-primary">View All</a>
         </div>
         <div class="row">
-          <div class="col-lg-6">
+          <div class="col-lg-6" *ngFor="let event of eventList">
             <div class="card mb-4">
               <div class="card-img-top">
-            
+                <!-- You can add an image if available -->
               </div>
               <div class="card-body">
-                <h5 class="card-title">Entrepreneurship Support Program (ESP)</h5>
-                <p class="card-text">02:00 PM – 03:00 PM</p>
-                <p class="card-text"><small class="text-muted">June 14, 2024</small></p>
+                <h5 class="card-title">{{ event.eventName }}</h5>
+                <p class="card-text">{{ event.eventDate | date:'hh:mm a' }} - {{ event.eventDate | date:'hh:mm a' }}</p>
+                <p class="card-text"><small class="text-muted">{{ event.eventDate | date:'MMMM dd, yyyy' }}</small></p>
+                <p class="card-text">{{ event.description }}</p>
+                <p class="card-text">Location: {{ event.location }}</p>
               </div>
             </div>
-            <div class="card mb-4">
-              <div class="card-img-top">
             
-              </div>
-              <div class="card-body">
-                <h5 class="card-title">Academic Excellence Award 2024</h5>
-                <p class="card-text">01:00 PM – 02:00 PM</p>
-                <p class="card-text"><small class="text-muted">June 14, 2024</small></p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <div class="card mb-4">
-              <div class="card-img-top">
-            
-              </div>
-              <div class="card-body">
-                <h5 class="card-title">Intra AutoCAD Drawing Competition</h5>
-                <p class="card-text">10:00 AM – 06:00 PM</p>
-                <p class="card-text"><small class="text-muted">June 12, 2024</small></p>
-              </div>
-            </div>
-            <div class="card mb-4">
-              <div class="card-img-top">
-            
-              </div>
-              <div class="card-body">
-                <h5 class="card-title">Talk Program On Implementation Of Building Code</h5>
-                <p class="card-text">01:00 PM – 03:00 PM</p>
-                <p class="card-text"><small class="text-muted">July 06, 2024</small></p>
-              </div>
-            </div>
           </div>
         </div>
+        <a href="/login" class="btn btn-outline-primary">View All</a>
       </div>
     </section>
     
-
 
  
     <section id="contact" class="contact section-bg">
