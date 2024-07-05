@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { AssignmentService } from '../../../core/services/assignment-service/assignment.service';
 import { EnrollmentService } from '../../../core/services/enrollment_service/enrollment.service';
 import { NgxPaginationModule } from 'ngx-pagination'; // Import ngx-pagination module
+import { PopUpService } from '../../../core/popup/pop-up.service';
 
 
 @Component({
@@ -30,7 +31,7 @@ export class AssignmentComponent {
 
 
   constructor(private formBuilder: FormBuilder, private assigmentService: AssignmentService,
-    private enrollmentService: EnrollmentService
+    private enrollmentService: EnrollmentService,private conformationService:PopUpService
   ) {
   }
   ngOnInit(): void {
@@ -49,6 +50,7 @@ export class AssignmentComponent {
     this.getAssignmentsByEnrolledSubjectsFunction();
     this.getassignmentsbyemailFunction();
   }
+
   onSubmit(): void {
     if (this.assignmentForm.valid) {
       const formData = new FormData();
@@ -61,16 +63,34 @@ export class AssignmentComponent {
         res => {
           console.log('Assignment submitted successfully:', res);
           this.assignmentForm.reset();
+          this.clearFileInput();
           this.getassignmentsbyemailFunction();
 
         },
         error => {
           console.error('Error submitting assignment:', error);
           this.getassignmentsbyemailFunction();
+          if (error.error && error.error.message) {
+            this.conformationService.showErrorMessage(error.error.message);
+            this.assignmentForm.reset(); 
+            this.clearFileInput();
+
+          } else {
+            this.conformationService.showErrorMessage('Error submitting assignment');
+            this.assignmentForm.reset();
+            this.clearFileInput(); 
+          }
 
         }
       );
     }
+  }
+  clearFileInput() {
+    const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
+    if (fileInput) {
+      fileInput.value = '';
+    }
+  
   }
   calculateStatusForAssignments(): void {
     // Example logic to determine status (you can adjust this based on your criteria)
@@ -141,12 +161,17 @@ export class AssignmentComponent {
     return Array.from(subjectsSet);
   }
   getassignmentsbyemailFunction() {
-    this.assigmentService.getassignmentsbyemailStudent().subscribe((res) => {
+    this.assigmentService.getassignmentsbyemailStudent().subscribe((res: any) => {
       console.log(res);
-      this.showassignmentsbyemail = res.Assignment
-      this.calculateStatusForAssignments(); 
-
-      debugger
-    })
+      this.showassignmentsbyemail = res.Assignment;
+      debugger;
+    }, error => {
+      console.error('Error retrieving assignments:', error);
+    });
   }
+  
 }
+function clearFileInput() {
+  throw new Error('Function not implemented.');
+}
+
