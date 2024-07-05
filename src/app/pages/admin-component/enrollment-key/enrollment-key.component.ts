@@ -50,7 +50,8 @@ export class EnrollmentKeyComponent implements OnInit {
       name: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]+$')]],
       credit: ['', [Validators.required, Validators.pattern('^[0-9]+(?:\.[0-9]+)?$')]],
       code: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9]+$')]],
-      teacher: ['', Validators.required]
+      teacher: ['', Validators.required],
+      image: [null, Validators.required] 
     });
   }
 
@@ -61,11 +62,27 @@ export class EnrollmentKeyComponent implements OnInit {
   addSubject(): void {
     this.subjects.push(this.createSubject());
   }
-
+  onFileChange(event: any, index: number): void {
+    const file = event.target.files[0];
+    if (file) {
+      this.subjects.at(index).get('image')?.setValue(file);
+    }
+  }
   submitForm(): void {
     if (this.enrollmentForm.valid) {
-      console.log(this.enrollmentForm.value);
-      this.enrollmentService.postEnrollment(this.enrollmentForm.value).subscribe(
+      const formData = new FormData();
+      formData.append('enrollmentKey', this.enrollmentForm.get('enrollmentKey')?.value);
+      formData.append('semester', this.enrollmentForm.get('semester')?.value);
+      formData.append('department', this.enrollmentForm.get('department')?.value);
+      this.enrollmentForm.get('subjects')?.value.forEach((subject: any, index: number) => {
+        formData.append(`subjects[${index}][name]`, subject.name);
+        formData.append(`subjects[${index}][credit]`, subject.credit);
+        formData.append(`subjects[${index}][code]`, subject.code);
+        formData.append(`subjects[${index}][teacher]`, subject.teacher);
+        formData.append(`subjects[${index}][image]`, subject.image);
+      });
+  
+      this.enrollmentService.postEnrollment(formData).subscribe(
         (res) => {
           if (res) {
             console.log(res);
@@ -84,7 +101,6 @@ export class EnrollmentKeyComponent implements OnInit {
       alertify.error('Sorry, the form is invalid');
     }
   }
-
   teacherData(): void {
     this.userService.getTeacherData().subscribe(
       (res) => {

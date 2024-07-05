@@ -49,8 +49,8 @@
                     Create User
                 </h5>
                 <div class="card-body">
-
                   <form [formGroup]="userForm" (ngSubmit)="createUser()" class="row">
+                    <!-- Name Input -->
                     <div class="col-lg-6 mb-4">
                       <input type="text" id="name" class="form-control" formControlName="name" placeholder="Name" required>
                       <div *ngIf="userForm.get('name')?.invalid && (userForm.get('name')?.dirty || userForm.get('name')?.touched)">
@@ -58,7 +58,7 @@
                         <small *ngIf="userForm.get('name')?.errors?.['pattern']" class="text-danger">Name can only contain letters and spaces.</small>
                       </div>
                     </div>
-                    
+                    <!-- Email Input -->
                     <div class="col-lg-6 mb-4">
                       <input type="email" id="email" formControlName="email" class="form-control" placeholder="Email" required>
                       <div *ngIf="userForm.get('email')?.invalid && (userForm.get('email')?.dirty || userForm.get('email')?.touched)">
@@ -66,7 +66,7 @@
                         <small *ngIf="userForm.get('email')?.errors?.['email']" class="text-danger">Email is invalid.</small>
                       </div>
                     </div>
-                    
+                    <!-- Password Input -->
                     <div class="col-lg-6 mb-4">
                       <input type="password" id="password" formControlName="password" class="form-control" placeholder="Password" required>
                       <div *ngIf="userForm.get('password')?.invalid && (userForm.get('password')?.dirty || userForm.get('password')?.touched)">
@@ -74,21 +74,22 @@
                         <small *ngIf="userForm.get('password')?.errors?.['minlength']" class="text-danger">Password must be at least 6 characters long.</small>
                       </div>
                     </div>
-                    
+                    <!-- Confirm Password Input -->
                     <div class="col-lg-6 mb-4">
                       <input type="password" id="confirmPassword" formControlName="confirmPassword" class="form-control" placeholder="Confirm Password" required>
                       <div *ngIf="userForm.get('confirmPassword')?.invalid && (userForm.get('confirmPassword')?.dirty || userForm.get('confirmPassword')?.touched)">
                         <small *ngIf="userForm.get('confirmPassword')?.errors?.['required']" class="text-danger">Confirm Password is required.</small>
+                        <small *ngIf="userForm.get('confirmPassword')?.errors?.['passwordMismatch']" class="text-danger">Passwords do not match.</small>
                       </div>
                     </div>
-                    
+                    <!-- Address Input -->
                     <div class="col-lg-6 mb-4">
                       <input type="text" id="address" formControlName="address" class="form-control" placeholder="Address" required>
                       <div *ngIf="userForm.get('address')?.invalid && (userForm.get('address')?.dirty || userForm.get('address')?.touched)">
                         <small *ngIf="userForm.get('address')?.errors?.['required']" class="text-danger">Address is required.</small>
                       </div>
                     </div>
-                    
+                    <!-- Role Select -->
                     <div class="col-lg-6 mb-4">
                       <select id="role" class="form-control" formControlName="role" (change)="onRoleChange()">
                         <option value="" disabled selected>Select Role</option>
@@ -101,18 +102,20 @@
                         <small *ngIf="userForm.get('role')?.errors?.['required']" class="text-danger">Role is required.</small>
                       </div>
                     </div>
-                    
+                    <!-- Roll Number Input for Students -->
                     <div class="col-lg-6 mb-4" *ngIf="userForm.get('role')?.value === 'student'">
-                      <input type="number" id="rollno" formControlName="rollno" class="form-control" placeholder="Roll Number">
+                      <input type="number" id="rollno" formControlName="rollno" class="form-control" placeholder="Roll Number" min="0">
                       <div *ngIf="userForm.get('rollno')?.invalid && (userForm.get('rollno')?.dirty || userForm.get('rollno')?.touched)">
                         <small *ngIf="userForm.get('rollno')?.errors?.['required']" class="text-danger">Roll Number is required.</small>
+                        <small *ngIf="userForm.get('rollno')?.errors?.['min']" class="text-danger">Roll Number cannot be negative.</small>
                       </div>
                     </div>
-                    
+                    <!-- Submit Button -->
                     <div class="">
                       <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                   </form>
+                  
                   
                 </div>
 
