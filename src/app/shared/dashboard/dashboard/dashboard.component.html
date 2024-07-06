@@ -279,6 +279,12 @@
             </a>
           </li>
           <li class="active cursor">
+            <a (click)="showSection('payment')">
+              <i class="fas fa-graduation-cap"></i>
+              <span>Id card Request</span>
+            </a>
+          </li>
+          <li class="active cursor">
             <a (click)="showSection('events')">
               <i class="fas fa-calendar-check"></i>
               <span>Events</span>
@@ -437,6 +443,9 @@
       </div>
       <div *ngIf="currentSection === 'department'">
         <app-department></app-department>
+      </div>
+      <div *ngIf="currentSection === 'payment'">
+        <app-payment></app-payment>
       </div>
 
       <div *ngIf="currentSection === 'id-card'">
