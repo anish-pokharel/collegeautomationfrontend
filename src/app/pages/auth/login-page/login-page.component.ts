@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserAuthService } from '../../../core/services/user_auth/user-auth.service';
 import { CommonModule } from '@angular/common';
@@ -10,7 +10,7 @@ import { PasswordService } from '../../../core/services/password.service';
 @Component({
   selector: 'app-login-page',
   standalone: true,
-  imports: [ReactiveFormsModule,CommonModule],
+  imports: [ReactiveFormsModule,CommonModule,FormsModule],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.css'
 })
@@ -18,7 +18,8 @@ export class LoginPageComponent implements OnInit {
   loginForm!: FormGroup;
   forgotPasswordForm!: FormGroup;
   showForgotPasswordModal: boolean = false;
-  token: string | null = null;
+  token!: string;
+  resetPasswordForm!: FormGroup;
 
 
   constructor(
@@ -31,25 +32,62 @@ export class LoginPageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.token = this.route.snapshot.queryParams['token'];
     this.loginForm= this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     })
     this.forgotPasswordForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
+      // newPassword: ['', Validators.required],
+      // confirmPassword: ['', Validators.required]
+    });
+    // this.route.queryParams.subscribe((params: any) => {
+    //   this.token = params['token'] || null;
+    //   if (this.token) {
+    //     this.showForgotPasswordModal = true;
+    //   }
+    // });
+
+    this.resetPasswordForm = this.formBuilder.group({
       newPassword: ['', Validators.required],
       confirmPassword: ['', Validators.required]
-    });
-    this.route.queryParams.subscribe((params: any) => {
-      this.token = params['token'] || null;
-      if (this.token) {
-        this.showForgotPasswordModal = true;
-      }
+    }, {
+      validators: this.passwordMatchValidator
     });
 
     this.checkUserToken()
   }
-  
+  passwordMatchValidator(group: FormGroup) {
+    const newPassword = group.get('newPassword')!.value;
+    const confirmPassword = group.get('confirmPassword')!.value;
+
+    return newPassword === confirmPassword ? null : { passwordMismatch: true };
+  }
+  submitResetPassword(): void {
+    if (this.resetPasswordForm.valid) {
+      const newPassword = this.resetPasswordForm.value.newPassword;
+      const confirmPassword = this.resetPasswordForm.value.confirmPassword;
+
+      if (newPassword !== confirmPassword) {
+        this.resetPasswordForm.setErrors({ passwordMismatch: true });
+        return;
+      }
+
+      // Call AuthService method to reset password
+      this.passwordResetService.resetPassword(this.token, newPassword).subscribe(
+        (response) => {
+          console.log('Password reset successful:', response);
+          // Optionally, show success message or redirect to login page
+          this.router.navigate(['/login']);
+        },
+        (error) => {
+          console.error('Error resetting password:', error);
+          // Handle error: display error message or handle as needed
+        }
+      );
+    }
+  }
   checkUserToken(): void {
     const userToken = localStorage.getItem('userToken');
     if (userToken) {
@@ -96,31 +134,21 @@ export class LoginPageComponent implements OnInit {
     this.showForgotPasswordModal = false;
     this.forgotPasswordForm.reset();
   }
-  submitForgotPassword() {
-    if (this.token) {
-      const { newPassword, confirmPassword } = this.forgotPasswordForm.value;
-      this.passwordResetService.resetPassword(this.token, newPassword, confirmPassword).subscribe(
-        response => {
-          alert('Password reset successful');
-          this.showForgotPasswordModal = false;
-          this.router.navigate(['/login']);
+  submitForgotPassword(): void {
+    if (this.forgotPasswordForm.valid) {
+      const email = this.forgotPasswordForm.value.email;
+      this.passwordResetService.requestPasswordReset(email).subscribe(
+        (response) => {
+          console.log('Password reset link sent:', response);
+          // Optionally, show success message or redirect to login page
         },
-        error => {
-          alert('Failed to reset password');
-        }
-      );
-    } else {
-      const { email } = this.forgotPasswordForm.value;
-      this.passwordResetService.requestResetPassword(email).subscribe(
-        response => {
-          alert('Password reset link sent to your email');
-          this.showForgotPasswordModal = false;
-        },
-        error => {
-          alert('Failed to send password reset link');
+        (error) => {
+          console.error('Error sending reset link:', error);
+          // Handle error: display error message or handle as needed
         }
       );
     }
   }
+
 
 }

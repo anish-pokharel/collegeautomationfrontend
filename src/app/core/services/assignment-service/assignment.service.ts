@@ -31,4 +31,7 @@ export class AssignmentService {
   getAssignmentsBySubjectAPI():Observable<any>{
     return this.http.get<any>(environment.api_url+'getassignmentsbysubject')
   }
+  getStudentData(studentId:string):Observable<any>{
+    return this.http.get<any>(environment.api_url+(`students/${studentId}`))
+  }
 }
