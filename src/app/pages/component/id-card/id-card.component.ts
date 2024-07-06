@@ -41,8 +41,11 @@ export class IdCardComponent {
   showUserProfile() {
     this.userService.getIdCardData().subscribe((res) => {
       console.log(res);
-      this.showUserProfileData = res.data[0]; 
-      console.log(this.showUserProfileData);
+      // this.showUserProfileData = res.data; 
+      // console.log(this.showUserProfileData);
+      this.showUserProfileData = res;
+      debugger
+
     });
   }
   makePayment(): void {

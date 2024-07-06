@@ -4,20 +4,17 @@
     <div class="row">
         <div class="col-lg-3 col-md-4 col-sm-6 col-12" *ngIf="showUserProfileData" >
             <div class="card border ">
-                <div class="id-card text-center my-4" >
-                    <img src="{{ showUserProfileData.data[0].Photo }}" alt="User Photo" style="height: 200px; width: 200px; object-fit: contain;" class="img-fluid mb-3">
-                    <h5>{{showUserProfileData.name}}</h5>
+                <div class="id-card text-center my-4">
+                    <img [src]="showUserProfileData.data[0].Photo" alt="User Photo" style="height: 200px; width: 200px; object-fit: contain;" class="img-fluid mb-3">
+                    <h5>{{showUserProfileData.message}}</h5>
                     <div class="info">
-                        <p><strong>Name:</strong> {{showUserProfileData.Name}}</p>
-                        <p><strong>Roll No:</strong> {{showUserProfileData.Rollno}}</p>
-                        <p><strong>Semester:</strong> {{showUserProfileData.Semester}}</p>
-                        <p><strong>Department:</strong> {{showUserProfileData.Department}}</p>
-                        <p><strong>Valid Until:</strong> {{showUserProfileData.ValidUntil}}</p>
+                      <p><strong>Name:</strong> {{showUserProfileData.data[0].Name}}</p>
+                      <p><strong>Roll No:</strong> {{showUserProfileData.data[0].Rollno}}</p>
+                      <p><strong>Semester:</strong> {{showUserProfileData.data[0].Semester}}</p>
+                      <p><strong>Department:</strong> {{showUserProfileData.data[0].Department}}</p>
+                      <p><strong>Valid Until:</strong> {{showUserProfileData.data[0].ValidUntil}}</p>
                     </div>
-                    <!-- <div class="barcode">
-                        <img src="https://barcode.tec-it.com/barcode.ashx?data=123456789" alt="Barcode" class="img-fluid">
-                    </div> -->
-                </div>
+                  </div>
             </div> 
 
         </div>
