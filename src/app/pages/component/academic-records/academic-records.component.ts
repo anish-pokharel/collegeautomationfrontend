@@ -70,7 +70,7 @@ export class AcademicRecordsComponent implements OnInit{
       formData.append('type', this.uploadForm.get('type')!.value);
       // formData.append('subject', this.uploadForm.get('subject')!.value);
 
-      this.http.post('http://localhost:3000/upload', formData).subscribe(
+      this.http.post('http://localhost:3200/upload', formData).subscribe(
         response => {
           console.log('File uploaded successfully:', response);
         },
