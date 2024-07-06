@@ -43,12 +43,12 @@
           </div>
         </div>
 
-        <div class="text-right text-danger m-b-15">
+        <!-- <div class="text-right text-danger m-b-15">
           <a class="text-danger" (click)="openForgotPasswordModal()">Forgot Password?</a>
-        </div>
+        </div> -->
 
         <div class="login-buttons">
-          <button type="submit" class="btn btn-success btn-block btn-lg" (click)="loginButton()">
+          <button type="submit" class="btn btn-success btn-block btn-lg my-2" (click)="loginButton()">
             Sign me in
           </button>
         </div>
@@ -66,8 +66,6 @@
     </div>
   </div>
 </div>
-
-<!-- Modal for Forgot Password -->
 <div class="modal" [class.active]="showForgotPasswordModal">
   <div class="modal-content">
     <span class="close" (click)="closeForgotPasswordModal()">&times;</span>
@@ -81,21 +79,31 @@
           <small *ngIf="forgotPasswordForm.get('email')?.errors?.['email']" class="text-danger">Invalid email format.</small>
         </div>
       </div>
-      <div class="form-group" *ngIf="token">
-        <label for="newPassword">New Password</label>
-        <input type="password" formControlName="newPassword" id="newPassword" required>
-        <div *ngIf="forgotPasswordForm.get('newPassword')?.invalid && (forgotPasswordForm.get('newPassword')?.dirty || forgotPasswordForm.get('newPassword')?.touched)">
-          <small *ngIf="forgotPasswordForm.get('newPassword')?.errors?.['required']" class="text-danger">New Password is required.</small>
-        </div>
-      </div>
-      <div class="form-group" *ngIf="token">
-        <label for="confirmPassword">Confirm Password</label>
-        <input type="password" formControlName="confirmPassword" id="confirmPassword" required>
-        <div *ngIf="forgotPasswordForm.get('confirmPassword')?.invalid && (forgotPasswordForm.get('confirmPassword')?.dirty || forgotPasswordForm.get('confirmPassword')?.touched)">
-          <small *ngIf="forgotPasswordForm.get('confirmPassword')?.errors?.['required']" class="text-danger">Confirm Password is required.</small>
-        </div>
-      </div>
+
       <button type="submit" [disabled]="forgotPasswordForm.invalid">Reset Password</button>
     </form>
   </div>
+</div>
+<div class="container">
+  <h2>Reset Password</h2>
+  <form [formGroup]="resetPasswordForm" (ngSubmit)="submitResetPassword()">
+    <div class="form-group">
+      <label for="newPassword">New Password</label>
+      <input type="password" formControlName="newPassword" id="newPassword" required>
+      <div *ngIf="resetPasswordForm.get('newPassword')?.invalid && (resetPasswordForm.get('newPassword')?.dirty || resetPasswordForm.get('newPassword')?.touched)">
+        <small *ngIf="resetPasswordForm.get('newPassword')?.errors?.['required']" class="text-danger">New Password is required.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="confirmPassword">Confirm Password</label>
+      <input type="password" formControlName="confirmPassword" id="confirmPassword" required>
+      <div *ngIf="resetPasswordForm.get('confirmPassword')?.invalid && (resetPasswordForm.get('confirmPassword')?.dirty || resetPasswordForm.get('confirmPassword')?.touched)">
+        <small *ngIf="resetPasswordForm.get('confirmPassword')?.errors?.['required']" class="text-danger">Confirm Password is required.</small>
+        <small *ngIf="resetPasswordForm.hasError('passwordMismatch')" class="text-danger">Passwords do not match.</small>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="resetPasswordForm.invalid">Reset Password</button>
+  </form>
 </div>

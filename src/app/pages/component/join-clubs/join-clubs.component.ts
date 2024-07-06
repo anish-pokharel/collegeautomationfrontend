@@ -79,10 +79,10 @@ export class JoinClubsComponent implements OnInit {
     this.showJoinedClubFunction();
     this.createClubForm = this.formBuilder.group({
       clubStatus: ['', Validators.required],
-      clubName: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9 ]+$')]], 
+      clubName: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]+$')]], 
       contactNumber: ['', [
         Validators.required,
-        Validators.pattern(/^\d{10}$/) 
+        Validators.pattern(/^(98|97)\d{8}$/) 
       ]],
       contactEmail: ['', Validators.required],
       createdDate: ['']

@@ -130,7 +130,7 @@
               <input type="text" formControlName="clubName" class="form-control" placeholder="Club Name">
               <div *ngIf="createClubForm.get('clubName')?.invalid && (createClubForm.get('clubName')?.dirty || createClubForm.get('clubName')?.touched)">
                 <small class="text-danger" *ngIf="createClubForm.get('clubName')?.errors?.['required']">Club Name is required.</small>
-                <small class="text-danger" *ngIf="createClubForm.get('clubName')?.errors?.['pattern']">Club Name should only contain alphanumeric characters and spaces.</small>
+                <small class="text-danger" *ngIf="createClubForm.get('clubName')?.errors?.['pattern']">Club Name should only contain alpha characters and spaces.</small>
               </div>
             </div>
           
