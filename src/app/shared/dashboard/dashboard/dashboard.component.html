@@ -11,7 +11,7 @@
       </button>
     </div>
     <ul class="navbar-nav navbar-right">
-      <li class="navbar-form">
+      <!-- <li class="navbar-form">
         <form (ngSubmit)="searchStudents()" #searchForm="ngForm">
           <div class="form-group">
             <input type="text" class="form-control" placeholder="Enter keyword" name="searchQuery" [(ngModel)]="searchQuery" required>
@@ -19,7 +19,7 @@
           </div>
         </form>
         
-      </li>
+      </li> -->
       <!-- <ng-container *ngIf="searchResults.length > 0">
         <li *ngFor="let result of searchResults" class="nav-item">
           <a class="nav-link" [routerLink]="['/student', result.id]" (click)="clearSearchForm()">{{ result.name }}</a>
