@@ -30,6 +30,7 @@ import { DepartmentComponent } from '../../../pages/component/department/departm
 import { OurCourseComponent } from '../../../pages/component/our-course/our-course.component';
 import { HttpClient } from '@angular/common/http';
 import { StudentDetailsComponent } from '../../../pages/component/student-details/student-details.component';
+import { PaymentComponent } from '../../../pages/component/payment/payment.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -41,7 +42,7 @@ import { StudentDetailsComponent } from '../../../pages/component/student-detail
     AssignmentMaterialsComponent, CourseRecordComponent, FeedbackComponent, InternalRecordsComponent,
     ModelQuestionComponent, StudentWorkComponent, UserManagementComponent,
     EnrollmentKeyComponent, ProfileComponent, JobVacancyComponent, ListCourseComponent, EventsComponent
-    , ClassScheduleComponent, DepartmentComponent, OurCourseComponent,ReactiveFormsModule,StudentDetailsComponent
+    , ClassScheduleComponent, DepartmentComponent, OurCourseComponent,ReactiveFormsModule,StudentDetailsComponent,PaymentComponent
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
